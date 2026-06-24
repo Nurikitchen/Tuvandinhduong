@@ -5617,6 +5617,7 @@
       
       setInterval(() => {
           syncStateToServer();
+          syncChatsToServer();
       }, 2000);
 
       // Perform initial sync on load
@@ -6731,7 +6732,11 @@
           // Find customer in data
           let customer = purchasedCustomers.find(c => c.phone === phone) || potentialCustomers.find(c => c.phone === phone);
           
-          if (customer && customer.password === pass) {
+          if (customer && (!customer.password || customer.password === pass)) {
+              if (!customer.password) {
+                  customer.password = pass;
+                  syncStateToServer();
+              }
               currentUser = customer;
               localStorage.setItem("nutriadmin_current_user", JSON.stringify(currentUser));
               saveToLocalAccounts(currentUser);
@@ -6767,6 +6772,7 @@
               date: new Date()
           };
           potentialCustomers.push(newCustomer);
+          syncStateToServer();
           if (typeof renderPotentialCustomers === 'function') renderPotentialCustomers(); // Update admin side
           
           currentUser = newCustomer;
@@ -10643,6 +10649,7 @@
         }
 
         orders.unshift(newOrder);
+        syncStateToServer();
         cart = [];
         e.target.reset();
         document.getElementById("cust-lat").value = "";
@@ -13131,6 +13138,8 @@
           date: new Date(),
         });
         
+        syncStateToServer();
+        
         // Hiện overlay thông báo đăng ký
         const overlay = document.getElementById("success-overlay");
         const content = document.getElementById("success-overlay-content");
@@ -13382,6 +13391,7 @@
         }
         
         orders.unshift(newOrder);
+        syncStateToServer();
 
         showToast(`Đã đẩy đơn sang Kho!`);
         renderPurchasedCustomers();
@@ -13449,6 +13459,7 @@
         }
 
         orders.unshift(newOrder);
+        syncStateToServer();
         showToast(`Đã đẩy đơn cả ngày sang Kho!`);
         renderPurchasedCustomers();
       }
