@@ -5387,12 +5387,14 @@
       if (!allChats[customerDeviceId]) {
         allChats[customerDeviceId] = {
             id: customerDeviceId,
-            name: "Khách hàng " + customerDeviceId.substr(-4),
+            name: currentUser ? currentUser.name : "Khách hàng " + customerDeviceId.substr(-4),
             history: [],
             needsSupport: false,
             hasUnread: false,
             lastUpdated: Date.now()
         };
+      } else if (currentUser && allChats[customerDeviceId].name.startsWith("Khách hàng ")) {
+        allChats[customerDeviceId].name = currentUser.name;
       }
       chatHistory = allChats[customerDeviceId].history;
 
@@ -5415,6 +5417,7 @@
         
         // Sync with server
         syncChatsToServer();
+        syncStateToServer();
       }
 
       async function syncChatsToServer() {
@@ -5449,6 +5452,8 @@
                   shippers,
                   inventory,
                   dishes,
+                  allReviews,
+                  allChats,
                   settings
               };
               const currentStr = JSON.stringify(currentState);
@@ -5481,6 +5486,16 @@
           if (serverState.settings) {
               localStorage.setItem("nutriadmin_settings", JSON.stringify(serverState.settings));
               if (typeof loadSettings === 'function') loadSettings();
+          }
+          if (serverState.allReviews) {
+              allReviews = serverState.allReviews;
+              localStorage.setItem("nutriadmin_all_reviews", JSON.stringify(allReviews));
+              if (document.getElementById("view-messages") && !document.getElementById("view-messages").classList.contains("hidden")) {
+                  if (typeof renderAdminReviewsList === 'function') renderAdminReviewsList();
+              }
+          }
+          if (serverState.allChats) {
+              updateLocalChatsFromServer(serverState.allChats);
           }
           
           if (serverState.orders) {
@@ -5628,6 +5643,7 @@
 
       function saveAllReviews() {
         localStorage.setItem("nutriadmin_all_reviews", JSON.stringify(allReviews));
+        syncStateToServer();
         if (document.getElementById("view-messages") && !document.getElementById("view-messages").classList.contains("hidden")) {
             if (typeof renderAdminReviewsList === 'function') renderAdminReviewsList();
         }
@@ -13945,6 +13961,13 @@
                           if (data.state.potentialCustomers) potentialCustomers = data.state.potentialCustomers;
                           if (data.state.purchasedCustomers) purchasedCustomers = data.state.purchasedCustomers;
                           if (data.state.shippers) shippers = data.state.shippers;
+                          if (data.state.allReviews) {
+                              allReviews = data.state.allReviews;
+                              localStorage.setItem("nutriadmin_all_reviews", JSON.stringify(allReviews));
+                          }
+                          if (data.state.allChats) {
+                              updateLocalChatsFromServer(data.state.allChats);
+                          }
                           
                           if (data.state.settings) {
                               localStorage.setItem("nutriadmin_settings", JSON.stringify(data.state.settings));
@@ -13982,6 +14005,8 @@
                       purchasedCustomers,
                       shippers,
                       orders,
+                      allReviews,
+                      allChats,
                       settings: currentSettings
                   };
                   
@@ -14275,6 +14300,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
               setTimeout(() => renderMessagesList(), 0);
               if (typeof syncChatsToServer === 'function') {
                   syncChatsToServer();
+                  syncStateToServer();
               }
           }
           
@@ -14425,6 +14451,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
               
               if (typeof syncChatsToServer === 'function') {
                   syncChatsToServer();
+                  syncStateToServer();
               }
           }
           
@@ -14445,6 +14472,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
               
               if (typeof syncChatsToServer === 'function') {
                   syncChatsToServer();
+                  syncStateToServer();
               }
           }
       }
