@@ -12686,7 +12686,6 @@
         let baseUrl = window.location.href.split("?")[0].split("#")[0];
         if (
           baseUrl.startsWith("blob:") ||
-          baseUrl.includes("googleusercontent") ||
           baseUrl === "about:srcdoc" ||
           baseUrl.startsWith("data:")
         ) {
@@ -19813,6 +19812,11 @@
         }
       }
 
+      window.submitPackage = submitPackage;
+      window.handlePackageChange = handlePackageChange;
+      window.updatePkgWards = updatePkgWards;
+      window.updatePkgDistricts = updatePkgDistricts;
+
       // ==========================================
       // 12. ADMIN: WEEKLY MENU
       // ==========================================
@@ -20423,6 +20427,59 @@
       const getChatSystemInstruction = (storeName) =>
         `Bạn là chuyên gia dinh dưỡng ảo của hệ thống ${storeName}. Hãy tư vấn ngắn gọn (tối đa 3-4 câu), thân thiện, súc tích bằng tiếng Việt. Tập trung vào kiến thức ăn uống lành mạnh, giảm cân, tăng cơ, tính toán TDEE/Calo. Bạn có thể sử dụng biểu tượng cảm xúc (emoji) để cuộc trò chuyện tự nhiên hơn. Luôn khuyến khích khách hàng sử dụng công cụ 'Tư vấn dinh dưỡng' của app để nhận thực đơn cá nhân hóa.`;
 
+      function resetChatbotStyles() {
+        const chatWindow = document.getElementById("chatbot-window");
+        if (!chatWindow) return;
+        chatWindow.style.height = "";
+        chatWindow.style.top = "";
+        chatWindow.style.bottom = "";
+        chatWindow.style.maxHeight = "";
+      }
+
+      function adjustChatbotForViewport() {
+        const chatWindow = document.getElementById("chatbot-window");
+        if (!chatWindow || chatWindow.classList.contains("hidden")) return;
+
+        if (window.innerWidth < 640) {
+          if (window.visualViewport) {
+            const vv = window.visualViewport;
+            chatWindow.style.height = `${vv.height}px`;
+            chatWindow.style.top = `${vv.offsetTop}px`;
+            chatWindow.style.bottom = "auto";
+            chatWindow.style.maxHeight = `${vv.height}px`;
+          } else {
+            chatWindow.style.height = "100%";
+            chatWindow.style.top = "0px";
+            chatWindow.style.bottom = "0px";
+            chatWindow.style.maxHeight = "100%";
+          }
+        } else {
+          resetChatbotStyles();
+        }
+        scrollToBottomChat();
+      }
+
+      function initChatbotViewportListeners() {
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener("resize", adjustChatbotForViewport);
+          window.visualViewport.addEventListener("scroll", adjustChatbotForViewport);
+        }
+        window.addEventListener("resize", adjustChatbotForViewport);
+
+        const chatbotInput = document.getElementById("chatbot-input");
+        if (chatbotInput) {
+          chatbotInput.addEventListener("focus", () => {
+            setTimeout(adjustChatbotForViewport, 100);
+          });
+          chatbotInput.addEventListener("blur", () => {
+            setTimeout(adjustChatbotForViewport, 100);
+          });
+        }
+      }
+
+      // Initialize the listeners immediately
+      initChatbotViewportListeners();
+
       function toggleChat() {
         const chatWindow = document.getElementById("chatbot-window");
         const badge = document.getElementById("chatbot-badge");
@@ -20435,7 +20492,7 @@
           }
 
           chatWindow.classList.remove("hidden");
-          chatWindow.style.height = ""; // Ensure no inline height overrides the CSS
+          adjustChatbotForViewport();
           document.getElementById("chatbot-input").focus();
           // Ẩn badge khi mở chat
           badge.classList.add("hidden");
@@ -20456,6 +20513,7 @@
         const chatWindow = document.getElementById("chatbot-window");
         if (!chatWindow.classList.contains("hidden")) {
           chatWindow.classList.add("hidden");
+          resetChatbotStyles();
           document.body.classList.remove("overflow-hidden", "sm:overflow-auto");
           if (history.state && history.state.popup === "chat") {
             history.back();
@@ -20467,6 +20525,7 @@
         const chatWindow = document.getElementById("chatbot-window");
         if (chatWindow && !chatWindow.classList.contains("hidden")) {
           chatWindow.classList.add("hidden");
+          resetChatbotStyles();
           document.body.classList.remove("overflow-hidden", "sm:overflow-auto");
         }
       });
