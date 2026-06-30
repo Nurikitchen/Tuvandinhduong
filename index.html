@@ -17,16 +17,16 @@
       rel="stylesheet"
     />
     <!-- Thư viện html2pdf để xuất file PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
     
     <!-- Thư viện Google Identity Services (GSI) -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <!-- Thư viện Chart.js cho Biểu đồ thống kê -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
     <!-- Thư viện Canvas Confetti cho hiệu ứng ăn mừng -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" crossorigin="anonymous"></script>
     <!-- Thêm Tone.js để tạo âm thanh thông báo -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js" crossorigin="anonymous"></script>
     <!-- Thư viện Leaflet cho Bản đồ -->
     <link
       rel="stylesheet"
@@ -40,13 +40,13 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
     />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js" crossorigin="anonymous"></script>
 
     <!-- Thư viện Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js" crossorigin="anonymous"></script>
 
     <script>
       window.onerror = function(msg, url, line, col, err) {
@@ -1704,10 +1704,13 @@
             Quản lý thông tin liên hệ và các tích hợp
           </p>
         </div>
-        <div
-          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden max-w-3xl mb-6"
-        >
-          <form id="system-form" onsubmit="saveSettings(event)">
+        
+        <div class="flex flex-col xl:flex-row items-start gap-6">
+          <div class="flex-1 w-full max-w-3xl">
+            <div
+              class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-6"
+            >
+              <form id="system-form" onsubmit="saveSettings(event)">
             <div class="p-6 border-b border-slate-100">
               <h2
                 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2"
@@ -2035,7 +2038,7 @@
 
         <!-- Công cụ Sao lưu & Phục hồi -->
         <div
-          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden max-w-3xl mb-6"
+          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-6"
         >
           <div class="p-6">
             <h2
@@ -2081,7 +2084,7 @@
 
         <!-- Cấu hình AI API Key -->
         <div
-          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden max-w-3xl"
+          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
         >
           <div class="p-6">
             <h2
@@ -2141,7 +2144,7 @@
 
         <!-- Cấu hình Cloud (Firebase) -->
         <div
-          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden max-w-3xl mt-6"
+          class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-6"
         >
           <div class="p-6">
             <h2
@@ -2197,7 +2200,7 @@
         </div>
 
         <!-- Cấu hình Google Đăng Nhập -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden max-w-3xl mt-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-6">
           <div class="p-6">
             <h2 class="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg">
@@ -2232,6 +2235,124 @@
                 >
                   <i class="fa-solid fa-floppy-disk"></i> Cập nhật Client ID
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Khôi phục dữ liệu -->
+        <div class="bg-white rounded-2xl shadow-sm border border-red-100 overflow-hidden mt-6">
+          <div class="p-6">
+            <h2 class="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div>
+                Khôi phục dữ liệu (Reset Data)
+                <p class="text-sm text-slate-500 font-normal mt-0.5">
+                  Lựa chọn và xóa các mục dữ liệu. Hành động này không thể hoàn tác.
+                </p>
+              </div>
+            </h2>
+
+            <div class="mt-6 pl-0 sm:pl-12 space-y-4">
+              <button
+                onclick="openResetDataModal()"
+                type="button"
+                class="w-full sm:w-auto px-6 py-2.5 bg-red-600 text-white rounded-xl hover:bg-red-700 font-bold transition-colors shadow-sm flex items-center justify-center gap-2"
+              >
+                <i class="fa-solid fa-trash-can"></i> Khôi phục dữ liệu
+              </button>
+            </div>
+          </div>
+        </div>
+          </div>
+
+          <!-- Mascot Management Section -->
+          <div class="w-full xl:w-[400px] shrink-0">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden sticky top-24">
+              <div class="p-6 border-b border-slate-100 bg-emerald-50">
+                <h2 class="text-lg font-semibold text-emerald-800 flex items-center gap-2">
+                  <i class="fa-solid fa-masks-theater text-emerald-600"></i> Quản lý Nhân vật
+                </h2>
+                <p class="text-xs text-emerald-600 mt-1">Cấu hình nhân vật thương hiệu ảo</p>
+              </div>
+              <div class="p-6">
+                <!-- Preview area -->
+                <div id="mascot-preview-frame" class="w-full aspect-square bg-slate-900 rounded-2xl overflow-hidden relative flex flex-col items-center justify-center border border-slate-200 shadow-inner group mb-6">
+                  <!-- Animated Mascot Area -->
+                  <div id="mascot-svg-container" class="transition-transform duration-300">
+                    <!-- Dynamic SVG inside -->
+                  </div>
+                  <!-- Image Sequence Area -->
+                  <img id="mascot-sequence-img" class="w-full h-full object-contain hidden" alt="Mascot Preview" />
+                  
+                  <!-- Controls Overlay -->
+                  <div class="absolute bottom-3 left-3 right-3 bg-black/60 backdrop-blur-md rounded-xl p-2.5 flex items-center justify-between text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs">
+                    <div class="flex items-center gap-2">
+                      <button type="button" onclick="toggleMascotPlay()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
+                        <i id="mascot-play-icon" class="fa-solid fa-pause"></i>
+                      </button>
+                      <span id="mascot-frame-counter">Frame: --</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span>FPS:</span>
+                      <input type="range" id="mascot-fps-slider" min="1" max="30" value="12" oninput="changeMascotFps(this.value)" class="w-16 accent-emerald-500 h-1 rounded-lg cursor-pointer" />
+                      <span id="mascot-fps-val" class="w-6 text-right">12</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                  <label class="flex items-center justify-between p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-eye"></i></div>
+                      <span class="text-sm font-medium text-slate-700">Hiển thị nhân vật</span>
+                    </div>
+                    <div class="relative inline-flex items-center">
+                      <input type="checkbox" id="mascot-show-toggle" class="sr-only peer" checked onchange="toggleMascotVisibility(this.checked)">
+                      <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+                    </div>
+                  </label>
+                  
+                  <label class="flex items-center justify-between p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-microphone-lines"></i></div>
+                      <span class="text-sm font-medium text-slate-700">Cho phép tương tác giọng nói</span>
+                    </div>
+                    <div class="relative inline-flex items-center">
+                      <input type="checkbox" id="mascot-voice-toggle" class="sr-only peer" onchange="toggleMascotVoice(this.checked)">
+                      <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Expression Management list -->
+                <div class="border-t border-slate-100 pt-6">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Danh sách Biểu cảm</h3>
+                    <button type="button" onclick="promptAddMascotExpression()" class="text-xs bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-2.5 py-1.5 rounded-lg border border-emerald-200 font-bold transition-colors">
+                      <i class="fa-solid fa-plus mr-1"></i> Thêm biểu cảm
+                    </button>
+                  </div>
+                  
+                  <div id="mascot-expressions-list" class="space-y-2 max-h-[300px] overflow-y-auto pr-1 custom-scrollbar">
+                    <!-- Loaded dynamically via JS -->
+                  </div>
+                </div>
+                <!-- Action Management list -->
+                <div class="border-t border-slate-100 pt-6 mt-6">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Danh sách Hoạt động</h3>
+                    <button type="button" onclick="promptAddMascotAction()" class="text-xs bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-2.5 py-1.5 rounded-lg border border-emerald-200 font-bold transition-colors">
+                      <i class="fa-solid fa-plus mr-1"></i> Thêm hoạt động
+                    </button>
+                  </div>
+                  
+                  <div id="mascot-actions-list" class="space-y-2 max-h-[300px] overflow-y-auto pr-1 custom-scrollbar">
+                    <!-- Loaded dynamically via JS -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -6996,6 +7117,94 @@
       </div>
     </main>
 
+    <!-- Mascot Analyzing Overlay -->
+    <div id="mascot-analyzing-overlay" class="fixed inset-0 z-[10000] hidden flex-col items-center justify-center bg-slate-900/80 backdrop-blur-md p-4 transition-opacity duration-300 opacity-0 gap-6">
+      <div class="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full flex items-center justify-center">
+        <!-- Pulse ring background -->
+        <div class="absolute inset-0 bg-emerald-500/20 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+        <div class="absolute inset-0 bg-emerald-500/10 rounded-full animate-pulse"></div>
+        
+        <!-- Scanning line effect -->
+        <div class="absolute inset-0 rounded-full border-2 border-emerald-500/30 overflow-hidden">
+          <div class="w-full h-1 bg-emerald-400/80 absolute top-0 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-[scan_2s_ease-in-out_infinite_alternate]"></div>
+        </div>
+        
+        <img id="mascot-analyzing-img" class="w-full h-full object-contain drop-shadow-2xl z-10" alt="Mascot Analyzing" />
+      </div>
+      <div class="text-white text-xl sm:text-2xl font-bold tracking-wide flex items-center gap-2 mt-4 relative z-10">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-300">Đang phân tích dữ liệu</span>
+        <span class="flex gap-1 items-end h-6 pb-1">
+          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
+          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
+          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
+        </span>
+      </div>
+    </div>
+    
+    <style>
+      @keyframes scan {
+        0% { top: 0%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 100%; opacity: 0; }
+      }
+    </style>
+
+    <!-- Modal: Custom Prompt -->
+    <div id="custom-prompt-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity duration-300 opacity-0">
+      <div id="custom-prompt-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95">
+        <div class="p-6 pb-0">
+          <h3 id="custom-prompt-title" class="font-bold text-lg text-slate-800 mb-2">Nhập thông tin</h3>
+          <p id="custom-prompt-message" class="text-sm text-slate-500 mb-4 hidden"></p>
+          <input type="text" id="custom-prompt-input" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-2" placeholder="Nhập tên..." />
+        </div>
+        <div class="p-4 bg-slate-50 flex justify-end gap-2 mt-4">
+          <button type="button" onclick="closeCustomPrompt()" class="px-4 py-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-colors">
+            Hủy
+          </button>
+          <button type="button" id="custom-prompt-confirm-btn" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-colors">
+            Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Reset Data -->
+    <div id="reset-data-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity duration-300 opacity-0">
+      <div id="reset-data-content" class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95">
+        <div class="p-6 bg-red-600 text-white relative">
+          <button onclick="closeResetDataModal()" type="button" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex justify-center items-center transition-colors">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm text-2xl">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl">Khôi phục dữ liệu</h3>
+              <p class="text-red-100 text-sm opacity-90 mt-0.5">Hành động này không thể hoàn tác</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 overflow-y-auto max-h-[60vh] custom-scrollbar">
+          <p class="text-sm text-slate-600 mb-4 font-medium">Chọn các mục dữ liệu bạn muốn xóa:</p>
+          <div class="space-y-3" id="reset-options-container">
+            <!-- Rendered by JS -->
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-slate-100">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Nhập mật khẩu xác nhận</label>
+            <input type="password" id="reset-password-input" class="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-colors" placeholder="Nhập mật khẩu để tiếp tục..." />
+            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-info-circle mr-1"></i> Mặc định là 180298</p>
+          </div>
+        </div>
+        <div class="p-5 border-t border-slate-100 bg-slate-50 flex justify-end gap-3 rounded-b-3xl">
+          <button type="button" onclick="closeResetDataModal()" class="px-5 py-2.5 rounded-xl text-slate-600 font-semibold hover:bg-slate-200 transition-colors text-sm">Hủy</button>
+          <button type="button" onclick="confirmResetData()" class="px-5 py-2.5 rounded-xl bg-red-600 text-white font-bold hover:bg-red-700 shadow-sm transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-trash-can"></i> Xóa dữ liệu</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal: Login -->
     <div
       id="login-modal"
@@ -8319,9 +8528,9 @@
                         id="purchased-package"
                         class="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm"
                       >
-                        <option value="7">Gói 7 Ngày</option>
-                        <option value="10">Gói 10 Ngày</option>
-                        <option value="30">Gói 1 Tháng</option>
+                        <option value="target_5">Gói Trải Nghiệm (5 Ngày)</option>
+                        <option value="target_10">Gói Chuyển Đổi (10 Ngày)</option>
+                        <option value="target_20">Gói Bứt Phá (20 Ngày)</option>
                       </select>
                     </div>
                     <div>
@@ -14532,6 +14741,66 @@
         }
       }
 
+      let analyzingInterval = null;
+      let analyzingFrameIndex = 0;
+      
+      function showAnalyzingPopup(callback) {
+        const overlay = document.getElementById("mascot-analyzing-overlay");
+        const img = document.getElementById("mascot-analyzing-img");
+        
+        // Show overlay
+        overlay.classList.remove("hidden");
+        overlay.classList.add("flex");
+        // Trigger reflow
+        void overlay.offsetWidth;
+        overlay.classList.remove("opacity-0");
+        overlay.classList.add("opacity-100");
+        
+        // Check if we have frames for "phan_tich"
+        let frames = [];
+        if (typeof mascotLoadedSequences !== 'undefined') {
+            if (mascotLoadedSequences['phan_tich'] && mascotLoadedSequences['phan_tich'].length > 0) {
+                frames = mascotLoadedSequences['phan_tich'];
+            } else if (mascotLoadedSequences['suy_nghi'] && mascotLoadedSequences['suy_nghi'].length > 0) {
+                frames = mascotLoadedSequences['suy_nghi']; // fallback
+            }
+        }
+
+        if (frames.length > 0) {
+            analyzingFrameIndex = 0;
+            img.classList.remove("hidden");
+            img.src = frames[0];
+            
+            if (analyzingInterval) clearInterval(analyzingInterval);
+            
+            const fps = typeof mascotFps !== 'undefined' ? mascotFps : 12;
+            analyzingInterval = setInterval(() => {
+                analyzingFrameIndex++;
+                if (analyzingFrameIndex >= frames.length) {
+                    analyzingFrameIndex = 0; // loop
+                }
+                img.src = frames[analyzingFrameIndex];
+            }, 1000 / fps);
+        } else {
+            img.classList.add("hidden");
+        }
+
+        setTimeout(() => {
+            if (analyzingInterval) {
+                clearInterval(analyzingInterval);
+                analyzingInterval = null;
+            }
+            overlay.classList.remove("opacity-100");
+            overlay.classList.add("opacity-0");
+            setTimeout(() => {
+                overlay.classList.remove("flex");
+                overlay.classList.add("hidden");
+                img.src = "";
+                if (typeof callback === 'function') callback();
+            }, 300);
+        }, 2000);
+      }
+
       function handleAnalysisSubmit(e) {
         e.preventDefault();
         const form = e.target;
@@ -15806,10 +16075,11 @@
         updatePackage(5, 10);
         updatePackage(6, 20);
 
-        document.getElementById("analysis-empty-state").classList.add("hidden");
-        document
-          .getElementById("analysis-result-state")
-          .classList.remove("hidden");
+        showAnalyzingPopup(() => {
+          document.getElementById("analysis-empty-state").classList.add("hidden");
+          document
+            .getElementById("analysis-result-state")
+            .classList.remove("hidden");
 
         // Kích hoạt hiệu ứng Confetti
         if (typeof confetti === "function") {
@@ -16077,6 +16347,7 @@
             fab.classList.remove("animate-wiggle");
           }, 600);
         }, 1000); // Đợi 1s sau khi render kết quả để tạo cảm giác tự nhiên
+        });
       }
 
       // ==========================================
@@ -19123,11 +19394,11 @@
           } catch (e) {}
         }
         if (pkgValue === "target_5" || pkgValue === "5")
-          return pkgTexts["front-pkg4-title"] || "5 Ngày";
+          return pkgTexts["front-pkg4-title"] || "Trải Nghiệm (5 Ngày)";
         if (pkgValue === "target_10" || pkgValue === "10")
-          return pkgTexts["front-pkg5-title"] || "10 Ngày";
+          return pkgTexts["front-pkg5-title"] || "Chuyển Đổi (10 Ngày)";
         if (pkgValue === "target_20" || pkgValue === "20")
-          return pkgTexts["front-pkg6-title"] || "20 Ngày";
+          return pkgTexts["front-pkg6-title"] || "Bứt Phá (20 Ngày)";
         return pkgValue;
       }
 
@@ -21748,6 +22019,905 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
           }, 5000);
       };
 
+      // =========================================================================
+      // MASCOT / EXPRESSIONS MANAGEMENT WITH INDEXEDDB STORAGE & ANIMATIONS
+      // =========================================================================
+      const MascotDB = {
+        dbName: 'NutriMascotDB',
+        storeName: 'sequences',
+        db: null,
+        
+        init() {
+          return new Promise((resolve, reject) => {
+            if (this.db) return resolve(this.db);
+            const request = indexedDB.open(this.dbName, 1);
+            request.onerror = (e) => reject(e);
+            request.onsuccess = (e) => {
+              this.db = e.target.result;
+              resolve(this.db);
+            };
+            request.onupgradeneeded = (e) => {
+              const db = e.target.result;
+              db.createObjectStore(this.storeName);
+            };
+          });
+        },
+        
+        saveSequence(expressionId, frames) {
+          return this.init().then(() => {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(this.storeName, 'readwrite');
+              const store = tx.objectStore(this.storeName);
+              const req = store.put(frames, expressionId);
+              req.onsuccess = () => resolve();
+              req.onerror = (e) => reject(e);
+            });
+          });
+        },
+        
+        getSequence(expressionId) {
+          return this.init().then(() => {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(this.storeName, 'readonly');
+              const store = tx.objectStore(this.storeName);
+              const req = store.get(expressionId);
+              req.onsuccess = (e) => resolve(e.target.result || null);
+              req.onerror = (e) => reject(e);
+            });
+          });
+        },
+        
+        deleteSequence(expressionId) {
+          return this.init().then(() => {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(this.storeName, 'readwrite');
+              const store = tx.objectStore(this.storeName);
+              const req = store.delete(expressionId);
+              req.onsuccess = () => resolve();
+              req.onerror = (e) => reject(e);
+            });
+          });
+        }
+      };
+
+      let activeMascotId = "vui_ve";
+      let mascotExpressions = [
+        { id: "vui_ve", name: "vui vẻ", isDefault: true },
+        { id: "cuoi_lon", name: "cười lớn", isDefault: true },
+        { id: "tu_hao", name: "tự hào", isDefault: true },
+        { id: "yeu_thich", name: "yêu thích", isDefault: true },
+        { id: "suy_nghi", name: "suy nghĩ", isDefault: true },
+        { id: "ngac_nhien", name: "ngạc nhiên", isDefault: true },
+        { id: "buon", name: "buồn", isDefault: true },
+        { id: "buon_ngu", name: "buồn ngủ", isDefault: true },
+        { id: "tu_tin", name: "tự tin", isDefault: true },
+        { id: "cam_on", name: "cảm ơn", isDefault: true },
+        { id: "xin_loi", name: "xin lỗi", isDefault: true }
+      ];
+            let mascotActions = [
+        { id: "an_mung", name: "ăn mừng", isDefault: true },
+        { id: "an", name: "ăn", isDefault: true },
+        { id: "lam_viec", name: "làm việc", isDefault: true },
+        { id: "nau_an", name: "nấu ăn", isDefault: true },
+        { id: "ngu", name: "ngủ", isDefault: true },
+        { id: "noi_chuyen", name: "nói chuyện", isDefault: true },
+        { id: "phan_tich", name: "phân tích", isDefault: true },
+        { id: "tap_the_duc", name: "tập thể dục", isDefault: true },
+        { id: "thuc_day", name: "thức dậy", isDefault: true },
+        { id: "uong_nuoc", name: "uống nước", isDefault: true }
+      ];
+      let mascotLoadedSequences = {}; // Store custom frame data URL arrays in memory
+      let mascotAnimationInterval = null;
+      let mascotCurrentFrameIndex = 0;
+      let mascotFps = 12;
+      let mascotIsPlaying = true;
+
+      async function initMascotSystem() {
+        // Load custom expressions list
+        try {
+          const savedExprs = localStorage.getItem("nutriadmin_mascot_expressions");
+          if (savedExprs) {
+            mascotExpressions = JSON.parse(savedExprs);
+          } else {
+            localStorage.setItem("nutriadmin_mascot_expressions", JSON.stringify(mascotExpressions));
+          }
+        } catch (e) {
+          console.error("Failed to load mascot expressions list", e);
+        }
+        // Load custom actions list
+        try {
+          const savedActions = localStorage.getItem("nutriadmin_mascot_actions");
+          if (savedActions) {
+            mascotActions = JSON.parse(savedActions);
+          } else {
+            localStorage.setItem("nutriadmin_mascot_actions", JSON.stringify(mascotActions));
+          }
+        } catch (e) {
+          console.error("Failed to load mascot actions list", e);
+        }
+
+        // Load active expression
+        try {
+          const savedActive = localStorage.getItem("nutriadmin_mascot_active_expression");
+          if (savedActive) activeMascotId = savedActive;
+        } catch (e) {}
+
+        // Load custom toggles from localStorage
+        try {
+          const showToggle = document.getElementById("mascot-show-toggle");
+          if (showToggle) {
+            const savedShow = localStorage.getItem("nutriadmin_mascot_visible");
+            showToggle.checked = savedShow !== "false";
+          }
+          const voiceToggle = document.getElementById("mascot-voice-toggle");
+          if (voiceToggle) {
+            const savedVoice = localStorage.getItem("nutriadmin_mascot_voice_enabled");
+            voiceToggle.checked = savedVoice === "true";
+          }
+        } catch (e) {}
+
+        // Load sequences from IndexedDB
+        try {
+          await MascotDB.init();
+          for (const expr of mascotExpressions) {
+            const frames = await MascotDB.getSequence(expr.id);
+            if (frames && frames.length > 0) {
+              mascotLoadedSequences[expr.id] = frames;
+            }
+          }
+          for (const action of mascotActions) {
+            const frames = await MascotDB.getSequence(action.id);
+            if (frames && frames.length > 0) {
+              mascotLoadedSequences[action.id] = frames;
+            }
+          }
+        } catch (e) {
+          console.error("Failed to load sequences from IndexedDB", e);
+        }
+
+        // Render expressions list & preview
+        renderMascotExpressions();
+        renderMascotActions();
+        startMascotPlaybackLoop();
+      }
+
+      function renderMascotExpressions() {
+        const container = document.getElementById("mascot-expressions-list");
+        if (!container) return;
+
+        container.innerHTML = "";
+        
+        mascotExpressions.forEach((expr) => {
+          const isActive = expr.id === activeMascotId;
+          const hasSequence = mascotLoadedSequences[expr.id] && mascotLoadedSequences[expr.id].length > 0;
+          const numFrames = hasSequence ? mascotLoadedSequences[expr.id].length : 0;
+          
+          const row = document.createElement("div");
+          row.className = `flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 ${
+            isActive 
+              ? "bg-emerald-600 text-white border-emerald-600 shadow-md transform -translate-y-0.5" 
+              : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
+          }`;
+          
+          // Left side: click selector
+          const leftSec = document.createElement("button");
+          leftSec.type = "button";
+          leftSec.className = "flex-1 flex items-center gap-3 text-left focus:outline-none";
+          leftSec.onclick = () => selectMascotExpression(expr.id);
+          
+          let iconHtml = '<i class="fa-solid fa-face-smile text-lg"></i>';
+          if (expr.id === "buon") iconHtml = '<i class="fa-solid fa-face-sad-tear text-lg"></i>';
+          else if (expr.id === "ngac_nhien") iconHtml = '<i class="fa-solid fa-face-surprise text-lg"></i>';
+          else if (expr.id === "buon_ngu") iconHtml = '<i class="fa-solid fa-face-tired text-lg"></i>';
+          else if (expr.id === "yeu_thich") iconHtml = '<i class="fa-solid fa-heart text-lg text-rose-400"></i>';
+          else if (expr.id === "cuoi_lon") iconHtml = '<i class="fa-solid fa-face-laugh-squint text-lg"></i>';
+          else if (expr.id === "tu_hao") iconHtml = '<i class="fa-solid fa-award text-lg text-amber-400"></i>';
+          else if (expr.id === "tu_tin") iconHtml = '<i class="fa-solid fa-glasses text-lg"></i>';
+          else if (expr.id === "suy_nghi") iconHtml = '<i class="fa-solid fa-brain text-lg"></i>';
+          
+          leftSec.innerHTML = `
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center ${isActive ? "bg-white/20 text-white" : "bg-emerald-50 text-emerald-600"}">
+              ${iconHtml}
+            </div>
+            <div>
+              <div class="text-sm font-semibold capitalize">${expr.name}</div>
+              <div class="text-xs ${isActive ? "text-emerald-100" : "text-slate-400"}">
+                ${hasSequence ? `<i class="fa-solid fa-film mr-1"></i> ${numFrames} hình` : "Mặc định (Vector)"}
+              </div>
+            </div>
+          `;
+          
+          // Right side: controls (upload sequence, clear sequence, delete expression if custom)
+          const rightSec = document.createElement("div");
+          rightSec.className = "flex items-center gap-1.5 shrink-0";
+          
+          // Upload sequence button
+          const fileInputId = `mascot-upload-input-${expr.id}`;
+          rightSec.innerHTML += `
+            <input type="file" id="${fileInputId}" multiple accept="image/png" onchange="uploadMascotSequence(event, '${expr.id}')" class="hidden" />
+            <button type="button" onclick="document.getElementById('${fileInputId}').click()" title="Tải lên chuỗi hình ảnh PNG" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+              isActive 
+                ? "bg-white/20 text-white border-white/20 hover:bg-white/30" 
+                : "bg-white text-slate-500 border-slate-200 hover:text-emerald-600 hover:border-emerald-100 hover:bg-emerald-50"
+            }">
+              <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+            </button>
+          `;
+          
+          // Delete sequence button (if uploaded)
+          if (hasSequence) {
+            rightSec.innerHTML += `
+              <button type="button" onclick="deleteMascotSequence('${expr.id}')" title="Xóa chuỗi hình ảnh" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+                isActive 
+                  ? "bg-white/20 text-red-100 border-white/20 hover:bg-red-500/30" 
+                  : "bg-white text-red-500 border-red-100 hover:bg-red-50"
+              }">
+                <i class="fa-solid fa-rotate-left text-xs"></i>
+              </button>
+            `;
+          }
+          
+          // Delete completely (if custom expression)
+          if (!expr.isDefault) {
+            rightSec.innerHTML += `
+              <button type="button" onclick="deleteMascotExpression('${expr.id}')" title="Xóa biểu cảm hoàn toàn" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+                isActive 
+                  ? "bg-white/20 text-red-100 border-white/20 hover:bg-red-500/30" 
+                  : "bg-white text-red-500 border-red-200 hover:bg-red-50"
+              }">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            `;
+          }
+          
+          row.appendChild(leftSec);
+          row.appendChild(rightSec);
+          container.appendChild(row);
+        });
+        
+        // Update speed and current sliders
+        const slider = document.getElementById("mascot-fps-slider");
+        if (slider) slider.value = mascotFps;
+        const speedVal = document.getElementById("mascot-fps-val");
+        if (speedVal) speedVal.innerText = mascotFps;
+      }
+
+
+      function renderMascotActions() {
+        const container = document.getElementById("mascot-actions-list");
+        if (!container) return;
+
+        container.innerHTML = "";
+        
+        mascotActions.forEach((action) => {
+          const isActive = action.id === activeMascotId;
+          const hasSequence = mascotLoadedSequences[action.id] && mascotLoadedSequences[action.id].length > 0;
+          const numFrames = hasSequence ? mascotLoadedSequences[action.id].length : 0;
+          
+          const row = document.createElement("div");
+          row.className = `flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 ${
+            isActive 
+              ? "bg-emerald-600 text-white border-emerald-600 shadow-md transform -translate-y-0.5" 
+              : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200"
+          }`;
+          
+          // Left side: click selector
+          const leftSec = document.createElement("button");
+          leftSec.type = "button";
+          leftSec.className = "flex-1 flex items-center gap-3 text-left focus:outline-none";
+          leftSec.onclick = () => selectMascotAction(action.id);
+          
+          let iconHtml = '<i class="fa-solid fa-person-running text-lg"></i>';
+          if (action.id === "an") iconHtml = '<i class="fa-solid fa-utensils text-lg"></i>';
+          else if (action.id === "ngu") iconHtml = '<i class="fa-solid fa-bed text-lg"></i>';
+          else if (action.id === "lam_viec") iconHtml = '<i class="fa-solid fa-laptop-code text-lg"></i>';
+          else if (action.id === "nau_an") iconHtml = '<i class="fa-solid fa-fire-burner text-lg"></i>';
+          else if (action.id === "noi_chuyen") iconHtml = '<i class="fa-solid fa-comments text-lg"></i>';
+          else if (action.id === "phan_tich") iconHtml = '<i class="fa-solid fa-chart-line text-lg"></i>';
+          else if (action.id === "an_mung") iconHtml = '<i class="fa-solid fa-champagne-glasses text-lg"></i>';
+          else if (action.id === "uong_nuoc") iconHtml = '<i class="fa-solid fa-glass-water text-lg"></i>';
+          else if (action.id === "thuc_day") iconHtml = '<i class="fa-solid fa-sun text-lg text-amber-400"></i>';
+          else if (action.id === "tap_the_duc") iconHtml = '<i class="fa-solid fa-dumbbell text-lg"></i>';
+          
+          leftSec.innerHTML = `
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center ${isActive ? "bg-white/20 text-white" : "bg-emerald-50 text-emerald-600"}">
+              ${iconHtml}
+            </div>
+            <div>
+              <div class="text-sm font-semibold capitalize">${action.name}</div>
+              <div class="text-xs ${isActive ? "text-emerald-100" : "text-slate-400"}">
+                ${hasSequence ? `<i class="fa-solid fa-film mr-1"></i> ${numFrames} hình` : "Mặc định (Vector)"}
+              </div>
+            </div>
+          `;
+          
+          // Right side: controls (upload sequence, clear sequence, delete action if custom)
+          const rightSec = document.createElement("div");
+          rightSec.className = "flex items-center gap-1.5 shrink-0";
+          
+          // Upload sequence button
+          const fileInputId = `mascot-upload-input-${action.id}`;
+          rightSec.innerHTML += `
+            <input type="file" id="${fileInputId}" multiple accept="image/png" onchange="uploadMascotSequence(event, '${action.id}')" class="hidden" />
+            <button type="button" onclick="document.getElementById('${fileInputId}').click()" title="Tải lên chuỗi hình ảnh PNG" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+              isActive 
+                ? "bg-white/20 text-white border-white/20 hover:bg-white/30" 
+                : "bg-white text-slate-500 border-slate-200 hover:text-emerald-600 hover:border-emerald-100 hover:bg-emerald-50"
+            }">
+              <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+            </button>
+          `;
+          
+          // Delete sequence button (if uploaded)
+          if (hasSequence) {
+            rightSec.innerHTML += `
+              <button type="button" onclick="deleteMascotSequence('${action.id}')" title="Xóa chuỗi hình ảnh" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+                isActive 
+                  ? "bg-white/20 text-red-100 border-white/20 hover:bg-red-500/30" 
+                  : "bg-white text-red-500 border-red-100 hover:bg-red-50"
+              }">
+                <i class="fa-solid fa-rotate-left text-xs"></i>
+              </button>
+            `;
+          }
+          
+          // Delete completely (if custom action)
+          if (!action.isDefault) {
+            rightSec.innerHTML += `
+              <button type="button" onclick="deleteMascotAction('${action.id}')" title="Xóa hoạt động hoàn toàn" class="w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${
+                isActive 
+                  ? "bg-white/20 text-red-100 border-white/20 hover:bg-red-500/30" 
+                  : "bg-white text-red-500 border-red-200 hover:bg-red-50"
+              }">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            `;
+          }
+          
+          row.appendChild(leftSec);
+          row.appendChild(rightSec);
+          container.appendChild(row);
+        });
+      }
+
+      function selectMascotAction(id) {
+        activeMascotId = id;
+        localStorage.setItem("nutriadmin_mascot_active_expression", id); // Re-use the same local storage key for active element
+        mascotCurrentFrameIndex = 0;
+        
+        renderMascotExpressions(); // Re-render to clear active state
+        renderMascotActions(); // Render new active state
+        drawActiveMascotPreview();
+        showToast(`Đã chọn hoạt động: ${id.replace(/_/g, ' ')}`, "info");
+      }
+
+      function promptAddMascotAction() {
+        openCustomPrompt("Thêm hoạt động mới", "Nhập tên hoạt động mới:", (name) => {
+          if (!name) return;
+          
+          const cleanName = name.trim().toLowerCase();
+          if (!cleanName) return;
+          
+          const id = cleanName
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove accent diacritics
+            .replace(/[đĐ]/g, "d")
+            .replace(/[^a-z0-9]/g, "_") // remove non-alpha
+            .replace(/_+/g, "_");       // reduce double underscores
+          
+          if (mascotActions.some(a => a.id === id) || mascotExpressions.some(e => e.id === id)) {
+            showToast("Tên này đã tồn tại!", "error");
+            return;
+          }
+          
+          mascotActions.push({
+            id: id,
+            name: cleanName,
+            isDefault: false
+          });
+          
+          localStorage.setItem("nutriadmin_mascot_actions", JSON.stringify(mascotActions));
+          showToast(`Đã thêm hoạt động: ${cleanName}`, "success");
+          selectMascotAction(id);
+        });
+      }
+
+      function deleteMascotAction(id) {
+        if (confirm(`Bạn có chắc chắn muốn xóa hoàn toàn hoạt động '${id}' không?`)) {
+          mascotActions = mascotActions.filter(a => a.id !== id);
+          localStorage.setItem("nutriadmin_mascot_actions", JSON.stringify(mascotActions));
+          
+          // Delete from IndexedDB and loaded memory
+          MascotDB.deleteSequence(id).then(() => {
+            delete mascotLoadedSequences[id];
+            
+            // If active was deleted, fallback
+            if (activeMascotId === id) {
+              activeMascotId = "vui_ve";
+              localStorage.setItem("nutriadmin_mascot_active_expression", "vui_ve");
+            }
+            
+            showToast("Đã xóa hoạt động thành công!", "success");
+            renderMascotActions();
+            renderMascotExpressions();
+            drawActiveMascotPreview();
+          });
+        }
+      }
+
+      function selectMascotExpression(id) {
+        activeMascotId = id;
+        localStorage.setItem("nutriadmin_mascot_active_expression", id);
+        mascotCurrentFrameIndex = 0;
+        
+        renderMascotExpressions();
+        renderMascotActions();
+        drawActiveMascotPreview();
+        showToast(`Đã chọn biểu cảm: ${id.replace(/_/g, ' ')}`, "info");
+      }
+
+      function promptAddMascotExpression() {
+        openCustomPrompt("Thêm biểu cảm mới", "Nhập tên biểu cảm mới:", (name) => {
+          if (!name) return;
+          
+          const cleanName = name.trim().toLowerCase();
+          if (!cleanName) return;
+          
+          const id = cleanName
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove accent diacritics
+            .replace(/[đĐ]/g, "d")
+            .replace(/[^a-z0-9]/g, "_") // remove non-alpha
+            .replace(/_+/g, "_");       // reduce double underscores
+          
+          if (mascotExpressions.some(e => e.id === id) || mascotActions.some(a => a.id === id)) {
+            showToast("Tên này đã tồn tại!", "error");
+            return;
+          }
+          
+          mascotExpressions.push({
+            id: id,
+            name: cleanName,
+            isDefault: false
+          });
+          
+          localStorage.setItem("nutriadmin_mascot_expressions", JSON.stringify(mascotExpressions));
+          showToast(`Đã thêm biểu cảm: ${cleanName}`, "success");
+          selectMascotExpression(id);
+        });
+      }
+
+      function deleteMascotExpression(id) {
+        if (confirm(`Bạn có chắc chắn muốn xóa hoàn toàn biểu cảm '${id}' không?`)) {
+          mascotExpressions = mascotExpressions.filter(e => e.id !== id);
+          localStorage.setItem("nutriadmin_mascot_expressions", JSON.stringify(mascotExpressions));
+          
+          // Delete from IndexedDB and loaded memory
+          MascotDB.deleteSequence(id).then(() => {
+            delete mascotLoadedSequences[id];
+            
+            // If active was deleted, fallback
+            if (activeMascotId === id) {
+              activeMascotId = "vui_ve";
+              localStorage.setItem("nutriadmin_mascot_active_expression", "vui_ve");
+            }
+            
+            showToast("Đã xóa biểu cảm thành công!", "success");
+            renderMascotExpressions();
+            renderMascotActions();
+            drawActiveMascotPreview();
+          });
+        }
+      }
+
+      function uploadMascotSequence(event, id) {
+        const files = Array.from(event.target.files);
+        if (files.length === 0) return;
+
+        // Sort files by name so sequence plays in correct frame order (e.g., frame1, frame2...)
+        files.sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'}));
+
+        showToast("⏳ Đang xử lý chuỗi hình ảnh PNG...", "info");
+        
+        const readPromises = files.map(file => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+          });
+        });
+
+        Promise.all(readPromises).then(frames => {
+          MascotDB.saveSequence(id, frames).then(() => {
+            mascotLoadedSequences[id] = frames;
+            showToast(`Đã tải lên ${frames.length} khung hình thành công!`, "success");
+            mascotCurrentFrameIndex = 0;
+            renderMascotExpressions();
+            renderMascotActions();
+            drawActiveMascotPreview();
+          }).catch(err => {
+            console.error("IndexedDB save failed", err);
+            showToast("Không thể lưu chuỗi hình ảnh vào database", "error");
+          });
+        });
+      }
+
+      function deleteMascotSequence(id) {
+        if (confirm("Bạn muốn xóa chuỗi hình ảnh và khôi phục về biểu cảm mặc định?")) {
+          MascotDB.deleteSequence(id).then(() => {
+            delete mascotLoadedSequences[id];
+            showToast("Đã khôi phục về hình ảnh mặc định", "success");
+            renderMascotExpressions();
+            renderMascotActions();
+            drawActiveMascotPreview();
+          });
+        }
+      }
+
+      function toggleMascotPlay() {
+        mascotIsPlaying = !mascotIsPlaying;
+        const icon = document.getElementById("mascot-play-icon");
+        if (icon) {
+          if (mascotIsPlaying) {
+            icon.className = "fa-solid fa-pause";
+            showToast("Đã phát chuyển động", "info");
+          } else {
+            icon.className = "fa-solid fa-play";
+            showToast("Tạm dừng chuyển động", "info");
+          }
+        }
+      }
+
+      function changeMascotFps(val) {
+        mascotFps = parseInt(val);
+        const fpsVal = document.getElementById("mascot-fps-val");
+        if (fpsVal) fpsVal.innerText = mascotFps;
+      }
+
+      function toggleMascotVisibility(checked) {
+        localStorage.setItem("nutriadmin_mascot_visible", checked ? "true" : "false");
+        showToast(checked ? "Đã bật hiển thị nhân vật" : "Đã tắt hiển thị nhân vật", "info");
+      }
+
+      function toggleMascotVoice(checked) {
+        localStorage.setItem("nutriadmin_mascot_voice_enabled", checked ? "true" : "false");
+        showToast(checked ? "Đã bật tương tác giọng nói" : "Đã tắt tương tác giọng nói", "info");
+      }
+
+      function drawMascotSVG(expression, frame) {
+        let eyeLeft = '', eyeRight = '', mouth = '', cheeks = '', extras = '', transform = '', leafTransform = '';
+        
+        // Leaf stem swaying
+        const leafAngle = Math.sin(frame * 0.45) * 10;
+        leafTransform = `transform="rotate(${leafAngle} 60 25)"`;
+        
+        // Gentle vertical hovering
+        const floatY = Math.sin(frame * 0.25) * 3.5;
+        transform = `style="transform: translateY(${floatY}px)"`;
+
+        // Warm blushing cheeks
+        cheeks = `
+          <circle cx="43" cy="62" r="5" fill="#f43f5e" opacity="0.3" filter="blur(1px)" />
+          <circle cx="77" cy="62" r="5" fill="#f43f5e" opacity="0.3" filter="blur(1px)" />
+        `;
+
+        switch (expression) {
+          case 'vui_ve':
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M52 66 Q60 77 68 66" stroke="#2DD4BF" stroke-width="3" fill="none" stroke-linecap="round" />`;
+            // Bouncing height
+            const bounceY = Math.abs(Math.sin(frame * 0.4)) * -7;
+            transform = `style="transform: translateY(${bounceY}px)"`;
+            break;
+            
+          case 'cuoi_lon':
+            eyeLeft = `<path d="M38 52 L48 56 L38 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            eyeRight = `<path d="M82 52 L72 56 L82 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            mouth = `<path d="M48 64 C48 78, 72 78, 72 64 Z" fill="#EF4444" stroke="#2DD4BF" stroke-width="2.5" />`;
+            // Intense laughing body shake
+            const shakeX = (frame % 2 === 0 ? 3 : -3);
+            const shakeY = (frame % 3 === 0 ? 2 : -2);
+            transform = `style="transform: translate(${shakeX}px, ${shakeY}px)"`;
+            break;
+            
+          case 'tu_hao':
+            eyeLeft = `<path d="M40 52 Q45 45 50 52" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 52 Q75 45 80 52" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M52 66 Q60 61 68 65" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const starScale = 0.6 + Math.abs(Math.sin(frame * 0.35)) * 0.4;
+            extras = `<polygon points="98,36 100,41 105,41 101,44 103,49 98,46 93,49 95,44 91,41 96,41" fill="#FBBF24" style="transform: scale(${starScale}) translate(20px, 5px)" />`;
+            const scaleY = 1 + Math.sin(frame * 0.18) * 0.04;
+            transform = `style="transform: scaleY(${scaleY}); transform-origin: bottom center;"`;
+            break;
+            
+          case 'yeu_thich':
+            const hL = `
+              <path d="M41 48 C38 45, 34 45, 34 49 C34 54, 41 58, 41 58 C41 58, 48 54, 48 49 C48 45, 44 45, 41 48 Z" fill="#F43F5E" />
+            `;
+            const hR = `
+              <path d="M79 48 C76 45, 72 45, 72 49 C72 54, 79 58, 79 58 C79 58, 86 54, 86 49 C86 45, 82 45, 79 48 Z" fill="#F43F5E" />
+            `;
+            eyeLeft = hL;
+            eyeRight = hR;
+            mouth = `<ellipse cx="60" cy="68" rx="4" ry="6" fill="#F43F5E" />`;
+            const h1Y = (frame * 2.5) % 35;
+            const h2Y = ((frame * 2.5) + 17) % 35;
+            extras = `
+              <path d="M22 ${75 - h1Y} C20 ${72 - h1Y}, 17 ${72 - h1Y}, 17 ${76 - h1Y} C17 ${80 - h1Y}, 22 ${84 - h1Y}, 22 ${84 - h1Y} C22 ${84 - h1Y}, 27 ${80 - h1Y}, 27 ${76 - h1Y} C27 ${72 - h1Y}, 24 ${72 - h1Y}, 22 ${75 - h1Y} Z" fill="#EF4444" opacity="${1 - h1Y/35}" transform="scale(0.65) translate(-10px, -20px)" />
+              <path d="M102 ${85 - h2Y} C100 ${82 - h2Y}, 97 ${82 - h2Y}, 97 ${86 - h2Y} C97 ${90 - h2Y}, 102 ${94 - h2Y}, 102 ${94 - h2Y} C102 ${94 - h2Y}, 107 ${90 - h2Y}, 107 ${86 - h2Y} C107 ${82 - h2Y}, 104 ${82 - h2Y}, 102 ${85 - h2Y} Z" fill="#EF4444" opacity="${1 - h2Y/35}" transform="scale(0.55) translate(80px, -10px)" />
+            `;
+            const pulse = 1 + Math.sin(frame * 0.3) * 0.05;
+            transform = `style="transform: scale(${pulse}); transform-origin: center;"`;
+            break;
+            
+          case 'suy_nghi':
+            eyeLeft = `<ellipse cx="48" cy="51" rx="3.5" ry="5.5" fill="#2DD4BF" />`;
+            eyeRight = `<ellipse cx="78" cy="51" rx="3.5" ry="5.5" fill="#2DD4BF" />`;
+            mouth = `<path d="M48 68 Q55 64 60 70 T72 66" stroke="#2DD4BF" stroke-width="3" fill="none" stroke-linecap="round" />`;
+            const qY = Math.sin(frame * 0.22) * 5 - 4;
+            extras = `
+              <text x="96" y="${32 + qY}" font-family="system-ui, sans-serif" font-weight="900" font-size="22" fill="#60A5FA" opacity="0.95" text-anchor="middle">?</text>
+            `;
+            const tilt = Math.sin(frame * 0.12) * 3.5;
+            transform = `style="transform: rotate(${tilt}deg); transform-origin: center;"`;
+            break;
+            
+          case 'ngac_nhien':
+            eyeLeft = `<circle cx="44" cy="52" r="6" fill="#2DD4BF" />`;
+            eyeRight = `<circle cx="76" cy="52" r="6" fill="#2DD4BF" />`;
+            mouth = `<circle cx="60" cy="68" r="6.5" fill="none" stroke="#2DD4BF" stroke-width="3.5" />`;
+            const exclY = Math.sin(frame * 0.45) * 3;
+            extras = `
+              <text x="60" y="${22 + exclY}" font-family="system-ui, sans-serif" font-weight="950" font-size="24" fill="#F87171" text-anchor="middle" filter="drop-shadow(0 0 4px #EF4444)">!</text>
+            `;
+            const sX = (frame % 2 === 0 ? 1.5 : -1.5);
+            transform = `style="transform: translateX(${sX}px)"`;
+            break;
+            
+          case 'buon':
+            eyeLeft = `<path d="M38 48 L48 55" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            eyeRight = `<path d="M82 48 L72 55" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            mouth = `<path d="M50 72 Q60 64 70 72" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const tearY = (frame * 3) % 40;
+            extras = `
+              <circle cx="72" cy="${54 + tearY}" r="3" fill="#3B82F6" opacity="${tearY < 32 ? 0.95 : 0}" />
+            `;
+            const tiltSad = Math.sin(frame * 0.08) * 2.5;
+            transform = `style="transform: rotate(${tiltSad}deg) translateY(${floatY}px); transform-origin: bottom center;"`;
+            break;
+            
+          case 'buon_ngu':
+            eyeLeft = `<path d="M38 52 H50" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 52 H82" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            mouth = `<ellipse cx="60" cy="66" rx="2" ry="4" fill="none" stroke="#2DD4BF" stroke-width="2.5" />`;
+            const zPct = (frame % 22) / 22;
+            const zX = 84 + zPct * 16;
+            const zY = 46 - zPct * 26;
+            extras = `
+              <text x="${zX}" y="${zY}" font-family="system-ui, sans-serif" font-weight="bold" font-size="${8 + zPct * 9}" fill="#818CF8" opacity="${1 - zPct}">Z</text>
+            `;
+            const breatheScale = 1 + Math.sin(frame * 0.08) * 0.03;
+            transform = `style="transform: scale(${breatheScale}) translateY(${floatY}px); transform-origin: bottom center;"`;
+            break;
+            
+          case 'tu_tin':
+            eyeLeft = `
+              <path d="M33 46 H87 V53 C87 58, 81 62, 75 62 Q60 55 45 62 C39 62, 33 58, 33 53 Z" fill="#111827" stroke="#1F2937" stroke-width="2" />
+              <line x1="33" y1="46" x2="28" y2="44" stroke="#111827" stroke-width="2.5" />
+              <line x1="87" y1="46" x2="92" y2="44" stroke="#111827" stroke-width="2.5" />
+            `;
+            mouth = `<path d="M52 68 Q65 72 68 64" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const energyFloat = Math.sin(frame * 0.35) * 6;
+            transform = `style="transform: translateY(${energyFloat}px)"`;
+            break;
+            
+          case 'cam_on':
+            eyeLeft = `<path d="M38 52 Q44 44 50 52" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 52 Q76 44 82 52" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M48 64 Q60 76 72 64 Z" fill="#2DD4BF" />`;
+            const sparklesOn = frame % 12 < 6;
+            if (sparklesOn) {
+              extras = `
+                <polygon points="14,38 16,41 21,41 17,43 19,47 14,45 9,47 11,43 7,41 12,41" fill="#FBBF24" />
+                <polygon points="106,63 108,66 113,66 109,68 111,72 106,70 101,72 103,68 99,66 104,66" fill="#FBBF24" />
+              `;
+            }
+            const bowAngle = Math.abs(Math.sin(frame * 0.22)) * 14;
+            transform = `style="transform: rotate(${bowAngle}deg); transform-origin: bottom center;"`;
+            break;
+            
+          case 'xin_loi':
+            eyeLeft = `<path d="M38 52 Q44 44 50 52" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 52 Q76 44 82 52" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            mouth = `<line x1="48" y1="68" x2="72" y2="68" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round" />`;
+            extras = `<ellipse cx="88" cy="48" rx="2.5" ry="4.5" fill="#60A5FA" transform="rotate(-20 88 48)" />`;
+            const droopY = Math.sin(frame * 0.18) * 1.8 + 4;
+            transform = `style="transform: translateY(${droopY}px); transform-origin: bottom center;"`;
+            break;
+            
+
+          case 'an_mung':
+            eyeLeft = `<path d="M38 52 L48 56 L38 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            eyeRight = `<path d="M82 52 L72 56 L82 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            mouth = `<path d="M48 64 C48 78, 72 78, 72 64 Z" fill="#EF4444" stroke="#2DD4BF" stroke-width="2.5" />`;
+            const jumpY = Math.abs(Math.sin(frame * 0.4)) * -15;
+            transform = `style="transform: translateY(${jumpY}px)"`;
+            break;
+            
+          case 'an':
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            const chewOpen = Math.abs(Math.sin(frame * 0.5)) * 10;
+            mouth = `<ellipse cx="60" cy="68" rx="8" ry="${2 + chewOpen}" fill="#EF4444" stroke="#2DD4BF" stroke-width="2" />`;
+            break;
+
+          case 'lam_viec':
+            eyeLeft = `<ellipse cx="48" cy="51" rx="4" ry="4" fill="#2DD4BF" />`;
+            eyeRight = `<ellipse cx="78" cy="51" rx="4" ry="4" fill="#2DD4BF" />`;
+            mouth = `<line x1="52" y1="68" x2="68" y2="68" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" />`;
+            extras = `<rect x="35" y="80" width="50" height="30" rx="4" fill="#64748B" />`;
+            break;
+
+          case 'nau_an':
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            mouth = `<ellipse cx="60" cy="68" rx="6" ry="6" fill="none" stroke="#2DD4BF" stroke-width="3" />`;
+            const stirX = Math.sin(frame * 0.3) * 5;
+            extras = `<path d="M20 70 Q30 90 40 70" stroke="#94A3B8" stroke-width="4" fill="none" style="transform: translateX(${stirX}px)" />`;
+            break;
+
+          case 'ngu':
+            eyeLeft = `<path d="M38 52 H50" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 52 H82" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round" />`;
+            mouth = `<ellipse cx="60" cy="66" rx="2" ry="4" fill="none" stroke="#2DD4BF" stroke-width="2.5" />`;
+            const nzPct = (frame % 22) / 22;
+            extras = `
+              <text x="${84 + nzPct * 16}" y="${46 - nzPct * 26}" font-family="system-ui, sans-serif" font-weight="bold" font-size="${8 + nzPct * 9}" fill="#818CF8" opacity="${1 - nzPct}">Z</text>
+            `;
+            break;
+
+          case 'noi_chuyen':
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            const talkOpen = Math.abs(Math.sin(frame * 0.6)) * 6;
+            mouth = `<ellipse cx="60" cy="68" rx="6" ry="${1 + talkOpen}" fill="none" stroke="#2DD4BF" stroke-width="3" />`;
+            break;
+
+          case 'phan_tich':
+            eyeLeft = `<path d="M40 50 L50 56 L40 56 Z" fill="#2DD4BF" />`;
+            eyeRight = `<path d="M80 50 L70 56 L80 56 Z" fill="#2DD4BF" />`;
+            mouth = `<line x1="52" y1="68" x2="68" y2="68" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" />`;
+            const gX = Math.sin(frame * 0.1) * 3;
+            extras = `<rect x="90" y="40" width="20" height="30" rx="2" fill="none" stroke="#38BDF8" stroke-width="2" style="transform: translateY(${gX}px)" />`;
+            break;
+
+          case 'tap_the_duc':
+            eyeLeft = `<path d="M38 52 L48 56 L38 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            eyeRight = `<path d="M82 52 L72 56 L82 60" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />`;
+            mouth = `<path d="M53 66 Q60 76 67 66" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const dbY = Math.sin(frame * 0.4) * 8;
+            extras = `
+              <rect x="10" y="${60 + dbY}" width="20" height="6" rx="2" fill="#94A3B8" />
+              <rect x="90" y="${60 - dbY}" width="20" height="6" rx="2" fill="#94A3B8" />
+            `;
+            break;
+
+          case 'thuc_day':
+            eyeLeft = `<ellipse cx="48" cy="51" rx="${4 + Math.sin(frame*0.2)*3}" ry="${4 + Math.sin(frame*0.2)*3}" fill="#2DD4BF" />`;
+            eyeRight = `<ellipse cx="78" cy="51" rx="${4 + Math.sin(frame*0.2)*3}" ry="${4 + Math.sin(frame*0.2)*3}" fill="#2DD4BF" />`;
+            mouth = `<ellipse cx="60" cy="68" rx="4" ry="4" fill="none" stroke="#2DD4BF" stroke-width="3" />`;
+            break;
+
+          case 'uong_nuoc':
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            mouth = `<ellipse cx="60" cy="68" rx="4" ry="4" fill="#38BDF8" />`;
+            const wY = Math.sin(frame * 0.3) * 5;
+            extras = `<rect x="55" y="${70 + wY}" width="10" height="15" rx="2" fill="#93C5FD" opacity="0.8" />`;
+            break;
+
+          default:
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M53 66 Q60 76 67 66" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            break;
+        }
+
+        return `
+          <svg viewBox="0 0 120 120" class="w-40 h-40 filter drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]" ${transform}>
+            <defs>
+              <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#34D399" />
+                <stop offset="100%" stop-color="#10B981" />
+              </linearGradient>
+              <linearGradient id="stemGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#78350F" />
+                <stop offset="100%" stop-color="#451A03" />
+              </linearGradient>
+            </defs>
+            <path d="M60 25 Q60 12 70 10" stroke="url(#stemGrad)" stroke-width="3.2" fill="none" stroke-linecap="round" ${leafTransform} />
+            <path d="M70 10 Q85 5 80 18 Q65 20 70 10 Z" fill="#059669" ${leafTransform} />
+            <rect x="25" y="25" width="70" height="80" rx="35" fill="url(#bodyGrad)" stroke="#047857" stroke-width="4.5" />
+            <rect x="33" y="38" width="54" height="44" rx="18" fill="#1E293B" stroke="#0F172A" stroke-width="3.2" />
+            ${cheeks}
+            ${eyeLeft}
+            ${eyeRight}
+            ${mouth}
+            ${extras}
+          </svg>
+        `;
+      }
+
+      function drawActiveMascotPreview() {
+        const svgContainer = document.getElementById("mascot-svg-container");
+        const sequenceImg = document.getElementById("mascot-sequence-img");
+        const counter = document.getElementById("mascot-frame-counter");
+        
+        if (!svgContainer || !sequenceImg) return;
+        
+        const hasSequence = mascotLoadedSequences[activeMascotId] && mascotLoadedSequences[activeMascotId].length > 0;
+        
+        if (hasSequence) {
+          const frames = mascotLoadedSequences[activeMascotId];
+          // Ensure frame index is valid
+          if (mascotCurrentFrameIndex >= frames.length) {
+            mascotCurrentFrameIndex = 0;
+          }
+          
+          sequenceImg.src = frames[mascotCurrentFrameIndex];
+          sequenceImg.classList.remove("hidden");
+          svgContainer.classList.add("hidden");
+          
+          if (counter) {
+            counter.innerText = `Frame: ${mascotCurrentFrameIndex + 1} / ${frames.length}`;
+          }
+        } else {
+          sequenceImg.classList.add("hidden");
+          svgContainer.classList.remove("hidden");
+          
+          // Render beautiful dynamic vector SVG
+          svgContainer.innerHTML = drawMascotSVG(activeMascotId, mascotCurrentFrameIndex);
+          
+          if (counter) {
+            counter.innerText = `Vector: ${activeMascotId.replace(/_/g, ' ')}`;
+          }
+        }
+      }
+
+      function startMascotPlaybackLoop() {
+        if (mascotAnimationInterval) {
+          clearInterval(mascotAnimationInterval);
+        }
+        
+        const runLoop = () => {
+          if (mascotIsPlaying) {
+            mascotCurrentFrameIndex++;
+            const hasSequence = mascotLoadedSequences[activeMascotId] && mascotLoadedSequences[activeMascotId].length > 0;
+            
+            if (hasSequence) {
+              const frames = mascotLoadedSequences[activeMascotId];
+              if (mascotCurrentFrameIndex >= frames.length) {
+                mascotCurrentFrameIndex = 0;
+              }
+            } else {
+              // Vector loop runs indefinitely
+              if (mascotCurrentFrameIndex >= 120) {
+                mascotCurrentFrameIndex = 0;
+              }
+            }
+            
+            drawActiveMascotPreview();
+          }
+          
+          // Dynamically adjust timeout based on mascotFps
+          setTimeout(runLoop, 1000 / mascotFps);
+        };
+        
+        // Launch dynamic nested loop
+        setTimeout(runLoop, 1000 / mascotFps);
+      }
+
       window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
         let cfgHash = null;
@@ -21790,6 +22960,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
 
         initGoogleSignIn();
         loadSettings();
+        initMascotSystem();
         renderCategories();
         renderDishes();
         initLocationDropdowns();
@@ -22580,6 +23751,72 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
     </div>
 
     <script>
+      let customPromptCallback = null;
+
+      function openCustomPrompt(title, message, callback) {
+        const modal = document.getElementById("custom-prompt-modal");
+        const titleEl = document.getElementById("custom-prompt-title");
+        const msgEl = document.getElementById("custom-prompt-message");
+        const inputEl = document.getElementById("custom-prompt-input");
+        const confirmBtn = document.getElementById("custom-prompt-confirm-btn");
+        
+        customPromptCallback = callback;
+        
+        titleEl.innerText = title;
+        if (message) {
+          msgEl.innerText = message;
+          msgEl.classList.remove("hidden");
+        } else {
+          msgEl.classList.add("hidden");
+        }
+        
+        inputEl.value = "";
+        
+        // Remove old event listeners by replacing the node
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+        
+        const newInputEl = inputEl.cloneNode(true);
+        inputEl.parentNode.replaceChild(newInputEl, inputEl);
+        
+        newConfirmBtn.addEventListener("click", () => {
+          const val = newInputEl.value;
+          closeCustomPrompt();
+          if (customPromptCallback) customPromptCallback(val);
+        });
+        
+        newInputEl.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            newConfirmBtn.click();
+          }
+        });
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        // Trigger reflow
+        void modal.offsetWidth;
+        modal.classList.remove("opacity-0");
+        modal.classList.add("opacity-100");
+        
+        setTimeout(() => {
+          newInputEl.focus();
+        }, 300);
+      }
+
+      function closeCustomPrompt() {
+        const modal = document.getElementById("custom-prompt-modal");
+        modal.classList.remove("opacity-100");
+        modal.classList.add("opacity-0");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }, 300);
+      }
+      
+      window.openCustomPrompt = openCustomPrompt;
+      window.closeCustomPrompt = closeCustomPrompt;
+
       function openPricingModal(pkgDays, isEditMode) {
         // Hide all tabs first
         document
@@ -22629,6 +23866,185 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
       document
         .getElementById("pricing-modal")
         .addEventListener("click", closePricingModal);
+
+      // =========================================================================
+      // RESET DATA SYSTEM
+      // =========================================================================
+      const resetDataOptions = [
+        { id: 'stats', name: 'Chỉ số thống kê', icon: 'fa-chart-pie' },
+        { id: 'marketing', name: 'Chỉ số QR & Marketing', icon: 'fa-bullhorn' },
+        { id: 'orders', name: 'Quản lý đơn hàng', icon: 'fa-file-invoice' },
+        { id: 'kitchen', name: 'Quản lý bếp', icon: 'fa-kitchen-set' },
+        { id: 'inventory', name: 'Quản lý nguyên liệu', icon: 'fa-boxes-stacked' },
+        { id: 'messages', name: 'Tin nhắn', icon: 'fa-comments' },
+        { id: 'reviews', name: 'Đánh giá', icon: 'fa-star' },
+        { id: 'menu', name: 'Menu', icon: 'fa-utensils' },
+        { id: 'leads', name: 'Khách hàng tiềm năng', icon: 'fa-magnet' },
+        { id: 'customers', name: 'Khách đã mua gói', icon: 'fa-users' },
+        { id: 'accounts', name: 'Quản lý tài khoản', icon: 'fa-user-shield' },
+        { id: 'order_history', name: 'Lịch sử đơn hàng', icon: 'fa-clock-rotate-left' }
+      ];
+
+      function openResetDataModal() {
+        const container = document.getElementById("reset-options-container");
+        container.innerHTML = resetDataOptions.map(opt => `
+          <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors">
+            <input type="checkbox" name="reset-option" value="${opt.id}" class="w-5 h-5 text-red-600 border-slate-300 rounded focus:ring-red-500" />
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center"><i class="fa-solid ${opt.icon}"></i></div>
+              <span class="text-sm font-medium text-slate-700">${opt.name}</span>
+            </div>
+          </label>
+        `).join('');
+
+        document.getElementById("reset-password-input").value = "";
+
+        const modal = document.getElementById("reset-data-modal");
+        const content = document.getElementById("reset-data-content");
+        
+        modal.classList.remove("hidden");
+        // Force reflow
+        void modal.offsetWidth;
+        
+        modal.classList.add("opacity-100");
+        modal.classList.remove("opacity-0");
+        content.classList.add("scale-100");
+        content.classList.remove("scale-95");
+      }
+
+      function closeResetDataModal() {
+        const modal = document.getElementById("reset-data-modal");
+        const content = document.getElementById("reset-data-content");
+        
+        modal.classList.remove("opacity-100");
+        modal.classList.add("opacity-0");
+        content.classList.remove("scale-100");
+        content.classList.add("scale-95");
+        
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+
+      function confirmResetData() {
+        const passwordInput = document.getElementById("reset-password-input").value;
+        if (passwordInput !== "180298") {
+          showToast("Mật khẩu không chính xác!", "error");
+          return;
+        }
+
+        const checkedBoxes = document.querySelectorAll('input[name="reset-option"]:checked');
+        if (checkedBoxes.length === 0) {
+          showToast("Vui lòng chọn ít nhất một mục để xóa!", "error");
+          return;
+        }
+
+        let clearedCount = 0;
+        let needsSync = false;
+
+        checkedBoxes.forEach(box => {
+          const id = box.value;
+          if (id === 'stats') {
+            // Stats are computed from orders, but we can clear marketing stats too if they check stats
+          } else if (id === 'marketing') {
+            localStorage.removeItem("nutriadmin_marketing_stats");
+          } else if (id === 'orders' || id === 'order_history') {
+            orders = [];
+            localStorage.removeItem("nutriadmin_orders");
+            needsSync = true;
+          } else if (id === 'kitchen') {
+            localStorage.removeItem("nutriadmin_kitchen_states");
+          } else if (id === 'inventory') {
+            inventory = [];
+            needsSync = true;
+          } else if (id === 'messages') {
+            allChats = {};
+            localStorage.removeItem("nutriadmin_all_chats");
+            needsSync = true;
+          } else if (id === 'reviews') {
+            allReviews = {};
+            localStorage.removeItem("nutriadmin_all_reviews");
+            needsSync = true;
+          } else if (id === 'menu') {
+            dishes = [];
+            needsSync = true;
+          } else if (id === 'leads') {
+            potentialCustomers = [];
+            localStorage.removeItem("nutriadmin_potential_customers");
+            needsSync = true;
+          } else if (id === 'customers') {
+            purchasedCustomers = [];
+            localStorage.removeItem("nutriadmin_purchased_customers");
+            needsSync = true;
+          } else if (id === 'accounts') {
+            localStorage.removeItem("nutriadmin_local_accounts");
+          }
+          clearedCount++;
+        });
+
+        if (needsSync) {
+          if (typeof syncStateToServer === "function") {
+            // Force a state string mismatch so syncStateToServer actually updates localStorage
+            lastStateStr = ""; 
+            syncStateToServer();
+          }
+
+          // Force Firebase sync immediately if cloudDb is initialized
+          if (typeof cloudDb !== 'undefined' && cloudDb !== null) {
+            const settingsRaw = localStorage.getItem("nutriadmin_settings");
+            const currentSettings = settingsRaw ? JSON.parse(settingsRaw) : {};
+            const currentState = {
+              dishes: typeof dishes !== 'undefined' ? dishes : [],
+              inventory: typeof inventory !== 'undefined' ? inventory : [],
+              trackingSources: typeof trackingSources !== 'undefined' ? trackingSources : [],
+              discountCodes: typeof discountCodes !== 'undefined' ? discountCodes : [],
+              potentialCustomers: typeof potentialCustomers !== 'undefined' ? potentialCustomers : [],
+              purchasedCustomers: typeof purchasedCustomers !== 'undefined' ? purchasedCustomers : [],
+              shippers: typeof shippers !== 'undefined' ? shippers : [],
+              orders: typeof orders !== 'undefined' ? orders : [],
+              allReviews: typeof allReviews !== 'undefined' ? allReviews : {},
+              allChats: typeof allChats !== 'undefined' ? allChats : {},
+              settings: currentSettings,
+            };
+            
+            cloudDb
+              .collection("nutriadmin_v1")
+              .doc("system_data")
+              .set({ state: currentState }, { merge: true })
+              .then(() => {
+                showToast(`Đã xóa thành công ${clearedCount} mục dữ liệu!`, "success");
+                closeResetDataModal();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
+              })
+              .catch(err => {
+                showToast("Lỗi đồng bộ dữ liệu: " + err.message, "error");
+              });
+            return; // Exit early, reload will happen in the .then()
+          }
+        }
+
+        showToast(`Đã xóa thành công ${clearedCount} mục dữ liệu!`, "success");
+        closeResetDataModal();
+        
+        // Reload page after a short delay to reflect changes
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+
+      // Close modal when clicking outside
+      document.getElementById("reset-data-modal")?.addEventListener("click", (e) => {
+        if (e.target.id === "reset-data-modal") {
+          closeResetDataModal();
+        }
+      });
+      
+      window.openResetDataModal = openResetDataModal;
+      window.closeResetDataModal = closeResetDataModal;
+      window.confirmResetData = confirmResetData;
+
     </script>
     <!-- Real-time Admin Notification Container -->
     <div id="realtime-notification-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
