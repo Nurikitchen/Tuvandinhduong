@@ -929,13 +929,14 @@
           <div class="text-right shrink-0 hidden md:block">
             <div class="text-xs text-slate-500">
               Mục tiêu:
-              <span 
+              <span
                 id="revenue-goal"
                 oninput="window.updateTextSync('revenue-goal', this.innerText)"
-                contenteditable="true" 
-                spellcheck="false" 
+                contenteditable="true"
+                spellcheck="false"
                 class="font-semibold text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-400 rounded px-1 -mx-1 cursor-text transition-colors"
-              >50.000.000đ</span>
+                >50.000.000đ</span
+              >
             </div>
             <div class="text-xs text-slate-500">
               Đã đạt:
@@ -1003,9 +1004,19 @@
                 <option value="all">Tất cả thời gian</option>
               </select>
               <div id="dashboard-custom-date" class="hidden items-center gap-2">
-                <input type="date" id="dashboard-date-from" onchange="renderDashboard()" class="rounded-lg border border-slate-300 py-2.5 px-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary bg-white shadow-sm text-slate-700">
+                <input
+                  type="date"
+                  id="dashboard-date-from"
+                  onchange="renderDashboard()"
+                  class="rounded-lg border border-slate-300 py-2.5 px-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary bg-white shadow-sm text-slate-700"
+                />
                 <span class="text-slate-500 font-medium">-</span>
-                <input type="date" id="dashboard-date-to" onchange="renderDashboard()" class="rounded-lg border border-slate-300 py-2.5 px-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary bg-white shadow-sm text-slate-700">
+                <input
+                  type="date"
+                  id="dashboard-date-to"
+                  onchange="renderDashboard()"
+                  class="rounded-lg border border-slate-300 py-2.5 px-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary bg-white shadow-sm text-slate-700"
+                />
               </div>
               <button
                 class="bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 px-3 rounded-lg shadow-sm"
@@ -6608,12 +6619,13 @@
                 <i class="fa-solid fa-pen text-xs"></i>
               </button>
             </div>
-            <p
-              class="text-slate-500 dark:text-slate-400 text-sm mb-6"
-              id="profile-phone"
+            <button
+              onclick="openCustomerSelfEdit()"
+              class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-slate-200 text-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 transition-colors mb-6 shadow-sm"
             >
-              ...
-            </p>
+              <i class="fa-solid fa-address-card text-emerald-600 text-xs"></i>
+              <span id="profile-phone">Thông tin cá nhân</span>
+            </button>
 
             <!-- 1. Gamification Progress -->
             <div
@@ -6751,10 +6763,10 @@
                 class="w-full md:w-auto bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors border border-emerald-200"
               >
                 <i class="fa-solid fa-calendar-day mr-1"></i>
-                <span id="mascot-schedule-btn-text">Lịch trình Mascot</span>
+                <span>Thay đổi lịch trình</span>
               </button>
             </div>
-            <div class="flex justify-center items-end mb-6 gap-4">
+            <div class="flex justify-center items-end gap-4">
               <div class="flex flex-col items-center">
                 <span
                   id="mascot-time-prev"
@@ -6788,6 +6800,14 @@
                   alt="Mascot tiếp theo"
                 />
               </div>
+            </div>
+            <div class="text-center mb-6 mt-4">
+              <h3
+                id="mascot-schedule-title"
+                class="text-[17px] font-extrabold text-emerald-700 tracking-tight"
+              >
+                Lịch trình hôm nay
+              </h3>
             </div>
 
             <!-- 3. Health Stats / BMI -->
@@ -8135,11 +8155,17 @@
           onclick="openNuriAI(event)"
           class="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-all hover:scale-110 border border-slate-100 relative group/tooltip cursor-pointer"
         >
-          <div id="sub-menu-mascot-container" class="w-10 h-10 flex items-center justify-center overflow-hidden rounded-full">
+          <div
+            id="sub-menu-mascot-container"
+            class="w-10 h-10 flex items-center justify-center overflow-hidden rounded-full"
+          >
             <!-- Rendered dynamically as SVG/images -->
           </div>
           <!-- Label: AI CHATBOT -->
-          <span class="absolute right-14 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm whitespace-nowrap uppercase tracking-wider">AI CHATBOT</span>
+          <span
+            class="absolute right-14 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm whitespace-nowrap uppercase tracking-wider"
+            >AI CHATBOT</span
+          >
         </button>
 
         <!-- Messenger Link -->
@@ -8152,7 +8178,10 @@
         >
           <i class="fa-brands fa-facebook-messenger text-2xl"></i>
           <!-- Tooltip -->
-          <span class="absolute right-14 bg-slate-900 text-white text-xs font-medium px-2 py-1 rounded shadow-md whitespace-nowrap opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none">Messenger (Fanpage)</span>
+          <span
+            class="absolute right-14 bg-slate-900 text-white text-xs font-medium px-2 py-1 rounded shadow-md whitespace-nowrap opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none"
+            >Messenger (Fanpage)</span
+          >
         </a>
 
         <!-- Zalo Link -->
@@ -8164,12 +8193,34 @@
           class="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-all hover:scale-110 border border-slate-100 overflow-hidden relative group/tooltip cursor-pointer"
         >
           <!-- Official Zalo SVG Icon -->
-          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.477 2 2 5.92 2 10.77c0 2.894 1.6 5.433 4.09 7.037-.18.736-.65 2.22-.75 2.56-.12.41.13.4.27.3.26-.19 2.94-1.95 4.08-2.693.1.003.21.006.31.006 5.523 0 10-3.92 10-8.77C22 5.92 17.523 2 12 2z" fill="#0068FF"/>
-            <text x="12" y="13" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" font-size="6.5" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.2">Zalo</text>
+          <svg
+            class="w-8 h-8"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C6.477 2 2 5.92 2 10.77c0 2.894 1.6 5.433 4.09 7.037-.18.736-.65 2.22-.75 2.56-.12.41.13.4.27.3.26-.19 2.94-1.95 4.08-2.693.1.003.21.006.31.006 5.523 0 10-3.92 10-8.77C22 5.92 17.523 2 12 2z"
+              fill="#0068FF"
+            />
+            <text
+              x="12"
+              y="13"
+              font-family="system-ui, -apple-system, sans-serif"
+              font-weight="bold"
+              font-size="6.5"
+              fill="#FFFFFF"
+              text-anchor="middle"
+              letter-spacing="-0.2"
+            >
+              Zalo
+            </text>
           </svg>
           <!-- Tooltip -->
-          <span class="absolute right-14 bg-slate-900 text-white text-xs font-medium px-2 py-1 rounded shadow-md whitespace-nowrap opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none">Nhắn tin Zalo</span>
+          <span
+            class="absolute right-14 bg-slate-900 text-white text-xs font-medium px-2 py-1 rounded shadow-md whitespace-nowrap opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none"
+            >Nhắn tin Zalo</span
+          >
         </a>
       </div>
 
@@ -8182,7 +8233,10 @@
           id="fab-mascot-fallback"
           class="w-14 h-14 flex items-center justify-center text-2xl"
         >
-          <i id="main-fab-icon" class="fa-solid fa-comment-dots text-2xl transition-transform duration-300"></i>
+          <i
+            id="main-fab-icon"
+            class="fa-solid fa-comment-dots text-2xl transition-transform duration-300"
+          ></i>
         </div>
         <img
           id="fab-mascot-img"
@@ -8207,7 +8261,7 @@
     <!-- Nuri Chatbot Window -->
     <div
       id="chatbot-window"
-      class="fixed bottom-24 left-4 right-4 sm:left-auto sm:right-6 z-[100] sm:w-[380px] h-[65dvh] sm:h-[500px] max-h-[calc(100dvh-8rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 hidden flex-col transition-all transform origin-bottom-right overflow-hidden"
+      class="fixed inset-0 sm:inset-auto sm:bottom-24 sm:right-6 z-[100] sm:w-[380px] h-[100dvh] sm:h-[500px] sm:max-h-[calc(100dvh-8rem)] bg-white sm:rounded-2xl shadow-2xl border-0 sm:border border-slate-200 hidden flex-col transition-all overflow-hidden"
     >
       <!-- Header -->
       <div
@@ -8216,7 +8270,13 @@
         <div
           class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent pointer-events-none"
         ></div>
-        <div class="flex items-center gap-3 relative z-10">
+        <div class="flex items-center gap-2 relative z-10">
+          <button
+            onclick="toggleChat()"
+            class="sm:hidden text-white/90 hover:text-white transition-colors relative z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10"
+          >
+            <i class="fa-solid fa-chevron-left text-lg"></i>
+          </button>
           <div
             class="w-9 h-9 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-inner text-lg"
           >
@@ -8234,7 +8294,7 @@
         </div>
         <button
           onclick="toggleChat()"
-          class="text-white/70 hover:text-white transition-colors relative z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10"
+          class="hidden sm:flex text-white/70 hover:text-white transition-colors relative z-10 w-8 h-8 items-center justify-center rounded-full hover:bg-white/10"
         >
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
@@ -9430,13 +9490,20 @@
           class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all my-8 w-full max-w-4xl pointer-events-auto flex flex-col max-h-[90vh]"
         >
           <!-- Header -->
-          <div class="bg-white px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+          <div
+            class="bg-white px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0"
+          >
             <div>
-              <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h3
+                class="text-lg font-bold text-slate-900 flex items-center gap-2"
+              >
                 <i class="fa-solid fa-utensils text-emerald-500"></i>
                 <span id="dish-picker-modal-title">Chọn món ăn</span>
               </h3>
-              <p class="text-xs text-slate-500 mt-0.5" id="dish-picker-modal-subtitle">
+              <p
+                class="text-xs text-slate-500 mt-0.5"
+                id="dish-picker-modal-subtitle"
+              >
                 Vui lòng chọn món ăn và kích cỡ phù hợp cho bữa ăn này
               </p>
             </div>
@@ -9450,15 +9517,22 @@
           </div>
 
           <!-- Category filter bar -->
-          <div class="px-6 py-3 bg-slate-50 border-b border-slate-100 flex flex-wrap items-center gap-2 shrink-0">
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-2">Bộ lọc món:</span>
+          <div
+            class="px-6 py-3 bg-slate-50 border-b border-slate-100 flex flex-wrap items-center gap-2 shrink-0"
+          >
+            <span
+              class="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-2"
+              >Bộ lọc món:</span
+            >
             <div class="flex flex-wrap gap-1.5" id="dish-picker-categories">
               <!-- Dynamically rendered category buttons -->
             </div>
           </div>
 
           <!-- Dishes Grid Container -->
-          <div class="p-6 overflow-y-auto custom-scrollbar flex-grow bg-slate-50/50">
+          <div
+            class="p-6 overflow-y-auto custom-scrollbar flex-grow bg-slate-50/50"
+          >
             <!-- Skip Option Box -->
             <div class="mb-4">
               <button
@@ -9471,13 +9545,18 @@
             </div>
 
             <!-- Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="dish-picker-grid">
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+              id="dish-picker-grid"
+            >
               <!-- Dynamically populated dish cards -->
             </div>
           </div>
 
           <!-- Footer -->
-          <div class="bg-white px-6 py-4 border-t border-slate-100 flex justify-end shrink-0">
+          <div
+            class="bg-white px-6 py-4 border-t border-slate-100 flex justify-end shrink-0"
+          >
             <button
               type="button"
               onclick="closeDishPickerModal()"
@@ -9508,14 +9587,19 @@
           class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all my-8 w-full max-w-2xl pointer-events-auto flex flex-col max-h-[90vh]"
         >
           <!-- Header -->
-          <div class="bg-white px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0">
+          <div
+            class="bg-white px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0"
+          >
             <div>
-              <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h3
+                class="text-lg font-bold text-slate-900 flex items-center gap-2"
+              >
                 <i class="fa-solid fa-magic text-emerald-500 animate-pulse"></i>
                 <span>Công cụ Tạo đơn hàng Tự động</span>
               </h3>
               <p class="text-xs text-slate-500 mt-0.5">
-                Tự động tạo và điều phối đơn hàng nhanh dựa trên dữ liệu khách hàng và món ăn
+                Tự động tạo và điều phối đơn hàng nhanh dựa trên dữ liệu khách
+                hàng và món ăn
               </p>
             </div>
             <button
@@ -9528,15 +9612,23 @@
           </div>
 
           <!-- Body Container -->
-          <div class="p-6 overflow-y-auto custom-scrollbar flex-grow bg-slate-50/50 space-y-4">
-            
+          <div
+            class="p-6 overflow-y-auto custom-scrollbar flex-grow bg-slate-50/50 space-y-4"
+          >
             <!-- Step 1: Customer Selection -->
-            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-user-tag text-slate-400"></i> Bước 1: Chọn Khách hàng & Địa chỉ
+            <div
+              class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3"
+            >
+              <h4
+                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-user-tag text-slate-400"></i> Bước 1: Chọn
+                Khách hàng & Địa chỉ
               </h4>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Khách hàng nhận đơn</label>
+                <label class="block text-xs font-medium text-slate-500 mb-1"
+                  >Khách hàng nhận đơn</label
+                >
                 <select
                   id="qo-customer-select"
                   onchange="onQuickOrderCustomerChange()"
@@ -9548,28 +9640,57 @@
               </div>
 
               <!-- Pre-populated customer info fields -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1" id="qo-customer-info-box">
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1"
+                id="qo-customer-info-box"
+              >
                 <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1">Số điện thoại</label>
-                  <input type="text" id="qo-phone" class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50" readonly />
+                  <label class="block text-xs font-medium text-slate-400 mb-1"
+                    >Số điện thoại</label
+                  >
+                  <input
+                    type="text"
+                    id="qo-phone"
+                    class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50"
+                    readonly
+                  />
                 </div>
                 <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1">Size đăng ký / Mặc định</label>
-                  <input type="text" id="qo-default-size" class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50" readonly />
+                  <label class="block text-xs font-medium text-slate-400 mb-1"
+                    >Size đăng ký / Mặc định</label
+                  >
+                  <input
+                    type="text"
+                    id="qo-default-size"
+                    class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50"
+                    readonly
+                  />
                 </div>
                 <div class="sm:col-span-2">
-                  <label class="block text-xs font-medium text-slate-400 mb-1">Địa chỉ giao hàng</label>
-                  <textarea id="qo-address" rows="1" class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50" readonly></textarea>
+                  <label class="block text-xs font-medium text-slate-400 mb-1"
+                    >Địa chỉ giao hàng</label
+                  >
+                  <textarea
+                    id="qo-address"
+                    rows="1"
+                    class="w-full rounded-lg border border-slate-200 py-1.5 px-3 text-xs bg-slate-50"
+                    readonly
+                  ></textarea>
                 </div>
               </div>
             </div>
 
             <!-- Step 2: Generation Mode Selector -->
-            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-utensils text-slate-400"></i> Bước 2: Chọn phương thức lên món
+            <div
+              class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3"
+            >
+              <h4
+                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-utensils text-slate-400"></i> Bước 2: Chọn
+                phương thức lên món
               </h4>
-              
+
               <!-- Tab Navigation -->
               <div class="flex border-b border-slate-100 pb-1 gap-4">
                 <button
@@ -9594,7 +9715,9 @@
               <div id="qo-content-weekly" class="space-y-3">
                 <div class="grid grid-cols-2 gap-3">
                   <div>
-                    <label class="block text-xs font-medium text-slate-500 mb-1">Chọn thứ trong tuần</label>
+                    <label class="block text-xs font-medium text-slate-500 mb-1"
+                      >Chọn thứ trong tuần</label
+                    >
                     <select
                       id="qo-weekday-select"
                       onchange="onQuickOrderWeeklyConfigChange()"
@@ -9610,7 +9733,9 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-slate-500 mb-1">Bữa ăn muốn giao</label>
+                    <label class="block text-xs font-medium text-slate-500 mb-1"
+                      >Bữa ăn muốn giao</label
+                    >
                     <select
                       id="qo-meal-type-select"
                       onchange="onQuickOrderWeeklyConfigChange()"
@@ -9624,8 +9749,13 @@
                 </div>
 
                 <!-- Preview of weekly menu dishes for selected day -->
-                <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/50 space-y-2 text-xs" id="qo-weekly-preview">
-                  <span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>
+                <div
+                  class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/50 space-y-2 text-xs"
+                  id="qo-weekly-preview"
+                >
+                  <span class="text-slate-400 italic"
+                    >Vui lòng chọn khách hàng để xem thực đơn tuần...</span
+                  >
                 </div>
               </div>
 
@@ -9633,7 +9763,9 @@
               <div id="qo-content-custom" class="hidden space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
                   <div>
-                    <label class="block text-xs font-medium text-slate-500 mb-1">Chọn món ăn</label>
+                    <label class="block text-xs font-medium text-slate-500 mb-1"
+                      >Chọn món ăn</label
+                    >
                     <select
                       id="qo-dish-select"
                       class="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs focus:ring-1 focus:ring-emerald-500 bg-white"
@@ -9644,7 +9776,10 @@
                   </div>
                   <div class="grid grid-cols-2 gap-2">
                     <div>
-                      <label class="block text-xs font-medium text-slate-500 mb-1">Kích cỡ (Size)</label>
+                      <label
+                        class="block text-xs font-medium text-slate-500 mb-1"
+                        >Kích cỡ (Size)</label
+                      >
                       <select
                         id="qo-size-select"
                         class="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs focus:ring-1 focus:ring-emerald-500 bg-white"
@@ -9664,9 +9799,13 @@
                 </div>
 
                 <!-- Custom dishes list -->
-                <div class="border border-slate-200/60 rounded-xl overflow-hidden bg-white">
+                <div
+                  class="border border-slate-200/60 rounded-xl overflow-hidden bg-white"
+                >
                   <table class="w-full text-xs text-left">
-                    <thead class="bg-slate-50 text-slate-500 border-b border-slate-100">
+                    <thead
+                      class="bg-slate-50 text-slate-500 border-b border-slate-100"
+                    >
                       <tr>
                         <th class="px-3 py-2">Món ăn</th>
                         <th class="px-3 py-2 text-center">Kích cỡ</th>
@@ -9676,8 +9815,12 @@
                     </thead>
                     <tbody id="qo-custom-list-body">
                       <tr>
-                        <td colspan="4" class="px-3 py-6 text-center text-slate-400 italic">
-                          Chưa có món nào được chọn. Vui lòng thêm từ hộp chọn phía trên.
+                        <td
+                          colspan="4"
+                          class="px-3 py-6 text-center text-slate-400 italic"
+                        >
+                          Chưa có món nào được chọn. Vui lòng thêm từ hộp chọn
+                          phía trên.
                         </td>
                       </tr>
                     </tbody>
@@ -9687,13 +9830,20 @@
             </div>
 
             <!-- Step 3: Order Settings -->
-            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-cog text-slate-400"></i> Bước 3: Tuỳ chỉnh Đơn hàng & Trạng thái
+            <div
+              class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-3"
+            >
+              <h4
+                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-cog text-slate-400"></i> Bước 3: Tuỳ chỉnh
+                Đơn hàng & Trạng thái
               </h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label class="block text-xs font-medium text-slate-500 mb-1">Ghi chú giao hàng</label>
+                  <label class="block text-xs font-medium text-slate-500 mb-1"
+                    >Ghi chú giao hàng</label
+                  >
                   <input
                     type="text"
                     id="qo-notes-input"
@@ -9702,25 +9852,35 @@
                   />
                 </div>
                 <div>
-                  <label class="block text-xs font-medium text-slate-500 mb-1">Trạng thái khởi tạo</label>
+                  <label class="block text-xs font-medium text-slate-500 mb-1"
+                    >Trạng thái khởi tạo</label
+                  >
                   <select
                     id="qo-status-select"
                     class="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs focus:ring-1 focus:ring-emerald-500 bg-white"
                   >
-                    <option value="pending" selected>Chờ xác nhận (Pending)</option>
-                    <option value="processing">Đang chế biến (Processing)</option>
+                    <option value="pending" selected>
+                      Chờ xác nhận (Pending)
+                    </option>
+                    <option value="processing">
+                      Đang chế biến (Processing)
+                    </option>
                     <option value="ready">Sẵn sàng giao (Ready)</option>
                   </select>
                 </div>
               </div>
             </div>
-
           </div>
 
           <!-- Footer -->
-          <div class="bg-white px-6 py-4 border-t border-slate-100 flex justify-between shrink-0">
-            <span class="text-[11px] text-slate-400 italic flex items-center gap-1">
-              <i class="fa-solid fa-shield-halved"></i> Đơn sẽ tự động phân shipper gần nhất
+          <div
+            class="bg-white px-6 py-4 border-t border-slate-100 flex justify-between shrink-0"
+          >
+            <span
+              class="text-[11px] text-slate-400 italic flex items-center gap-1"
+            >
+              <i class="fa-solid fa-shield-halved"></i> Đơn sẽ tự động phân
+              shipper gần nhất
             </span>
             <div class="flex gap-2">
               <button
@@ -10840,9 +11000,14 @@
           }
           updatedUI = true;
         }
-        if (serverState.purchasedCustomers)
+        if (serverState.purchasedCustomers) {
           purchasedCustomers = serverState.purchasedCustomers;
-        if (serverState.shippers) shippers = serverState.shippers;
+          updatedUI = true;
+        }
+        if (serverState.shippers) {
+          shippers = serverState.shippers;
+          updatedUI = true;
+        }
 
         if (updatedUI) {
           try {
@@ -10879,6 +11044,10 @@
           try {
             if (typeof renderGrandOpeningCustomers === "function")
               renderGrandOpeningCustomers();
+          } catch (e) {}
+          try {
+            if (typeof renderCustomerProfile === "function")
+              renderCustomerProfile();
           } catch (e) {}
         }
       }
@@ -13013,6 +13182,25 @@
         }
       }
 
+      function openCustomerSelfEdit() {
+        if (!currentUser) return;
+        const p = purchasedCustomers.find((c) => c.phone === currentUser.phone);
+        if (p) {
+          openPurchasedModal("edit", p.id);
+        } else {
+          openPurchasedModal("new");
+          setTimeout(() => {
+            const sel = document.getElementById("purchased-account-select");
+            if (sel) {
+              sel.value = currentUser.phone;
+              if (typeof autofillPurchasedCustomer === "function") {
+                autofillPurchasedCustomer();
+              }
+            }
+          }, 50);
+        }
+      }
+
       function renderCustomerProfile() {
         if (!currentUser) return;
 
@@ -13023,13 +13211,10 @@
         if (freshUser) currentUser = freshUser;
 
         document.getElementById("profile-name").innerText = currentUser.name;
-        document.getElementById("profile-phone").innerText = currentUser.phone;
-        const mascotBtnText = document.getElementById(
-          "mascot-schedule-btn-text",
-        );
-        if (mascotBtnText)
-          mascotBtnText.innerText =
-            "Lịch trình hôm nay của " + currentUser.name;
+        document.getElementById("profile-phone").innerText = "Thông tin cá nhân";
+        const mascotTitle = document.getElementById("mascot-schedule-title");
+        if (mascotTitle)
+          mascotTitle.innerText = "Lịch trình hôm nay của " + currentUser.name;
 
         if (currentUser.avatar) {
           document.getElementById("profile-avatar-img").src =
@@ -13163,49 +13348,96 @@
                   </div>
               `;
         } else {
+          let packageDatesHtml =
+            '<p class="text-sm text-slate-500">Đang hoạt động</p>';
+          if (currentUser.startDate && !isNaN(pkg)) {
+            const sDate = new Date(currentUser.startDate);
+            const eDate = new Date(sDate.getTime() + pkg * 24 * 60 * 60 * 1000);
+            const sStr = sDate.toLocaleDateString("vi-VN");
+            const eStr = eDate.toLocaleDateString("vi-VN");
+            packageDatesHtml = `<p class="text-xs text-slate-500 mt-1 font-medium"><i class="fa-regular fa-calendar-days mr-1"></i> ${sStr} - ${eStr}</p>`;
+          }
+          const packageName =
+            typeof resolvePackageName === "function"
+              ? resolvePackageName(currentUser.package)
+              : `Gói ${pkg} Ngày`;
+
           let todayMenuHtml = "";
           if (currentUser.weeklyMenu) {
-            let selectedDayMenu = null;
-            // Get the first day that has dishes selected (representing upcoming meals)
-            for (let d of weekDays) {
-              if (
-                currentUser.weeklyMenu[d.key] &&
-                (currentUser.weeklyMenu[d.key].meal1.dishId ||
-                  currentUser.weeklyMenu[d.key].meal2.dishId)
-              ) {
-                selectedDayMenu = currentUser.weeklyMenu[d.key];
-                break;
-              }
-            }
+            const dayIndex = new Date().getDay();
+            const currentDayKey =
+              dayIndex === 0 ? "sunday" : weekDays[dayIndex - 1].key;
+            const selectedDayMenu = currentUser.weeklyMenu[currentDayKey];
 
-            if (selectedDayMenu) {
+            if (
+              selectedDayMenu &&
+              (selectedDayMenu.meal1?.dishId || selectedDayMenu.meal2?.dishId)
+            ) {
               let meals = [];
-              if (selectedDayMenu.meal1.dishId)
-                meals.push(
-                  dishes.find((x) => x.id == selectedDayMenu.meal1.dishId),
+              if (selectedDayMenu.meal1?.dishId) {
+                const dish = dishes.find(
+                  (x) => x.id == selectedDayMenu.meal1.dishId,
                 );
-              if (selectedDayMenu.meal2.dishId)
-                meals.push(
-                  dishes.find((x) => x.id == selectedDayMenu.meal2.dishId),
+                if (dish) {
+                  meals.push({
+                    dish: dish,
+                    size: selectedDayMenu.meal1.size || "standard",
+                    label: "Bữa 1",
+                  });
+                }
+              }
+              if (selectedDayMenu.meal2?.dishId) {
+                const dish = dishes.find(
+                  (x) => x.id == selectedDayMenu.meal2.dishId,
                 );
-              meals = meals.filter((x) => x);
+                if (dish) {
+                  meals.push({
+                    dish: dish,
+                    size: selectedDayMenu.meal2.size || "standard",
+                    label: "Bữa 2",
+                  });
+                }
+              }
 
               if (meals.length > 0) {
                 todayMenuHtml = `
                               <div class="mt-4 mb-4">
-                                  <p class="text-sm font-bold text-slate-700 mb-2">Thực đơn gần nhất của bạn:</p>
-                                  <div class="flex gap-3 overflow-x-auto pb-2 snap-x" style="scrollbar-width: none;">
+                                  <p class="text-sm font-bold text-slate-700 mb-2">Thực đơn hôm nay của bạn:</p>
+                                  <div class="flex flex-col gap-3">
                                       ${meals
-                                        .map(
-                                          (m) => `
-                                          <div class="min-w-[120px] max-w-[120px] bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm snap-start shrink-0">
-                                              <img src="${m.image}" class="w-full h-20 object-cover" alt="${m.name}">
-                                              <div class="p-2">
-                                                  <p class="text-xs font-semibold text-slate-800 truncate" title="${m.name}">${m.name}</p>
+                                        .map((m) => {
+                                          const sizeData =
+                                            m.dish.sizes && m.dish.sizes[m.size]
+                                              ? m.dish.sizes[m.size]
+                                              : {
+                                                  kcal: 0,
+                                                  protein: 0,
+                                                  carbs: 0,
+                                                  fat: 0,
+                                                };
+                                          const sizeLabel =
+                                            m.size === "standard"
+                                              ? "Standard"
+                                              : "Large";
+                                          return `
+                                          <div class="flex bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm">
+                                              <img src="${m.dish.image}" class="w-24 h-24 object-cover shrink-0" alt="${m.dish.name}">
+                                              <div class="p-3 flex-1 flex flex-col justify-center">
+                                                  <div class="flex justify-between items-start mb-1">
+                                                      <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider">${m.label}</span>
+                                                      <span class="text-[10px] font-bold text-slate-500 border border-slate-200 px-1.5 py-0.5 rounded">${sizeLabel}</span>
+                                                  </div>
+                                                  <p class="text-sm font-semibold text-slate-800 line-clamp-1 mb-1.5" title="${m.dish.name}">${m.dish.name}</p>
+                                                  <div class="flex gap-2 text-[10px] text-slate-500 font-medium">
+                                                      <span><i class="fa-solid fa-fire text-orange-500 mr-0.5"></i>${sizeData.kcal}kcal</span>
+                                                      <span><i class="fa-solid fa-dumbbell text-blue-500 mr-0.5"></i>${sizeData.protein}g P</span>
+                                                      <span><i class="fa-solid fa-wheat-awn text-yellow-600 mr-0.5"></i>${sizeData.carbs}g C</span>
+                                                      <span><i class="fa-solid fa-droplet text-rose-500 mr-0.5"></i>${sizeData.fat || 0}g F</span>
+                                                  </div>
                                               </div>
                                           </div>
-                                      `,
-                                        )
+                                      `;
+                                        })
                                         .join("")}
                                   </div>
                               </div>
@@ -13214,16 +13446,16 @@
             }
           }
           if (!todayMenuHtml) {
-            todayMenuHtml = `<div class="mt-4 mb-4 p-3 bg-slate-50 border border-slate-100 rounded-xl text-center text-sm text-slate-500">Bạn chưa chọn món cho các ngày tới.</div>`;
+            todayMenuHtml = `<div class="mt-4 mb-4 p-3 bg-slate-50 border border-slate-100 rounded-xl text-center text-sm text-slate-500">Bạn chưa chọn món cho hôm nay.</div>`;
           }
 
           subContainer.innerHTML = `
                   <div class="flex justify-between items-start">
                       <div>
-                          <p class="font-bold text-slate-800 text-lg">Gói ${pkg} Ngày</p>
-                          <p class="text-sm text-slate-500">Đang hoạt động</p>
+                          <p class="font-bold text-slate-800 text-lg">${packageName}</p>
+                          ${packageDatesHtml}
                       </div>
-                      <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-md">ACTIVE</span>
+                      <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-md mt-1 shrink-0">ACTIVE</span>
                   </div>
                   ${todayMenuHtml}
                   <div class="mt-2 space-y-3">
@@ -13609,8 +13841,11 @@
             existingSettings.revenueGoal = text;
             changed = true;
             if (typeof renderDashboard === "function") {
-               clearTimeout(window.revenueGoalUpdateTimeout);
-               window.revenueGoalUpdateTimeout = setTimeout(renderDashboard, 300);
+              clearTimeout(window.revenueGoalUpdateTimeout);
+              window.revenueGoalUpdateTimeout = setTimeout(
+                renderDashboard,
+                300,
+              );
             }
           }
         } else if (id.startsWith("front-pkg")) {
@@ -15255,10 +15490,26 @@
           } else if (timeFilter === "month") {
             cutoffTime = startOfDay - 29 * 24 * 60 * 60 * 1000;
           } else if (timeFilter === "thisMonth") {
-            cutoffTime = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+            cutoffTime = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              1,
+            ).getTime();
           } else if (timeFilter === "lastMonth") {
-            cutoffTime = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
-            endTime = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999).getTime();
+            cutoffTime = new Date(
+              now.getFullYear(),
+              now.getMonth() - 1,
+              1,
+            ).getTime();
+            endTime = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              0,
+              23,
+              59,
+              59,
+              999,
+            ).getTime();
           }
 
           filteredOrders = orders.filter((o) => {
@@ -15292,11 +15543,35 @@
             cutoffTimePrev = startOfDay - 59 * 24 * 60 * 60 * 1000;
             endTimePrev = startOfDay - 29 * 24 * 60 * 60 * 1000 - 1;
           } else if (timeFilter === "thisMonth") {
-            cutoffTimePrev = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
-            endTimePrev = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999).getTime();
+            cutoffTimePrev = new Date(
+              now.getFullYear(),
+              now.getMonth() - 1,
+              1,
+            ).getTime();
+            endTimePrev = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              0,
+              23,
+              59,
+              59,
+              999,
+            ).getTime();
           } else if (timeFilter === "lastMonth") {
-            cutoffTimePrev = new Date(now.getFullYear(), now.getMonth() - 2, 1).getTime();
-            endTimePrev = new Date(now.getFullYear(), now.getMonth() - 1, 0, 23, 59, 59, 999).getTime();
+            cutoffTimePrev = new Date(
+              now.getFullYear(),
+              now.getMonth() - 2,
+              1,
+            ).getTime();
+            endTimePrev = new Date(
+              now.getFullYear(),
+              now.getMonth() - 1,
+              0,
+              23,
+              59,
+              59,
+              999,
+            ).getTime();
           } else if (timeFilter === "custom") {
             const duration = endTime - cutoffTime;
             cutoffTimePrev = cutoffTime - duration - 1;
@@ -15409,7 +15684,8 @@
         }
 
         // Goal Tracking (Dynamic from UI)
-        const goalText = document.getElementById("revenue-goal")?.innerText || "50000000";
+        const goalText =
+          document.getElementById("revenue-goal")?.innerText || "50000000";
         const GOAL = parseInt(goalText.replace(/\D/g, ""), 10) || 50000000;
         const progress = Math.min(Math.round((totalRevenue / GOAL) * 100), 100);
         document.getElementById("goal-progress-text").innerText =
@@ -17026,8 +17302,15 @@
         let zaloUrl = "https://zalo.me";
         if (parsedSettings.zalo && parsedSettings.zalo.trim()) {
           const rawZalo = parsedSettings.zalo.trim();
-          if (rawZalo.includes("zalo.me") || rawZalo.startsWith("http://") || rawZalo.startsWith("https://")) {
-            if (!rawZalo.startsWith("http://") && !rawZalo.startsWith("https://")) {
+          if (
+            rawZalo.includes("zalo.me") ||
+            rawZalo.startsWith("http://") ||
+            rawZalo.startsWith("https://")
+          ) {
+            if (
+              !rawZalo.startsWith("http://") &&
+              !rawZalo.startsWith("https://")
+            ) {
               zaloUrl = "https://" + rawZalo;
             } else {
               zaloUrl = rawZalo;
@@ -20063,14 +20346,17 @@
                             </div>
                             
                             <div class="mb-4 bg-slate-50 p-3 rounded-lg border border-slate-100 font-medium">
-                               ${order.isPackageOrder ? `
+                               ${
+                                 order.isPackageOrder
+                                   ? `
                                  <div class="flex items-center justify-between text-emerald-700 bg-emerald-50/50 p-1.5 rounded-md">
                                     <span class="text-xs font-bold uppercase"><i class="fa-solid fa-receipt mr-1"></i>Thanh toán</span>
                                     <span class="text-xs font-bold bg-emerald-100 px-2 py-0.5 rounded text-emerald-800">
                                       Theo Gói Đăng Ký
                                     </span>
                                  </div>
-                               ` : `
+                               `
+                                   : `
                                  <div class="flex items-center justify-between">
                                     <span class="text-xs font-bold text-slate-500 uppercase">Thanh toán</span>
                                     <span class="text-xs font-semibold ${order.paymentMethod === "cod" ? "text-slate-600" : "text-indigo-600"}">
@@ -20084,7 +20370,8 @@
                                        <option value="paid" ${order.paymentStatus === "paid" ? "selected" : ""}>Đã thanh toán</option>
                                     </select>
                                  </div>
-                               `}
+                               `
+                               }
                             </div>
 
                             <div class="border-t border-slate-100 pt-4 mb-4"><p class="text-xs font-bold text-slate-500 uppercase mb-2">Chi tiết món</p>${itemsHtml}</div>
@@ -20816,7 +21103,7 @@
                   <div class="flex justify-between items-center mt-3 pt-2 border-t border-dashed border-slate-200">
                       <span class="text-slate-500 font-medium text-xs">Tổng thu:</span>
                       <span class="font-black text-emerald-600 text-base">
-                        ${o.isPackageOrder ? '<span class="text-emerald-700 text-xs font-bold bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded">Theo Gói (Không thu tiền)</span>' : (o.paymentMethod === "cod" ? formatCurrency(o.total) + "đ" : '<span class="text-indigo-500 text-xs">Đã thanh toán (Chuyển khoản/Ví)</span>')}
+                        ${o.isPackageOrder ? '<span class="text-emerald-700 text-xs font-bold bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded">Theo Gói (Không thu tiền)</span>' : o.paymentMethod === "cod" ? formatCurrency(o.total) + "đ" : '<span class="text-indigo-500 text-xs">Đã thanh toán (Chuyển khoản/Ví)</span>'}
                       </span>
                   </div>
                </div>
@@ -21599,7 +21886,8 @@
             updatePurchasedWards();
             document.getElementById("purchased-ward").value = c.ward || "";
             document.getElementById("purchased-street").value = c.street || "";
-            document.getElementById("purchased-size").value = c.size || "standard";
+            document.getElementById("purchased-size").value =
+              c.size || "standard";
             document.getElementById("purchased-notes").value = c.notes || "";
           }
         }
@@ -21699,6 +21987,13 @@
             if (pC) {
               pC.package = data.package;
             }
+            if (currentUser && currentUser.phone === phone) {
+              currentUser = { ...currentUser, ...data };
+              localStorage.setItem(
+                "nutriadmin_current_user",
+                JSON.stringify(currentUser),
+              );
+            }
           }
         } else {
           data.id = Date.now();
@@ -21720,7 +22015,7 @@
 
           // Update currentUser if it's them
           if (currentUser && currentUser.phone === phone) {
-            currentUser.points = currentPoints;
+            currentUser = { ...currentUser, ...data, points: currentPoints };
             localStorage.setItem(
               "nutriadmin_current_user",
               JSON.stringify(currentUser),
@@ -21736,6 +22031,9 @@
         }
         closePurchasedModal();
         renderPurchasedCustomers();
+        if (typeof renderCustomerProfile === "function")
+          renderCustomerProfile();
+        if (typeof syncStateToServer === "function") syncStateToServer();
         showToast("Lưu thông tin OK");
       }
 
@@ -22098,17 +22396,21 @@
         } else {
           fn();
         }
-        
+
         setTimeout(() => {
-          document.getElementById('delivery-form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document
+            .getElementById("delivery-form-section")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 150);
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll('.pkg-label').forEach(label => {
-          label.addEventListener('click', () => {
+        document.querySelectorAll(".pkg-label").forEach((label) => {
+          label.addEventListener("click", () => {
             setTimeout(() => {
-              document.getElementById('delivery-form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              document
+                .getElementById("delivery-form-section")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }, 150);
           });
         });
@@ -22329,10 +22631,12 @@
         const disp = document.getElementById(`disp-${dK}-${mK}`);
         if (!disp) return;
         document.getElementById(`val-dish-${dK}-${mK}`).value = dId || "";
-        document.getElementById(`val-size-${dK}-${mK}`).value = sK || "standard";
+        document.getElementById(`val-size-${dK}-${mK}`).value =
+          sK || "standard";
 
         if (!dId) {
-          disp.innerHTML = '<span class="text-xs text-slate-400 italic font-medium"><i class="fa-solid fa-plus text-slate-300 mr-1.5"></i>Chọn món ăn...</span>';
+          disp.innerHTML =
+            '<span class="text-xs text-slate-400 italic font-medium"><i class="fa-solid fa-plus text-slate-300 mr-1.5"></i>Chọn món ăn...</span>';
         } else {
           const d = dishes.find((x) => x.id == dId);
           if (d) {
@@ -22348,80 +22652,89 @@
         }
       }
 
-      window.openDishPickerModal = function(dKey, mKey) {
+      window.openDishPickerModal = function (dKey, mKey) {
         currentPickerDKey = dKey;
         currentPickerMKey = mKey;
         currentCategoryFilter = "all";
 
         // Find day and meal label
-        const dayObj = weekDays.find(d => d.key === dKey);
+        const dayObj = weekDays.find((d) => d.key === dKey);
         const dayLabel = dayObj ? dayObj.label : dKey;
         const mealLabel = mKey === "meal1" ? "Bữa 1" : "Bữa 2";
-        document.getElementById("dish-picker-modal-title").innerText = `Chọn món cho ${dayLabel} - ${mealLabel}`;
+        document.getElementById("dish-picker-modal-title").innerText =
+          `Chọn món cho ${dayLabel} - ${mealLabel}`;
 
         // Get customer defaults
         const cId = document.getElementById("menu-customer-id").value;
-        const c = purchasedCustomers.find((x) => x.id == cId) || potentialCustomers.find((x) => x.id == cId);
+        const c =
+          purchasedCustomers.find((x) => x.id == cId) ||
+          potentialCustomers.find((x) => x.id == cId);
         const customerName = c ? c.name : "...";
-        const customerSize = c ? (c.size || "standard") : "standard";
-        document.getElementById("dish-picker-modal-subtitle").innerText = `Khách hàng: ${customerName} • Size mặc định gói: ${customerSize === 'large' ? 'Lớn' : 'Cơ bản'}`;
+        const customerSize = c ? c.size || "standard" : "standard";
+        document.getElementById("dish-picker-modal-subtitle").innerText =
+          `Khách hàng: ${customerName} • Size mặc định gói: ${customerSize === "large" ? "Lớn" : "Cơ bản"}`;
 
         // Build categories
-        const activeDishes = dishes.filter(x => x.isActive);
+        const activeDishes = dishes.filter((x) => x.isActive);
         const categories = ["all"];
-        activeDishes.forEach(d => {
+        activeDishes.forEach((d) => {
           if (d.category && !categories.includes(d.category)) {
             categories.push(d.category);
           }
         });
 
         const categoryMapping = {
-          "all": "Tất cả",
-          "beef": "Thịt Bò",
-          "chicken": "Thịt Gà",
-          "pork": "Thịt Heo",
-          "seafood": "Hải Sản",
+          all: "Tất cả",
+          beef: "Thịt Bò",
+          chicken: "Thịt Gà",
+          pork: "Thịt Heo",
+          seafood: "Hải Sản",
           "Rau củ": "Rau Củ",
-          "Thịt": "Thịt",
+          Thịt: "Thịt",
           "Thủy Sản": "Thủy Sản",
-          "Tinh bột": "Tinh Bột"
+          "Tinh bột": "Tinh Bột",
         };
 
         const catsContainer = document.getElementById("dish-picker-categories");
-        catsContainer.innerHTML = categories.map(cat => {
-          const label = categoryMapping[cat] || cat;
-          const activeClass = cat === currentCategoryFilter 
-            ? "bg-emerald-600 text-white font-bold" 
-            : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300";
-          return `<button type="button" onclick="setDishPickerCategory('${cat}')" class="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${activeClass}">${label}</button>`;
-        }).join("");
+        catsContainer.innerHTML = categories
+          .map((cat) => {
+            const label = categoryMapping[cat] || cat;
+            const activeClass =
+              cat === currentCategoryFilter
+                ? "bg-emerald-600 text-white font-bold"
+                : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300";
+            return `<button type="button" onclick="setDishPickerCategory('${cat}')" class="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${activeClass}">${label}</button>`;
+          })
+          .join("");
 
         renderDishPickerGrid();
 
         document.getElementById("dish-picker-modal").classList.remove("hidden");
       };
 
-      window.setDishPickerCategory = function(cat) {
+      window.setDishPickerCategory = function (cat) {
         currentCategoryFilter = cat;
-        
+
         // Update category buttons active state
         const catsContainer = document.getElementById("dish-picker-categories");
         if (catsContainer) {
           const buttons = catsContainer.querySelectorAll("button");
-          const activeDishes = dishes.filter(x => x.isActive);
+          const activeDishes = dishes.filter((x) => x.isActive);
           const categories = ["all"];
-          activeDishes.forEach(d => {
+          activeDishes.forEach((d) => {
             if (d.category && !categories.includes(d.category)) {
               categories.push(d.category);
             }
           });
-          
+
           buttons.forEach((btn, index) => {
             const btnCat = categories[index];
             if (btnCat === currentCategoryFilter) {
-              btn.className = "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-emerald-600 text-white font-bold cursor-pointer";
+              btn.className =
+                "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-emerald-600 text-white font-bold cursor-pointer";
             } else {
-              btn.className = "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 cursor-pointer";
+              btn.className =
+                "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 cursor-pointer";
             }
           });
         }
@@ -22429,20 +22742,23 @@
         renderDishPickerGrid();
       };
 
-      window.renderDishPickerGrid = function() {
+      window.renderDishPickerGrid = function () {
         const grid = document.getElementById("dish-picker-grid");
         if (!grid) return;
 
         // Filter dishes
-        const activeDishes = dishes.filter(x => x.isActive);
-        const filteredDishes = currentCategoryFilter === "all" 
-          ? activeDishes 
-          : activeDishes.filter(d => d.category === currentCategoryFilter);
+        const activeDishes = dishes.filter((x) => x.isActive);
+        const filteredDishes =
+          currentCategoryFilter === "all"
+            ? activeDishes
+            : activeDishes.filter((d) => d.category === currentCategoryFilter);
 
         // Get customer defaults
         const cId = document.getElementById("menu-customer-id").value;
-        const c = purchasedCustomers.find((x) => x.id == cId) || potentialCustomers.find((x) => x.id == cId);
-        const defaultSize = c ? (c.size || "standard") : "standard";
+        const c =
+          purchasedCustomers.find((x) => x.id == cId) ||
+          potentialCustomers.find((x) => x.id == cId);
+        const defaultSize = c ? c.size || "standard" : "standard";
 
         if (filteredDishes.length === 0) {
           grid.innerHTML = `
@@ -22453,15 +22769,22 @@
           return;
         }
 
-        grid.innerHTML = filteredDishes.map(d => {
-          const isStdDefault = defaultSize === 'standard';
-          const isLrgDefault = defaultSize === 'large';
-          
-          // Get correct size data based on customer's registered package size
-          const sizeKey = defaultSize; // "standard" or "large"
-          const sizeData = d.sizes?.[sizeKey] || d.sizes?.standard || { kcal: 300, protein: 25, carbs: 35, fat: 10 };
+        grid.innerHTML = filteredDishes
+          .map((d) => {
+            const isStdDefault = defaultSize === "standard";
+            const isLrgDefault = defaultSize === "large";
 
-          return `
+            // Get correct size data based on customer's registered package size
+            const sizeKey = defaultSize; // "standard" or "large"
+            const sizeData = d.sizes?.[sizeKey] ||
+              d.sizes?.standard || {
+                kcal: 300,
+                protein: 25,
+                carbs: 35,
+                fat: 10,
+              };
+
+            return `
             <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
               <!-- Dish Image & Badge -->
               <div class="relative h-44 overflow-hidden shrink-0 bg-slate-100">
@@ -22469,8 +22792,8 @@
                 <span class="absolute top-2.5 left-2.5 bg-slate-900/75 text-white text-[10px] font-semibold px-2 py-1 rounded-lg backdrop-blur-sm">
                   ${sizeData.kcal} kcal
                 </span>
-                ${isStdDefault ? '<span class="absolute top-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Cơ bản</span>' : ''}
-                ${isLrgDefault ? '<span class="absolute top-2.5 right-2.5 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Lớn</span>' : ''}
+                ${isStdDefault ? '<span class="absolute top-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Cơ bản</span>' : ""}
+                ${isLrgDefault ? '<span class="absolute top-2.5 right-2.5 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Lớn</span>' : ""}
               </div>
               
               <!-- Content -->
@@ -22504,7 +22827,9 @@
                 
                 <!-- Action Buttons: Only show the registered package size of the customer -->
                 <div class="mt-auto">
-                  ${isStdDefault ? `
+                  ${
+                    isStdDefault
+                      ? `
                     <button 
                       type="button" 
                       onclick="selectDishPickerItem(${d.id}, 'standard')"
@@ -22512,7 +22837,8 @@
                     >
                       <i class="fa-solid fa-check"></i> Chọn món (Cơ Bản - ${sizeData.kcal} kcal)
                     </button>
-                  ` : `
+                  `
+                      : `
                     <button 
                       type="button" 
                       onclick="selectDishPickerItem(${d.id}, 'large')"
@@ -22520,40 +22846,48 @@
                     >
                       <i class="fa-solid fa-check"></i> Chọn món (Size Lớn - ${sizeData.kcal} kcal)
                     </button>
-                  `}
+                  `
+                  }
                 </div>
               </div>
             </div>`;
-        }).join("");
+          })
+          .join("");
       };
 
-      window.selectDishPickerItem = function(dId, sK) {
+      window.selectDishPickerItem = function (dId, sK) {
         selectWeeklyDish(currentPickerDKey, currentPickerMKey, dId, sK, true);
       };
 
-      window.closeDishPickerModal = function() {
+      window.closeDishPickerModal = function () {
         document.getElementById("dish-picker-modal").classList.add("hidden");
       };
 
       // ==========================================
       // QUICK ORDER AUTOMATIC GENERATION HANDLERS
       // ==========================================
-      window.quickOrderMode = 'weekly';
+      window.quickOrderMode = "weekly";
       window.quickOrderCustomItems = [];
 
-      window.openQuickOrderModal = function() {
+      window.openQuickOrderModal = function () {
         // Populate customer select
         const select = document.getElementById("qo-customer-select");
         if (select) {
           let options = '<option value="">-- Chọn khách hàng --</option>';
-          if (typeof purchasedCustomers !== 'undefined' && Array.isArray(purchasedCustomers)) {
-            purchasedCustomers.forEach(c => {
-              options += `<option value="p-${c.id}">Gói Hội Viên: ${c.name} (${c.phone || ''})</option>`;
+          if (
+            typeof purchasedCustomers !== "undefined" &&
+            Array.isArray(purchasedCustomers)
+          ) {
+            purchasedCustomers.forEach((c) => {
+              options += `<option value="p-${c.id}">Gói Hội Viên: ${c.name} (${c.phone || ""})</option>`;
             });
           }
-          if (typeof potentialCustomers !== 'undefined' && Array.isArray(potentialCustomers)) {
-            potentialCustomers.forEach(c => {
-              options += `<option value="t-${c.id}">Lẻ/Tiềm Năng: ${c.name} (${c.phone || ''})</option>`;
+          if (
+            typeof potentialCustomers !== "undefined" &&
+            Array.isArray(potentialCustomers)
+          ) {
+            potentialCustomers.forEach((c) => {
+              options += `<option value="t-${c.id}">Lẻ/Tiềm Năng: ${c.name} (${c.phone || ""})</option>`;
             });
           }
           select.innerHTML = options;
@@ -22563,9 +22897,9 @@
         const dishSelect = document.getElementById("qo-dish-select");
         if (dishSelect) {
           let dishOpts = '<option value="">-- Chọn món ăn --</option>';
-          if (typeof dishes !== 'undefined' && Array.isArray(dishes)) {
-            const activeDishes = dishes.filter(d => d.isActive);
-            activeDishes.forEach(d => {
+          if (typeof dishes !== "undefined" && Array.isArray(dishes)) {
+            const activeDishes = dishes.filter((d) => d.isActive);
+            activeDishes.forEach((d) => {
               dishOpts += `<option value="${d.id}">${d.name}</option>`;
             });
           }
@@ -22573,7 +22907,15 @@
         }
 
         // Set pre-selected weekday based on current weekday
-        const daysMap = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        const daysMap = [
+          "sunday",
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+        ];
         const currentDayKey = daysMap[new Date().getDay()];
         const weekdaySelect = document.getElementById("qo-weekday-select");
         if (weekdaySelect) {
@@ -22590,77 +22932,85 @@
           document.getElementById("qo-customer-select").value = "";
         }
         window.quickOrderCustomItems = [];
-        window.quickOrderMode = 'weekly';
-        window.setQuickOrderMode('weekly');
-        document.getElementById("qo-weekly-preview").innerHTML = '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
+        window.quickOrderMode = "weekly";
+        window.setQuickOrderMode("weekly");
+        document.getElementById("qo-weekly-preview").innerHTML =
+          '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
 
         // Show modal
         document.getElementById("quick-order-modal").classList.remove("hidden");
       };
 
-      window.closeQuickOrderModal = function() {
+      window.closeQuickOrderModal = function () {
         document.getElementById("quick-order-modal").classList.add("hidden");
       };
 
-      window.onQuickOrderCustomerChange = function() {
+      window.onQuickOrderCustomerChange = function () {
         const val = document.getElementById("qo-customer-select").value;
         if (!val) {
           document.getElementById("qo-phone").value = "";
           document.getElementById("qo-default-size").value = "";
           document.getElementById("qo-address").value = "";
-          document.getElementById("qo-weekly-preview").innerHTML = '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
+          document.getElementById("qo-weekly-preview").innerHTML =
+            '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
           return;
         }
         const parts = val.split("-");
         const id = parseInt(parts[1]);
         const isPurchased = parts[0] === "p";
-        const c = isPurchased 
-          ? purchasedCustomers.find(x => x.id === id) 
-          : potentialCustomers.find(x => x.id === id);
+        const c = isPurchased
+          ? purchasedCustomers.find((x) => x.id === id)
+          : potentialCustomers.find((x) => x.id === id);
         if (c) {
           document.getElementById("qo-phone").value = c.phone || "N/A";
-          document.getElementById("qo-default-size").value = c.size === 'large' ? 'Size Lớn' : 'Cơ bản (CB)';
+          document.getElementById("qo-default-size").value =
+            c.size === "large" ? "Size Lớn" : "Cơ bản (CB)";
           document.getElementById("qo-address").value = c.address || "N/A";
-          if (window.quickOrderMode === 'weekly') {
+          if (window.quickOrderMode === "weekly") {
             window.onQuickOrderWeeklyConfigChange();
           }
         }
       };
 
-      window.setQuickOrderMode = function(mode) {
+      window.setQuickOrderMode = function (mode) {
         window.quickOrderMode = mode;
         const btnWeekly = document.getElementById("qo-tab-weekly");
         const btnCustom = document.getElementById("qo-tab-custom");
         const contentWeekly = document.getElementById("qo-content-weekly");
         const contentCustom = document.getElementById("qo-content-custom");
-        
-        if (mode === 'weekly') {
-          btnWeekly.className = "pb-2 text-xs font-bold border-b-2 border-emerald-500 text-emerald-600 transition-all cursor-pointer";
-          btnCustom.className = "pb-2 text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all cursor-pointer";
+
+        if (mode === "weekly") {
+          btnWeekly.className =
+            "pb-2 text-xs font-bold border-b-2 border-emerald-500 text-emerald-600 transition-all cursor-pointer";
+          btnCustom.className =
+            "pb-2 text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all cursor-pointer";
           contentWeekly.classList.remove("hidden");
           contentCustom.classList.add("hidden");
           window.onQuickOrderWeeklyConfigChange();
         } else {
-          btnWeekly.className = "pb-2 text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all cursor-pointer";
-          btnCustom.className = "pb-2 text-xs font-bold border-b-2 border-emerald-500 text-emerald-600 transition-all cursor-pointer";
+          btnWeekly.className =
+            "pb-2 text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-600 transition-all cursor-pointer";
+          btnCustom.className =
+            "pb-2 text-xs font-bold border-b-2 border-emerald-500 text-emerald-600 transition-all cursor-pointer";
           contentWeekly.classList.add("hidden");
           contentCustom.classList.remove("hidden");
           window.renderQuickOrderCustomList();
         }
       };
 
-      window.onQuickOrderWeeklyConfigChange = function() {
+      window.onQuickOrderWeeklyConfigChange = function () {
         const val = document.getElementById("qo-customer-select").value;
         if (!val) {
-          document.getElementById("qo-weekly-preview").innerHTML = '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
+          document.getElementById("qo-weekly-preview").innerHTML =
+            '<span class="text-slate-400 italic">Vui lòng chọn khách hàng để xem thực đơn tuần...</span>';
           return;
         }
         const parts = val.split("-");
         const id = parseInt(parts[1]);
         const isPurchased = parts[0] === "p";
-        const c = isPurchased 
-          ? purchasedCustomers.find(x => x.id === id) 
-          : potentialCustomers.find(x => x.id === id);
+        const c = isPurchased
+          ? purchasedCustomers.find((x) => x.id === id)
+          : potentialCustomers.find((x) => x.id === id);
         if (!c) return;
 
         const weekday = document.getElementById("qo-weekday-select").value;
@@ -22672,10 +23022,17 @@
         if (mealType === "all" || mealType === "meal1") {
           const m1 = dayMenu.meal1 || {};
           if (m1.dishId) {
-            const d = dishes.find(x => x.id == m1.dishId);
+            const d = dishes.find((x) => x.id == m1.dishId);
             if (d) {
-              const sizeLabel = m1.size === "large" ? "Size Lớn" : "Cơ Bản (CB)";
-              const sizeData = d.sizes?.[m1.size || 'standard'] || d.sizes?.standard || { kcal: 300, protein: 25, carbs: 35, fat: 10 };
+              const sizeLabel =
+                m1.size === "large" ? "Size Lớn" : "Cơ Bản (CB)";
+              const sizeData = d.sizes?.[m1.size || "standard"] ||
+                d.sizes?.standard || {
+                  kcal: 300,
+                  protein: 25,
+                  carbs: 35,
+                  fat: 10,
+                };
               html += `
                 <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm">
                   <img src="${d.image}" class="w-10 h-10 rounded-lg object-cover border shrink-0">
@@ -22691,10 +23048,17 @@
         if (mealType === "all" || mealType === "meal2") {
           const m2 = dayMenu.meal2 || {};
           if (m2.dishId) {
-            const d = dishes.find(x => x.id == m2.dishId);
+            const d = dishes.find((x) => x.id == m2.dishId);
             if (d) {
-              const sizeLabel = m2.size === "large" ? "Size Lớn" : "Cơ Bản (CB)";
-              const sizeData = d.sizes?.[m2.size || 'standard'] || d.sizes?.standard || { kcal: 300, protein: 25, carbs: 35, fat: 10 };
+              const sizeLabel =
+                m2.size === "large" ? "Size Lớn" : "Cơ Bản (CB)";
+              const sizeData = d.sizes?.[m2.size || "standard"] ||
+                d.sizes?.standard || {
+                  kcal: 300,
+                  protein: 25,
+                  carbs: 35,
+                  fat: 10,
+                };
               html += `
                 <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm mt-2">
                   <img src="${d.image}" class="w-10 h-10 rounded-lg object-cover border shrink-0">
@@ -22712,24 +23076,27 @@
           html = `
             <div class="text-center py-4 text-slate-400 text-xs">
               <i class="fa-solid fa-circle-exclamation text-amber-500 mb-1.5 text-base block"></i>
-              Không có món ăn nào được lên lịch cho <b>${weekday === 'sunday' ? 'Chủ Nhật' : 'Thứ ' + (weekday === 'monday' ? 'Hai' : weekday === 'tuesday' ? 'Ba' : weekday === 'wednesday' ? 'Tư' : weekday === 'thursday' ? 'Năm' : weekday === 'friday' ? 'Sáu' : 'Bảy')}</b> (${mealType === 'all' ? 'Cả ngày' : mealType === 'meal1' ? 'Bữa 1' : 'Bữa 2'})
+              Không có món ăn nào được lên lịch cho <b>${weekday === "sunday" ? "Chủ Nhật" : "Thứ " + (weekday === "monday" ? "Hai" : weekday === "tuesday" ? "Ba" : weekday === "wednesday" ? "Tư" : weekday === "thursday" ? "Năm" : weekday === "friday" ? "Sáu" : "Bảy")}</b> (${mealType === "all" ? "Cả ngày" : mealType === "meal1" ? "Bữa 1" : "Bữa 2"})
             </div>`;
         }
         document.getElementById("qo-weekly-preview").innerHTML = html;
       };
 
-      window.addDishToQuickOrderList = function() {
+      window.addDishToQuickOrderList = function () {
         const dishId = document.getElementById("qo-dish-select").value;
         if (!dishId) {
           showToast("Vui lòng chọn món ăn!", "error");
           return;
         }
-        const d = dishes.find(x => x.id == dishId);
+        const d = dishes.find((x) => x.id == dishId);
         if (!d) return;
         const sizeKey = document.getElementById("qo-size-select").value;
-        const sizeData = d.sizes?.[sizeKey] || d.sizes?.standard || { kcal: 300, protein: 25, carbs: 35, fat: 10 };
-        
-        const existingIndex = window.quickOrderCustomItems.findIndex(item => item.dishId == d.id && item.sizeKey === sizeKey);
+        const sizeData = d.sizes?.[sizeKey] ||
+          d.sizes?.standard || { kcal: 300, protein: 25, carbs: 35, fat: 10 };
+
+        const existingIndex = window.quickOrderCustomItems.findIndex(
+          (item) => item.dishId == d.id && item.sizeKey === sizeKey,
+        );
         if (existingIndex > -1) {
           window.quickOrderCustomItems[existingIndex].qty += 1;
         } else {
@@ -22744,19 +23111,19 @@
             kcal: sizeData.kcal,
             protein: sizeData.protein,
             carbs: sizeData.carbs,
-            fat: sizeData.fat
+            fat: sizeData.fat,
           });
         }
         window.renderQuickOrderCustomList();
         document.getElementById("qo-dish-select").value = "";
       };
 
-      window.removeQuickOrderCustomItem = function(index) {
+      window.removeQuickOrderCustomItem = function (index) {
         window.quickOrderCustomItems.splice(index, 1);
         window.renderQuickOrderCustomList();
       };
 
-      window.renderQuickOrderCustomList = function() {
+      window.renderQuickOrderCustomList = function () {
         const tbody = document.getElementById("qo-custom-list-body");
         if (!tbody) return;
         if (window.quickOrderCustomItems.length === 0) {
@@ -22768,15 +23135,16 @@
             </tr>`;
           return;
         }
-        tbody.innerHTML = window.quickOrderCustomItems.map((item, index) => {
-          return `
+        tbody.innerHTML = window.quickOrderCustomItems
+          .map((item, index) => {
+            return `
             <tr class="border-b border-slate-100 hover:bg-slate-50/50">
               <td class="px-3 py-2.5 font-semibold text-slate-800 flex items-center gap-2">
                 <img src="${item.image}" class="w-7 h-7 rounded object-cover border border-slate-100 shrink-0">
                 <div class="truncate max-w-[150px]" title="${item.name}">${item.name}</div>
               </td>
               <td class="px-3 py-2.5 text-center">
-                <span class="px-2 py-0.5 rounded text-[10px] font-medium ${item.sizeKey === 'large' ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'}">
+                <span class="px-2 py-0.5 rounded text-[10px] font-medium ${item.sizeKey === "large" ? "bg-amber-50 text-amber-700" : "bg-emerald-50 text-emerald-700"}">
                   ${item.sizeLabel}
                 </span>
               </td>
@@ -22793,10 +23161,11 @@
                 </button>
               </td>
             </tr>`;
-        }).join("");
+          })
+          .join("");
       };
 
-      window.adjustQuickOrderQty = function(index, delta) {
+      window.adjustQuickOrderQty = function (index, delta) {
         if (window.quickOrderCustomItems[index]) {
           window.quickOrderCustomItems[index].qty += delta;
           if (window.quickOrderCustomItems[index].qty <= 0) {
@@ -22806,7 +23175,7 @@
         }
       };
 
-      window.submitQuickOrder = function() {
+      window.submitQuickOrder = function () {
         const custVal = document.getElementById("qo-customer-select").value;
         if (!custVal) {
           showToast("Vui lòng chọn khách hàng!", "error");
@@ -22815,9 +23184,9 @@
         const parts = custVal.split("-");
         const id = parseInt(parts[1]);
         const isPurchased = parts[0] === "p";
-        const c = isPurchased 
-          ? purchasedCustomers.find(x => x.id === id) 
-          : potentialCustomers.find(x => x.id === id);
+        const c = isPurchased
+          ? purchasedCustomers.find((x) => x.id === id)
+          : potentialCustomers.find((x) => x.id === id);
         if (!c) {
           showToast("Không tìm thấy thông tin khách hàng!", "error");
           return;
@@ -22826,18 +23195,32 @@
         let orderItems = [];
         let orderNotesPrefix = "";
 
-        if (window.quickOrderMode === 'weekly') {
+        if (window.quickOrderMode === "weekly") {
           const weekday = document.getElementById("qo-weekday-select").value;
           const mealType = document.getElementById("qo-meal-type-select").value;
           const menu = c.weeklyMenu || {};
           const dayMenu = menu[weekday] || {};
 
-          const weekdayLabel = weekday === 'sunday' ? 'Chủ Nhật' : 'Thứ ' + (weekday === 'monday' ? 'Hai' : weekday === 'tuesday' ? 'Ba' : weekday === 'wednesday' ? 'Tư' : weekday === 'thursday' ? 'Năm' : weekday === 'friday' ? 'Sáu' : 'Bảy');
+          const weekdayLabel =
+            weekday === "sunday"
+              ? "Chủ Nhật"
+              : "Thứ " +
+                (weekday === "monday"
+                  ? "Hai"
+                  : weekday === "tuesday"
+                    ? "Ba"
+                    : weekday === "wednesday"
+                      ? "Tư"
+                      : weekday === "thursday"
+                        ? "Năm"
+                        : weekday === "friday"
+                          ? "Sáu"
+                          : "Bảy");
 
           if (mealType === "all" || mealType === "meal1") {
             const m1 = dayMenu.meal1 || {};
             if (m1.dishId) {
-              const d = dishes.find(x => x.id == m1.dishId);
+              const d = dishes.find((x) => x.id == m1.dishId);
               if (d) {
                 orderItems.push({
                   dishId: d.id,
@@ -22845,7 +23228,7 @@
                   sizeKey: m1.size || c.size || "standard",
                   sizeLabel: (m1.size || c.size) === "large" ? "Lớn" : "Cơ bản",
                   price: 0,
-                  qty: 1
+                  qty: 1,
                 });
               }
             }
@@ -22853,7 +23236,7 @@
           if (mealType === "all" || mealType === "meal2") {
             const m2 = dayMenu.meal2 || {};
             if (m2.dishId) {
-              const d = dishes.find(x => x.id == m2.dishId);
+              const d = dishes.find((x) => x.id == m2.dishId);
               if (d) {
                 orderItems.push({
                   dishId: d.id,
@@ -22861,41 +23244,47 @@
                   sizeKey: m2.size || c.size || "standard",
                   sizeLabel: (m2.size || c.size) === "large" ? "Lớn" : "Cơ bản",
                   price: 0,
-                  qty: 1
+                  qty: 1,
                 });
               }
             }
           }
 
           if (orderItems.length === 0) {
-            showToast(`Thực đơn tuần của khách vào ngày ${weekdayLabel} đang trống!`, "error");
+            showToast(
+              `Thực đơn tuần của khách vào ngày ${weekdayLabel} đang trống!`,
+              "error",
+            );
             return;
           }
 
           orderNotesPrefix = `[GÓI] ${weekdayLabel} - ${mealType === "all" ? "Cả ngày" : mealType === "meal1" ? "Bữa 1" : "Bữa 2"}`;
-
         } else {
           // Custom mode
           if (window.quickOrderCustomItems.length === 0) {
             showToast("Vui lòng thêm ít nhất một món ăn!", "error");
             return;
           }
-          orderItems = window.quickOrderCustomItems.map(item => ({
+          orderItems = window.quickOrderCustomItems.map((item) => ({
             dishId: item.dishId,
             name: item.name,
             sizeKey: item.sizeKey,
             sizeLabel: item.sizeKey === "large" ? "Lớn" : "Cơ bản",
             price: item.price || 0,
-            qty: item.qty
+            qty: item.qty,
           }));
           orderNotesPrefix = `[ĐƠN LẺ] Tự chọn`;
         }
 
         // Calculate total amount
-        const totalAmount = orderItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const totalAmount = orderItems.reduce(
+          (sum, item) => sum + item.price * item.qty,
+          0,
+        );
 
         // Build notes & status
-        const statusValue = document.getElementById("qo-status-select").value || "pending";
+        const statusValue =
+          document.getElementById("qo-status-select").value || "pending";
         const customNotes = document.getElementById("qo-notes-input").value;
         const finalNotes = `${orderNotesPrefix}${customNotes ? ` (${customNotes})` : ""}`;
 
@@ -22912,12 +23301,17 @@
           status: statusValue,
           timestamp: new Date(),
           shipperId: null,
-          isPackageOrder: window.quickOrderMode === 'weekly',
-          packageCustomerId: c.id
+          isPackageOrder: window.quickOrderMode === "weekly",
+          packageCustomerId: c.id,
         };
 
         // Auto assign nearest shipper if lat & lng exist
-        if (newOrder.lat && newOrder.lng && typeof shippers !== 'undefined' && Array.isArray(shippers)) {
+        if (
+          newOrder.lat &&
+          newOrder.lng &&
+          typeof shippers !== "undefined" &&
+          Array.isArray(shippers)
+        ) {
           let minDistance = Infinity;
           shippers.forEach((s) => {
             if (s.lat && s.lng) {
@@ -22925,7 +23319,7 @@
                 newOrder.lat,
                 newOrder.lng,
                 s.lat,
-                s.lng
+                s.lng,
               );
               if (dist < minDistance) {
                 minDistance = dist;
@@ -22976,32 +23370,44 @@
                           <i class="fa-solid fa-calendar-day text-slate-400"></i>
                           <span>${d.label}</span>
                         </h4>
-                        ${isFromAdmin ? `
+                        ${
+                          isFromAdmin
+                            ? `
                         <button onclick="generateDailyOrder(${c.id},'${d.key}')" class="inline-flex items-center gap-1.5 text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer shadow-sm">
                           <i class="fa-solid fa-cubes text-slate-400"></i> Gộp cả ngày
                         </button>
-                        ` : ""}
+                        `
+                            : ""
+                        }
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs font-bold text-slate-500">Bữa 1</label>
-                                ${isFromAdmin ? `
+                                ${
+                                  isFromAdmin
+                                    ? `
                                 <button onclick="generateMealOrder(${c.id},'${d.key}','meal1')" class="inline-flex items-center gap-1 text-[10px] bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 font-bold px-2 py-0.5 rounded-lg transition-all cursor-pointer shadow-sm">
                                   <i class="fa-solid fa-bolt text-amber-500 animate-pulse"></i> Tạo đơn nhanh
                                 </button>
-                                ` : ""}
+                                `
+                                    : ""
+                                }
                             </div>
                             ${renderCustomDishSelect(d.key, "meal1", aD)}
                         </div>
                         <div>
                             <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs font-bold text-slate-500">Bữa 2</label>
-                                ${isFromAdmin ? `
+                                ${
+                                  isFromAdmin
+                                    ? `
                                 <button onclick="generateMealOrder(${c.id},'${d.key}','meal2')" class="inline-flex items-center gap-1 text-[10px] bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 font-bold px-2 py-0.5 rounded-lg transition-all cursor-pointer shadow-sm">
                                   <i class="fa-solid fa-bolt text-amber-500 animate-pulse"></i> Tạo đơn nhanh
                                 </button>
-                                ` : ""}
+                                `
+                                    : ""
+                                }
                             </div>
                             ${renderCustomDishSelect(d.key, "meal2", aD)}
                         </div>
@@ -23081,7 +23487,9 @@
       }
 
       function generateMealOrder(cId, dK, mK) {
-        const c = purchasedCustomers.find((x) => x.id === cId) || potentialCustomers.find((x) => x.id === cId);
+        const c =
+          purchasedCustomers.find((x) => x.id === cId) ||
+          potentialCustomers.find((x) => x.id === cId);
         if (!c) {
           showToast("Không tìm thấy thông tin khách hàng!", "error");
           return;
@@ -23150,7 +23558,9 @@
       }
 
       function generateDailyOrder(cId, dK) {
-        const c = purchasedCustomers.find((x) => x.id === cId) || potentialCustomers.find((x) => x.id === cId);
+        const c =
+          purchasedCustomers.find((x) => x.id === cId) ||
+          potentialCustomers.find((x) => x.id === cId);
         if (!c) {
           showToast("Không tìm thấy thông tin khách hàng!", "error");
           return;
@@ -23543,12 +23953,19 @@
 
         if (window.visualViewport) {
           const vv = window.visualViewport;
-          // When keyboard is open, vv.height is less than window.innerHeight
-          if (vv.height < window.innerHeight - 50 && window.innerWidth < 640) {
-            chatWindow.style.bottom = `${window.innerHeight - vv.height + 10}px`;
-            chatWindow.style.maxHeight = `${vv.height - 20}px`;
+          if (window.innerWidth < 640) {
+            // Full screen on mobile, adjust for keyboard
+            chatWindow.style.height = `${vv.height}px`;
+            chatWindow.style.bottom = `${window.innerHeight - vv.height}px`;
+            chatWindow.style.maxHeight = "none";
           } else {
-            resetChatbotStyles();
+            // Desktop popup
+            if (vv.height < window.innerHeight - 50) {
+              chatWindow.style.bottom = `${window.innerHeight - vv.height + 10}px`;
+              chatWindow.style.maxHeight = `${vv.height - 20}px`;
+            } else {
+              resetChatbotStyles();
+            }
           }
         } else {
           resetChatbotStyles();
@@ -23586,12 +24003,19 @@
       function getSocialLinks() {
         const settingsRaw = localStorage.getItem("nutriadmin_settings");
         const settings = settingsRaw ? JSON.parse(settingsRaw) : {};
-        
+
         let zaloUrl = "https://zalo.me";
         if (settings.zalo && settings.zalo.trim()) {
           const rawZalo = settings.zalo.trim();
-          if (rawZalo.includes("zalo.me") || rawZalo.startsWith("http://") || rawZalo.startsWith("https://")) {
-            if (!rawZalo.startsWith("http://") && !rawZalo.startsWith("https://")) {
+          if (
+            rawZalo.includes("zalo.me") ||
+            rawZalo.startsWith("http://") ||
+            rawZalo.startsWith("https://")
+          ) {
+            if (
+              !rawZalo.startsWith("http://") &&
+              !rawZalo.startsWith("https://")
+            ) {
               zaloUrl = "https://" + rawZalo;
             } else {
               zaloUrl = rawZalo;
@@ -23609,7 +24033,10 @@
         let facebookUrl = "https://facebook.com";
         if (settings.facebook && settings.facebook.trim()) {
           facebookUrl = settings.facebook.trim();
-          if (!facebookUrl.startsWith("http://") && !facebookUrl.startsWith("https://")) {
+          if (
+            !facebookUrl.startsWith("http://") &&
+            !facebookUrl.startsWith("https://")
+          ) {
             facebookUrl = "https://" + facebookUrl;
           }
         }
@@ -23617,7 +24044,7 @@
         return { zaloUrl, facebookUrl };
       }
 
-      window.updateFabBackground = function() {
+      window.updateFabBackground = function () {
         const menu = document.getElementById("chatbot-social-menu");
         const btn = document.querySelector("#chatbot-fab > button");
         const img = document.getElementById("fab-mascot-img");
@@ -23625,29 +24052,38 @@
 
         // If social menu is open, we MUST show the green circle so the white X icon is clearly visible.
         if (menu && !menu.classList.contains("hidden")) {
-          btn.classList.add("bg-[linear-gradient(135deg,#15803D,#10B981)]", "shadow-[0_8px_20px_rgba(16,185,129,0.3)]");
+          btn.classList.add(
+            "bg-[linear-gradient(135deg,#15803D,#10B981)]",
+            "shadow-[0_8px_20px_rgba(16,185,129,0.3)]",
+          );
           btn.classList.remove("bg-transparent", "shadow-none");
           return;
         }
 
         // If social menu is closed, check if mascot img is active (hidden is absent)
         if (img && !img.classList.contains("hidden")) {
-          btn.classList.remove("bg-[linear-gradient(135deg,#15803D,#10B981)]", "shadow-[0_8px_20px_rgba(16,185,129,0.3)]");
+          btn.classList.remove(
+            "bg-[linear-gradient(135deg,#15803D,#10B981)]",
+            "shadow-[0_8px_20px_rgba(16,185,129,0.3)]",
+          );
           btn.classList.add("bg-transparent", "shadow-none");
         } else {
-          btn.classList.add("bg-[linear-gradient(135deg,#15803D,#10B981)]", "shadow-[0_8px_20px_rgba(16,185,129,0.3)]");
+          btn.classList.add(
+            "bg-[linear-gradient(135deg,#15803D,#10B981)]",
+            "shadow-[0_8px_20px_rgba(16,185,129,0.3)]",
+          );
           btn.classList.remove("bg-transparent", "shadow-none");
         }
       };
 
-      window.toggleSocialMenu = function(event) {
+      window.toggleSocialMenu = function (event) {
         if (event) {
           event.preventDefault();
           event.stopPropagation();
         }
         const menu = document.getElementById("chatbot-social-menu");
         const mainIcon = document.getElementById("main-fab-icon");
-        
+
         // Update URLs dynamically
         updateSocialMenuLinks();
 
@@ -23658,7 +24094,8 @@
             menu.classList.remove("translate-y-4", "opacity-0");
           }, 10);
           if (mainIcon) {
-            mainIcon.className = "fa-solid fa-xmark text-2xl transition-transform duration-300 rotate-90";
+            mainIcon.className =
+              "fa-solid fa-xmark text-2xl transition-transform duration-300 rotate-90";
           }
           updateFabBackground();
         } else {
@@ -23666,7 +24103,7 @@
         }
       };
 
-      window.closeSocialMenu = function() {
+      window.closeSocialMenu = function () {
         const menu = document.getElementById("chatbot-social-menu");
         const mainIcon = document.getElementById("main-fab-icon");
         if (menu && !menu.classList.contains("hidden")) {
@@ -23676,21 +24113,22 @@
             updateFabBackground();
           }, 300);
           if (mainIcon) {
-            mainIcon.className = "fa-solid fa-comment-dots text-2xl transition-transform duration-300";
+            mainIcon.className =
+              "fa-solid fa-comment-dots text-2xl transition-transform duration-300";
           }
         }
       };
 
-      window.updateSocialMenuLinks = function() {
+      window.updateSocialMenuLinks = function () {
         const links = getSocialLinks();
         const zaloBtn = document.getElementById("chatbot-zalo-link");
         const messengerBtn = document.getElementById("chatbot-messenger-link");
-        
+
         if (zaloBtn) zaloBtn.href = links.zaloUrl;
         if (messengerBtn) messengerBtn.href = links.facebookUrl;
       };
 
-      window.openNuriAI = function(event) {
+      window.openNuriAI = function (event) {
         if (event) {
           event.preventDefault();
           event.stopPropagation();
@@ -23699,14 +24137,14 @@
         toggleChat();
       };
 
-      window.openMessenger = function(event) {
+      window.openMessenger = function (event) {
         if (event) {
           event.stopPropagation();
         }
         closeSocialMenu();
       };
 
-      window.openZalo = function(event) {
+      window.openZalo = function (event) {
         if (event) {
           event.stopPropagation();
         }
@@ -26480,7 +26918,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
       function drawSubMenuMascot() {
         const container = document.getElementById("sub-menu-mascot-container");
         if (!container) return;
-        
+
         let frames = [];
         if (
           typeof mascotLoadedSequences !== "undefined" &&
@@ -26502,7 +26940,8 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
             container.innerHTML = `<img class="w-full h-full object-contain" alt="Nuri Mascot" />`;
             img = container.querySelector("img");
           }
-          if (subMenuMascotFrameIndex >= frames.length) subMenuMascotFrameIndex = 0;
+          if (subMenuMascotFrameIndex >= frames.length)
+            subMenuMascotFrameIndex = 0;
           img.src = frames[subMenuMascotFrameIndex];
           subMenuMascotFrameIndex++;
         } else {
@@ -26510,7 +26949,7 @@ Không cần ghi tiêu đề, trả lời trực tiếp bằng tiếng Việt, c
           let svgStr = drawMascotSVG("lam_viec", subMenuMascotFrameIndex);
           svgStr = svgStr.replace(
             'class="w-40 h-40 filter drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]"',
-            'class="w-full h-full drop-shadow-sm"'
+            'class="w-full h-full drop-shadow-sm"',
           );
           container.innerHTML = svgStr;
           subMenuMascotFrameIndex++;
