@@ -3954,7 +3954,7 @@
                     spellcheck="false"
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
                   >
-                    5 Ngày
+                    7 Ngày
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <p
@@ -3968,7 +3968,7 @@
                       spellcheck="false"
                       class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
                     >
-                      +0.25kg dự kiến
+                      +0.36kg dự kiến
                     </p>
                   </div>
                   <p
@@ -4066,7 +4066,7 @@
                     spellcheck="false"
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
                   >
-                    10 Ngày
+                    14 Ngày
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <p
@@ -4080,7 +4080,7 @@
                       spellcheck="false"
                       class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
                     >
-                      +0.55kg dự kiến
+                      +0.71kg dự kiến
                     </p>
                   </div>
                   <p
@@ -4091,7 +4091,7 @@
                     spellcheck="false"
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] opacity-90 text-xl md:text-2xl font-bold mt-1 cursor-text transition-colors duration-200"
                   >
-                    Đạt 14% mục tiêu
+                    Đạt 12% mục tiêu
                   </p>
                 </div>
               </div>
@@ -4183,7 +4183,7 @@
                     spellcheck="false"
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
                   >
-                    20 Ngày
+                    30 Ngày
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <p
@@ -4197,7 +4197,7 @@
                       spellcheck="false"
                       class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
                     >
-                      +1.1kg dự kiến
+                      +1.43kg dự kiến
                     </p>
                   </div>
                   <p
@@ -4208,7 +4208,7 @@
                     spellcheck="false"
                     class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] opacity-90 text-xl md:text-2xl font-bold mt-1 cursor-text transition-colors duration-200"
                   >
-                    Đạt 28% mục tiêu
+                    Đạt 24% mục tiêu
                   </p>
                 </div>
               </div>
@@ -6067,6 +6067,10 @@
                     id="customer-category-filters"
                   ></div>
                   <div
+                    class="mb-4 flex overflow-x-auto pb-2 gap-2 hide-scrollbar hidden"
+                    id="customer-sub-category-filters"
+                  ></div>
+                  <div
                     id="customer-menu-list"
                     class="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar"
                   ></div>
@@ -6126,6 +6130,16 @@
                           >0đ</span
                         >
                       </div>
+                      
+                      <!-- Self-mix fee row -->
+                      <div id="cart-self-mix-fee-row" class="flex justify-between items-start mb-3 hidden">
+                        <div class="flex flex-col">
+                          <span class="text-sm text-slate-500">Phí tự mix món:</span>
+                          <span id="cart-self-mix-fee-note" class="text-[11px] text-orange-600 mt-0.5 font-medium">Phí chế biến món tự thiết kế</span>
+                        </div>
+                        <span id="cart-self-mix-fee" class="text-sm font-bold text-orange-600">7.000đ</span>
+                      </div>
+
                       <div
                         class="flex justify-between items-center pt-2 border-t border-slate-100"
                       >
@@ -9753,13 +9767,13 @@
                         id="purchased-package"
                         class="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm"
                       >
-                        <option value="target_5">
-                          Gói Trải Nghiệm (5 Ngày)
+                        <option value="target_7">
+                          Gói Trải Nghiệm (7 Ngày)
                         </option>
-                        <option value="target_10">
-                          Gói Chuyển Đổi (10 Ngày)
+                        <option value="target_14">
+                          Gói Chuyển Đổi (14 Ngày)
                         </option>
-                        <option value="target_20">Gói Bứt Phá (20 Ngày)</option>
+                        <option value="target_30">Gói Bứt Phá (30 Ngày)</option>
                       </select>
                     </div>
                     <div>
@@ -11129,6 +11143,7 @@
       let currentFilter = "complete";
       let currentSubFilter = "all";
       let currentCustomerFilter = "complete";
+      let currentCustomerSubFilter = "all";
       let isSimulating = false;
       let isSystemProcessing = false;
       let confirmActionCallback = null;
@@ -14436,7 +14451,7 @@
         // Daily tip
         const tips = [
           "Uống 1 cốc nước ấm vào buổi sáng để thanh lọc cơ thể.",
-          "Bổ sung nhiều rau xanh vào bữa ăn để tăng cường chất xơ.",
+          "Bổ sung many rau xanh vào bữa ăn để tăng cường chất xơ.",
           "Ngủ đủ 7-8 tiếng mỗi ngày giúp cơ thể phục hồi tốt hơn.",
           "Nhai kỹ thức ăn giúp cải thiện hệ tiêu hóa.",
           "Hạn chế đồ uống có đường và nước có ga.",
@@ -14489,8 +14504,15 @@
 
         // Subscription
         const subContainer = document.getElementById("profile-subscription");
-        const pkg = parseInt(currentUser.package || 0);
-        if (pkg === 0) {
+        let pkgDays = 0;
+        if (currentUser.package) {
+          const match = String(currentUser.package).match(/\d+/);
+          if (match) {
+            pkgDays = parseInt(match[0]);
+          }
+        }
+
+        if (!currentUser.package) {
           subContainer.innerHTML = `
                         <div class="text-center py-4">
                             <p class="text-slate-500 mb-3 text-sm">Bạn chưa đăng ký gói ăn nào.</p>
@@ -14498,19 +14520,99 @@
                         </div>
                     `;
         } else {
-          let packageDatesHtml =
-            '<p class="text-sm text-slate-500">Đang hoạt động</p>';
-          if (currentUser.startDate && !isNaN(pkg)) {
+          const settingsStr = localStorage.getItem("nutriadmin_settings");
+          let pkgTexts = {};
+          if (settingsStr) {
+            try {
+              const settings = JSON.parse(settingsStr);
+              pkgTexts = settings.packagesText || {};
+            } catch (e) {}
+          }
+
+          let packageName = `Gói đăng ký`;
+          const pkgValStr = String(currentUser.package || "");
+          const pLower = pkgValStr.toLowerCase();
+          
+          if (pLower.includes("trải nghiệm") || pLower.includes("trai nghiem") || pLower === "7" || pLower === "5" || pLower.includes("target_7") || pLower.includes("target_5")) {
+            packageName = "Gói " + (pkgTexts["front-pkg4-subtitle"] || "Trải Nghiệm");
+          } else if (pLower.includes("chuyển đổi") || pLower.includes("chuyen doi") || pLower.includes("duy trì") || pLower.includes("duy tri") || pLower === "14" || pLower === "10" || pLower.includes("target_14") || pLower.includes("target_10")) {
+            packageName = "Gói " + (pkgTexts["front-pkg5-subtitle"] || "Duy Trì");
+          } else if (pLower.includes("bứt phá") || pLower.includes("but pha") || pLower === "30" || pLower === "28" || pLower === "20" || pLower.includes("target_30") || pLower.includes("target_20")) {
+            packageName = "Gói " + (pkgTexts["front-pkg6-subtitle"] || "Bứt Phá");
+          } else {
+            // strip any parenthesis or duration numbers to just show package name
+            packageName = `Gói ${currentUser.package.replace(/\s*\(\d+\s*Ngày\)/i, "").replace(/\d+\s*Ngày/i, "").trim()}`;
+          }
+
+          let pkgDurationDays = 7;
+          if (pLower.includes("trải nghiệm") || pLower.includes("trai nghiem") || pLower === "7" || pLower === "5" || pLower.includes("target_7") || pLower.includes("target_5")) {
+            pkgDurationDays = 7;
+          } else if (pLower.includes("chuyển đổi") || pLower.includes("chuyen doi") || pLower.includes("duy trì") || pLower.includes("duy tri") || pLower === "14" || pLower === "10" || pLower.includes("target_14") || pLower.includes("target_10")) {
+            pkgDurationDays = 14;
+          } else if (pLower.includes("bứt phá") || pLower.includes("but pha") || pLower === "30" || pLower === "28" || pLower === "20" || pLower.includes("target_30") || pLower.includes("target_20")) {
+            pkgDurationDays = 28;
+          } else {
+            pkgDurationDays = pkgDays > 0 ? pkgDays : 7;
+          }
+
+          let packageDatesHtml = `
+            <div class="mt-2 text-xs text-slate-500 space-y-1 font-medium bg-slate-50 border border-slate-100 p-2.5 rounded-lg">
+              <div class="flex items-center gap-1.5">
+                <i class="fa-regular fa-calendar-check text-slate-400"></i>
+                <span>Bắt đầu: <strong class="text-slate-600">Chưa kích hoạt</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i class="fa-regular fa-calendar-xmark text-slate-400"></i>
+                <span>Kết thúc: <strong class="text-slate-600">Chưa kích hoạt</strong></span>
+              </div>
+            </div>
+          `;
+
+          let warningHtml = "";
+
+          if (currentUser.startDate && pkgDurationDays > 0) {
             const sDate = new Date(currentUser.startDate);
-            const eDate = new Date(sDate.getTime() + pkg * 24 * 60 * 60 * 1000);
+            const eDate = new Date(sDate.getTime() + pkgDurationDays * 24 * 60 * 60 * 1000);
             const sStr = sDate.toLocaleDateString("vi-VN");
             const eStr = eDate.toLocaleDateString("vi-VN");
-            packageDatesHtml = `<p class="text-xs text-slate-500 mt-1 font-medium"><i class="fa-regular fa-calendar-days mr-1"></i> ${sStr} - ${eStr}</p>`;
+            packageDatesHtml = `
+              <div class="mt-2 text-xs text-slate-500 space-y-1.5 font-medium bg-slate-50 border border-slate-100 p-2.5 rounded-lg">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-regular fa-calendar-check text-emerald-600 font-bold"></i>
+                  <span>Bắt đầu: <strong class="text-slate-700">${sStr}</strong></span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-regular fa-calendar-xmark text-rose-500 font-bold"></i>
+                  <span>Kết thúc: <strong class="text-slate-700">${eStr}</strong></span>
+                </div>
+              </div>
+            `;
+
+            // Calculate remaining days
+            const today = new Date();
+            const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const eDateStart = new Date(eDate.getFullYear(), eDate.getMonth(), eDate.getDate());
+            const diffDays = Math.ceil((eDateStart.getTime() - todayStart.getTime()) / (1000 * 60 * 60 * 24));
+
+            if (diffDays <= 2) {
+              warningHtml = `
+                <div class="flex-1 md:max-w-xs bg-rose-50 border border-rose-200 rounded-xl p-3 flex items-center gap-3 animate-pulse shadow-sm self-stretch">
+                  <div class="w-24 h-24 shrink-0 flex items-center justify-center bg-white rounded-lg border border-rose-100 p-0.5">
+                    <div id="profile-warning-mascot-svg" class="w-full h-full flex items-center justify-center [&_svg]:w-24 [&_svg]:h-24 [&_svg]:drop-shadow-none"></div>
+                    <img id="profile-warning-mascot-img" class="w-full h-full object-contain hidden" alt="Mascot Ngạc Nhiên" />
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-[10px] text-rose-700 font-bold mb-0.5 flex items-center gap-1 uppercase tracking-wider">
+                      <i class="fa-solid fa-triangle-exclamation"></i> Nhắc nhở gia hạn
+                    </p>
+                    <p class="text-[11px] text-rose-600 font-semibold leading-normal">
+                      Bạn cần đăng ký gia hạn gói trước ngày <span class="underline text-rose-700 font-bold">${eStr}</span> để tiếp tục.
+                    </p>
+                  </div>
+                </div>
+              `;
+            }
           }
-          const packageName =
-            typeof resolvePackageName === "function"
-              ? resolvePackageName(currentUser.package)
-              : `Gói ${pkg} Ngày`;
 
           let todayMenuHtml = "";
           if (currentUser.weeklyMenu) {
@@ -14587,7 +14689,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            `;
+                                                `;
                                               })
                                               .join("")}
                                         </div>
@@ -14601,12 +14703,13 @@
           }
 
           subContainer.innerHTML = `
-                        <div class="flex justify-between items-start">
-                            <div>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="flex-1 min-w-0">
                                 <p class="font-bold text-slate-800 text-lg">${packageName}</p>
                                 ${packageDatesHtml}
                             </div>
-                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-md mt-1 shrink-0">ACTIVE</span>
+                            ${warningHtml}
+                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-md mt-1 shrink-0 self-start md:self-auto">ACTIVE</span>
                         </div>
                         ${todayMenuHtml}
                         <div class="mt-2 space-y-3">
@@ -14684,6 +14787,9 @@
 
         if (typeof updatePersonalMascot === "function") {
           updatePersonalMascot();
+        }
+        if (typeof updateProfileWarningMascot === "function") {
+          updateProfileWarningMascot();
         }
       }
 
@@ -14814,6 +14920,60 @@
           },
           1000 / (typeof mascotFps !== "undefined" ? mascotFps : 12),
         );
+      }
+
+      function updateProfileWarningMascot() {
+        if (window.profileWarningMascotInterval) {
+          clearInterval(window.profileWarningMascotInterval);
+        }
+
+        const warningSvg = document.getElementById("profile-warning-mascot-svg");
+        const warningImg = document.getElementById("profile-warning-mascot-img");
+
+        if (warningSvg && warningImg) {
+          let frames = [];
+          if (
+            typeof mascotLoadedSequences !== "undefined" &&
+            mascotLoadedSequences["ngac_nhien"] &&
+            mascotLoadedSequences["ngac_nhien"].length > 0
+          ) {
+            frames = mascotLoadedSequences["ngac_nhien"];
+          } else if (
+            typeof mascotLoadedSequences !== "undefined" &&
+            mascotLoadedSequences["vui_ve"] &&
+            mascotLoadedSequences["vui_ve"].length > 0
+          ) {
+            frames = mascotLoadedSequences["vui_ve"];
+          }
+
+          if (frames.length > 0) {
+            warningSvg.classList.add("hidden");
+            warningImg.classList.remove("hidden");
+            warningImg.src = frames[0];
+            let frameIdx = 0;
+            window.profileWarningMascotInterval = setInterval(() => {
+              frameIdx++;
+              warningImg.src = frames[frameIdx % frames.length];
+            }, 1000 / (typeof mascotFps !== "undefined" ? mascotFps : 12));
+          } else {
+            warningImg.classList.add("hidden");
+            warningSvg.classList.remove("hidden");
+            let frameIdx = 0;
+            const updateSvg = () => {
+              let svgStr = typeof drawMascotSVG === "function" ? drawMascotSVG("ngac_nhien", frameIdx) : "";
+              svgStr = svgStr.replace(
+                'class="w-40 h-40 filter drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]"',
+                'class="w-full h-full drop-shadow-sm"',
+              );
+              warningSvg.innerHTML = svgStr;
+            };
+            updateSvg();
+            window.profileWarningMascotInterval = setInterval(() => {
+              frameIdx++;
+              updateSvg();
+            }, 1000 / (typeof mascotFps !== "undefined" ? mascotFps : 12));
+          }
+        }
       }
 
       function showToast(message, type = "success") {
@@ -18705,6 +18865,22 @@
             .bannerGrandOpeningEnabled !== false;
         let htmlToRender = `
                       <div id="dynamic-lunch-container">${window.renderMealSectionHTML(lunchOptions, "lunch")}</div>
+                      
+                      <!-- Custom Mix Section -->
+                      <div class="my-8 p-6 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200" id="advice-custom-mix-section">
+                          <div class="flex flex-col items-center justify-center text-center py-2">
+                              <button type="button" onclick="openCustomMixFromAdvice()" class="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                                  <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
+                                  Tự mix món theo sở thích
+                              </button>
+                              <p class="text-xs text-slate-500 mt-2 font-medium">Tự chọn nguồn đạm, tinh bột, cách chế biến và rau củ yêu thích của riêng bạn!</p>
+                          </div>
+                          
+                          <div id="advice-custom-mix-list-container" class="mt-4 space-y-4">
+                              <!-- Custom dishes created on this device will be rendered here -->
+                          </div>
+                      </div>
+
                       <div id="dynamic-dinner-container">${window.renderMealSectionHTML(dinnerOptions, "dinner")}</div>
 
                       <!-- Bố cục Đăng ký Gói theo thiết kế Premium mới -->
@@ -19155,7 +19331,7 @@
                                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-stretch w-[760px] mx-auto text-left px-2 lg:px-0">
 
                                       <label class="pkg-label pkg-target-label relative block cursor-pointer group h-full transition-all duration-500" style="order: 1; view-transition-name: pkg-target-5;">
-                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_5" class="sr-only">
+                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_7" class="sr-only">
                                           <div class="pkg-badge block absolute -top-3 left-1/2 -translate-x-1/2 bg-[#10B981] text-white text-[11px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md z-20 whitespace-nowrap opacity-0 transition-opacity duration-500">Đang Chọn</div>
                                           <!-- Gói Trải Nghiệm -->
                   <div class="pkg-inner h-full bg-white border-[3px] border-[#0F766E]  rounded-2xl md:rounded-3xl p-4 sm:p-5 lg:p-8 flex flex-col transition-all duration-500 relative overflow-hidden shadow-lg shadow-emerald-900/5">
@@ -19174,13 +19350,13 @@
                           id="front-pkg4-title"
 
                           class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
-                        >${getPkgText("front-pkg4-title", `5 Ngày`)}</h4>
+                        >${getPkgText("front-pkg4-title", `7 Ngày`)}</h4>
                         <div class="flex items-center gap-2 mt-1">
                           <p
                             id="front-pkg4-expected"
 
                             class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
-                          >${getPkgText("front-pkg4-expected", `+0.25kg dự kiến`)}</p>
+                          >${getPkgText("front-pkg4-expected", `+0.36kg dự kiến`)}</p>
                         </div>
                         <p
                           id="front-pkg4-target"
@@ -19234,7 +19410,7 @@
                                       </label>
 
                                       <label class="pkg-label pkg-target-label relative block cursor-pointer group h-full transition-all duration-500" style="order: 2; view-transition-name: pkg-target-10;">
-                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_10" class="sr-only">
+                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_14" class="sr-only">
                                           <div class="pkg-badge block absolute -top-3 left-1/2 -translate-x-1/2 bg-[#10B981] text-white text-[11px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md z-20 whitespace-nowrap opacity-0 transition-opacity duration-500">Đang Chọn</div>
                                           <!-- Gói Chuyển Đổi -->
                   <div class="pkg-inner h-full bg-white border-[3px] border-[#0F766E]  rounded-2xl md:rounded-3xl p-4 sm:p-5 lg:p-8 flex flex-col transition-all duration-500 relative overflow-hidden shadow-lg shadow-emerald-900/5">
@@ -19253,19 +19429,19 @@
                           id="front-pkg5-title"
 
                           class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
-                        >${getPkgText("front-pkg5-title", `10 Ngày`)}</h4>
+                        >${getPkgText("front-pkg5-title", `14 Ngày`)}</h4>
                         <div class="flex items-center gap-2 mt-1">
                           <p
                             id="front-pkg5-expected"
 
                             class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
-                          >${getPkgText("front-pkg5-expected", `+0.55kg dự kiến`)}</p>
+                          >${getPkgText("front-pkg5-expected", `+0.71kg dự kiến`)}</p>
                         </div>
                         <p
                           id="front-pkg5-target"
 
                           class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] opacity-90 text-xl md:text-2xl font-bold mt-1 cursor-text transition-colors duration-200"
-                        >${getPkgText("front-pkg5-target", `Đạt 14% mục tiêu`)}</p>
+                        >${getPkgText("front-pkg5-target", `Đạt 12% mục tiêu`)}</p>
                       </div>
                     </div>
 
@@ -19313,7 +19489,7 @@
                                       </label>
 
                                       <label class="pkg-label pkg-target-label active-pkg relative block cursor-pointer group h-full transition-all duration-500" style="order: 3; view-transition-name: pkg-target-20;">
-                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_20" checked class="sr-only">
+                                          <input type="radio" onchange="handlePackageChange()" name="pkg_duration" value="target_30" checked class="sr-only">
                                           <div class="pkg-badge block absolute -top-3 left-1/2 -translate-x-1/2 bg-[#10B981] text-white text-[11px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md z-20 whitespace-nowrap opacity-0 transition-opacity duration-500">Đang Chọn</div>
                                           <!-- Gói Bứt Phá -->
                   <div class="pkg-inner h-full bg-white border-[3px] border-[#0F766E]  rounded-2xl md:rounded-3xl p-4 sm:p-5 lg:p-8 flex flex-col transition-all duration-500 relative overflow-hidden shadow-lg shadow-emerald-900/5">
@@ -19337,19 +19513,19 @@
                           id="front-pkg6-title"
 
                           class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight cursor-text transition-colors duration-200"
-                        >${getPkgText("front-pkg6-title", `20 Ngày`)}</h4>
+                        >${getPkgText("front-pkg6-title", `30 Ngày`)}</h4>
                         <div class="flex items-center gap-2 mt-1">
                           <p
                             id="front-pkg6-expected"
 
                             class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] font-bold text-2xl md:text-3xl cursor-text transition-colors duration-200"
-                          >${getPkgText("front-pkg6-expected", `+1.1kg dự kiến`)}</p>
+                          >${getPkgText("front-pkg6-expected", `+1.43kg dự kiến`)}</p>
                         </div>
                         <p
                           id="front-pkg6-target"
 
                           class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-50 rounded text-[#10B981] opacity-90 text-xl md:text-2xl font-bold mt-1 cursor-text transition-colors duration-200"
-                        >${getPkgText("front-pkg6-target", `Đạt 28% mục tiêu`)}</p>
+                        >${getPkgText("front-pkg6-target", `Đạt 24% mục tiêu`)}</p>
                       </div>
                     </div>
 
@@ -19426,9 +19602,9 @@
                                       <div>
                                           <label class="block text-xs font-medium text-slate-500 mb-1">Gói đăng ký *</label>
                                           <select id="pkg-duration" required class="w-full rounded-xl border border-slate-300 py-3 px-4 text-sm focus:border-[#15803D] focus:ring-1 focus:ring-[#15803D] outline-none transition-colors bg-slate-50 focus:bg-white">
-                                              <option value="5">5 Ngày</option>
-                                              <option value="10">10 Ngày</option>
-                                              <option value="20">20 Ngày</option>
+                                              <option value="7">Trải Nghiệm</option>
+                                              <option value="14">Chuyển Đổi</option>
+                                              <option value="30">Bứt Phá</option>
                                           </select>
                                       </div>
                                       <div>
@@ -19608,6 +19784,10 @@
 
         container.innerHTML = htmlToRender;
 
+        if (window.renderCustomAdviceDishes) {
+          window.renderCustomAdviceDishes();
+        }
+
         updatePkgDistricts();
 
         // Setup popup trigger
@@ -19662,9 +19842,9 @@
           }
         };
 
-        updatePackage(4, 5);
-        updatePackage(5, 10);
-        updatePackage(6, 20);
+        updatePackage(4, 7);
+        updatePackage(5, 14);
+        updatePackage(6, 30);
 
         showAnalyzingPopup(() => {
           document
@@ -19956,10 +20136,16 @@
       // ==========================================
       // 8. ORDERS & CART MANAGEMENT
       // ==========================================
-      function setCustomerFilter(catId) {
+      window.setCustomerFilter = function (catId) {
         currentCustomerFilter = catId;
+        currentCustomerSubFilter = "all";
         renderCustomerMenu();
-      }
+      };
+
+      window.setCustomerSubFilter = function (id) {
+        currentCustomerSubFilter = id;
+        renderCustomerMenu();
+      };
 
       function renderCustomerMenu() {
         const filtersContainer = document.getElementById(
@@ -19983,10 +20169,36 @@
             .join("");
         }
 
+        // Sub-categories for 'complete' on customer ordering page
+        const subContainer = document.getElementById("customer-sub-category-filters");
+        if (subContainer) {
+          if (currentCustomerFilter === "complete") {
+            subContainer.classList.remove("hidden");
+            const proteins = dishes.filter((d) => d.category === "protein" && d.isActive && !d.isCustom);
+            const subCats = [{ id: "all", name: "Tất cả" }].concat(
+              proteins.map((p) => ({ id: p.id.toString(), name: p.name })),
+            );
+
+            subContainer.innerHTML = subCats
+              .map(
+                (cat) => `
+                          <button onclick="setCustomerSubFilter('${cat.id}')"
+                                  class="whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                                    currentCustomerSubFilter === cat.id
+                                      ? "bg-amber-100 text-amber-800 border border-amber-200 font-bold"
+                                      : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+                                  }">${cat.name}</button>`,
+              )
+              .join("");
+          } else {
+            subContainer.classList.add("hidden");
+          }
+        }
+
         const container = document.getElementById("customer-menu-list");
         if (!container) return;
 
-        const activeDishes = dishes.filter(
+        let activeDishes = dishes.filter(
           (d) =>
             d.isActive &&
             !d.isCustom &&
@@ -19994,6 +20206,22 @@
             (currentCustomerFilter === "all" ||
               d.category === currentCustomerFilter),
         );
+
+        if (currentCustomerFilter === "complete" && currentCustomerSubFilter !== "all") {
+          const protein = dishes.find(
+            (d) =>
+              d.id.toString() === currentCustomerSubFilter && d.category === "protein",
+          );
+          if (protein) {
+            activeDishes = activeDishes.filter(
+              (d) =>
+                d.ingredients &&
+                (d.ingredients.startsWith(protein.name) ||
+                  d.name.includes(protein.name)),
+            );
+          }
+        }
+
         container.innerHTML = activeDishes
           .map(
             (dish) => `
@@ -20094,6 +20322,8 @@
           container.innerHTML = `<div class="text-center text-slate-400 py-8 text-sm">Giỏ hàng đang trống</div>`;
           document.getElementById("cart-subtotal").innerText = "0đ";
           document.getElementById("cart-shipping-fee").innerText = "0đ";
+          const selfMixRow = document.getElementById("cart-self-mix-fee-row");
+          if (selfMixRow) selfMixRow.classList.add("hidden");
           totalEl.innerText = "0đ";
           btnSubmit.disabled = true;
           updateNutritionSummary();
@@ -20154,7 +20384,23 @@
           shippingNote.classList.add("hidden");
         }
 
-        const total = subtotal + shippingFee;
+        const hasCustomItem = cart.some(item => {
+          if (item.isCustom) return true;
+          const dish = dishes.find(d => d.id === item.dishId);
+          return dish && (dish.isCustom || dish.isAdviceMix);
+        });
+
+        const selfMixFeeRow = document.getElementById("cart-self-mix-fee-row");
+        const selfMixFee = hasCustomItem ? 7000 : 0;
+        if (selfMixFeeRow) {
+          if (hasCustomItem) {
+            selfMixFeeRow.classList.remove("hidden");
+          } else {
+            selfMixFeeRow.classList.add("hidden");
+          }
+        }
+
+        const total = subtotal + shippingFee + selfMixFee;
         totalEl.innerText = formatCurrency(total) + "đ";
         checkSubmitButtonState();
 
@@ -20409,6 +20655,13 @@
           shippingFee = 0;
         }
 
+        const hasCustomItem = cart.some(item => {
+          if (item.isCustom) return true;
+          const dish = dishes.find(d => d.id === item.dishId);
+          return dish && (dish.isCustom || dish.isAdviceMix);
+        });
+        const selfMixFee = hasCustomItem ? 7000 : 0;
+
         const newOrder = {
           id: "ORD" + Math.floor(1000 + Math.random() * 9000),
           customerName: document.getElementById("cust-name").value,
@@ -20422,7 +20675,8 @@
           deliveryTime: deliveryTime,
           items: [...cart],
           shippingFee: shippingFee,
-          total: subtotal + shippingFee,
+          selfMixFee: selfMixFee,
+          total: subtotal + shippingFee + selfMixFee,
           status: "pending",
           timestamp: new Date(),
           shipperId: null,
@@ -20777,6 +21031,16 @@
                                   <div class="mt-3 pt-3 border-t border-dashed border-slate-100 flex justify-between text-sm">
                                       <span class="text-slate-500">Phí vận chuyển:</span>
                                       <span class="font-medium ${order.shippingFee === 0 ? "text-emerald-600" : "text-slate-700"}">${order.shippingFee === 0 ? "Miễn phí" : formatCurrency(order.shippingFee) + "đ"}</span>
+                                  </div>
+                              `
+                                  : ""
+                              }
+                              ${
+                                order.selfMixFee
+                                  ? `
+                                  <div class="mt-1 flex justify-between text-sm">
+                                      <span class="text-slate-500">Phí tự mix món:</span>
+                                      <span class="font-bold text-orange-600">${formatCurrency(order.selfMixFee)}đ</span>
                                   </div>
                               `
                                   : ""
@@ -23078,12 +23342,12 @@
             pkgTexts = settings.packagesText || {};
           } catch (e) {}
         }
-        if (pkgValue === "target_5" || pkgValue === "5")
-          return pkgTexts["front-pkg4-title"] || "Trải Nghiệm (5 Ngày)";
-        if (pkgValue === "target_10" || pkgValue === "10")
-          return pkgTexts["front-pkg5-title"] || "Chuyển Đổi (10 Ngày)";
-        if (pkgValue === "target_20" || pkgValue === "20")
-          return pkgTexts["front-pkg6-title"] || "Bứt Phá (20 Ngày)";
+        if (pkgValue === "target_5" || pkgValue === "5" || pkgValue === "target_7" || pkgValue === "7")
+          return pkgTexts["front-pkg4-title"] || "Trải Nghiệm (7 Ngày)";
+        if (pkgValue === "target_10" || pkgValue === "10" || pkgValue === "target_14" || pkgValue === "14")
+          return pkgTexts["front-pkg5-title"] || "Chuyển Đổi (14 Ngày)";
+        if (pkgValue === "target_20" || pkgValue === "20" || pkgValue === "target_30" || pkgValue === "30")
+          return pkgTexts["front-pkg6-title"] || "Bứt Phá (30 Ngày)";
         return pkgValue;
       }
 
@@ -23166,6 +23430,16 @@
                                   <div class="mt-2 pt-2 border-t border-dashed border-slate-100 flex justify-between text-sm">
                                       <span class="text-slate-500">Phí vận chuyển:</span>
                                       <span class="font-medium ${o.shippingFee === 0 ? "text-emerald-600" : "text-slate-700"}">${o.shippingFee === 0 ? "Miễn phí" : formatCurrency(o.shippingFee) + "đ"}</span>
+                                  </div>
+                                  `
+                                      : ""
+                                  }
+                                  ${
+                                    o.selfMixFee
+                                      ? `
+                                  <div class="mt-1 flex justify-between text-sm">
+                                      <span class="text-slate-500">Phí tự mix món:</span>
+                                      <span class="font-bold text-orange-600">${formatCurrency(o.selfMixFee)}đ</span>
                                   </div>
                                   `
                                       : ""
@@ -23344,11 +23618,9 @@
       }
 
       function getPackagePoints(pkgValue) {
-        if (pkgValue === "target_5" || String(pkgValue) === "5") return 350;
-        if (pkgValue === "target_10" || String(pkgValue) === "10") return 680;
-        if (pkgValue === "target_20" || String(pkgValue) === "20") return 1320;
-        if (String(pkgValue) === "7") return 490;
-        if (String(pkgValue) === "30") return 1950;
+        if (pkgValue === "target_5" || String(pkgValue) === "5" || pkgValue === "target_7" || String(pkgValue) === "7") return 490;
+        if (pkgValue === "target_10" || String(pkgValue) === "10" || pkgValue === "target_14" || String(pkgValue) === "14") return 980;
+        if (pkgValue === "target_20" || String(pkgValue) === "20" || pkgValue === "target_30" || String(pkgValue) === "30") return 2100;
         return 0;
       }
 
@@ -28787,6 +29059,15 @@
         loadSettings();
         initMascotSystem();
         renderCategories();
+
+        // Load custom advice dishes from localStorage and prepend/append to dishes
+        const customAdviceDishesOnLoad = JSON.parse(localStorage.getItem("nutriadmin_custom_advice_dishes") || "[]");
+        customAdviceDishesOnLoad.forEach(dish => {
+          if (!dishes.some(d => d.id === dish.id)) {
+            dishes.push(dish);
+          }
+        });
+
         renderDishes();
         initLocationDropdowns();
         renderLandingAuth();
@@ -29935,6 +30216,126 @@
         }
       };
 
+      window.adviceMixContext = null;
+      window.adviceDishOrderSizes = window.adviceDishOrderSizes || {};
+
+      window.openCustomMixFromAdvice = function () {
+        window.adviceMixContext = true;
+        window.openCreateDishModal();
+      };
+
+      window.setAdviceDishOrderSize = function (id, size) {
+        window.adviceDishOrderSizes[id] = size;
+        if (window.renderCustomAdviceDishes) {
+          window.renderCustomAdviceDishes();
+        }
+      };
+
+      window.orderCustomAdviceDish = function (id) {
+        const size = window.adviceDishOrderSizes[id] || "standard";
+        
+        // Add to cart
+        addToCart(id, size);
+        
+        // Switch to order form (trang đặt hàng)
+        switchView("order-form");
+        
+        showToast("Đã thêm món tự mix và chuyển đến trang đặt hàng!", "success");
+      };
+
+      window.renderCustomAdviceDishes = function () {
+        const container = document.getElementById("advice-custom-mix-list-container");
+        if (!container) return;
+
+        let customAdviceDishes = [];
+        try {
+          customAdviceDishes = JSON.parse(localStorage.getItem("nutriadmin_custom_advice_dishes") || "[]");
+        } catch (e) {
+          customAdviceDishes = [];
+        }
+
+        if (!Array.isArray(customAdviceDishes) || customAdviceDishes.length === 0) {
+          container.innerHTML = `<div class="text-center py-4 text-slate-400 text-xs">Chưa có món tự mix nào được tạo.</div>`;
+          return;
+        }
+
+        container.innerHTML = `
+          <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 mt-6 text-center md:text-left">Món ăn bạn tự thiết kế</h4>
+          <div class="grid grid-cols-1 gap-4">
+            ${customAdviceDishes.filter(Boolean).map((dish) => {
+              const id = dish.id;
+              const size = window.adviceDishOrderSizes[id] || "standard";
+              const stdPrice = dish.sizes && dish.sizes.standard ? dish.sizes.standard.price : 0;
+              const lrgPrice = dish.sizes && dish.sizes.large ? dish.sizes.large.price : 0;
+              
+              const currentSizeData = dish.sizes && dish.sizes[size] ? dish.sizes[size] : (dish.sizes && dish.sizes.standard ? dish.sizes.standard : {});
+              const proteinG = currentSizeData.protein || 0;
+              const carbsG = currentSizeData.carbs || 0;
+              const fatG = currentSizeData.fat || 0;
+              const kcalVal = currentSizeData.kcal || 0;
+              
+              return `
+                <div class="relative bg-white rounded-2xl border-2 border-orange-400 hover:shadow-[0_12px_32px_rgba(249,115,22,0.15)] transition-all duration-300 shadow-sm p-3 md:p-4 flex flex-col mb-6">
+                    <div class="absolute -top-3 left-4 bg-[linear-gradient(135deg,#EA580C,#F97316)] text-[#FFFFFF] text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full shadow-sm flex items-center gap-1 z-10">
+                        <i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i> MÓN TỰ THIẾT KẾ
+                    </div>
+                    
+                    <div class="flex flex-row gap-3 md:gap-6">
+                        <div class="w-[35%] md:w-1/3 min-h-[120px] rounded-xl overflow-hidden relative shrink-0">
+                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover">
+                            <div class="absolute bottom-1 left-1 md:bottom-2 md:left-2 bg-white/90 backdrop-blur text-slate-800 text-[9px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-sm">
+                                ${kcalVal} kcal
+                            </div>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center py-1">
+                            <h4 class="font-bold text-base md:text-xl text-slate-900 mb-1 md:mb-2 leading-tight">${dish.name}</h4>
+                            <p class="text-[11px] md:text-sm text-slate-500 mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">${dish.ingredients}</p>
+                            <div class="grid grid-cols-3 gap-1.5 md:gap-3">
+                                <div class="bg-slate-50 rounded-lg p-1.5 md:p-3 text-center border border-slate-200">
+                                    <p class="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase mb-0.5 md:mb-1">Đạm</p>
+                                    <p class="font-bold text-[#0F172A] text-sm md:text-base">${Math.round(proteinG)}g</p>
+                                </div>
+                                <div class="bg-slate-50 rounded-lg p-1.5 md:p-3 text-center border border-slate-200">
+                                    <p class="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase mb-0.5 md:mb-1">Tinh Bột</p>
+                                    <p class="font-bold text-[#0F172A] text-sm md:text-base">${Math.round(carbsG)}g</p>
+                                </div>
+                                <div class="bg-slate-50 rounded-lg p-1.5 md:p-3 text-center border border-slate-200">
+                                    <p class="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase mb-0.5 md:mb-1">Béo</p>
+                                    <p class="font-bold text-[#0F172A] text-sm md:text-base">${Math.round(fatG)}g</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-2">
+                        <button type="button" id="size-btn-${id}-standard" onclick="setAdviceDishOrderSize(${id}, 'standard')" 
+                            class="py-2.5 px-4 rounded-xl font-bold text-xs transition-all border flex items-center justify-center gap-1.5 ${
+                              size === "standard" 
+                                ? "bg-orange-50 text-orange-700 border-orange-300 shadow-sm" 
+                                : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                            }" style="cursor: pointer;">
+                            <i class="fa-solid fa-circle text-[8px] ${size === "standard" ? "text-orange-500" : "text-transparent"}"></i> Size Cơ Bản (${formatCurrency(stdPrice)}đ)
+                        </button>
+                        <button type="button" id="size-btn-${id}-large" onclick="setAdviceDishOrderSize(${id}, 'large')" 
+                            class="py-2.5 px-4 rounded-xl font-bold text-xs transition-all border flex items-center justify-center gap-1.5 ${
+                              size === "large" 
+                                ? "bg-orange-50 text-orange-700 border-orange-300 shadow-sm" 
+                                : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                            }" style="cursor: pointer;">
+                            <i class="fa-solid fa-circle text-[8px] ${size === "large" ? "text-orange-500" : "text-transparent"}"></i> Size Lớn (${formatCurrency(lrgPrice)}đ)
+                        </button>
+                        <button type="button" onclick="orderCustomAdviceDish(${id})" 
+                            class="py-2.5 px-4 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] text-white font-bold rounded-xl text-xs shadow-sm hover:shadow transition-all flex items-center justify-center gap-1.5" style="cursor: pointer;">
+                            <i class="fa-solid fa-cart-shopping"></i> Đặt giao món này
+                        </button>
+                    </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `;
+      };
+
       window.handleSelfMixClick = function (cId, dKey, mKey) {
         openCreateDishModal();
         selfMixContext = { cId, dKey, mKey };
@@ -30618,11 +31019,34 @@
               mainIngredientQty: 0.25,
             },
           },
-          isCustom: selfMixContext ? true : false,
+          isCustom: selfMixContext || window.adviceMixContext ? true : false,
           customFor: selfMixContext ? selfMixContext.cId : null,
+          isAdviceMix: window.adviceMixContext ? true : false,
         };
 
         dishes.unshift(newDish);
+
+        // If advice mix, save to local storage as well
+        if (window.adviceMixContext) {
+          let customAdviceDishes = [];
+          try {
+            customAdviceDishes = JSON.parse(localStorage.getItem("nutriadmin_custom_advice_dishes") || "[]");
+          } catch (e) {
+            customAdviceDishes = [];
+          }
+          if (!Array.isArray(customAdviceDishes)) {
+            customAdviceDishes = [];
+          }
+          customAdviceDishes.unshift(newDish);
+          try {
+            localStorage.setItem("nutriadmin_custom_advice_dishes", JSON.stringify(customAdviceDishes));
+          } catch (e) {}
+          window.adviceMixContext = null;
+          
+          if (window.renderCustomAdviceDishes) {
+            window.renderCustomAdviceDishes();
+          }
+        }
 
         // Save to server
         if (typeof syncStateToServer === "function") {
