@@ -15974,7 +15974,7 @@
       }
 
       async function testFirebaseConfig() {
-        const configStr = document
+        let configStr = document
           .getElementById("custom-firebase-config")
           .value.trim();
         if (!configStr) {
@@ -15984,9 +15984,15 @@
 
         let config;
         try {
-          config = JSON.parse(configStr);
+          const match = configStr.match(/\{[\s\S]*\}/);
+          if (match) {
+            config = (new Function('return ' + match[0]))();
+            configStr = JSON.stringify(config); // Normalize
+          } else {
+            throw new Error("No object found");
+          }
         } catch (e) {
-          showToast("Cấu hình không đúng định dạng JSON.", "error");
+          showToast("Cấu hình không đúng định dạng. Vui lòng copy đúng Object config.", "error");
           return;
         }
 
@@ -16059,16 +16065,22 @@
       }
 
       function saveCustomFirebaseConfig() {
-        const config = document
+        let configStr = document
           .getElementById("custom-firebase-config")
           .value.trim();
-        if (config) {
+        if (configStr) {
           try {
-            JSON.parse(config);
-            localStorage.setItem("nutriadmin_custom_firebase_config", config);
-            showToast("Đã lưu cấu hình Cloud thành công.", "success");
+            const match = configStr.match(/\{[\s\S]*\}/);
+            if (match) {
+              const config = (new Function('return ' + match[0]))();
+              const normalizedJson = JSON.stringify(config);
+              localStorage.setItem("nutriadmin_custom_firebase_config", normalizedJson);
+              showToast("Đã lưu cấu hình Cloud thành công.", "success");
+            } else {
+              throw new Error("No object found");
+            }
           } catch (e) {
-            showToast("Cấu hình không đúng định dạng JSON.", "error");
+            showToast("Cấu hình không đúng định dạng. Vui lòng copy đúng Object config.", "error");
           }
         } else {
           localStorage.removeItem("nutriadmin_custom_firebase_config");
@@ -16236,8 +16248,9 @@
             .value.trim();
           if (config) {
             try {
-              JSON.parse(config);
-              localStorage.setItem("nutriadmin_custom_firebase_config", config);
+              let looseJson = config.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":').replace(/'/g, '"');
+              JSON.parse(looseJson);
+              localStorage.setItem("nutriadmin_custom_firebase_config", looseJson);
               showToast("Đã tự động lưu cấu hình Cloud.", "success");
             } catch (e) {
               // Ignore parse errors silently during auto-save
@@ -16789,7 +16802,7 @@
         document.body.appendChild(script);
       }
 
-      function openQRModal(sourceCode = null) {
+      async function openQRModal(sourceCode = null) {
         let landingUrl = getBaseUrl() + "?mode=landing";
         const badgeEl = document.getElementById("qr-source-badge");
 
@@ -16804,16 +16817,23 @@
           badgeEl.classList.add("hidden");
         }
 
+        // Khôi phục việc nhúng payload Firebase/API key để QR có thể hoạt động đúng với DB cá nhân
         landingUrl = buildUrlWithCredentials(landingUrl);
-
         document.getElementById("landing-url").value = landingUrl;
         document.getElementById("qr-code-img").src =
           "https://via.placeholder.com/250x250.png?text=Loading...";
 
-        getShortUrlJsonp(landingUrl, function (shortUrl) {
-          document.getElementById("qr-code-img").src =
-            `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
-        });
+        try {
+            // Dùng TinyURL thay vì is.gd vì is.gd thường xuyên bị lỗi với URL dài hoặc có ký tự đặc biệt
+            const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(landingUrl)}`);
+            const shortUrl = await response.text();
+            document.getElementById("qr-code-img").src =
+              `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
+        } catch(e) {
+            console.error("Failed to shorten url", e);
+            document.getElementById("qr-code-img").src =
+              `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(landingUrl)}&margin=0`;
+        }
 
         closeTrackingModal();
         document.getElementById("qr-modal").classList.remove("hidden");
@@ -27253,7 +27273,9 @@
 
         let config;
         try {
-          config = JSON.parse(configStr);
+          let looseJson = configStr.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":').replace(/'/g, '"');
+          config = JSON.parse(looseJson);
+          configStr = looseJson; // Update it for saving
         } catch (e) {
           return;
         }
