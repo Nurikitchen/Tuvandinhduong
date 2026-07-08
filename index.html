@@ -1528,6 +1528,12 @@
               <i class="fa-solid fa-utensils mr-2"></i> Tạo món ăn mới
             </button>
             <button
+              onclick="openModal('add', 'weekly_special')"
+              class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all cursor-pointer"
+            >
+              <i class="fa-solid fa-star mr-2"></i> Tạo món mới mỗi tuần
+            </button>
+            <button
               onclick="openModal('add')"
               class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all cursor-pointer"
             >
@@ -1883,6 +1889,36 @@
                           <p class="text-xs text-slate-500 mt-1">
                             Hỗ trợ JPG, PNG, WEBP (Tối đa 2MB). Nên dùng ảnh
                             vuông (Tỉ lệ 1:1).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-slate-700 mb-2"
+                        >Logo trình duyệt (Favicon)</label
+                      >
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="w-10 h-10 rounded-lg border border-dashed border-slate-300 flex items-center justify-center overflow-hidden bg-slate-50"
+                        >
+                          <img
+                            id="set-favicon-preview"
+                            src="https://via.placeholder.com/150?text=Favicon"
+                            class="w-full h-full object-cover text-xs text-slate-400"
+                            alt="Favicon preview"
+                          />
+                        </div>
+                        <div class="flex-1">
+                          <input
+                            type="file"
+                            id="set-favicon-logo"
+                            accept="image/*"
+                            class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primaryHover cursor-pointer"
+                            onchange="handleFaviconUpload(event)"
+                          />
+                          <p class="text-xs text-slate-500 mt-1">
+                            Hiển thị trên tab trình duyệt (Khuyên dùng ảnh vuông).
                           </p>
                         </div>
                       </div>
@@ -8898,6 +8934,7 @@
                         class="w-full rounded-lg border border-slate-300 py-2 px-3 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors bg-white"
                       >
                         <option value="complete">Món hoàn chỉnh</option>
+                        <option value="weekly_special">Món mới mỗi tuần</option>
                         <option value="protein">Đạm</option>
                         <option value="carbs">Tinh bột</option>
                         <option value="veggies">Rau củ</option>
@@ -12228,6 +12265,7 @@
 
       const categories = [
         { id: "complete", name: "Món hoàn chỉnh" },
+        { id: "weekly_special", name: "Món mới mỗi tuần" },
         { id: "protein", name: "Đạm" },
         { id: "carbs", name: "Tinh bột" },
         { id: "veggies", name: "Rau củ" },
@@ -15443,8 +15481,23 @@
 
         const storeName = settings.brandName || "Nuri Kitchen";
         const logoData = settings.brandLogo; // base64 string or empty
+        const faviconData = settings.favicon || settings.brandLogo; // use favicon, fallback to brandLogo
 
         document.title = `${storeName} - Quản Lý Menu Healthy`;
+
+        // Refresh Favicon
+        let faviconLink = document.querySelector("link[rel~='icon']");
+        if (!faviconLink) {
+          faviconLink = document.createElement('link');
+          faviconLink.rel = 'icon';
+          document.head.appendChild(faviconLink);
+        }
+        if (faviconData) {
+          faviconLink.href = faviconData;
+        } else {
+          // Fallback if needed, or leave as default
+          faviconLink.href = 'data:image/x-icon;base64,'; // Clears it or you can put a default base64 icon
+        }
 
         // Refresh Header Logo & Name
         const headerBrandEl = document.getElementById("header-brand-name");
@@ -15631,6 +15684,11 @@
             if (logoImg) logoImg.src = settings.brandLogo;
           }
 
+          if (settings.favicon) {
+            const favImg = document.getElementById("set-favicon-preview");
+            if (favImg) favImg.src = settings.favicon;
+          }
+
           document.getElementById("set-payment-momo-info").value =
             settings.paymentMomoInfo || "";
           if (settings.paymentMomoQr) {
@@ -15762,6 +15820,16 @@
         });
       }
 
+      function handleFaviconUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        compressImage(file, 128, 128, 0.8, function (compressedDataUrl) {
+          const favImg = document.getElementById("set-favicon-preview");
+          if (favImg) favImg.src = compressedDataUrl;
+        });
+      }
+
       function handlePaymentQRUpload(event, type) {
         const file = event.target.files[0];
         if (!file) return;
@@ -15799,6 +15867,25 @@
           ) {
             logoBase64 = existing.brandLogo;
           }
+        }
+
+        let faviconBase64 = "";
+        const favImg = document.getElementById("set-favicon-preview");
+        if (
+          favImg &&
+          favImg.src &&
+          !favImg.src.endsWith("placeholder.com/150?text=Favicon") &&
+          favImg.src.startsWith("data:image")
+        ) {
+          faviconBase64 = favImg.src;
+        }
+        if (
+          !faviconBase64 &&
+          existing.favicon &&
+          favImg &&
+          favImg.src === existing.favicon
+        ) {
+          faviconBase64 = existing.favicon;
         }
 
         let momoQrBase64 = existing.paymentMomoQr || "";
@@ -15904,6 +15991,7 @@
           ...existingSettings,
           brandName: document.getElementById("set-brand-name").value,
           brandLogo: logoBase64,
+          favicon: faviconBase64,
           phone: document.getElementById("set-phone").value,
           district: document.getElementById("set-district").value,
           ward: document.getElementById("set-ward").value,
@@ -17946,7 +18034,7 @@
                                 currentFilter === cat.id
                                   ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
                                   : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
-                              }">${cat.name}</button>`,
+                              }">${cat.id === "complete" ? "Món theo công thức" : cat.name}</button>`,
           )
           .join("");
 
@@ -17955,7 +18043,7 @@
         if (subContainer) {
           if (currentFilter === "complete") {
             subContainer.classList.remove("hidden");
-            const proteins = dishes.filter((d) => d.category === "protein" && d.isActive !== false);
+            const proteins = dishes.filter((d) => d.category === "protein" && d.isActive !== false && d.name !== "Tôm");
             const subCats = [{ id: "all", name: "Tất cả" }].concat(
               proteins.map((p) => ({ id: p.id.toString(), name: p.name })),
             );
@@ -18163,16 +18251,16 @@
         document.getElementById("dish-modal").classList.add("hidden");
       }
 
-      function openModal(mode, id = null) {
+      function openModal(mode, idOrCategory = null) {
         const modal = document.getElementById("dish-modal");
         const form = document.getElementById("dish-form");
         form.reset();
 
-        if (mode === "edit" && id) {
+        if (mode === "edit" && idOrCategory) {
           document.getElementById("modal-title").innerText = "Chỉnh sửa món ăn";
           const applyToAll = document.getElementById("apply-to-all-methods");
           if (applyToAll) applyToAll.checked = false;
-          const dish = dishes.find((d) => d.id === id);
+          const dish = dishes.find((d) => d.id === idOrCategory);
           if (dish) {
             document.getElementById("dish-id").value = dish.id;
             document.getElementById("dish-name").value = dish.name;
@@ -18194,6 +18282,7 @@
             document.getElementById("dish-ingredients").value =
               dish.ingredients || "";
             document.getElementById("dish-active").checked = dish.isActive;
+
             if (dish.sizes) {
               document.getElementById("s-price").value = dish.sizes.lean?.price || "";
               document.getElementById("s-kcal").value = dish.sizes.lean?.kcal || "";
@@ -18201,7 +18290,6 @@
               document.getElementById("s-carbs").value = dish.sizes.lean?.carbs || "";
               document.getElementById("s-fat").value = dish.sizes.lean?.fat || "";
               document.getElementById("s-main-ingQty").value = dish.sizes.lean?.mainIngredientQty || "";
-
               document.getElementById("m-price").value =
                 dish.sizes.balance?.price || "";
               document.getElementById("m-kcal").value =
@@ -18234,7 +18322,6 @@
                 "m-carbs",
                 "m-fat",
                 "m-main-ingQty",
-
                 "s-price",
                 "s-kcal",
                 "s-protein",
@@ -18253,7 +18340,7 @@
             }
           }
         } else {
-          document.getElementById("modal-title").innerText = "Thêm món ăn mới";
+          document.getElementById("modal-title").innerText = "Thêm món ăn/Nguyên liệu mới";
           const applyToAll = document.getElementById("apply-to-all-methods");
           if (applyToAll) applyToAll.checked = false;
           document.getElementById("dish-id").value = "";
@@ -18263,7 +18350,11 @@
           document
             .getElementById("dish-image-placeholder")
             .classList.remove("hidden");
-          document.getElementById("dish-category").value = "complete";
+          if (mode === "add" && typeof idOrCategory === "string") {
+            document.getElementById("dish-category").value = idOrCategory;
+          } else {
+            document.getElementById("dish-category").value = "complete";
+          }
         }
 
         handleCategoryChange();
@@ -18683,30 +18774,32 @@
         };
 
         dishData.sizes = {
-            standard: {
-              kcal: parseInt(document.getElementById("m-kcal").value) || 0,
-              protein:
-                parseFloat(document.getElementById("m-protein").value) || 0,
-              carbs: parseFloat(document.getElementById("m-carbs").value) || 0,
-              fat: parseFloat(document.getElementById("m-fat").value) || 0,
-              price: parseInt(document.getElementById("m-price").value) || 0,
-              mainIngredientQty:
-                parseFloat(document.getElementById("m-main-ingQty").value) ||
-                null,
-            },
-            large: {
-              kcal: parseInt(document.getElementById("l-kcal").value) || 0,
-              protein:
-                parseFloat(document.getElementById("l-protein").value) || 0,
-              carbs: parseFloat(document.getElementById("l-carbs").value) || 0,
-              fat: parseFloat(document.getElementById("l-fat").value) || 0,
-              price: parseInt(document.getElementById("l-price").value) || 0,
-              mainIngredientQty:
-                parseFloat(document.getElementById("l-main-ingQty").value) ||
-                null,
-            },
+          lean: {
+            kcal: parseInt(document.getElementById("s-kcal").value) || 0,
+            protein: parseFloat(document.getElementById("s-protein").value) || 0,
+            carbs: parseFloat(document.getElementById("s-carbs").value) || 0,
+            fat: parseFloat(document.getElementById("s-fat").value) || 0,
+            price: parseInt(document.getElementById("s-price").value) || 0,
+            mainIngredientQty: parseFloat(document.getElementById("s-main-ingQty").value) || null,
+          },
+          balance: {
+            kcal: parseInt(document.getElementById("m-kcal").value) || 0,
+            protein: parseFloat(document.getElementById("m-protein").value) || 0,
+            carbs: parseFloat(document.getElementById("m-carbs").value) || 0,
+            fat: parseFloat(document.getElementById("m-fat").value) || 0,
+            price: parseInt(document.getElementById("m-price").value) || 0,
+            mainIngredientQty: parseFloat(document.getElementById("m-main-ingQty").value) || null,
+          },
+          power: {
+            kcal: parseInt(document.getElementById("l-kcal").value) || 0,
+            protein: parseFloat(document.getElementById("l-protein").value) || 0,
+            carbs: parseFloat(document.getElementById("l-carbs").value) || 0,
+            fat: parseFloat(document.getElementById("l-fat").value) || 0,
+            price: parseInt(document.getElementById("l-price").value) || 0,
+            mainIngredientQty: parseFloat(document.getElementById("l-main-ingQty").value) || null,
+          }
         };
-        
+
         if (category === "protein") {
           // Keep existing methods if it's editing an existing protein
           if (id) {
@@ -20869,7 +20962,7 @@
         );
         if (filtersContainer) {
           filtersContainer.innerHTML = categories
-            .filter((cat) => cat.id === "complete")
+            .filter((cat) => cat.id === "complete" || cat.id === "weekly_special")
             .map(
               (cat) => `
                           <button onclick="setCustomerFilter('${cat.id}')"
@@ -20878,7 +20971,7 @@
                                       ? "bg-emerald-100 text-emerald-700 font-bold"
                                       : "bg-white text-slate-500 hover:bg-slate-50 border border-slate-200"
                                   }">
-                              ${cat.name}
+                              ${cat.id === "complete" ? "Món theo công thức" : cat.name}
                           </button>
                       `,
             )
@@ -20890,7 +20983,7 @@
         if (subContainer) {
           if (currentCustomerFilter === "complete") {
             subContainer.classList.remove("hidden");
-            const proteins = dishes.filter((d) => d.category === "protein" && d.isActive && !d.isCustom);
+            const proteins = dishes.filter((d) => d.category === "protein" && d.isActive && !d.isCustom && d.name !== "Tôm");
             const subCats = [{ id: "all", name: "Tất cả" }].concat(
               proteins.map((p) => ({ id: p.id.toString(), name: p.name })),
             );
@@ -25367,7 +25460,7 @@
         const activeDishes = dishes.filter((x) => x.isActive !== false && !x.isCustom && 
           (!hiddenKeywordsPicker.some(kw => x.name.includes(kw) || (x.ingredients && x.ingredients.includes(kw))))
         );
-        const categories = ["all"];
+        const categories = ["all", "complete", "weekly_special"];
         activeDishes.forEach((d) => {
           if (d.category && !categories.includes(d.category)) {
             categories.push(d.category);
@@ -25384,7 +25477,8 @@
           Thịt: "Thịt",
           "Thủy Sản": "Thủy Sản",
           "Tinh bột": "Tinh Bột",
-          complete: "Món ăn hoàn chỉnh",
+          complete: "Món theo công thức",
+          weekly_special: "Món mới mỗi tuần",
         };
 
         const catsContainer = document.getElementById("dish-picker-categories");
@@ -25417,12 +25511,12 @@
           const activeDishes = dishes.filter((x) => x.isActive !== false && !x.isCustom && 
             (!hiddenKeywordsPicker.some(kw => x.name.includes(kw) || (x.ingredients && x.ingredients.includes(kw))))
           );
-          const categories = ["all"];
-          activeDishes.forEach((d) => {
-            if (d.category && !categories.includes(d.category)) {
-              categories.push(d.category);
-            }
-          });
+          const categories = ["all", "complete", "weekly_special"];
+        activeDishes.forEach((d) => {
+          if (d.category && !categories.includes(d.category)) {
+            categories.push(d.category);
+          }
+        });
 
           buttons.forEach((btn, index) => {
             const btnCat = categories[index];
