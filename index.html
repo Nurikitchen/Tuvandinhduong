@@ -14272,7 +14272,10 @@
         for (let i = 0; i < delays.length; i++) {
           try {
             const headers = { "Content-Type": "application/json" };
-            if (!customKey) headers["x-custom-api-key"] = customKey;
+            if (customKey) {
+              headers["x-custom-api-key"] = customKey;
+              headers["x-custom-gemini-key"] = customKey;
+            }
 
             const response = await fetch(url, {
               method: "POST",
@@ -29733,7 +29736,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         for (let i = 0; i < delays.length; i++) {
           try {
             const headers = { "Content-Type": "application/json" };
-            if (!customKey) headers["x-custom-api-key"] = customKey;
+            if (customKey) {
+              headers["x-custom-api-key"] = customKey;
+              headers["x-custom-gemini-key"] = customKey;
+            }
 
             const response = await fetch(url, {
               method: "POST",
@@ -29972,7 +29978,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       let firebaseSyncTask = null;
 
       function initFirebaseSync() {
-        const configStr = localStorage.getItem(
+        let configStr = localStorage.getItem(
           "nutriadmin_custom_firebase_config",
         );
         if (!configStr) return;
@@ -35801,8 +35807,14 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           }
 
           try {
+              const headers = {};
+              const customKey = localStorage.getItem("nutriadmin_custom_api_key") || "";
+              if (customKey) {
+                  headers["x-custom-gemini-key"] = customKey;
+              }
               const res = await fetch('/api/analyze-food', {
                   method: 'POST',
+                  headers: headers,
                   body: formData
               });
               
