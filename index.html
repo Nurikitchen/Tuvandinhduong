@@ -18353,7 +18353,23 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         try {
           const cfg = {};
           if (customKey) cfg.ak = customKey;
-          if (customFb) cfg.fb = customFb;
+          if (customFb) {
+            try {
+              const fbObj = JSON.parse(customFb);
+              if (fbObj.apiKey && fbObj.projectId && fbObj.appId) {
+                // Compress standard firebase config keys
+                cfg.fb = {
+                  k: fbObj.apiKey,
+                  p: fbObj.projectId,
+                  i: fbObj.appId
+                };
+              } else {
+                cfg.fb = customFb;
+              }
+            } catch (e) {
+              cfg.fb = customFb;
+            }
+          }
 
           const hash = btoa(encodeURIComponent(JSON.stringify(cfg)));
           return base + (base.includes("?") ? "&" : "?") + "cfg=" + hash;
@@ -18448,10 +18464,12 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           document.getElementById("qr-code-img").src =
             `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
         } catch (e) {
-          console.error("Shortening error, fallback to long url", e);
-          document.getElementById("landing-url").value = landingUrl;
-          document.getElementById("qr-code-img").src =
-            `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(landingUrl)}&margin=0`;
+          console.error("Shortening error, trying is.gd client-side JSONP", e);
+          getShortUrlJsonp(landingUrl, function (shortUrl) {
+            document.getElementById("landing-url").value = shortUrl;
+            document.getElementById("qr-code-img").src =
+              `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
+          });
         }
       }
 
@@ -26230,9 +26248,11 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           document.getElementById("shipper-qr-img").src =
             `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
         } catch (e) {
-          console.error("Shortening error, fallback to long url", e);
-          document.getElementById("shipper-qr-img").src =
-            `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(appUrl)}&margin=0`;
+          console.error("Shortening error, trying is.gd client-side JSONP", e);
+          getShortUrlJsonp(appUrl, function (shortUrl) {
+            document.getElementById("shipper-qr-img").src =
+              `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
+          });
         }
       }
 
@@ -32770,8 +32790,28 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             const cfg = JSON.parse(decodeURIComponent(cfgStr));
             if (cfg.ak)
               localStorage.setItem("nutriadmin_custom_api_key", cfg.ak);
-            if (cfg.fb)
-              localStorage.setItem("nutriadmin_custom_firebase_config", cfg.fb);
+            if (cfg.fb) {
+              let decompressedFb = cfg.fb;
+              if (cfg.fb && typeof cfg.fb === "object" && cfg.fb.k && cfg.fb.p && cfg.fb.i) {
+                const decompressedObj = {
+                  apiKey: cfg.fb.k,
+                  projectId: cfg.fb.p,
+                  appId: cfg.fb.i,
+                  authDomain: `${cfg.fb.p}.firebaseapp.com`,
+                  storageBucket: `${cfg.fb.p}.appspot.com`
+                };
+                const appIdParts = cfg.fb.i.split(":");
+                if (appIdParts.length > 1) {
+                  decompressedObj.messagingSenderId = appIdParts[1];
+                }
+                decompressedFb = JSON.stringify(decompressedObj);
+              } else if (typeof cfg.fb === "string" && cfg.fb.trim().startsWith("{")) {
+                decompressedFb = cfg.fb;
+              } else {
+                decompressedFb = typeof cfg.fb === "string" ? cfg.fb : JSON.stringify(cfg.fb);
+              }
+              localStorage.setItem("nutriadmin_custom_firebase_config", decompressedFb);
+            }
 
             if (urlParams.has("cfg")) {
               urlParams.delete("cfg");
