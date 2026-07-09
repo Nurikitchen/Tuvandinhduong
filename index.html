@@ -122,6 +122,67 @@
       .animate-slide-in {
         animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      .animate-shimmer {
+        animation: shimmer 2s infinite;
+      }
+      .mascot-glow {
+        box-shadow: 0 0 25px 10px rgba(16, 185, 129, 0.4);
+        border-radius: 9999px;
+        animation: pulseGlow 1.5s infinite alternate;
+      }
+      @keyframes pulseGlow {
+        0% {
+          box-shadow: 0 0 15px 5px rgba(16, 185, 129, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 35px 15px rgba(16, 185, 129, 0.6);
+        }
+      }
+      @keyframes shake-and-glow-green {
+        0%, 100% {
+          transform: translateX(0);
+          box-shadow: 0 0 5px rgba(16, 185, 129, 0.4);
+        }
+        10%, 30%, 50%, 70%, 90% {
+          transform: translateX(-3px);
+        }
+        20%, 40%, 60%, 80% {
+          transform: translateX(3px);
+        }
+        50% {
+          box-shadow: 0 0 25px 10px rgba(16, 185, 129, 0.7);
+        }
+      }
+      .animate-shake-glow-green {
+        animation: shake-and-glow-green 1.2s ease-in-out infinite;
+        border-color: rgba(16, 185, 129, 0.6) !important;
+      }
+      @keyframes shake-and-glow-orange {
+        0%, 100% {
+          transform: translateX(0);
+          box-shadow: 0 0 5px rgba(249, 115, 22, 0.4);
+        }
+        10%, 30%, 50%, 70%, 90% {
+          transform: translateX(-3px);
+        }
+        20%, 40%, 60%, 80% {
+          transform: translateX(3px);
+        }
+        50% {
+          box-shadow: 0 0 25px 10px rgba(249, 115, 22, 0.7);
+        }
+      }
+      .animate-shake-glow-orange {
+        animation: shake-and-glow-orange 1.2s ease-in-out infinite;
+      }
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -5670,11 +5731,11 @@
                       Phân Bổ Dinh Dưỡng Mục Tiêu (Macros)
                     </h3>
                     <div
-                      class="flex flex-row items-center gap-3 sm:gap-8 w-full"
+                      class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 w-full"
                     >
                       <!-- Donut Chart -->
                       <div
-                        class="w-[100px] sm:w-[140px] md:w-[200px] relative aspect-square shrink-0"
+                        class="w-[120px] sm:w-[140px] md:w-[200px] relative aspect-square shrink-0"
                       >
                         <canvas id="macroDistributionChart"></canvas>
                         <div
@@ -5704,10 +5765,10 @@
 
                       <!-- Legend / Values -->
                       <div
-                        class="flex-1 min-w-0 grid grid-cols-1 gap-2 md:gap-4"
+                        class="w-full sm:flex-1 min-w-0 grid grid-cols-1 gap-2 md:gap-4"
                       >
                         <div
-                          class="flex items-center justify-between gap-2 md:gap-4 p-2 md:p-4 bg-red-50/40 dark:bg-red-900/10 hover:bg-red-50 dark:hover:bg-red-900/20 border border-red-100/50 dark:border-red-900/30 rounded-xl transition-colors"
+                          class="flex items-center justify-between gap-2 md:gap-4 p-2.5 md:p-4 bg-red-50/40 dark:bg-red-900/10 hover:bg-red-50 dark:hover:bg-red-900/20 border border-red-100/50 dark:border-red-900/30 rounded-xl transition-colors"
                         >
                           <div class="flex items-center gap-1.5 md:gap-3">
                             <div
@@ -5731,7 +5792,7 @@
                             </div>
                           </div>
                           <div
-                            class="text-sm md:text-lg font-black text-red-600 dark:text-red-400 text-right tracking-tight truncate"
+                            class="text-sm md:text-lg font-black text-red-600 dark:text-red-400 text-right tracking-tight shrink-0"
                             id="macro-protein"
                           >
                             --g
@@ -5739,7 +5800,7 @@
                         </div>
 
                         <div
-                          class="flex items-center justify-between gap-2 md:gap-4 p-2 md:p-4 bg-amber-50/40 dark:bg-amber-900/10 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-amber-100/50 dark:border-amber-900/30 rounded-xl transition-colors"
+                          class="flex items-center justify-between gap-2 md:gap-4 p-2.5 md:p-4 bg-amber-50/40 dark:bg-amber-900/10 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-amber-100/50 dark:border-amber-900/30 rounded-xl transition-colors"
                         >
                           <div class="flex items-center gap-1.5 md:gap-3">
                             <div
@@ -5763,7 +5824,7 @@
                             </div>
                           </div>
                           <div
-                            class="text-sm md:text-lg font-black text-amber-600 dark:text-amber-400 text-right tracking-tight truncate"
+                            class="text-sm md:text-lg font-black text-amber-600 dark:text-amber-400 text-right tracking-tight shrink-0"
                             id="macro-carb"
                           >
                             --g
@@ -5771,7 +5832,7 @@
                         </div>
 
                         <div
-                          class="flex items-center justify-between gap-2 md:gap-4 p-2 md:p-4 bg-sky-50/40 dark:bg-sky-900/10 hover:bg-sky-50 dark:hover:bg-sky-900/20 border border-sky-100/50 dark:border-sky-900/30 rounded-xl transition-colors"
+                          class="flex items-center justify-between gap-2 md:gap-4 p-2.5 md:p-4 bg-sky-50/40 dark:bg-sky-900/10 hover:bg-sky-50 dark:hover:bg-sky-900/20 border border-sky-100/50 dark:border-sky-900/30 rounded-xl transition-colors"
                         >
                           <div class="flex items-center gap-1.5 md:gap-3">
                             <div
@@ -5795,7 +5856,7 @@
                             </div>
                           </div>
                           <div
-                            class="text-sm md:text-lg font-black text-sky-600 dark:text-sky-400 text-right tracking-tight truncate"
+                            class="text-sm md:text-lg font-black text-sky-600 dark:text-sky-400 text-right tracking-tight shrink-0"
                             id="macro-fat"
                           >
                             --g
@@ -5838,6 +5899,13 @@
                         Nuri đang phân tích và cá nhân hóa lời khuyên cho bạn...
                       </p>
                     </div>
+                  </div>
+
+                  <!-- Save Profile Button (Only visible when updating profile) -->
+                  <div id="save-profile-action" class="hidden mt-6">
+                    <button onclick="saveProfileData()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
+                      <i class="fa-solid fa-floppy-disk"></i> Lưu thông tin và cập nhật hồ sơ
+                    </button>
                   </div>
 
                   <!-- Recommendations -->
@@ -6691,6 +6759,189 @@
               <span id="profile-phone">Thông tin cá nhân</span>
             </button>
 
+
+            <!-- 5. Gamification - Streak -->
+            <div id="profile-streak-container" class="w-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-4 mb-4 shadow-sm flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-2xl animate-bounce">
+                  🔥
+                </div>
+                <div>
+                  <h4 class="font-black text-orange-600" id="profile-streak-title">Chuỗi duy trì: 7 ngày</h4>
+                  <p class="text-[11px] text-orange-500 font-medium">Tiếp tục ăn lành mạnh để không mất chuỗi nhé!</p>
+                </div>
+              </div>
+              <button id="profile-streak-share-btn" onclick="openShareModal()" class="px-3 py-1.5 bg-orange-500 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-orange-600 transition-colors">
+                Khoe ngay
+              </button>
+            </div>
+
+            <!-- Data Analysis Button -->
+            <button id="personal-analysis-btn" onclick="startProfileAnalysis()" class="w-full mb-6 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl p-4 flex items-center justify-between group transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-emerald-600 shadow-sm group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="text-left">
+                  <h4 class="font-bold text-emerald-800 text-sm">Phân tích dữ liệu cá nhân</h4>
+                  <p class="text-[11px] text-emerald-600/80 font-medium">Cập nhật chỉ số để có lộ trình chính xác nhất</p>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-right text-emerald-400 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            
+            <!-- 2. Nutrition Dashboard -->
+            <div class="w-full bg-white border border-slate-100 rounded-2xl p-5 mb-6 shadow-sm">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-chart-pie text-emerald-600"></i> Dinh dưỡng hôm nay
+                </h3>
+                <button onclick="openAddCalorieModal()" class="px-3 py-1.5 flex items-center gap-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors text-xs font-semibold">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Nhập thêm
+                </button>
+              </div>
+              <div class="grid grid-cols-4 gap-2 mb-6">
+                <!-- Calories -->
+                <div class="flex flex-col items-center">
+                  <div class="relative w-14 h-14 mb-2">
+                    <svg class="w-14 h-14 transform -rotate-90">
+                      <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-100" />
+                      <circle id="dash-calo-circle" cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="150.7" stroke-dashoffset="30" class="text-amber-500 transition-all duration-1000" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center flex-col">
+                      <span class="text-[11px] font-bold text-amber-500" id="dash-calo-pct">80%</span>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-500 font-medium">Calo <i class="fa-solid fa-fire text-amber-500"></i></p>
+                  <p class="text-[11px] font-bold text-slate-800 whitespace-nowrap" id="dash-calo">1200<span class="text-[9px] text-slate-400 font-normal" id="dash-calo-target">/1500 kcal</span></p>
+                </div>
+                <!-- Protein -->
+                <div class="flex flex-col items-center">
+                  <div class="relative w-14 h-14 mb-2">
+                    <svg class="w-14 h-14 transform -rotate-90">
+                      <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-100" />
+                      <circle id="dash-pro-circle" cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="150.7" stroke-dashoffset="60" class="text-red-400 transition-all duration-1000" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-[11px] font-bold text-red-400" id="dash-pro-pct">77%</span>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-500 font-medium">Đạm <i class="fa-solid fa-drumstick-bite text-red-400"></i></p>
+                  <p class="text-[11px] font-bold text-slate-800 whitespace-nowrap" id="dash-pro">85<span class="text-[9px] text-slate-400 font-normal" id="dash-pro-target">/110g</span></p>
+                </div>
+                <!-- Carb -->
+                <div class="flex flex-col items-center">
+                  <div class="relative w-14 h-14 mb-2">
+                    <svg class="w-14 h-14 transform -rotate-90">
+                      <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-100" />
+                      <circle id="dash-carb-circle" cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="150.7" stroke-dashoffset="90" class="text-blue-400 transition-all duration-1000" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-[11px] font-bold text-blue-400" id="dash-carb-pct">72%</span>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-500 font-medium">Tinh bột <i class="fa-solid fa-bowl-rice text-blue-400"></i></p>
+                  <p class="text-[11px] font-bold text-slate-800 whitespace-nowrap" id="dash-carb">130<span class="text-[9px] text-slate-400 font-normal" id="dash-carb-target">/180g</span></p>
+                </div>
+                <!-- Fat -->
+                <div class="flex flex-col items-center">
+                  <div class="relative w-14 h-14 mb-2">
+                    <svg class="w-14 h-14 transform -rotate-90">
+                      <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-100" />
+                      <circle id="dash-fat-circle" cx="28" cy="28" r="24" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="150.7" stroke-dashoffset="120" class="text-yellow-400 transition-all duration-1000" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-[11px] font-bold text-yellow-500" id="dash-fat-pct">80%</span>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-500 font-medium">Béo <i class="fa-solid fa-droplet text-yellow-400"></i></p>
+                  <p class="text-[11px] font-bold text-slate-800 whitespace-nowrap" id="dash-fat">40<span class="text-[9px] text-slate-400 font-normal" id="dash-fat-target">/50g</span></p>
+                </div>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                  <p class="text-xs font-bold text-slate-700">Calo 7 ngày qua</p>
+                  <div class="flex flex-wrap items-center gap-2 justify-end max-w-[60%]">
+                    <p class="text-[9px] text-slate-500 font-medium flex items-center"><span class="inline-block w-2 h-2 rounded bg-amber-400 mr-1"></span>Nhập thêm</p>
+                    <p class="text-[9px] text-slate-500 font-medium flex items-center"><span class="inline-block w-2 h-2 rounded bg-emerald-400 mr-1"></span>Gói ăn</p>
+                    <p class="text-[9px] text-slate-500 font-medium flex items-center" id="dash-bar-target-label"><span class="inline-block w-4 h-[1px] border-b-2 border-dashed border-emerald-500 mr-1"></span>Mục tiêu (1500)</p>
+                  </div>
+                </div>
+                <div class="relative pt-2">
+                  <!-- Target Line (1500 / 2000 = 75% from bottom => top is 25%) -->
+                  <div class="absolute top-[25%] left-0 right-0 border-b-2 border-dashed border-emerald-500 z-0">
+                    <span id="dash-bar-target-number" class="absolute -top-5 right-0 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1 rounded shadow-sm border border-emerald-100">1500</span>
+                  </div>
+                  
+                  <div class="flex items-end justify-between h-32 gap-1.5 relative z-10 px-1">
+                    <!-- T2 -->
+                    <div id="bar-t2" data-base="700" data-extra="0" class="w-full h-[35%] flex flex-col justify-end gap-[1px] relative group cursor-pointer transition-all duration-500" style="height: 35%" onclick="openDayDetailModal(this.id, 'Thứ 2')">
+                        <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 shadow-sm rounded bar-tooltip">700</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra"></div>
+                        <div class="w-full bg-emerald-400 rounded-t rounded-b h-full bar-base transition-all"></div>
+                    </div>
+                    
+                    <!-- T3 -->
+                    <div id="bar-t3" data-base="900" data-extra="0" class="w-full h-[45%] flex flex-col justify-end gap-[1px] relative group cursor-pointer transition-all duration-500" style="height: 45%" onclick="openDayDetailModal(this.id, 'Thứ 3')">
+                        <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 shadow-sm rounded bar-tooltip">900</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra"></div>
+                        <div class="w-full bg-emerald-400 rounded-t rounded-b h-full bar-base transition-all"></div>
+                    </div>
+
+                    <!-- T4 -->
+                    <div id="bar-t4" data-base="1200" data-extra="0" class="w-full h-[60%] flex flex-col justify-end gap-[1px] relative group cursor-pointer transition-all duration-500" style="height: 60%" onclick="openDayDetailModal(this.id, 'Thứ 4')">
+                        <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 shadow-sm rounded bar-tooltip">1200</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra"></div>
+                        <div class="w-full bg-emerald-400 rounded-t rounded-b h-full bar-base transition-all"></div> 
+                    </div>
+
+                    <!-- T5 -->
+                    <div id="bar-t5" data-base="1200" data-extra="0" class="w-full h-[60%] flex flex-col justify-end gap-[1px] relative group cursor-pointer transition-all duration-500" style="height: 60%" onclick="openDayDetailModal(this.id, 'Thứ 5')">
+                        <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 shadow-sm rounded bar-tooltip">1200</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra"></div>
+                        <div class="w-full bg-emerald-400 rounded-t rounded-b h-full bar-base transition-all"></div>
+                    </div>
+
+                    <!-- T6 -->
+                    <div id="bar-t6" data-base="1000" data-extra="0" class="w-full h-[50%] flex flex-col justify-end gap-[1px] relative group cursor-pointer transition-all duration-500" style="height: 50%" onclick="openDayDetailModal(this.id, 'Thứ 6')">
+                        <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 shadow-sm rounded bar-tooltip">1000</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra"></div>
+                        <div class="w-full bg-emerald-400 rounded-t rounded-b h-full bar-base transition-all"></div>
+                    </div>
+
+                    <!-- T7: Ăn tự do -->
+                    <div id="bar-t7" data-base="0" data-extra="0" class="w-full h-[30%] flex flex-col justify-end gap-[1px] relative group cursor-pointer items-center transition-all duration-500" style="height: 30%" onclick="openDayDetailModal(this.id, 'Thứ 7')">
+                        <span class="absolute -top-7 left-1/2 -translate-x-1/2 text-[9px] font-bold text-amber-600 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 shadow-sm z-20 bar-tooltip">Tự do</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra z-10"></div>
+                        <div class="w-full h-full bg-gradient-to-t from-amber-200 to-amber-100 rounded-b border-t border-amber-400 flex items-center justify-center relative overflow-hidden bar-base rounded-t transition-all">
+                          <i class="fa-solid fa-star text-amber-400/50 text-[10px] absolute top-2"></i>
+                          <i class="fa-solid fa-burger text-amber-400/40 text-xs absolute bottom-2 left-0 -rotate-12"></i>
+                        </div> 
+                    </div>
+
+                    <!-- CN: Ăn tự do -->
+                    <div id="bar-cn" data-base="0" data-extra="0" class="w-full h-[30%] flex flex-col justify-end gap-[1px] relative group cursor-pointer items-center transition-all duration-500" style="height: 30%" onclick="openDayDetailModal(this.id, 'Chủ nhật')">
+                        <span class="absolute -top-7 left-1/2 -translate-x-1/2 text-[9px] font-bold text-amber-600 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 shadow-sm z-20 bar-tooltip">Tự do</span>
+                        <div class="w-full bg-amber-400 rounded-t hidden bar-extra z-10"></div>
+                        <div class="w-full h-full bg-gradient-to-t from-amber-200 to-amber-100 rounded-b border-t border-amber-400 flex items-center justify-center relative overflow-hidden bar-base rounded-t transition-all">
+                          <i class="fa-solid fa-star text-amber-400/50 text-[10px] absolute top-2"></i>
+                          <i class="fa-solid fa-pizza-slice text-amber-400/40 text-xs absolute bottom-4 right-0 rotate-12"></i>
+                        </div> 
+                    </div>
+                  </div>
+                  <div class="flex justify-between text-[10px] text-slate-500 mt-2 font-medium border-t border-slate-100 pt-2 px-1">
+                    <span class="w-full text-center">T2</span>
+                    <span class="w-full text-center">T3</span>
+                    <span class="w-full text-center">T4</span>
+                    <span class="w-full text-center">T5</span>
+                    <span class="w-full text-center">T6</span>
+                    <span class="w-full text-center text-amber-500 font-bold bg-amber-50 rounded mx-0.5">T7</span>
+                    <span class="w-full text-center text-amber-500 font-bold bg-amber-50 rounded mx-0.5">CN</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- 1. Gamification Progress -->
             <div
               class="w-full bg-slate-50 rounded-2xl p-5 mb-6 border border-slate-100 shadow-sm relative overflow-hidden"
@@ -6715,7 +6966,8 @@
 
                 <!-- Main mascot in center -->
                 <div
-                  class="w-16 h-16 shrink-0 flex items-center justify-center relative"
+                  id="rank-mascot-container"
+                  class="w-16 h-16 shrink-0 flex items-center justify-center relative transition-all duration-500"
                 >
                   <img
                     id="rank-mascot-main-img"
@@ -6747,12 +6999,15 @@
                   <span id="current-rank-label">Hạt mầm</span>
                   <span id="next-rank-label">Mầm cây</span>
                 </div>
-                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                <div class="w-full bg-slate-200 rounded-full h-2.5 relative overflow-hidden">
                   <div
                     id="rank-progress-bar"
-                    class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-2.5 rounded-full transition-all duration-1000"
+                    class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-2.5 rounded-full transition-all duration-1000 relative overflow-hidden"
                     style="width: 0%"
-                  ></div>
+                  >
+                    <!-- Shimmer overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer"></div>
+                  </div>
                 </div>
                 <div
                   class="flex justify-between items-center mt-2 relative z-10"
@@ -6792,6 +7047,19 @@
                     ></div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- Daily Quests Card -->
+            <div class="w-full bg-white rounded-2xl p-5 mb-6 border border-slate-100 shadow-sm relative overflow-hidden">
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <i class="fa-solid fa-clipboard-list text-emerald-500"></i> Nhiệm vụ tích lũy điểm
+                </h3>
+                <span class="text-[10px] bg-emerald-50 text-emerald-700 font-extrabold px-2 py-0.5 rounded-full">Hàng ngày & Tuần</span>
+              </div>
+              <div id="daily-quests-list" class="space-y-3">
+                <!-- Dynamically populated in JavaScript -->
               </div>
             </div>
 
@@ -6886,12 +7154,7 @@
                   <i class="fa-solid fa-heart-pulse text-rose-500"></i> Chỉ số
                   cơ thể
                 </h3>
-                <button
-                  onclick="toggleBmiEditor()"
-                  class="text-xs text-emerald-600 font-medium hover:underline"
-                >
-                  Cập nhật
-                </button>
+                
               </div>
 
               <div
@@ -6920,41 +7183,7 @@
                 </div>
               </div>
 
-              <div
-                id="bmi-editor"
-                class="hidden grid-cols-2 gap-3 mb-4 transition-all"
-              >
-                <div class="relative">
-                  <input
-                    type="number"
-                    id="input-height"
-                    class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="Chiều cao (cm)"
-                  />
-                  <span class="absolute right-3 top-2.5 text-xs text-slate-400"
-                    >cm</span
-                  >
-                </div>
-                <div class="relative">
-                  <input
-                    type="number"
-                    id="input-weight"
-                    class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="Cân nặng (kg)"
-                  />
-                  <span class="absolute right-3 top-2.5 text-xs text-slate-400"
-                    >kg</span
-                  >
-                </div>
-                <div class="col-span-2">
-                  <button
-                    onclick="saveBmiInfo()"
-                    class="w-full bg-emerald-100 text-emerald-700 font-semibold py-2 rounded-xl text-sm hover:bg-emerald-200 transition-colors"
-                  >
-                    Lưu chỉ số
-                  </button>
-                </div>
-              </div>
+              
 
               <div
                 class="bg-emerald-50 rounded-xl p-3 flex items-center justify-between border border-emerald-100"
@@ -7003,8 +7232,8 @@
                 class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center"
               >
                 <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                  <i class="fa-solid fa-clock-rotate-left text-emerald-600"></i>
-                  Lịch sử đơn hàng
+                  <i class="fa-solid fa-calendar-week text-emerald-600"></i>
+                  Lịch ăn uống (Meal Calendar)
                 </h3>
                 <button
                   onclick="switchView('tracking')"
@@ -7013,8 +7242,11 @@
                   Xem tiến độ đơn
                 </button>
               </div>
-              <div class="p-4 flex flex-col gap-3" id="profile-order-history">
-                <!-- Loaded via JS -->
+              <div class="p-4" id="profile-meal-calendar">
+                <!-- Timeline will be generated by JS -->
+                <div class="relative border-l-2 border-emerald-100 ml-3 md:ml-4 flex flex-col gap-6" id="meal-timeline-container">
+                  <!-- JS Content -->
+                </div>
               </div>
             </div>
 
@@ -7718,6 +7950,7 @@
         class="text-white text-xl sm:text-2xl font-bold tracking-wide flex items-center gap-2 mt-4 relative z-10"
       >
         <span
+          id="mascot-analyzing-text"
           class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-300"
           >Đang phân tích dữ liệu</span
         >
@@ -11221,6 +11454,41 @@
         >
           Xác Nhận
         </button>
+      </div>
+    </div>
+
+    
+    <!-- Rating Modal -->
+    <div id="rating-modal" class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm px-4 transition-all duration-300 opacity-0 pointer-events-none">
+      <div class="transform scale-95 transition-all duration-300 w-full max-w-sm bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden relative" id="rating-modal-content">
+        <div class="p-6 text-center">
+          <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-amber-500">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Đánh giá món ăn</h3>
+          <p class="text-sm text-slate-500 mb-6">Bạn cảm thấy món này thế nào? Đánh giá của bạn giúp chúng tôi cải thiện thực đơn.</p>
+          <div class="flex justify-center gap-3 mb-6" id="star-rating-container">
+            <button onclick="setRating(1)" class="text-4xl text-slate-200 hover:text-amber-400 hover:scale-110 transition-all star-btn"><i class="fa-solid fa-star"></i></button>
+            <button onclick="setRating(2)" class="text-4xl text-slate-200 hover:text-amber-400 hover:scale-110 transition-all star-btn"><i class="fa-solid fa-star"></i></button>
+            <button onclick="setRating(3)" class="text-4xl text-slate-200 hover:text-amber-400 hover:scale-110 transition-all star-btn"><i class="fa-solid fa-star"></i></button>
+            <button onclick="setRating(4)" class="text-4xl text-slate-200 hover:text-amber-400 hover:scale-110 transition-all star-btn"><i class="fa-solid fa-star"></i></button>
+            <button onclick="setRating(5)" class="text-4xl text-slate-200 hover:text-amber-400 hover:scale-110 transition-all star-btn"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <input type="hidden" id="rating-dish-id" value="">
+          <button onclick="submitRating()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-colors shadow-[0_4px_10px_rgba(16,185,129,0.3)]">Gửi đánh giá</button>
+          <button onclick="closeRatingModal()" class="w-full mt-3 text-slate-400 hover:text-slate-600 font-semibold py-2 transition-colors">Bỏ qua</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wrap-up Report Modal -->
+    <div id="wrapup-modal" class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm px-4 transition-all duration-300 opacity-0 pointer-events-none">
+      <div class="transform scale-95 transition-all duration-300 w-full max-w-lg bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 rounded-[2rem] shadow-2xl border-4 border-emerald-800/60 overflow-hidden relative" id="wrapup-modal-content">
+        <!-- Confetti wrapper inside modal -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]" id="wrapup-confetti"></div>
+        <div class="p-6 md:p-8 relative z-10 text-white" id="wrapup-modal-body-content">
+          <!-- Dynamic content will be loaded here -->
+        </div>
       </div>
     </div>
 
@@ -14762,7 +15030,901 @@
         }
       }
 
-      function renderCustomerProfile() {
+      function getStreakDays() {
+        if (currentUser) {
+          if (!currentUser.streak) {
+            currentUser.streak = 7;
+          }
+          return currentUser.streak;
+        }
+        return 7;
+      }
+
+      function isSameCalendarWeek(timestamp1, timestamp2) {
+        if (!timestamp1 || !timestamp2) return false;
+        const d1 = new Date(timestamp1);
+        const d2 = new Date(timestamp2);
+        
+        // Find Monday of the week for d1
+        const day1 = d1.getDay();
+        const diff1 = d1.getDate() - day1 + (day1 === 0 ? -6 : 1);
+        const mon1 = new Date(d1.setDate(diff1));
+        mon1.setHours(0,0,0,0);
+        
+        // Find Monday of the week for d2
+        const day2 = d2.getDay();
+        const diff2 = d2.getDate() - day2 + (day2 === 0 ? -6 : 1);
+        const mon2 = new Date(d2.setDate(diff2));
+        mon2.setHours(0,0,0,0);
+        
+        return mon1.getTime() === mon2.getTime();
+      }
+
+      function getKcalForOrderItem(item) {
+        if (!item) return 0;
+        if (typeof item.kcal === "number" && item.kcal > 0) return item.kcal;
+        if (typeof item.calories === "number" && item.calories > 0) return item.calories;
+        // Search in dishes
+        if (typeof dishes !== "undefined" && Array.isArray(dishes)) {
+          const dish = dishes.find(d => d.id == item.dishId);
+          if (dish) {
+            const sizeKey = item.sizeKey || "balance";
+            if (dish.sizes && dish.sizes[sizeKey] && typeof dish.sizes[sizeKey].kcal === "number") {
+              return dish.sizes[sizeKey].kcal;
+            }
+            if (dish.sizes) {
+              for (let sk in dish.sizes) {
+                if (dish.sizes[sk] && typeof dish.sizes[sk].kcal === "number") {
+                  return dish.sizes[sk].kcal;
+                }
+              }
+            }
+          }
+        }
+        // Fallbacks
+        const sk = item.sizeKey || "";
+        if (sk === "power" || (item.sizeLabel && item.sizeLabel.includes("Power"))) return 800;
+        if (sk === "lean" || (item.sizeLabel && item.sizeLabel.includes("Lean"))) return 450;
+        return 600; // balance
+      }
+
+      function getMacrosForOrderItem(item) {
+        let macros = { protein: 0, carbs: 0, fat: 0 };
+        if (!item) return macros;
+        if (typeof dishes !== "undefined" && Array.isArray(dishes)) {
+          const dish = dishes.find(d => d.id == item.dishId);
+          if (dish) {
+            const sizeKey = item.sizeKey || "balance";
+            if (dish.sizes && dish.sizes[sizeKey]) {
+              const sz = dish.sizes[sizeKey];
+              macros.protein = (sz.protein || 0) * (item.qty || 1);
+              macros.carbs = (sz.carbs || 0) * (item.qty || 1);
+              macros.fat = (sz.fat || 0) * (item.qty || 1);
+              return macros;
+            }
+            if (dish.sizes) {
+              for (let sk in dish.sizes) {
+                if (dish.sizes[sk]) {
+                  const sz = dish.sizes[sk];
+                  macros.protein = (sz.protein || 0) * (item.qty || 1);
+                  macros.carbs = (sz.carbs || 0) * (item.qty || 1);
+                  macros.fat = (sz.fat || 0) * (item.qty || 1);
+                  return macros;
+                }
+              }
+            }
+          }
+        }
+        return macros;
+      }
+
+      function getOrderKcal(order) {
+        if (!order || !order.items || !Array.isArray(order.items)) return 0;
+        let sum = 0;
+        order.items.forEach(item => {
+          sum += getKcalForOrderItem(item) * (item.qty || 1);
+        });
+        return sum;
+      }
+
+      function animateCircularProgress(circleId, pctId, targetPct) {
+        const circle = document.getElementById(circleId);
+        const pctText = document.getElementById(pctId);
+        if (!circle || !pctText) return;
+
+        circle.style.transition = 'none';
+        circle.style.strokeDashoffset = '150.7';
+        pctText.textContent = '0%';
+
+        circle.getBoundingClientRect(); // Force reflow
+
+        circle.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        const targetOffset = 150.7 - (150.7 * Math.min(targetPct, 100) / 100);
+        circle.style.strokeDashoffset = targetOffset;
+
+        let currentPct = 0;
+        const startTime = performance.now();
+        const duration = 1200;
+
+        function animateText(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeProgress = progress * (2 - progress); // easeOutQuad
+          currentPct = Math.round(targetPct * easeProgress);
+          pctText.textContent = currentPct + '%';
+
+          if (progress < 1) {
+            requestAnimationFrame(animateText);
+          } else {
+            pctText.textContent = targetPct + '%';
+          }
+        }
+        requestAnimationFrame(animateText);
+      }
+
+      function updateNutritionDashboard(isFirstLoad = false) {
+        if (!currentUser) return;
+
+        const daysSeq = ['bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7', 'bar-cn'];
+        const dayIds = ['bar-cn', 'bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7'];
+        const todayIndex = new Date().getDay(); // 0 is CN, 1 is T2, etc.
+        const todayIndexInSeq = todayIndex === 0 ? 6 : todayIndex - 1;
+        const todayId = dayIds[todayIndex];
+
+        const defaultDemoBases = {
+          'bar-t2': 700,
+          'bar-t3': 900,
+          'bar-t4': 1200,
+          'bar-t5': 1200,
+          'bar-t6': 1000,
+          'bar-t7': 0,
+          'bar-cn': 0
+        };
+
+        const now = Date.now();
+
+        // 1. Calculate and set data-base and data-extra for each bar
+        daysSeq.forEach((dayId, i) => {
+          const bar = document.getElementById(dayId);
+          if (!bar) return;
+
+          let base = 0;
+          if (i === todayIndexInSeq) {
+            // Today starts at 0 by default
+            base = 0;
+          } else if (i > todayIndexInSeq) {
+            // Future days are 0 by default
+            base = 0;
+          } else {
+            // Past days keep their default demo base
+            base = defaultDemoBases[dayId] || 0;
+          }
+
+          // Add completed package orders of current week for this day of the week
+          if (typeof orders !== "undefined" && Array.isArray(orders)) {
+            const userOrders = orders.filter(o => 
+              o.phone === currentUser.phone && 
+              o.isPackageOrder && 
+              o.status === "completed" && 
+              isSameCalendarWeek(o.timestamp, now)
+            );
+
+            userOrders.forEach(o => {
+              const oDayIndex = new Date(o.timestamp).getDay();
+              const oDayId = dayIds[oDayIndex];
+              if (oDayId === dayId) {
+                base += getOrderKcal(o);
+              }
+            });
+          }
+
+          // Set base
+          bar.setAttribute('data-base', base);
+
+          // Calculate extra calories from extra foods logged
+          let extra = 0;
+          if (window.extraFoodsData && window.extraFoodsData[dayId]) {
+            window.extraFoodsData[dayId].forEach(item => {
+              extra += item.kcal || 0;
+            });
+          }
+          bar.setAttribute('data-extra', extra);
+        });
+
+        // 2. Update heights and tooltips for all bars based on targetCal
+        const targetCal = (typeof currentUser !== 'undefined' && currentUser && currentUser.targetCal) || (window.lastAnalysisResult && window.lastAnalysisResult.targetCal) || 1500;
+        const maxScale = targetCal / 0.75; // 75% is the target line
+
+        daysSeq.forEach((dayId, i) => {
+          const bar = document.getElementById(dayId);
+          if (!bar) return;
+
+          const base = parseInt(bar.getAttribute('data-base')) || 0;
+          const extra = parseInt(bar.getAttribute('data-extra')) || 0;
+          const total = base + extra;
+
+          let hPercent = Math.min((total / maxScale) * 100, 100);
+          if (base === 0 && hPercent < 15 && hPercent > 0) {
+            hPercent = Math.max(hPercent, 30);
+          } else if (base === 0 && total === 0) {
+            hPercent = 0; // Empty bar if 0 calo
+          }
+
+          if (isFirstLoad) {
+            bar.style.transition = 'none';
+            bar.style.height = '0%';
+            bar.getBoundingClientRect(); // force reflow
+            bar.style.transition = 'height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            setTimeout(() => {
+              bar.style.height = hPercent + '%';
+            }, i * 120);
+          } else {
+            bar.style.transition = 'height 0.5s ease-in-out';
+            bar.style.height = hPercent + '%';
+          }
+
+          // Update tooltip
+          const tooltip = bar.querySelector('.bar-tooltip');
+          if (tooltip) {
+            if (base === 0 && total > 0) {
+              tooltip.innerHTML = `${total} <span class="text-[8px] font-normal text-slate-400 block -mt-1">(tự do)</span>`;
+              tooltip.classList.remove('text-amber-600');
+              tooltip.classList.add('text-slate-500');
+            } else if (total === 0) {
+              tooltip.textContent = "0 kcal";
+            } else {
+              tooltip.textContent = total;
+            }
+          }
+
+          // Update inner bar visual segments (base vs extra)
+          const extraDiv = bar.querySelector('.bar-extra');
+          const baseDiv = bar.querySelector('.bar-base');
+
+          if (extraDiv && baseDiv) {
+            if (extra > 0) {
+              extraDiv.classList.remove('hidden');
+              const actualTotalForRatio = total || 1;
+              const extraPercent = (extra / actualTotalForRatio) * 100;
+              const basePercent = (base / actualTotalForRatio) * 100;
+
+              if (base === 0) {
+                extraDiv.style.height = '100%';
+                baseDiv.classList.add('hidden');
+              } else {
+                baseDiv.classList.remove('hidden');
+                baseDiv.classList.remove('rounded-t');
+                extraDiv.style.height = extraPercent + '%';
+                baseDiv.style.height = basePercent + '%';
+              }
+            } else {
+              extraDiv.classList.add('hidden');
+              baseDiv.classList.remove('hidden');
+              baseDiv.classList.add('rounded-t');
+              baseDiv.style.height = '100%';
+              if (total === 0) {
+                baseDiv.classList.add('hidden'); // hide completely if 0
+              }
+            }
+          }
+        });
+
+        // 3. Update "Dinh dưỡng hôm nay" (Today's nutrition) widgets
+        const todayBar = document.getElementById(todayId);
+        if (todayBar) {
+          const todayBase = parseInt(todayBar.getAttribute('data-base')) || 0;
+          const todayExtra = parseInt(todayBar.getAttribute('data-extra')) || 0;
+          const todayTotal = todayBase + todayExtra;
+
+          // Update Calo displays
+          const caloDisplay = document.getElementById('dash-calo');
+          if (caloDisplay) {
+            caloDisplay.innerHTML = `${todayTotal}<span class="text-[9px] text-slate-400 font-normal" id="dash-calo-target">/${targetCal} kcal</span>`;
+          }
+
+          const pctCal = Math.round((todayTotal / targetCal) * 100);
+          animateCircularProgress('dash-calo-circle', 'dash-calo-pct', pctCal);
+
+          // 4. Update macronutrients (Protein, Carbs, Fat) dynamically
+          const targetPro = (typeof currentUser !== 'undefined' && currentUser && currentUser.targetProtein) || (window.lastAnalysisResult && window.lastAnalysisResult.protein) || 120;
+          const targetCarb = (typeof currentUser !== 'undefined' && currentUser && currentUser.targetCarbs) || (window.lastAnalysisResult && window.lastAnalysisResult.carbs) || 150;
+          const targetFat = (typeof currentUser !== 'undefined' && currentUser && currentUser.targetFat) || (window.lastAnalysisResult && window.lastAnalysisResult.fat) || 50;
+
+          // Sum today's completed package orders macros
+          let todayPro = 0;
+          let todayCarb = 0;
+          let todayFat = 0;
+
+          if (typeof orders !== "undefined" && Array.isArray(orders)) {
+            const todayOrders = orders.filter(o => 
+              o.phone === currentUser.phone && 
+              o.isPackageOrder && 
+              o.status === "completed" && 
+              isSameCalendarWeek(o.timestamp, now) &&
+              dayIds[new Date(o.timestamp).getDay()] === todayId
+            );
+
+            todayOrders.forEach(o => {
+              if (o.items) {
+                o.items.forEach(item => {
+                  const m = getMacrosForOrderItem(item);
+                  todayPro += m.protein;
+                  todayCarb += m.carbs;
+                  todayFat += m.fat;
+                });
+              }
+            });
+          }
+
+          // Cập nhật Protein
+          const proDisplay = document.getElementById('dash-pro');
+          if (proDisplay) {
+            proDisplay.innerHTML = `${todayPro}<span class="text-[9px] text-slate-400 font-normal" id="dash-pro-target">/${targetPro}g</span>`;
+          }
+          const pctPro = Math.round((todayPro / targetPro) * 100);
+          animateCircularProgress('dash-pro-circle', 'dash-pro-pct', pctPro);
+
+          // Cập nhật Carbs
+          const carbDisplay = document.getElementById('dash-carb');
+          if (carbDisplay) {
+            carbDisplay.innerHTML = `${todayCarb}<span class="text-[9px] text-slate-400 font-normal" id="dash-carb-target">/${targetCarb}g</span>`;
+          }
+          const pctCarb = Math.round((todayCarb / targetCarb) * 100);
+          animateCircularProgress('dash-carb-circle', 'dash-carb-pct', pctCarb);
+
+          // Cập nhật Fat
+          const fatDisplay = document.getElementById('dash-fat');
+          if (fatDisplay) {
+            fatDisplay.innerHTML = `${todayFat}<span class="text-[9px] text-slate-400 font-normal" id="dash-fat-target">/${targetFat}g</span>`;
+          }
+          const pctFat = Math.round((todayFat / targetFat) * 100);
+          animateCircularProgress('dash-fat-circle', 'dash-fat-pct', pctFat);
+        }
+      }
+
+      function updateShareRewardBadge() {
+        if (!currentUser) return;
+        
+        // Clean and filter history for current week
+        const now = Date.now();
+        currentUser.shareHistory = (currentUser.shareHistory || []).filter(ts => isSameCalendarWeek(ts, now));
+        
+        const count = currentUser.shareHistory.length;
+        const textEl = document.getElementById("share-reward-text");
+        const badgeEl = document.getElementById("share-reward-badge");
+        
+        if (textEl && badgeEl) {
+          if (count >= 2) {
+            badgeEl.className = "bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 flex items-start gap-2.5 transition-all";
+            textEl.innerHTML = `Bạn đã nhận đủ <span class="font-bold text-emerald-600 dark:text-emerald-400">2/2 lần</span> điểm thưởng tuần này. Bạn vẫn có thể tiếp tục chia sẻ để khoe thành tích!`;
+          } else {
+            badgeEl.className = "bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-3 flex items-start gap-2.5 transition-all";
+            const remaining = 2 - count;
+            textEl.innerHTML = `Nhận ngay <span class="font-bold text-orange-600 dark:text-orange-400">+20 điểm xếp hạng</span> khi chia sẻ thành tích ăn uống lành mạnh lên mạng xã hội! Bạn đã nhận <span class="font-bold text-emerald-600 dark:text-emerald-400">${count}/2 lần</span> tuần này (còn ${remaining} lần).`;
+          }
+        }
+      }
+
+      function getFallbackWrapupAdvice(goal, weight, targetWeight, avgActualDailyCal, targetCal, tdee, predictedWeight, percentage) {
+        let encouragement = "";
+        let advice = "";
+
+        if (goal === "loss") {
+          if (avgActualDailyCal < tdee) {
+            encouragement = "Tuyệt vời! Bạn đang duy trì thâm hụt calo rất tốt để hướng tới mục tiêu giảm cân.";
+            advice = `Với mức tiêu thụ trung bình là ${avgActualDailyCal} kcal/ngày (thấp hơn TDEE là ${tdee} kcal), bạn đang đi đúng hướng. Hãy tiếp tục duy trì thực đơn lành mạnh từ Nuri Kitchen để đạt cân nặng dự kiến là ${predictedWeight.toFixed(1)}kg nhé.`;
+          } else {
+            encouragement = "Cố lên bạn nhé! Hành trình vạn dặm luôn bắt đầu từ những bước đi đầu tiên.";
+            advice = `Lượng calo thực tế (${avgActualDailyCal} kcal/ngày) hiện đang cao hơn mức tiêu thụ TDEE (${tdee} kcal/ngày). Để đạt mục tiêu giảm cân hiệu quả, bạn nên tập trung sử dụng đúng các món ăn trong thực đơn Nuri Kitchen và hạn chế ăn thêm món phụ ngoài kế hoạch.`;
+          }
+        } else if (goal === "gain") {
+          if (avgActualDailyCal > tdee) {
+            encouragement = "Quá tốt! Bạn đang nạp thặng dư calo ổn định để hỗ trợ tăng cân lành mạnh.";
+            advice = `Lượng calo trung bình ${avgActualDailyCal} kcal/ngày cao hơn TDEE (${tdee} kcal) giúp cơ thể có đủ dưỡng chất để tăng cân an toàn. Hãy giữ vững phong độ ăn uống khoa học cùng Nuri Kitchen.`;
+          } else {
+            encouragement = "Hãy cố gắng ăn uống đầy đủ hơn nhé! Cơ thể bạn đang cần thêm năng lượng.";
+            advice = `Lượng calo thực tế (${avgActualDailyCal} kcal/ngày) hiện đang thấp hơn hoặc bằng TDEE (${tdee} kcal/ngày). Để tăng cân thành công, bạn cần tăng lượng calo nạp vào qua các bữa ăn bổ dưỡng và dùng thêm các món ăn nhẹ giàu protein từ thực đơn của Nuri Kitchen.`;
+          }
+        } else if (goal === "recomp") {
+          encouragement = "Rất ấn tượng! Bạn đang duy trì lối sống cực kỳ lành mạnh để tối ưu cơ bắp và giảm mỡ thừa.";
+          advice = `Mức tiêu thụ trung bình ${avgActualDailyCal} kcal/ngày sát với mục tiêu (${targetCal} kcal/ngày) giúp quá trình tái cấu trúc cơ thể diễn ra hiệu quả nhất. Hãy tiếp tục tin tưởng thực đơn cân đối protein của Nuri Kitchen!`;
+        } else {
+          encouragement = "Tuyệt vời! Bạn đang kiểm soát năng lượng nạp vào rất tốt để duy trì vóc dáng ổn định.";
+          advice = `Thực đơn cân bằng từ Nuri Kitchen cùng lối sống năng động giúp bạn duy trì năng lượng lý tưởng ở mức ${avgActualDailyCal} kcal/ngày. Đây là chìa khóa để giữ vững vóc dáng săn chắc và nâng cao sức đề kháng toàn diện.`;
+        }
+
+        return { encouragement, advice };
+      }
+
+      async function openWrapupModal() {
+        if (!currentUser) {
+          showToast("Vui lòng đăng nhập để xem báo cáo!", "warning");
+          return;
+        }
+
+        const modal = document.getElementById("wrapup-modal");
+        const content = document.getElementById("wrapup-modal-content");
+        if (!modal || !content) return;
+
+        // Start calculating and API request immediately
+        const analysisPromise = (async () => {
+          const weight = currentUser.weight || (window.lastAnalysisResult && window.lastAnalysisResult.weight) || 60;
+          const height = currentUser.height || (window.lastAnalysisResult && window.lastAnalysisResult.height) || 165;
+          const targetWeight = currentUser.targetWeight || (window.lastAnalysisResult && window.lastAnalysisResult.targetWeight) || (currentUser.goal === "loss" ? weight - 3 : weight + 3);
+          const goal = currentUser.goal || (window.lastAnalysisResult && window.lastAnalysisResult.goal) || "loss";
+          const duration = currentUser.duration || (window.lastAnalysisResult && window.lastAnalysisResult.duration) || 4;
+          const targetCal = currentUser.targetCal || (window.lastAnalysisResult && window.lastAnalysisResult.targetCal) || 1500;
+          const tdee = currentUser.tdee || (window.lastAnalysisResult && window.lastAnalysisResult.tdee) || 2000;
+          const age = currentUser.age || 25;
+          const gender = currentUser.gender || "female";
+
+          let weeklyMenuCal = 0;
+          let menuDaysCount = 0;
+          if (currentUser.weeklyMenu) {
+            const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+            days.forEach(day => {
+              const m = currentUser.weeklyMenu[day];
+              if (m) {
+                if (m.meal1?.dishId) {
+                  weeklyMenuCal += getKcalForOrderItem(m.meal1);
+                  menuDaysCount++;
+                }
+                if (m.meal2?.dishId) {
+                  weeklyMenuCal += getKcalForOrderItem(m.meal2);
+                }
+              }
+            });
+          }
+          const avgPlannedDailyCal = menuDaysCount > 0 ? Math.round(weeklyMenuCal / 7) : 1100;
+
+          const now = Date.now();
+          const pkgStartDate = currentUser.startDate ? new Date(currentUser.startDate) : null;
+          let earliestOrderTimestamp = null;
+          if (typeof orders !== "undefined" && Array.isArray(orders)) {
+            const userPackageOrders = orders.filter(o => o.phone === currentUser.phone && o.isPackageOrder && o.status === "completed");
+            if (userPackageOrders.length > 0) {
+              const timestamps = userPackageOrders.map(o => new Date(o.timestamp).getTime());
+              earliestOrderTimestamp = new Date(Math.min(...timestamps));
+            }
+          }
+          const startDate = pkgStartDate || earliestOrderTimestamp || new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+          const defaultDemoBases = {
+            'bar-t2': 700,
+            'bar-t3': 900,
+            'bar-t4': 1200,
+            'bar-t5': 1200,
+            'bar-t6': 1000,
+            'bar-t7': 0,
+            'bar-cn': 0
+          };
+          const dayIdsByGetDay = ['bar-cn', 'bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7'];
+
+          let totalKcalFromStart = 0;
+          let totalPassedDays = 0;
+
+          const tempDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+          const todayDate = new Date();
+          todayDate.setHours(23, 59, 59, 999); // ensure today is fully covered
+
+          while (tempDate.getTime() <= todayDate.getTime()) {
+            totalPassedDays++;
+            const dayOfWeekIndex = tempDate.getDay();
+            const dayId = dayIdsByGetDay[dayOfWeekIndex];
+
+            let dayBase = 0;
+            let orderOnThisDay = null;
+            if (typeof orders !== "undefined" && Array.isArray(orders)) {
+              orderOnThisDay = orders.find(o => 
+                o.phone === currentUser.phone && 
+                o.isPackageOrder && 
+                o.status === "completed" &&
+                new Date(o.timestamp).toDateString() === tempDate.toDateString()
+              );
+            }
+
+            if (orderOnThisDay) {
+              dayBase = getOrderKcal(orderOnThisDay);
+            } else {
+              dayBase = defaultDemoBases[dayId] || 0;
+            }
+
+            totalKcalFromStart += dayBase;
+
+            if (isSameCalendarWeek(tempDate.getTime(), now)) {
+              if (window.extraFoodsData && window.extraFoodsData[dayId]) {
+                window.extraFoodsData[dayId].forEach(item => {
+                  totalKcalFromStart += (item.kcal || 0);
+                });
+              }
+            }
+
+            tempDate.setDate(tempDate.getDate() + 1);
+          }
+
+          if (totalPassedDays === 0) totalPassedDays = 1;
+          const avgActualDailyCal = Math.round(totalKcalFromStart / totalPassedDays);
+
+          const totalDaysOfPackage = duration * 7;
+          const remainingDays = Math.max(0, totalDaysOfPackage - totalPassedDays);
+          const totalProjectedKcal = totalKcalFromStart + (remainingDays * targetCal);
+          const totalExpendedOverDuration = totalDaysOfPackage * tdee;
+
+          const netCalDiff = totalProjectedKcal - totalExpendedOverDuration;
+          const netWeightChange = netCalDiff / 7700; // negative means loss, positive means gain
+
+          let predictedWeight = weight + netWeightChange;
+          if (predictedWeight < 35) {
+            predictedWeight = 35;
+          }
+
+          let percentage = 0;
+          let weightChangeStr = "";
+
+          if (goal === "loss") {
+            const achievedLoss = -netWeightChange; // positive if lost weight
+            const targetLoss = weight - targetWeight;
+            if (targetLoss > 0) {
+              percentage = Math.min(100, Math.max(0, Math.round((achievedLoss / targetLoss) * 100)));
+            } else {
+              percentage = achievedLoss > 0 ? 100 : 0;
+            }
+            weightChangeStr = netWeightChange <= 0 
+              ? `giảm được ${Math.abs(netWeightChange).toFixed(1)}kg` 
+              : `tăng ${netWeightChange.toFixed(1)}kg (dư calo)`;
+          } else if (goal === "gain") {
+            const achievedGain = netWeightChange; // positive if gained weight
+            const targetGain = targetWeight - weight;
+            if (targetGain > 0) {
+              percentage = Math.min(100, Math.max(0, Math.round((achievedGain / targetGain) * 100)));
+            } else {
+              percentage = achievedGain > 0 ? 100 : 0;
+            }
+            weightChangeStr = netWeightChange >= 0 
+              ? `tăng được ${netWeightChange.toFixed(1)}kg` 
+              : `giảm ${Math.abs(netWeightChange).toFixed(1)}kg (thâm hụt)`;
+          } else {
+            percentage = 100 - Math.min(100, Math.round((Math.abs(avgActualDailyCal - targetCal) / targetCal) * 100));
+            weightChangeStr = Math.abs(netWeightChange) < 0.5 
+              ? "giữ cân ổn định" 
+              : (netWeightChange >= 0 ? `tăng nhẹ ${netWeightChange.toFixed(1)}kg` : `giảm nhẹ ${Math.abs(netWeightChange).toFixed(1)}kg`);
+          }
+
+          let encouragement = "";
+          let advice = "";
+
+          const prompt = `Bạn là chuyên gia dinh dưỡng Nuri, đại diện cho Nuri Kitchen. Hãy viết báo cáo tổng kết hành trình ăn uống lành mạnh bằng Tiếng Việt cho khách hàng ${currentUser.name}:
+- Tuổi: ${age}, Giới tính: ${gender === "male" ? "Nam" : "Nữ"}, Chiều cao: ${height}cm.
+- Cân nặng hiện tại: ${weight}kg, Cân nặng mục tiêu: ${targetWeight}kg, Mục tiêu: ${goal === "loss" ? "Giảm cân" : goal === "gain" ? "Tăng cân" : goal === "recomp" ? "Tăng cơ giảm mỡ" : "Duy trì vóc dáng"}.
+- Kcal tiêu thụ thực tế trung bình hàng ngày: ${avgActualDailyCal} kcal (TDEE: ${tdee} kcal, Kcal mục tiêu: ${targetCal} kcal, Kcal thực đơn gói trung bình: ${avgPlannedDailyCal} kcal).
+- Kết quả dự đoán: Cân nặng dự kiến sau ${duration} tuần là ${predictedWeight.toFixed(1)}kg (${weightChangeStr}), đạt ${percentage}% mục tiêu vóc dáng.
+
+Hãy tạo ra:
+1. Một câu khen ngợi hoặc động viên chân thành, ấm áp (1-2 câu).
+2. Lời tư vấn dinh dưỡng cá nhân sâu sắc, dễ hiểu (2-3 câu). Đánh giá trực tiếp mối tương quan giữa lượng kcal thực tế tiêu thụ (${avgActualDailyCal} kcal) với kcal mục tiêu (${targetCal} kcal), tầm quan trọng của thực đơn gói Nuri Kitchen đang cung cấp và đưa ra giải pháp cụ thể giúp khách hàng hoàn thành mục tiêu.
+
+Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hiệu markdown \`\`\`json) với cấu trúc:
+{
+  "encouragement": "câu khen ngợi/động viên",
+  "advice": "lời tư vấn dinh dưỡng cá nhân"
+}`;
+
+          try {
+            const aiText = await fetchGeminiAPI(prompt, true);
+            let cleaned = aiText ? aiText.trim() : "";
+            if (cleaned.startsWith("```json")) {
+              cleaned = cleaned.substring(7);
+            }
+            if (cleaned.endsWith("```")) {
+              cleaned = cleaned.substring(0, cleaned.length - 3);
+            }
+            const parsed = JSON.parse(cleaned.trim());
+            encouragement = parsed.encouragement || "";
+            advice = parsed.advice || "";
+          } catch (err) {
+            const fallback = getFallbackWrapupAdvice(goal, weight, targetWeight, avgActualDailyCal, targetCal, tdee, predictedWeight, percentage);
+            encouragement = fallback.encouragement;
+            advice = fallback.advice;
+          }
+
+          if (!encouragement || !advice) {
+            const fallback = getFallbackWrapupAdvice(goal, weight, targetWeight, avgActualDailyCal, targetCal, tdee, predictedWeight, percentage);
+            encouragement = encouragement || fallback.encouragement;
+            advice = advice || fallback.advice;
+          }
+
+          let goalText = "Duy trì vóc dáng";
+          let goalIcon = '<i class="fa-solid fa-heart-pulse text-emerald-400"></i>';
+          if (goal === "loss") {
+            goalText = "Giảm cân";
+            goalIcon = '<i class="fa-solid fa-weight-scale text-rose-400"></i>';
+          } else if (goal === "gain") {
+            goalText = "Tăng cân";
+            goalIcon = '<i class="fa-solid fa-circle-arrow-up text-blue-400"></i>';
+          } else if (goal === "recomp") {
+            goalText = "Tăng cơ giảm mỡ";
+            goalIcon = '<i class="fa-solid fa-dumbbell text-amber-400"></i>';
+          }
+
+          return {
+            weight,
+            predictedWeight,
+            weightChangeStr,
+            percentage,
+            encouragement,
+            advice,
+            goalText,
+            goalIcon,
+            tdee,
+            targetCal,
+            avgPlannedDailyCal,
+            avgActualDailyCal,
+            duration
+          };
+        })();
+
+        // Call the mascot analyzing overlay passing the promise
+        showAnalyzingPopup(async () => {
+          try {
+            const result = await analysisPromise;
+
+            const contentBody = document.getElementById("wrapup-modal-body-content");
+            if (contentBody) {
+              contentBody.innerHTML = `
+                <div class="text-center mb-6">
+                  <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-tr from-amber-400 to-yellow-500 rounded-full shadow-lg mb-3 ring-4 ring-amber-500/30 animate-bounce">
+                    <i class="fa-solid fa-medal text-3xl text-emerald-950"></i>
+                  </div>
+                  <h2 class="text-2xl font-extrabold text-white leading-tight">Báo Cáo Tổng Kết</h2>
+                  <p class="text-emerald-300 text-xs mt-1">Phân tích chuyên sâu từ Nuri Kitchen</p>
+                </div>
+
+                <!-- Profile Info Cards -->
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                  <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-2.5">
+                    <span class="text-[10px] text-emerald-300 block uppercase font-bold tracking-wider mb-0.5">Mục tiêu</span>
+                    <span class="text-xs font-bold flex items-center gap-1.5">${result.goalIcon} ${result.goalText}</span>
+                  </div>
+                  <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-2.5">
+                    <span class="text-[10px] text-emerald-300 block uppercase font-bold tracking-wider mb-0.5">Cân nặng gốc</span>
+                    <span class="text-xs font-bold"><i class="fa-solid fa-user-tag text-emerald-400 mr-1"></i> ${result.weight} kg</span>
+                  </div>
+                </div>
+
+                <!-- Metrics Comparison Table -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 mb-4">
+                  <h3 class="text-xs font-bold text-emerald-200 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-bar"></i> Chỉ số Calorie hàng ngày
+                  </h3>
+                  <div class="space-y-2.5 text-xs">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-blue-400"></span> Tiêu hao cơ thể (TDEE)
+                      </span>
+                      <span class="font-bold text-slate-100">${result.tdee} kcal</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Calo mục tiêu phân tích
+                      </span>
+                      <span class="font-bold text-emerald-300">${result.targetCal} kcal</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-white/5 pt-2">
+                      <span class="text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span> Thực đơn gói (Kế hoạch)
+                      </span>
+                      <span class="font-bold text-amber-300">${result.avgPlannedDailyCal} kcal</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span> Calo thực tế (Gói + Tự do)
+                      </span>
+                      <span class="font-bold text-rose-300">${result.avgActualDailyCal} kcal</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Weight Forecast and Goal Badge -->
+                <div class="bg-gradient-to-r from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 rounded-2xl p-4 mb-4 text-center">
+                  <p class="text-[10px] text-emerald-300 uppercase tracking-widest font-black mb-1">Dự báo cân nặng tương lai</p>
+                  <div class="text-lg font-black text-white mb-2">
+                    Sau ${result.duration} tuần: <span class="text-2xl text-yellow-300">${result.predictedWeight.toFixed(1)}</span> kg 
+                    <span class="text-xs font-normal block text-emerald-200 mt-0.5">(${result.weightChangeStr})</span>
+                  </div>
+                  
+                  <!-- Progress bar -->
+                  <div class="mt-3">
+                    <div class="flex justify-between text-[10px] text-emerald-300 font-semibold mb-1">
+                      <span>Tiến độ mục tiêu</span>
+                      <span class="font-bold text-yellow-300">${result.percentage}% đạt được</span>
+                    </div>
+                    <div class="w-full bg-emerald-950 rounded-full h-2.5 overflow-hidden border border-emerald-800">
+                      <div class="bg-gradient-to-r from-amber-400 to-yellow-500 h-full rounded-full shadow-[0_0_8px_rgba(251,191,36,0.5)] transition-all duration-1000" style="width: ${result.percentage}%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Encouragement & Advice cards -->
+                <div class="space-y-3 mb-6 text-left">
+                  <div class="bg-emerald-900/30 border border-emerald-800/40 rounded-xl p-3">
+                    <p class="text-xs italic text-yellow-100 leading-relaxed font-medium text-center">
+                      <i class="fa-solid fa-quote-left text-amber-400 mr-1 opacity-60"></i>
+                      ${result.encouragement}
+                      <i class="fa-solid fa-quote-right text-amber-400 ml-1 opacity-60"></i>
+                    </p>
+                  </div>
+                  <div class="bg-teal-900/30 border border-teal-800/40 rounded-xl p-3.5">
+                    <p class="text-[11px] uppercase tracking-wider text-teal-300 font-bold mb-1 flex items-center gap-1.5">
+                      <i class="fa-solid fa-user-doctor"></i> Tư vấn từ Nuri
+                    </p>
+                    <p class="text-xs text-slate-200 leading-relaxed font-medium">
+                      ${result.advice}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col gap-2">
+                  <button onclick="closeWrapupModal(); triggerConfetti();" class="w-full bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-500 hover:to-yellow-600 text-[#043F2E] font-black py-3 rounded-xl transition-all shadow-[0_4px_15px_rgba(251,191,36,0.3)] hover:scale-[1.02] active:scale-[0.98]">
+                    Tiếp tục duy trì 🔥
+                  </button>
+                  <button onclick="closeWrapupModal()" class="w-full text-emerald-400 hover:text-emerald-300 text-xs font-bold py-1.5 transition-colors">
+                    Đóng báo cáo
+                  </button>
+                </div>
+              `;
+            }
+
+            // Show the modal
+            modal.classList.remove("pointer-events-none");
+            modal.classList.remove("opacity-0");
+            modal.classList.add("opacity-100");
+            content.classList.remove("scale-95");
+            content.classList.add("scale-100");
+          } catch (err) {
+            console.error("Error executing report opening:", err);
+            showToast("Có lỗi xảy ra khi tải báo cáo!", "error");
+          }
+        }, "Nuri đang phân tích số liệu hành trình...", analysisPromise);
+      }
+
+      window.openWrapupModal = openWrapupModal;
+
+      function closeWrapupModal() {
+        const modal = document.getElementById("wrapup-modal");
+        const content = document.getElementById("wrapup-modal-content");
+        if (modal && content) {
+          modal.classList.remove("opacity-100");
+          modal.classList.add("opacity-0");
+          content.classList.remove("scale-100");
+          content.classList.add("scale-95");
+          
+          setTimeout(() => {
+            modal.classList.add("pointer-events-none");
+          }, 300);
+        }
+      }
+      window.closeWrapupModal = closeWrapupModal;
+
+      function copyShareContent() {
+        const textarea = document.getElementById("share-text-content");
+        if (!textarea) return;
+        
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // For mobile devices
+        
+        try {
+          navigator.clipboard.writeText(textarea.value).then(() => {
+            showCopySuccessFeedback();
+          }).catch(() => {
+            // Fallback for some browsers / iframe environment
+            document.execCommand("copy");
+            showCopySuccessFeedback();
+          });
+        } catch (err) {
+          // Fallback
+          document.execCommand("copy");
+          showCopySuccessFeedback();
+        }
+      }
+
+      function showCopySuccessFeedback() {
+        showToast("Đã sao chép nội dung chia sẻ thành công!", "success");
+        const btnText = document.getElementById("copy-btn-text");
+        if (btnText) {
+          const originalText = btnText.innerText;
+          btnText.innerText = "Đã sao chép!";
+          setTimeout(() => {
+            btnText.innerText = originalText;
+          }, 2000);
+        }
+      }
+
+      function shareSocial(platform) {
+        const textarea = document.getElementById("share-text-content");
+        const content = textarea ? textarea.value : "";
+        
+        // Auto copy content to clipboard so user can paste it on the social platform easily
+        try {
+          navigator.clipboard.writeText(content).catch(() => {});
+        } catch (e) {}
+
+        const appUrl = window.location.href;
+        let shareUrl = "";
+
+        switch (platform) {
+          case "facebook":
+            // Facebook share dialog
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(appUrl)}&quote=${encodeURIComponent(content)}`;
+            break;
+          case "twitter":
+            // Twitter intent tweet (supports pre-filled text!)
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(content)}&url=${encodeURIComponent(appUrl)}`;
+            break;
+          case "zalo":
+            // Zalo sharing link
+            shareUrl = `https://sp.zalo.me/share_to_zalo?url=${encodeURIComponent(appUrl)}`;
+            break;
+        }
+
+        if (shareUrl) {
+          // Open share link in a new window/tab
+          window.open(shareUrl, "_blank", "noopener,noreferrer");
+          showToast(`Đang chuyển hướng sang ${platform === "twitter" ? "X/Twitter" : platform.toUpperCase()}...`, "success");
+          
+          // Reward points if under weekly limit
+          if (currentUser) {
+            const now = Date.now();
+            currentUser.shareHistory = (currentUser.shareHistory || []).filter(ts => isSameCalendarWeek(ts, now));
+            
+            if (currentUser.shareHistory.length < 2) {
+              currentUser.shareHistory.push(now);
+              currentUser.points = (currentUser.points || 0) + 20;
+              currentUser.rank = getRankFromPoints(currentUser.points);
+
+              // Update in global customers arrays
+              let mainUser = purchasedCustomers.find((c) => c.phone === currentUser.phone);
+              if (mainUser) {
+                mainUser.points = currentUser.points;
+                mainUser.rank = currentUser.rank;
+                mainUser.shareHistory = currentUser.shareHistory;
+              } else {
+                let potUser = potentialCustomers.find((c) => c.phone === currentUser.phone);
+                if (potUser) {
+                  potUser.points = currentUser.points;
+                  potUser.rank = currentUser.rank;
+                  potUser.shareHistory = currentUser.shareHistory;
+                }
+              }
+
+              // Update local storage
+              localStorage.setItem("nutriadmin_current_user", JSON.stringify(currentUser));
+              
+              // Sync up customers data
+              localStorage.setItem("nutriadmin_purchased_customers", JSON.stringify(purchasedCustomers));
+              localStorage.setItem("nutriadmin_potential_customers", JSON.stringify(potentialCustomers));
+
+              // Sync to server
+              if (typeof syncStateToServer === "function") syncStateToServer();
+
+              // Refresh modal badge, profile values, and celebrate
+              updateShareRewardBadge();
+              renderCustomerProfile();
+              triggerConfetti();
+
+              setTimeout(() => {
+                showToast(`Khoe thành công! Bạn nhận được +20 điểm xếp hạng (Lần ${currentUser.shareHistory.length}/2 tuần này)`, "success");
+              }, 1200);
+            } else {
+              setTimeout(() => {
+                showToast("Bạn đã đạt giới hạn nhận điểm tuần này (tối đa 2 lần/tuần).", "info");
+              }, 1200);
+            }
+          }
+        }
+      }
+
+      function renderCustomerProfile() { try {
         if (!currentUser) return;
 
         // Re-fetch current user from main data to get latest updates
@@ -14777,6 +15939,13 @@
         const mascotTitle = document.getElementById("mascot-schedule-title");
         if (mascotTitle)
           mascotTitle.innerText = "Lịch trình hôm nay của " + currentUser.name;
+
+        // Update streak display
+        const streakDays = getStreakDays();
+        const streakTitleEl = document.getElementById("profile-streak-title");
+        if (streakTitleEl) {
+          streakTitleEl.innerText = `Chuỗi duy trì: ${streakDays} ngày`;
+        }
 
         if (currentUser.avatar) {
           document.getElementById("profile-avatar-img").src =
@@ -14845,6 +16014,94 @@
           `${progress}%`;
         document.getElementById("rank-hint-text").innerText = hintText;
 
+        // Mascot Evolution Detection
+        if (typeof window.lastKnownRank !== "undefined" && window.lastKnownRank !== rank) {
+          const ranksOrder = ["Hạt mầm", "Mầm cây", "Cây non", "Cây sự sống"];
+          const oldIdx = ranksOrder.indexOf(window.lastKnownRank);
+          const newIdx = ranksOrder.indexOf(rank);
+          if (newIdx > oldIdx) {
+            if (typeof triggerMascotEvolution === "function") {
+              triggerMascotEvolution(window.lastKnownRank, rank);
+            }
+          }
+        }
+        window.lastKnownRank = rank;
+
+        // Render Daily Quests List
+        const questsContainer = document.getElementById("daily-quests-list");
+        if (questsContainer) {
+          const todayStr = new Date().toISOString().split("T")[0];
+          const hasCheckedIn = currentUser.lastCheckInDate === todayStr;
+          
+          let hasLoggedWeightThisWeek = false;
+          if (currentUser.lastBmiUpdateDate) {
+            hasLoggedWeightThisWeek = isSameCalendarWeek(new Date(currentUser.lastBmiUpdateDate).getTime(), Date.now());
+          }
+
+          let hasSharedThisWeek = false;
+          const nowTs = Date.now();
+          const filteredShareHistory = (currentUser.shareHistory || []).filter(ts => isSameCalendarWeek(ts, nowTs));
+          if (filteredShareHistory.length > 0) {
+            hasSharedThisWeek = true;
+          }
+
+          questsContainer.innerHTML = `
+            <!-- Quest 1 -->
+            <div class="flex items-center justify-between p-3 rounded-2xl transition-all ${hasCheckedIn ? 'bg-slate-50 border border-slate-100 opacity-75' : 'bg-emerald-50/25 border border-emerald-100/50 hover:bg-emerald-50/40'}">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center ${hasCheckedIn ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'}">
+                  <i class="fa-solid ${hasCheckedIn ? 'fa-check' : 'fa-calendar-check'} text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold ${hasCheckedIn ? 'text-slate-400 line-through' : 'text-slate-700'}">Điểm danh hôm nay</p>
+                  <p class="text-[10px] text-emerald-600 font-bold">+10 điểm</p>
+                </div>
+              </div>
+              ${hasCheckedIn ? `
+                <span class="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-lg">Đã xong</span>
+              ` : `
+                <button onclick="triggerQuestCheckIn()" class="text-[10px] font-bold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-sm transition-all hover:scale-105 active:scale-95">Điểm danh</button>
+              `}
+            </div>
+
+            <!-- Quest 2 -->
+            <div class="flex items-center justify-between p-3 rounded-2xl transition-all ${hasLoggedWeightThisWeek ? 'bg-slate-50 border border-slate-100 opacity-75' : 'bg-emerald-50/25 border border-emerald-100/50 hover:bg-emerald-50/40'}">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center ${hasLoggedWeightThisWeek ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'}">
+                  <i class="fa-solid ${hasLoggedWeightThisWeek ? 'fa-check' : 'fa-weight-scale'} text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold ${hasLoggedWeightThisWeek ? 'text-slate-400 line-through' : 'text-slate-700'}">Ghi nhận cân nặng tuần này</p>
+                  <p class="text-[10px] text-emerald-600 font-bold">+5 điểm</p>
+                </div>
+              </div>
+              ${hasLoggedWeightThisWeek ? `
+                <span class="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-lg">Đã xong</span>
+              ` : `
+                <button onclick="triggerQuestWeight()" class="text-[10px] font-bold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-sm transition-all hover:scale-105 active:scale-95">Cập nhật</button>
+              `}
+            </div>
+
+            <!-- Quest 3 -->
+            <div class="flex items-center justify-between p-3 rounded-2xl transition-all ${hasSharedThisWeek ? 'bg-slate-50 border border-slate-100 opacity-75' : 'bg-emerald-50/25 border border-emerald-100/50 hover:bg-emerald-50/40'}">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center ${hasSharedThisWeek ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'}">
+                  <i class="fa-solid ${hasSharedThisWeek ? 'fa-check' : 'fa-share-nodes'} text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold ${hasSharedThisWeek ? 'text-slate-400 line-through' : 'text-slate-700'}">Chia sẻ thành tích tuần này</p>
+                  <p class="text-[10px] text-emerald-600 font-bold">+20 điểm</p>
+                </div>
+              </div>
+              ${hasSharedThisWeek ? `
+                <span class="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-lg">Đã xong</span>
+              ` : `
+                <button onclick="triggerQuestShare()" class="text-[10px] font-bold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-sm transition-all hover:scale-105 active:scale-95">Chia sẻ</button>
+              `}
+            </div>
+          `;
+        }
+
         // Daily tip
         const tips = [
           "Uống 1 cốc nước ấm vào buổi sáng để thanh lọc cơ thể.",
@@ -14897,7 +16154,7 @@
             "Chưa có dữ liệu";
           document.getElementById("profile-bmi-status").className =
             "px-2 py-1 rounded-md bg-slate-200 text-slate-600 text-xs font-bold";
-        }
+        } } catch (e) { console.error("renderCustomerProfile error:", e); }
 
         // Subscription
         const subContainer = document.getElementById("profile-subscription");
@@ -14993,19 +16250,33 @@
 
             if (diffDays <= 2) {
               warningHtml = `
-                <div class="flex-1 md:max-w-xs bg-rose-50 border border-rose-200 rounded-xl p-3 flex items-center gap-3 animate-pulse shadow-sm self-stretch">
-                  <div class="w-24 h-24 shrink-0 flex items-center justify-center bg-white rounded-lg border border-rose-100 p-0.5">
-                    <div id="profile-warning-mascot-svg" class="w-full h-full flex items-center justify-center [&_svg]:w-24 [&_svg]:h-24 [&_svg]:drop-shadow-none"></div>
-                    <img id="profile-warning-mascot-img" class="w-full h-full object-contain hidden" alt="Mascot Ngạc Nhiên" />
+                <div class="flex-1 md:max-w-xs bg-rose-50 border border-rose-200 rounded-xl p-3 flex flex-col gap-3 animate-pulse shadow-sm self-stretch">
+                  <div class="flex items-center gap-3">
+                    <div class="w-24 h-24 shrink-0 flex items-center justify-center bg-white rounded-lg border border-rose-100 p-0.5">
+                      <div id="profile-warning-mascot-svg" class="w-full h-full flex items-center justify-center [&_svg]:w-24 [&_svg]:h-24 [&_svg]:drop-shadow-none"></div>
+                      <img id="profile-warning-mascot-img" class="w-full h-full object-contain hidden" alt="Mascot Ngạc Nhiên" />
+                    </div>
+                    <div class="flex-1">
+                      <p class="text-[10px] text-rose-700 font-bold mb-0.5 flex items-center gap-1 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Nhắc nhở gia hạn
+                      </p>
+                      <p class="text-[11px] text-rose-600 font-semibold leading-normal">
+                        Bạn cần đăng ký gia hạn gói trước ngày <span class="underline text-rose-700 font-bold">${eStr}</span> để tiếp tục.
+                      </p>
+                    </div>
                   </div>
-                  <div class="flex-1">
-                    <p class="text-[10px] text-rose-700 font-bold mb-0.5 flex items-center gap-1 uppercase tracking-wider">
-                      <i class="fa-solid fa-triangle-exclamation"></i> Nhắc nhở gia hạn
-                    </p>
-                    <p class="text-[11px] text-rose-600 font-semibold leading-normal">
-                      Bạn cần đăng ký gia hạn gói trước ngày <span class="underline text-rose-700 font-bold">${eStr}</span> để tiếp tục.
-                    </p>
-                  </div>
+                  <button onclick="openWrapupModal()" class="w-full relative z-10 bg-white hover:bg-slate-50 text-slate-600 font-bold py-1.5 rounded-lg text-xs border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-medal text-amber-500"></i> Xem Báo cáo Tổng kết
+                  </button>
+                </div>
+              `;
+            } else {
+              // Add a button for Wrapup Report even if not expiring
+              warningHtml = `
+                <div class="flex-1 flex flex-col justify-center">
+                  <button onclick="openWrapupModal()" class="w-full max-w-[200px] ml-auto relative z-10 bg-white hover:bg-slate-50 text-slate-600 font-bold py-2 rounded-lg text-xs border border-slate-200 transition-colors flex items-center justify-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-medal text-amber-500"></i> Báo cáo Tổng kết
+                  </button>
                 </div>
               `;
             }
@@ -15154,35 +16425,81 @@
                     `;
         }
 
-        // Order History
-        const historyContainer = document.getElementById(
-          "profile-order-history",
-        );
-        const myOrders = orders.filter(
-          (o) =>
-            o.phone === currentUser.phone || o.deviceId === customerDeviceId,
-        ); // Match by phone or deviceId
+        // Meal Calendar (Timeline)
+        const timelineContainer = document.getElementById("meal-timeline-container");
+        if (timelineContainer) {
+          const days = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'];
+          const todayIndex = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1; // 0-6 (Mon-Sun)
+          
+          let timelineHtml = days.map((day, idx) => {
+            const isPast = idx < todayIndex;
+            const isToday = idx === todayIndex;
+            
+            // Dummy dishes for timeline
+            const randomDish = dishes[idx % dishes.length];
+            const isFavorite = localStorage.getItem(`fav_${randomDish.id}`) === "true";
+            const userRating = localStorage.getItem(`rating_${randomDish.id}`) || 0;
+            
+            let statusDot = isPast ? '<div class="absolute -left-[5px] top-4 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white"></div>' : 
+                            (isToday ? '<div class="absolute -left-[5px] top-4 w-3 h-3 rounded-full bg-amber-500 border-2 border-white animate-ping"></div><div class="absolute -left-[5px] top-4 w-3 h-3 rounded-full bg-amber-500 border-2 border-white"></div>' : 
+                            '<div class="absolute -left-[5px] top-4 w-3 h-3 rounded-full bg-slate-300 border-2 border-white"></div>');
+                            
+            let contentHtml = '';
+            if (isPast) {
+               contentHtml = `
+                 <div class="flex items-center justify-between">
+                   <div>
+                     <p class="text-xs font-bold text-slate-500 line-through">${randomDish.name}</p>
+                     <p class="text-[10px] text-emerald-500 font-semibold"><i class="fa-solid fa-check mr-1"></i> Đã hoàn thành</p>
+                   </div>
+                   <div class="flex items-center gap-2">
+                     ${userRating > 0 ? `<div class="text-amber-400 text-xs">${'★'.repeat(userRating)}</div>` : `<button onclick="openRatingModal(${randomDish.id})" class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded hover:bg-slate-200">Đánh giá</button>`}
+                   </div>
+                 </div>
+               `;
+            } else if (isToday) {
+               contentHtml = `
+                 <div class="flex bg-amber-50/50 border border-amber-100 rounded-lg p-2 gap-3 items-center">
+                   <img src="${randomDish.image}" class="w-12 h-12 object-cover rounded-md shadow-sm">
+                   <div class="flex-1">
+                     <div class="flex justify-between items-start">
+                       <p class="text-xs font-bold text-amber-700">${randomDish.name}</p>
+                       <button onclick="toggleFavorite(${randomDish.id})" class="text-rose-500 hover:scale-110 transition-transform">
+                         <i class="${isFavorite ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                       </button>
+                     </div>
+                     <p class="text-[10px] text-slate-500">${randomDish.calo} kcal</p>
+                   </div>
+                 </div>
+               `;
+            } else {
+               contentHtml = `
+                 <div class="flex gap-3 items-center opacity-60">
+                   <img src="${randomDish.image}" class="w-10 h-10 object-cover rounded-md grayscale">
+                   <div class="flex-1">
+                     <p class="text-xs font-bold text-slate-600">${randomDish.name}</p>
+                     <p class="text-[10px] text-slate-400">Dự kiến giao: 11:00 - 12:00</p>
+                   </div>
+                 </div>
+               `;
+            }
 
-        if (myOrders.length === 0) {
-          historyContainer.innerHTML = `<p class="text-center text-slate-500 text-sm py-4">Chưa có đơn hàng nào.</p>`;
-        } else {
-          historyContainer.innerHTML = myOrders
-            .sort((a, b) => b.timestamp - a.timestamp)
-            .map(
-              (o) => `
-                        <div class="border border-slate-100 rounded-xl p-3 bg-white">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm text-slate-800">${o.id}</span>
-                                <span class="text-xs font-semibold px-2 py-1 rounded-md ${o.status === "completed" ? "bg-emerald-50 text-emerald-600" : "bg-blue-50 text-blue-600"}">${o.status === "completed" ? "Đã giao" : "Đang xử lý"}</span>
-                            </div>
-                            <div class="text-xs text-slate-500 flex justify-between">
-                                <span>${new Date(o.timestamp).toLocaleDateString("vi-VN")}</span>
-                                <span class="font-bold text-slate-700">${o.total.toLocaleString()}đ</span>
-                            </div>
-                        </div>
-                    `,
-            )
-            .join("");
+            return `
+              <div class="relative pl-6">
+                ${statusDot}
+                <div class="mb-1">
+                  <span class="text-xs font-bold ${isToday ? 'text-amber-600' : (isPast ? 'text-slate-400' : 'text-slate-600')}">${day} ${isToday ? '(Hôm nay)' : ''}</span>
+                </div>
+                ${contentHtml}
+              </div>
+            `;
+          }).join("");
+          
+          timelineContainer.innerHTML = timelineHtml;
+        }
+
+        if (typeof updateNutritionDashboard === "function") {
+          updateNutritionDashboard();
         }
 
         if (typeof updatePersonalMascot === "function") {
@@ -15281,7 +16598,7 @@
           clearInterval(window.personalMascotInterval);
 
         // ALWAYS prefer activeMascotId if set, so user's manual selection (e.g. ngac_nhien) takes effect
-        const currentSlotId = activeMascotId || currentSlot.id;
+        const currentSlotId = currentSlot.id;
         const currentSlotObj = { id: currentSlotId, label: currentSlot.label };
 
         function setupMascot(imgElement, svgElement, slot) {
@@ -16460,6 +17777,13 @@
       }
 
       function switchView(viewName) {
+        if (viewName !== 'consulting' && window.isUpdatingProfile) {
+            window.isUpdatingProfile = false;
+            let rec = document.getElementById('menu-recommendation-container');
+            if (rec && rec.parentElement) rec.parentElement.style.display = 'block';
+            let saveBtn = document.getElementById('save-profile-action');
+            if (saveBtn) saveBtn.classList.add('hidden');
+        }
         if (viewName === "landing") viewName = "consulting";
         const urlParams = new URLSearchParams(window.location.search);
         const isUrlLandingMode = urlParams.get("mode") === "landing";
@@ -16640,6 +17964,9 @@
         }
         if (viewName === "customer-profile") {
           renderCustomerProfile();
+          if (typeof updateNutritionDashboard === "function") {
+            updateNutritionDashboard(true);
+          }
         }
         if (viewName === "messages") {
           if (currentMessagesTab === "messages") {
@@ -19238,9 +20565,13 @@
       let analyzingInterval = null;
       let analyzingFrameIndex = 0;
 
-      function showAnalyzingPopup(callback) {
+      function showAnalyzingPopup(callback, text = "Đang phân tích dữ liệu", customPromise = null) {
         const overlay = document.getElementById("mascot-analyzing-overlay");
         const img = document.getElementById("mascot-analyzing-img");
+        const textSpan = document.getElementById("mascot-analyzing-text");
+        if (textSpan) {
+          textSpan.innerText = text;
+        }
 
         // Show overlay
         overlay.classList.remove("hidden");
@@ -19289,7 +20620,7 @@
           }
         }, 1000 / fps);
 
-        setTimeout(() => {
+        const closePopup = () => {
           if (analyzingInterval) {
             clearInterval(analyzingInterval);
             analyzingInterval = null;
@@ -19302,7 +20633,19 @@
             img.src = "";
             if (typeof callback === "function") callback();
           }, 300);
-        }, 2000);
+        };
+
+        if (customPromise) {
+          const delayPromise = new Promise(resolve => setTimeout(resolve, 2000));
+          Promise.all([customPromise, delayPromise]).then(() => {
+            closePopup();
+          }).catch((err) => {
+            console.error("Popup promise error:", err);
+            closePopup();
+          });
+        } else {
+          setTimeout(closePopup, 2000);
+        }
       }
 
       function handleAnalysisSubmit(e) {
@@ -19435,6 +20778,82 @@
           pRatio = 0.3;
           cRatio = 0.4;
           fRatio = 0.3;
+        }
+
+        window.lastAnalysisResult = {
+          height: height,
+          weight: weight,
+          bmi: bmi,
+          bmiStatus: bmiStatus,
+          bmiColorClass: bmiColorClass,
+          targetCal: Math.round(targetCal),
+          protein: Math.round((targetCal * pRatio) / 4),
+          carbs: Math.round((targetCal * cRatio) / 4),
+          fat: Math.round((targetCal * fRatio) / 9),
+          goal: goal,
+          targetWeight: tw || null,
+          duration: wks || null,
+          tdee: tdee,
+          gender: gender,
+          age: age
+        };
+
+        if (window.isUpdatingProfile && typeof currentUser !== 'undefined' && currentUser) {
+          currentUser.gender = gender;
+          currentUser.age = age;
+          currentUser.height = height;
+          currentUser.weight = weight;
+          currentUser.bmi = bmi;
+          currentUser.goal = goal;
+          currentUser.targetWeight = tw || null;
+          currentUser.duration = wks || null;
+          currentUser.targetCal = Math.round(targetCal);
+          currentUser.tdee = tdee;
+          currentUser.targetProtein = Math.round((targetCal * pRatio) / 4);
+          currentUser.targetCarbs = Math.round((targetCal * cRatio) / 4);
+          currentUser.targetFat = Math.round((targetCal * fRatio) / 9);
+          
+          localStorage.setItem("nutriadmin_current_user", JSON.stringify(currentUser));
+          
+          if (typeof potentialCustomers !== "undefined") {
+            const idx = potentialCustomers.findIndex(c => c.phone === currentUser.phone);
+            if (idx !== -1) {
+              potentialCustomers[idx].gender = gender;
+              potentialCustomers[idx].age = age;
+              potentialCustomers[idx].height = height;
+              potentialCustomers[idx].weight = weight;
+              potentialCustomers[idx].bmi = bmi;
+              potentialCustomers[idx].goal = goal;
+              potentialCustomers[idx].targetWeight = tw || null;
+              potentialCustomers[idx].duration = wks || null;
+              potentialCustomers[idx].targetCal = Math.round(targetCal);
+              potentialCustomers[idx].tdee = tdee;
+              potentialCustomers[idx].targetProtein = Math.round((targetCal * pRatio) / 4);
+              potentialCustomers[idx].targetCarbs = Math.round((targetCal * cRatio) / 4);
+              potentialCustomers[idx].targetFat = Math.round((targetCal * fRatio) / 9);
+              localStorage.setItem("nutriadmin_potential_customers", JSON.stringify(potentialCustomers));
+            }
+          }
+          if (typeof purchasedCustomers !== "undefined") {
+            const idx2 = purchasedCustomers.findIndex(c => c.phone === currentUser.phone);
+            if (idx2 !== -1) {
+              purchasedCustomers[idx2].gender = gender;
+              purchasedCustomers[idx2].age = age;
+              purchasedCustomers[idx2].height = height;
+              purchasedCustomers[idx2].weight = weight;
+              purchasedCustomers[idx2].bmi = bmi;
+              purchasedCustomers[idx2].goal = goal;
+              purchasedCustomers[idx2].targetWeight = tw || null;
+              purchasedCustomers[idx2].duration = wks || null;
+              purchasedCustomers[idx2].targetCal = Math.round(targetCal);
+              purchasedCustomers[idx2].tdee = tdee;
+              purchasedCustomers[idx2].targetProtein = Math.round((targetCal * pRatio) / 4);
+              purchasedCustomers[idx2].targetCarbs = Math.round((targetCal * cRatio) / 4);
+              purchasedCustomers[idx2].targetFat = Math.round((targetCal * fRatio) / 9);
+              localStorage.setItem("nutriadmin_purchased_customers", JSON.stringify(purchasedCustomers));
+            }
+          }
+          if (typeof syncStateToServer === "function") syncStateToServer();
         }
 
         const mealTarget = {
@@ -23263,6 +24682,15 @@
           renderShippers();
           renderPurchasedCustomers();
           updateBulkSelectionCount();
+
+          if (currentUser && o.phone === currentUser.phone) {
+            if (typeof updateNutritionDashboard === "function") {
+              updateNutritionDashboard();
+            }
+            if (typeof renderCustomerProfile === "function") {
+              renderCustomerProfile();
+            }
+          }
         }
       }
 
@@ -23328,6 +24756,21 @@
           renderOrdersAdmin();
           renderShippers();
           renderPurchasedCustomers();
+
+          if (currentUser) {
+            const hasCurrentUserOrder = checkboxes && Array.from(checkboxes).some((cb) => {
+              const o = orders.find((x) => x.id === cb.value);
+              return o && o.phone === currentUser.phone;
+            });
+            if (hasCurrentUserOrder) {
+              if (typeof updateNutritionDashboard === "function") {
+                updateNutritionDashboard();
+              }
+              if (typeof renderCustomerProfile === "function") {
+                renderCustomerProfile();
+              }
+            }
+          }
         } else {
           showToast("Các đơn hàng đã ở trạng thái này", "info");
         }
@@ -29554,6 +30997,32 @@
             extras = `<rect x="55" y="${70 + wY}" width="10" height="15" rx="2" fill="#93C5FD" opacity="0.8" />`;
             break;
 
+          
+          case "giai_tri":
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4.5" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M53 66 Q60 76 67 66" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const hpY = Math.sin(frame * 0.2) * 2;
+            extras = `
+              <path d="M25 55 C25 15, 95 15, 95 55" stroke="#F43F5E" stroke-width="5" fill="none" style="transform: translateY(${hpY}px)" />
+              <rect x="20" y="45" width="12" height="24" rx="6" fill="#F43F5E" style="transform: translateY(${hpY}px)" />
+              <rect x="88" y="45" width="12" height="24" rx="6" fill="#F43F5E" style="transform: translateY(${hpY}px)" />
+              <path d="M30 55 Q35 55 35 60" stroke="#FFF" stroke-width="2" fill="none" style="transform: translateY(${hpY}px)" />
+              <path d="M90 55 Q85 55 85 60" stroke="#FFF" stroke-width="2" fill="none" style="transform: translateY(${hpY}px)" />
+            `;
+            break;
+
+          case "giao_hang":
+            eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
+            mouth = `<path d="M53 66 Q60 76 67 66" stroke="#2DD4BF" stroke-width="3.5" fill="none" stroke-linecap="round" />`;
+            const boxY = Math.sin(frame * 0.3) * 3;
+            extras = `
+              <rect x="40" y="75" width="40" height="25" fill="#D97706" rx="2" style="transform: translateY(${boxY}px)" />
+              <path d="M40 75 L80 75 M60 75 L60 100" stroke="#FCD34D" stroke-width="2" style="transform: translateY(${boxY}px)" />
+              <path d="M40 75 L30 65 M80 75 L90 65" stroke="#D97706" stroke-width="4" stroke-linecap="round" style="transform: translateY(${boxY}px)" />
+            `;
+            break;
           default:
             eyeLeft = `<path d="M40 54 Q45 44 50 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
             eyeRight = `<path d="M70 54 Q75 44 80 54" stroke="#2DD4BF" stroke-width="4" fill="none" stroke-linecap="round" />`;
@@ -32744,5 +34213,904 @@
       }, 1000);
     </script>
 
-</body>
+
+    <!-- Share Achievement Modal -->
+    <div id="share-achievement-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] hidden items-end justify-center sm:items-center opacity-0 transition-opacity duration-300">
+      <div id="share-achievement-modal-content" class="bg-white dark:bg-slate-800 w-full sm:w-[460px] rounded-t-3xl sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300 shadow-xl border border-slate-100 dark:border-slate-700">
+        <div class="flex justify-between items-center mb-5">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🔥</span>
+            <div>
+              <h3 class="font-bold text-slate-800 dark:text-white text-lg">Khoe thành tích ngay!</h3>
+              <p class="text-xs text-slate-500 dark:text-emerald-400 font-medium">Lan tỏa cảm hứng ăn uống lành mạnh</p>
+            </div>
+          </div>
+          <button onclick="closeShareModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Text Preview Card -->
+          <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 relative pb-14">
+            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Nội dung chia sẻ</div>
+            <textarea id="share-text-content" rows="4" class="w-full bg-transparent border-0 p-0 text-sm text-slate-700 dark:text-slate-200 focus:ring-0 focus:outline-none resize-none leading-relaxed font-medium" spellcheck="false">Tôi đã hoàn thành 7 ngày ăn uống lành mạnh cùng Nuri Kitchen! Hành trình cải thiện sức khỏe tuyệt vời bắt đầu từ hôm nay. 🥗🔥 #NuriKitchen #AnLanhManh</textarea>
+            
+            <div class="absolute right-3 bottom-3">
+              <button onclick="copyShareContent()" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer">
+                <i class="fa-solid fa-copy"></i>
+                <span id="copy-btn-text">Sao chép</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Reward Notice -->
+          <div id="share-reward-badge" class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-3 flex items-start gap-2.5">
+            <span class="text-lg">🎁</span>
+            <div class="flex-1 text-left">
+              <div class="text-xs font-bold text-amber-800 dark:text-amber-400">Quà tặng lan tỏa sức khỏe</div>
+              <p class="text-[11px] text-amber-700 dark:text-amber-300 font-medium leading-relaxed mt-0.5" id="share-reward-text">
+                Nhận ngay <span class="font-bold text-orange-600 dark:text-orange-400">+20 điểm xếp hạng</span> khi chia sẻ thành tích ăn uống lành mạnh lên mạng xã hội! (Tối đa 2 lần/tuần)
+              </p>
+            </div>
+          </div>
+
+          <!-- Social Share Platform Grid -->
+          <div>
+            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Chọn mạng xã hội để đăng nhanh</label>
+            <div class="grid grid-cols-3 gap-3">
+              <!-- Facebook -->
+              <button onclick="shareSocial('facebook')" class="flex flex-col items-center justify-center gap-2 p-4 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/30 border border-blue-100 dark:border-blue-900/50 rounded-2xl transition-all hover:-translate-y-0.5 cursor-pointer">
+                <div class="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl shadow-md shadow-blue-500/20">
+                  <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <span class="text-xs font-bold text-blue-700 dark:text-blue-400">Facebook</span>
+              </button>
+              
+              <!-- Zalo -->
+              <button onclick="shareSocial('zalo')" class="flex flex-col items-center justify-center gap-2 p-4 bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/40 dark:hover:bg-teal-900/30 border border-teal-100 dark:border-teal-900/50 rounded-2xl transition-all hover:-translate-y-0.5 cursor-pointer">
+                <div class="w-12 h-12 rounded-full bg-[#0068FF] text-white flex items-center justify-center font-bold text-base shadow-md shadow-blue-600/20">
+                  Zalo
+                </div>
+                <span class="text-xs font-bold text-teal-700 dark:text-teal-400">Zalo</span>
+              </button>
+
+              <!-- X / Twitter -->
+              <button onclick="shareSocial('twitter')" class="flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-700 rounded-2xl transition-all hover:-translate-y-0.5 cursor-pointer">
+                <div class="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg shadow-md shadow-black/20">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">X / Twitter</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="text-[10px] text-center text-slate-400 dark:text-slate-500 font-medium">
+            *Ứng dụng sẽ tự động copy nội dung bài viết và mở liên kết đăng bài của mạng xã hội tương ứng để bạn chia sẻ nhanh nhất.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mascot Rank Up Modal -->
+    <div id="rank-up-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[110] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+      <div id="rank-up-modal-content" class="bg-gradient-to-b from-slate-900 to-slate-950 text-white w-[90%] max-w-[400px] rounded-3xl p-6 border border-emerald-500/20 shadow-2xl transform scale-95 transition-all duration-300 relative overflow-hidden">
+        <!-- Ambient decorative lights -->
+        <div class="absolute -top-12 -left-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
+        
+        <div class="text-center relative z-10">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-3xl mb-4 animate-bounce">
+            <i class="fa-solid fa-circle-up"></i>
+          </div>
+          
+          <h3 class="text-2xl font-black bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 bg-clip-text text-transparent uppercase tracking-wider">Thăng Hạng!</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-6">Linh thú của bạn đã hoàn thành tiến hóa</p>
+          
+          <!-- Mascot comparison layout -->
+          <div class="flex items-center justify-center gap-6 mb-6">
+            <div class="flex flex-col items-center">
+              <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 relative">
+                <span class="absolute -top-2 bg-slate-800 text-[8px] px-1.5 py-0.5 rounded-full border border-white/10 text-slate-400">Cũ</span>
+                <div id="rank-up-old-svg" class="w-12 h-12"></div>
+              </div>
+              <span class="text-[10px] font-bold text-slate-400 mt-2" id="rank-up-old-name">Hạt mầm</span>
+            </div>
+            
+            <div class="text-emerald-400 text-xl animate-pulse">
+              <i class="fa-solid fa-right-long"></i>
+            </div>
+            
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center p-2 relative shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                <span class="absolute -top-2 bg-emerald-500 text-[8px] px-1.5 py-0.5 rounded-full border border-emerald-400 text-white font-extrabold animate-pulse">Mới</span>
+                <div id="rank-up-new-svg" class="w-16 h-16"></div>
+              </div>
+              <span class="text-[11px] font-black text-emerald-400 mt-2" id="rank-up-new-name">Mầm cây</span>
+            </div>
+          </div>
+          
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6 text-left">
+            <p class="text-xs font-bold text-slate-300 mb-1">Quyền lợi thứ hạng mới:</p>
+            <ul class="text-[10px] text-slate-400 space-y-1 list-disc list-inside">
+              <li>Mở khóa ngoại hình linh thú mới tuyệt đẹp</li>
+              <li>Nhận huy hiệu đặc biệt trên trang cá nhân</li>
+              <li>Tăng cơ hội được tư vấn thực đơn VIP từ AI</li>
+            </ul>
+          </div>
+          
+          <button onclick="closeRankUpModal()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
+            Tuyệt vời, cảm ơn!
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day Detail Modal -->
+    <div id="day-detail-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] hidden items-end justify-center sm:items-center opacity-0 transition-opacity duration-300">
+      <div id="day-detail-modal-content" class="bg-white w-full sm:w-[400px] rounded-t-3xl sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300">
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <h3 class="font-bold text-slate-800 text-lg" id="day-detail-title">Chi tiết ngày</h3>
+            <p class="text-xs text-slate-500 mt-1" id="day-detail-subtitle">Tổng: 0 kcal</p>
+          </div>
+          <button onclick="closeDayDetailModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2" id="day-detail-list">
+          <!-- Items will be injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Calorie Modal -->
+    <div id="add-calorie-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] hidden items-end justify-center sm:items-center opacity-0 transition-opacity duration-300">
+      <div id="add-calorie-modal-content" class="bg-white w-full sm:w-[400px] rounded-t-3xl sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300">
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <h3 class="font-bold text-slate-800 text-lg">Nhập thêm Calo</h3>
+            <p class="text-xs text-slate-500 mt-1">Calo ăn ngoài gói (bữa sáng, ăn vặt...)</p>
+          </div>
+          <button onclick="closeAddCalorieModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Ngày nhập</label>
+            <div class="relative">
+                <select id="extra-date-select" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 appearance-none cursor-pointer">
+                </select>
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Tên món ăn</label>
+            <input type="text" id="extra-food-name-input" placeholder="VD: Phở bò, trà sữa..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Hình ảnh (tùy chọn)</label>
+            <div class="flex items-center gap-3">
+              <label for="extra-food-image-input" class="flex-1 cursor-pointer flex items-center justify-center gap-2 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl text-sm hover:bg-slate-200 transition-colors border border-dashed border-slate-300">
+                  <i class="fa-solid fa-camera"></i> Tải ảnh lên
+              </label>
+              <input type="file" id="extra-food-image-input" accept="image/*" class="hidden" onchange="previewExtraFoodImage(event)">
+              <div id="extra-food-image-preview-container" class="hidden relative w-12 h-12 rounded-lg border border-slate-200 overflow-hidden shrink-0">
+                  <img id="extra-food-image-preview" src="" class="w-full h-full object-cover">
+                  <button onclick="removeExtraFoodImage()" class="absolute top-0 right-0 bg-slate-900/50 text-white w-4 h-4 flex items-center justify-center rounded-bl-lg text-[8px] hover:bg-slate-900"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+            </div>
+          </div>
+          
+          <button onclick="calculateCalorieWithAI()" class="w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl text-sm shadow-md hover:from-blue-600 hover:to-indigo-600 transition-colors flex items-center justify-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="ai-calc-btn-text">AI Tính toán Calo</span>
+          </button>
+          
+          <div class="relative py-2">
+             <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+             <div class="relative flex justify-center text-xs"><span class="bg-white px-2 text-slate-400">hoặc</span></div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Lượng Calo (kcal)</label>
+            <div class="relative">
+              <input type="number" id="extra-calorie-input" placeholder="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 pr-16">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">kcal</span>
+            </div>
+          </div>
+          
+          <div class="pt-2 flex gap-3">
+            <button onclick="closeAddCalorieModal()" class="flex-1 py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition-colors">
+              Hủy
+            </button>
+            <button onclick="submitExtraCalorie()" class="flex-1 py-3 bg-emerald-500 text-white font-semibold rounded-xl text-sm shadow-md shadow-emerald-500/20 hover:bg-emerald-600 transition-colors">
+              Thêm vào
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      window.extraFoodsData = window.extraFoodsData || {};
+
+      function openDayDetailModal(dayId, dayName) {
+        const bar = document.getElementById(dayId);
+        if (!bar) return;
+        
+        const base = parseInt(bar.getAttribute('data-base')) || 0;
+        const extra = parseInt(bar.getAttribute('data-extra')) || 0;
+        const total = base + extra;
+
+        document.getElementById('day-detail-title').innerText = `Chi tiết ${dayName}`;
+        document.getElementById('day-detail-subtitle').innerHTML = `Tổng: <span class="font-bold text-slate-800">${total} kcal</span>`;
+
+        let listHtml = "";
+
+        if (base > 0) {
+            listHtml += `
+                <div class="flex justify-between items-center p-3 bg-emerald-50 border border-emerald-100 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700">Gói ăn trong ngày</span>
+                    </div>
+                    <span class="text-sm font-bold text-emerald-600">${base} kcal</span>
+                </div>
+            `;
+        }
+
+        const extraItems = window.extraFoodsData[dayId] || [];
+        if (extraItems.length > 0) {
+            extraItems.forEach(item => {
+                listHtml += `
+                    <div class="flex justify-between items-center p-3 bg-amber-50 border border-amber-100 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-700">${item.name}</span>
+                        </div>
+                        <span class="text-sm font-bold text-amber-600">${item.kcal} kcal</span>
+                    </div>
+                `;
+            });
+        } else if (extra > 0) {
+            listHtml += `
+                <div class="flex justify-between items-center p-3 bg-amber-50 border border-amber-100 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700">Nhập thêm</span>
+                    </div>
+                    <span class="text-sm font-bold text-amber-600">${extra} kcal</span>
+                </div>
+            `;
+        }
+
+        if (base === 0 && extraItems.length === 0 && extra === 0) {
+            listHtml = `<p class="text-center text-sm text-slate-400 py-4">Ngày ăn tự do hoặc chưa có dữ liệu</p>`;
+        }
+
+        document.getElementById('day-detail-list').innerHTML = listHtml;
+
+        const modal = document.getElementById('day-detail-modal');
+        const content = document.getElementById('day-detail-modal-content');
+        if (modal && content) {
+          modal.classList.remove('hidden');
+          void modal.offsetWidth;
+          modal.classList.remove('opacity-0');
+          modal.classList.add('flex');
+          
+          if (window.innerWidth < 640) {
+            content.classList.remove('translate-y-full');
+          } else {
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+          }
+        }
+      }
+
+      function closeDayDetailModal() {
+        const modal = document.getElementById('day-detail-modal');
+        const content = document.getElementById('day-detail-modal-content');
+        if (modal && content) {
+          modal.classList.add('opacity-0');
+          if (window.innerWidth < 640) {
+            content.classList.add('translate-y-full');
+          } else {
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+          }
+          
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+          }, 300);
+        }
+      }
+
+      let extraFoodImageFile = null;
+
+      function previewExtraFoodImage(event) {
+          const file = event.target.files[0];
+          if (file) {
+              extraFoodImageFile = file;
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('extra-food-image-preview').src = e.target.result;
+                  document.getElementById('extra-food-image-preview-container').classList.remove('hidden');
+              }
+              reader.readAsDataURL(file);
+          }
+      }
+
+      function removeExtraFoodImage() {
+          extraFoodImageFile = null;
+          document.getElementById('extra-food-image-input').value = "";
+          document.getElementById('extra-food-image-preview-container').classList.add('hidden');
+      }
+
+      async function compressImage(file, maxWidth, maxHeight, quality) {
+          return new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = (event) => {
+                  const img = new Image();
+                  img.src = event.target.result;
+                  img.onload = () => {
+                      const canvas = document.createElement('canvas');
+                      let width = img.width;
+                      let height = img.height;
+                      
+                      if (width > height) {
+                          if (width > maxWidth) {
+                              height = Math.round((height * maxWidth) / width);
+                              width = maxWidth;
+                          }
+                      } else {
+                          if (height > maxHeight) {
+                              width = Math.round((width * maxHeight) / height);
+                              height = maxHeight;
+                          }
+                      }
+                      canvas.width = width;
+                      canvas.height = height;
+                      const ctx = canvas.getContext('2d');
+                      ctx.drawImage(img, 0, 0, width, height);
+                      canvas.toBlob((blob) => {
+                          resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
+                      }, 'image/jpeg', quality);
+                  };
+              };
+          });
+      }
+
+      async function calculateCalorieWithAI() {
+          const foodName = document.getElementById('extra-food-name-input').value;
+          
+          if (!foodName && !extraFoodImageFile) {
+              showToast("Vui lòng nhập tên món ăn hoặc tải ảnh lên", "error");
+              return;
+          }
+
+          const btnText = document.getElementById('ai-calc-btn-text');
+          const originalText = btnText.innerText;
+          btnText.innerText = "Đang tính toán...";
+
+          const formData = new FormData();
+          if (foodName) formData.append('foodName', foodName);
+          if (extraFoodImageFile) {
+              const compressedFile = await compressImage(extraFoodImageFile, 800, 800, 0.7);
+              formData.append('image', compressedFile);
+          }
+
+          try {
+              const res = await fetch('/api/analyze-food', {
+                  method: 'POST',
+                  body: formData
+              });
+              
+              if (!res.ok) throw new Error('Failed to fetch from API');
+              const data = await res.json();
+              
+              if (data.kcal) {
+                  document.getElementById('extra-calorie-input').value = data.kcal;
+                  showToast("Đã tính toán thành công!", "success");
+              } else {
+                  showToast("Không thể tính toán lượng calo", "error");
+              }
+          } catch(err) {
+              console.error(err);
+              showToast("Có lỗi xảy ra khi gọi AI", "error");
+          } finally {
+              btnText.innerText = originalText;
+          }
+      }
+
+      function openAddCalorieModal() {
+        const modal = document.getElementById('add-calorie-modal');
+        const content = document.getElementById('add-calorie-modal-content');
+        if (modal && content) {
+          const select = document.getElementById('extra-date-select');
+          if (select) {
+            select.innerHTML = '';
+            const dayNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+            const dayIds = ['bar-cn', 'bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7'];
+            const today = new Date();
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() - i);
+                const dayIndex = d.getDay();
+                const dayId = dayIds[dayIndex];
+                let label = dayNames[dayIndex] + ', ' + d.getDate() + '/' + (d.getMonth()+1);
+                if (i === 0) label = 'Hôm nay (' + label + ')';
+                else if (i === 1) label = 'Hôm qua (' + label + ')';
+                const opt = document.createElement('option');
+                opt.value = dayId;
+                opt.textContent = label;
+                select.appendChild(opt);
+            }
+          }
+          modal.classList.remove('hidden');
+          // Trigger reflow
+          void modal.offsetWidth;
+          modal.classList.remove('opacity-0');
+          modal.classList.add('flex');
+          
+          if (window.innerWidth < 640) {
+            content.classList.remove('translate-y-full');
+          } else {
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+          }
+        }
+      }
+
+      function closeAddCalorieModal() {
+        const modal = document.getElementById('add-calorie-modal');
+        const content = document.getElementById('add-calorie-modal-content');
+        if (modal && content) {
+          modal.classList.add('opacity-0');
+          if (window.innerWidth < 640) {
+            content.classList.add('translate-y-full');
+          } else {
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+          }
+          
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+          }, 300);
+        }
+      }
+
+      window.isUpdatingProfile = false;
+
+      function startProfileAnalysis() {
+        window.isUpdatingProfile = true;
+        // Hide recommendations and show save button
+        const recContainer = document.getElementById('menu-recommendation-container');
+        if(recContainer && recContainer.parentElement) {
+            recContainer.parentElement.style.display = 'none';
+        }
+        
+        const saveAction = document.getElementById('save-profile-action');
+        if(saveAction) saveAction.classList.remove('hidden');
+
+        // Go to consulting view
+        switchView('consulting');
+        setTimeout(() => {
+          const form = document.getElementById('diet-analysis-form');
+          if(form) {
+            form.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+          // Reset form to step 1
+          [2,3,4].forEach(s => {
+              const el = document.getElementById('diet-step-' + s);
+              if(el) {
+                  el.classList.add('hidden');
+                  el.classList.remove('block');
+              }
+          });
+          const el1 = document.getElementById('diet-step-1');
+          if(el1) {
+              el1.classList.remove('hidden');
+              el1.classList.add('block');
+          }
+          const pl = document.getElementById("diet-progress-line");
+          if(pl) pl.style.width = "25%";
+          const bdg = document.getElementById("diet-step-badge");
+          if(bdg) bdg.innerText = "BƯỚC 1/4";
+        }, 100);
+      }
+
+      function saveProfileData() {
+        try {
+            
+        if(!window.lastAnalysisResult) {
+          showToast('Không tìm thấy dữ liệu phân tích!', 'error');
+          return;
+        }
+
+        const data = window.lastAnalysisResult;
+        
+        // Generate proportional consumed values to simulate realistic data
+        let curCal = Math.round(data.targetCal * 0.7);
+        let curPro = Math.round(data.protein * 0.65);
+        let curCarb = Math.round(data.carbs * 0.8);
+        let curFat = Math.round(data.fat * 0.5);
+
+        // Cập nhật Calo
+        if(document.getElementById('dash-calo')) document.getElementById('dash-calo').innerHTML = `${curCal}<span class="text-[9px] text-slate-400 font-normal" id="dash-calo-target">/${data.targetCal} kcal</span>`;
+        let pctCal = Math.round((curCal / data.targetCal) * 100);
+        if(document.getElementById('dash-calo-pct')) document.getElementById('dash-calo-pct').textContent = pctCal + '%';
+        let offsetCal = 150.7 - (150.7 * Math.min(pctCal, 100) / 100);
+        if(document.getElementById('dash-calo-circle')) document.getElementById('dash-calo-circle').style.strokeDashoffset = offsetCal;
+
+        // Cập nhật Protein
+        if(document.getElementById('dash-pro')) document.getElementById('dash-pro').innerHTML = `${curPro}<span class="text-[9px] text-slate-400 font-normal" id="dash-pro-target">/${data.protein}g</span>`;
+        let pctPro = Math.round((curPro / data.protein) * 100);
+        if(document.getElementById('dash-pro-pct')) document.getElementById('dash-pro-pct').textContent = pctPro + '%';
+        let offsetPro = 150.7 - (150.7 * Math.min(pctPro, 100) / 100);
+        if(document.getElementById('dash-pro-circle')) document.getElementById('dash-pro-circle').style.strokeDashoffset = offsetPro;
+
+        // Cập nhật Carbs
+        if(document.getElementById('dash-carb')) document.getElementById('dash-carb').innerHTML = `${curCarb}<span class="text-[9px] text-slate-400 font-normal" id="dash-carb-target">/${data.carbs}g</span>`;
+        let pctCarb = Math.round((curCarb / data.carbs) * 100);
+        if(document.getElementById('dash-carb-pct')) document.getElementById('dash-carb-pct').textContent = pctCarb + '%';
+        let offsetCarb = 150.7 - (150.7 * Math.min(pctCarb, 100) / 100);
+        if(document.getElementById('dash-carb-circle')) document.getElementById('dash-carb-circle').style.strokeDashoffset = offsetCarb;
+
+        // Cập nhật Fat
+        if(document.getElementById('dash-fat')) document.getElementById('dash-fat').innerHTML = `${curFat}<span class="text-[9px] text-slate-400 font-normal" id="dash-fat-target">/${data.fat}g</span>`;
+        let pctFat = Math.round((curFat / data.fat) * 100);
+        if(document.getElementById('dash-fat-pct')) document.getElementById('dash-fat-pct').textContent = pctFat + '%';
+        let offsetFat = 150.7 - (150.7 * Math.min(pctFat, 100) / 100);
+        if(document.getElementById('dash-fat-circle')) document.getElementById('dash-fat-circle').style.strokeDashoffset = offsetFat;
+
+        // Cập nhật BMI và Cân nặng
+        if(data.height && data.weight) {
+            if (typeof currentUser !== 'undefined' && currentUser) {
+                currentUser.height = data.height;
+                currentUser.weight = data.weight;
+                currentUser.bmi = data.bmi;
+                if (data.gender) currentUser.gender = data.gender;
+                if (data.age) currentUser.age = data.age;
+                if (data.goal) currentUser.goal = data.goal;
+                if (data.targetWeight) currentUser.targetWeight = data.targetWeight;
+                if (data.duration) currentUser.duration = data.duration;
+                if (data.targetCal) currentUser.targetCal = data.targetCal;
+                if (data.tdee) currentUser.tdee = data.tdee;
+                currentUser.targetProtein = data.protein;
+                currentUser.targetCarbs = data.carbs;
+                currentUser.targetFat = data.fat;
+                
+                if(typeof saveToLocalAccounts === 'function') saveToLocalAccounts(currentUser);
+                
+                // Cập nhật luôn cho potentialCustomers hoặc purchasedCustomers để đồng bộ
+                if (typeof potentialCustomers !== 'undefined') {
+                    const idx = potentialCustomers.findIndex(c => c.phone === currentUser.phone);
+                    if (idx !== -1) {
+                        potentialCustomers[idx].height = data.height;
+                        potentialCustomers[idx].weight = data.weight;
+                        potentialCustomers[idx].bmi = data.bmi;
+                        if (data.gender) potentialCustomers[idx].gender = data.gender;
+                        if (data.age) potentialCustomers[idx].age = data.age;
+                        if (data.goal) potentialCustomers[idx].goal = data.goal;
+                        if (data.targetWeight) potentialCustomers[idx].targetWeight = data.targetWeight;
+                        if (data.duration) potentialCustomers[idx].duration = data.duration;
+                        if (data.targetCal) potentialCustomers[idx].targetCal = data.targetCal;
+                        if (data.tdee) potentialCustomers[idx].tdee = data.tdee;
+                        potentialCustomers[idx].targetProtein = data.protein;
+                        potentialCustomers[idx].targetCarbs = data.carbs;
+                        potentialCustomers[idx].targetFat = data.fat;
+                        localStorage.setItem("nutriadmin_potential_customers", JSON.stringify(potentialCustomers));
+                    }
+                }
+                if (typeof purchasedCustomers !== 'undefined') {
+                    const idx2 = purchasedCustomers.findIndex(c => c.phone === currentUser.phone);
+                    if (idx2 !== -1) {
+                        purchasedCustomers[idx2].height = data.height;
+                        purchasedCustomers[idx2].weight = data.weight;
+                        purchasedCustomers[idx2].bmi = data.bmi;
+                        if (data.gender) purchasedCustomers[idx2].gender = data.gender;
+                        if (data.age) purchasedCustomers[idx2].age = data.age;
+                        if (data.goal) purchasedCustomers[idx2].goal = data.goal;
+                        if (data.targetWeight) purchasedCustomers[idx2].targetWeight = data.targetWeight;
+                        if (data.duration) purchasedCustomers[idx2].duration = data.duration;
+                        if (data.targetCal) purchasedCustomers[idx2].targetCal = data.targetCal;
+                        if (data.tdee) purchasedCustomers[idx2].tdee = data.tdee;
+                        purchasedCustomers[idx2].targetProtein = data.protein;
+                        purchasedCustomers[idx2].targetCarbs = data.carbs;
+                        purchasedCustomers[idx2].targetFat = data.fat;
+                        localStorage.setItem("nutriadmin_purchased_customers", JSON.stringify(purchasedCustomers));
+                    }
+                }
+            }
+            if(document.getElementById('profile-height')) document.getElementById('profile-height').textContent = data.height;
+            if(document.getElementById('profile-weight')) document.getElementById('profile-weight').textContent = data.weight;
+            if(document.getElementById('profile-bmi')) document.getElementById('profile-bmi').textContent = data.bmi;
+            
+            const bmiStatusEl = document.getElementById('profile-bmi-status');
+            if(bmiStatusEl) {
+                bmiStatusEl.textContent = data.bmiStatus;
+                bmiStatusEl.className = 'px-2 py-1 rounded-md text-xs font-bold ' + data.bmiColorClass;
+            }
+        }
+
+        // Cập nhật nhãn biểu đồ
+        if(document.getElementById('dash-bar-target-label')) document.getElementById('dash-bar-target-label').innerHTML = `<span class="inline-block w-4 h-[1px] border-b-2 border-dashed border-emerald-500 mr-1"></span>Mục tiêu (${data.targetCal})`;
+        if(document.getElementById('dash-bar-target-number')) document.getElementById('dash-bar-target-number').textContent = data.targetCal + ' kcal';
+
+        // Update the bar chart scale
+        const maxScale = data.targetCal / 0.75; // 75% is the target line
+        const days = ['bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7', 'bar-cn'];
+        days.forEach(dayId => {
+            const bar = document.getElementById(dayId);
+            if (bar) {
+                const base = parseInt(bar.getAttribute('data-base')) || 0;
+                const extra = parseInt(bar.getAttribute('data-extra')) || 0;
+                const total = base + extra;
+                
+                let hPercent = Math.min((total / maxScale) * 100, 100);
+                if (base === 0 && hPercent < 15) hPercent = Math.max(hPercent, 30);
+                
+                bar.style.height = hPercent + '%';
+            }
+        });
+
+        // Here we just notify success
+        showToast('Đã lưu thông tin y khoa mới!', 'success');
+
+        // Cleanup and return
+        window.isUpdatingProfile = false;
+        const recContainer = document.getElementById('menu-recommendation-container');
+        if(recContainer && recContainer.parentElement) {
+            recContainer.parentElement.style.display = 'block';
+        }
+        const saveAction = document.getElementById('save-profile-action');
+        if(saveAction) saveAction.classList.add('hidden');
+
+        switchView('customer-profile');
+        window.scrollTo(0,0);
+      
+        } catch (err) {
+            console.error('saveProfileData error:', err);
+            showToast('Lỗi: ' + err.message, 'error');
+            // Force fallback navigation
+            switchView('customer-profile');
+        }
+    }
+
+      function submitExtraCalorie() {
+        const input = document.getElementById('extra-calorie-input');
+        const val = parseInt(input.value);
+        if (val && val > 0) {
+            const select = document.getElementById('extra-date-select');
+            const days = ['bar-cn', 'bar-t2', 'bar-t3', 'bar-t4', 'bar-t5', 'bar-t6', 'bar-t7'];
+            const actualTodayId = days[new Date().getDay()];
+            let todayId = actualTodayId;
+            if (select && select.value) {
+                todayId = select.value;
+            }
+
+            window.extraFoodsData = window.extraFoodsData || {};
+            if (!window.extraFoodsData[todayId]) window.extraFoodsData[todayId] = [];
+            const foodNameInput = document.getElementById('extra-food-name-input');
+            const fname = foodNameInput && foodNameInput.value.trim() ? foodNameInput.value.trim() : 'Món ăn thêm';
+            window.extraFoodsData[todayId].push({ name: fname, kcal: val });
+            
+            if (typeof updateNutritionDashboard === 'function') {
+                updateNutritionDashboard();
+            }
+            
+            input.value = '';
+            if (foodNameInput) foodNameInput.value = '';
+            if (typeof removeExtraFoodImage === 'function') removeExtraFoodImage();
+            closeAddCalorieModal();
+        }
+      }
+
+      function triggerQuestCheckIn() {
+        if (!currentUser) return;
+        const todayStr = new Date().toISOString().split("T")[0];
+        
+        // Mark check-in as complete
+        currentUser.lastCheckInDate = todayStr;
+        currentUser.points = (currentUser.points || 0) + 10;
+        
+        // Update user rank if appropriate
+        if (typeof getRankFromPoints === "function") {
+          currentUser.rank = getRankFromPoints(currentUser.points);
+        }
+
+        // Sync with global arrays
+        let mainUser = purchasedCustomers.find(c => c.phone === currentUser.phone);
+        if (mainUser) {
+          mainUser.points = currentUser.points;
+          mainUser.rank = currentUser.rank;
+          mainUser.lastCheckInDate = todayStr;
+        } else {
+          let potUser = potentialCustomers.find(c => c.phone === currentUser.phone);
+          if (potUser) {
+            potUser.points = currentUser.points;
+            potUser.rank = currentUser.rank;
+            potUser.lastCheckInDate = todayStr;
+          }
+        }
+
+        localStorage.setItem("nutriadmin_current_user", JSON.stringify(currentUser));
+        if (typeof saveToLocalAccounts === "function") {
+          saveToLocalAccounts(currentUser);
+        }
+
+        // Trigger effects
+        triggerConfetti();
+        showToast("Điểm danh thành công! Bạn nhận được +10 điểm tích lũy.", "success");
+        
+        renderCustomerProfile();
+        if (typeof updateNutritionDashboard === "function") {
+          updateNutritionDashboard();
+        }
+      }
+
+      function triggerQuestWeight() {
+        const btn = document.getElementById("personal-analysis-btn");
+        if (btn) {
+          btn.scrollIntoView({ behavior: "smooth", block: "center" });
+          
+          btn.classList.remove("animate-shake-glow-green");
+          void btn.offsetWidth; // Force reflow
+          btn.classList.add("animate-shake-glow-green");
+          
+          const removeAnim = () => {
+            btn.classList.remove("animate-shake-glow-green");
+            btn.removeEventListener("click", removeAnim);
+          };
+          btn.addEventListener("click", removeAnim);
+          
+          setTimeout(() => {
+            btn.classList.remove("animate-shake-glow-green");
+            btn.removeEventListener("click", removeAnim);
+          }, 7000);
+          
+          showToast("Màn hình đã chuyển đến mục Phân tích dữ liệu cá nhân!", "info");
+        } else {
+          if (typeof toggleBmiEditor === "function") {
+            toggleBmiEditor();
+            const editor = document.getElementById("bmi-editor");
+            if (editor) {
+              editor.scrollIntoView({ behavior: "smooth" });
+              showToast("Vui lòng nhập chiều cao, cân nặng mới và lưu lại để nhận điểm!", "info");
+            }
+          }
+        }
+      }
+
+      function triggerQuestShare() {
+        const container = document.getElementById("profile-streak-container");
+        const btn = document.getElementById("profile-streak-share-btn");
+        if (container && btn) {
+          container.scrollIntoView({ behavior: "smooth", block: "center" });
+          
+          btn.classList.remove("animate-shake-glow-orange");
+          void btn.offsetWidth; // Force reflow
+          btn.classList.add("animate-shake-glow-orange");
+          
+          const removeAnim = () => {
+            btn.classList.remove("animate-shake-glow-orange");
+            btn.removeEventListener("click", removeAnim);
+          };
+          btn.addEventListener("click", removeAnim);
+          
+          setTimeout(() => {
+            btn.classList.remove("animate-shake-glow-orange");
+            btn.removeEventListener("click", removeAnim);
+          }, 7000);
+          
+          showToast("Màn hình đã chuyển đến mục Chuỗi duy trì!", "info");
+        } else {
+          if (typeof openShareModal === "function") {
+            openShareModal();
+          }
+        }
+      }
+
+      function triggerMascotEvolution(oldRank, newRank) {
+        // Play Confetti
+        triggerConfetti();
+        
+        // Add animated glow to mascot container
+        const container = document.getElementById("rank-mascot-container");
+        if (container) {
+          container.classList.add("mascot-glow", "scale-[1.15]");
+          setTimeout(() => {
+            container.classList.remove("mascot-glow", "scale-[1.15]");
+          }, 5000);
+        }
+
+        // Open evolution modal
+        setTimeout(() => {
+          showRankUpModal(oldRank, newRank);
+        }, 800);
+      }
+
+      function showRankUpModal(oldRank, newRank) {
+        const modal = document.getElementById("rank-up-modal");
+        const content = document.getElementById("rank-up-modal-content");
+        const oldName = document.getElementById("rank-up-old-name");
+        const newName = document.getElementById("rank-up-new-name");
+        const oldSvg = document.getElementById("rank-up-old-svg");
+        const newSvg = document.getElementById("rank-up-new-svg");
+
+        if (modal && content && oldName && newName && oldSvg && newSvg) {
+          oldName.textContent = oldRank;
+          newName.textContent = newRank;
+
+          // Resolve rank IDs to draw SVGs
+          const rankAges = {
+            "Hạt mầm": "hat_mam",
+            "Mầm cây": "mam_cay",
+            "Cây non": "cay_non",
+            "Cây sự sống": "cay_lon"
+          };
+
+          const oldId = rankAges[oldRank] || "hat_mam";
+          const newId = rankAges[newRank] || "mam_cay";
+
+          if (typeof drawMascotSVG === "function") {
+            oldSvg.innerHTML = drawMascotSVG(oldId, 0).replace(
+              'class="w-40 h-40 filter drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]"',
+              'class="w-full h-full drop-shadow-sm"'
+            );
+            newSvg.innerHTML = drawMascotSVG(newId, 0).replace(
+              'class="w-40 h-40 filter drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]"',
+              'class="w-full h-full drop-shadow-md"'
+            );
+          }
+
+          modal.classList.remove("hidden");
+          void modal.offsetWidth;
+          modal.classList.remove("opacity-0");
+          modal.classList.add("flex");
+          content.classList.remove("scale-95");
+          content.classList.add("scale-100");
+        }
+      }
+
+      function closeRankUpModal() {
+        const modal = document.getElementById("rank-up-modal");
+        const content = document.getElementById("rank-up-modal-content");
+        if (modal && content) {
+          modal.classList.add("opacity-0");
+          content.classList.remove("scale-100");
+          content.classList.add("scale-95");
+          
+          setTimeout(() => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+          }, 300);
+        }
+      }
+
+      // Expose to window
+      window.triggerQuestCheckIn = triggerQuestCheckIn;
+      window.triggerQuestWeight = triggerQuestWeight;
+      window.triggerQuestShare = triggerQuestShare;
+      window.triggerMascotEvolution = triggerMascotEvolution;
+      window.showRankUpModal = showRankUpModal;
+      window.closeRankUpModal = closeRankUpModal;
+    </script>
+\n</body>
 </html>
