@@ -1786,10 +1786,39 @@
                       <input type="time" id="pwa-noti-time" class="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-emerald-500 text-slate-800 dark:text-slate-100" value="09:00" />
                     </div>
                     <div>
+                      <label class="block text-[11px] font-semibold text-slate-500 mb-1">Nguồn ảnh thông báo</label>
+                      <select id="pwa-noti-img-source" class="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-emerald-500 text-slate-800 dark:text-slate-100" onchange="togglePwaNotiImageSource()">
+                        <option value="mascot">Sử dụng Mascot mặc định</option>
+                        <option value="custom">Tải ảnh tùy chỉnh lên (PNG/JPG)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 gap-3 mb-3">
+                    <!-- Option A: Mascot select -->
+                    <div id="pwa-noti-mascot-container">
                       <label class="block text-[11px] font-semibold text-slate-500 mb-1">Mascot đồng hành</label>
                       <select id="pwa-noti-mascot" class="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-emerald-500 text-slate-800 dark:text-slate-100" onchange="previewSelectedFormMascot()">
                         <!-- Will fill with mascot options dynamically -->
                       </select>
+                    </div>
+                    <!-- Option B: Custom image upload -->
+                    <div id="pwa-noti-custom-img-container" class="hidden">
+                      <label class="block text-[11px] font-semibold text-slate-500 mb-1">Tải ảnh thông báo</label>
+                      <div class="flex items-center gap-3">
+                        <button type="button" onclick="document.getElementById('pwa-noti-custom-file').click()" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1.5">
+                          <i class="fa-solid fa-cloud-arrow-up text-emerald-500"></i> Chọn ảnh từ máy
+                        </button>
+                        <input type="file" id="pwa-noti-custom-file" accept="image/*" class="hidden" onchange="handlePwaNotiCustomFileSelect(event)" />
+                        <div class="flex-1 min-w-0 text-[11px] text-slate-400 truncate" id="pwa-noti-custom-file-name">Chưa chọn ảnh nào.</div>
+                      </div>
+                      <!-- Image preview -->
+                      <div id="pwa-noti-custom-preview-box" class="hidden mt-2 p-2 bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 rounded-lg max-w-[120px] aspect-square flex items-center justify-center overflow-hidden relative">
+                        <img id="pwa-noti-custom-preview-img" class="max-w-full max-h-full object-contain" />
+                        <button type="button" onclick="clearPwaNotiCustomImage()" class="absolute top-1 right-1 w-5 h-5 bg-rose-500 hover:bg-rose-600 text-white rounded-full flex items-center justify-center text-[10px] shadow-sm">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -1862,20 +1891,18 @@
                     </div>
 
                     <!-- PWA FLOATING NOTIFICATION MOCKUP BANNER (Duolingo Style!) -->
-                    <div id="phone-notification-banner" class="absolute left-1 right-1 top-24 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-white/20 dark:border-slate-800/50 flex gap-2.5 items-start transition-all duration-500 transform translate-y-[-120%] opacity-0 scale-95 z-50">
-                      <!-- Mascot Mini Image/SVG Frame in Notification -->
-                      <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100/30 shrink-0 flex items-center justify-center overflow-hidden shadow-inner relative" id="phone-noti-mascot-preview">
-                        <img id="phone-noti-mascot-preview-img" class="hidden w-full h-full object-contain scale-110" />
-                        <div id="phone-noti-mascot-preview-svg" class="w-full h-full [&>svg]:w-full [&>svg]:h-full scale-110"></div>
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-center">
-                          <span class="font-bold text-slate-800 dark:text-slate-100 text-[11px] truncate" id="phone-noti-title-text">Nuri Nhắc Bạn</span>
-                          <span class="text-[8px] text-slate-400">bây giờ</span>
-                        </div>
-                        <p class="text-[10px] text-slate-600 dark:text-slate-300 mt-0.5 leading-snug line-clamp-2" id="phone-noti-content-text">
-                          Đã đến giờ ăn sáng rồi bạn ơi! Đừng quên nạp năng lượng nhé! 🌱
+                    <div id="phone-notification-banner" class="absolute left-1 right-1 top-20 bg-gradient-to-b from-sky-500 to-sky-600 text-white rounded-[28px] p-4 shadow-2xl border border-sky-400/30 flex flex-col justify-between h-[180px] transition-all duration-500 transform translate-y-[-130%] opacity-0 scale-95 z-50 overflow-hidden">
+                      <div class="w-full text-center">
+                        <span class="font-black text-white text-xs tracking-wide block truncate drop-shadow-sm" id="phone-noti-title-text">Nuri Nhắc Bạn</span>
+                        <p class="text-[10px] text-sky-100 mt-1 font-medium leading-snug line-clamp-2 drop-shadow-sm px-1" id="phone-noti-content-text">
+                          Đã đến giờ rồi bạn ơi! Đừng quên nạp năng lượng nhé! 🌱
                         </p>
+                      </div>
+                      
+                      <!-- Mascot / Custom Image at the bottom center, sitting on the bottom edge -->
+                      <div class="w-20 h-20 shrink-0 flex items-end justify-center relative translate-y-2 mt-auto mx-auto" id="phone-noti-mascot-preview">
+                        <img id="phone-noti-mascot-preview-img" class="hidden max-w-full max-h-full object-contain scale-110" />
+                        <div id="phone-noti-mascot-preview-svg" class="w-full h-full [&>svg]:w-full [&>svg]:h-full scale-110 flex items-end justify-center"></div>
                       </div>
                     </div>
 
@@ -12731,6 +12758,7 @@
             mascotActions,
             mascotAges,
             activeMascotId,
+            pwaCustomIcon,
           };
           const currentStr = JSON.stringify(currentState);
           if (currentStr === lastStateStr) return;
@@ -12839,6 +12867,11 @@
             pwaBadgeActive ? "true" : "false",
           );
           if (typeof updateAppBadgeUI === "function") updateAppBadgeUI();
+        }
+        if (typeof serverState.pwaCustomIcon !== "undefined") {
+          pwaCustomIcon = serverState.pwaCustomIcon || "";
+          localStorage.setItem("nutriadmin_pwa_custom_icon", pwaCustomIcon);
+          if (typeof updatePwaIconUI === "function") updatePwaIconUI();
         }
         if (serverState.allReviews) {
           const prevReviewsCount = Object.keys(allReviews || {}).length;
@@ -27420,7 +27453,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         document.getElementById("shipper-qr-img").src =
           "https://via.placeholder.com/250x250.png?text=Loading...";
 
-        getShortUrlJsonp(appUrl, function (shortUrl) {
+        getShortUrl(appUrl, function (shortUrl) {
           document.getElementById("shipper-qr-img").src =
             `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
         });
@@ -34059,7 +34092,20 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
           const shareBtn = document.getElementById("btn-share-qr");
           if (shareBtn) shareBtn.classList.add("hidden");
-          switchView("consulting");
+          
+          if (currentUser) {
+            switchView("customer-profile");
+          } else {
+            switchView("consulting");
+            setTimeout(() => {
+              openAuthModal("login");
+            }, 600);
+          }
+
+          // Auto-prompt to enable notifications on user's device
+          if (typeof checkAndShowPwaPermissionPrompt === "function") {
+            checkAndShowPwaPermissionPrompt();
+          }
         } else if (mode === "shipper-app") {
           const nav = document.querySelector("nav");
           if (nav) nav.classList.add("hidden");
@@ -37705,6 +37751,53 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       </div>
     </div>
 
+    <!-- Real PWA Floating Notification Banner (iOS/Android Style!) -->
+    <div id="real-pwa-floating-notification" class="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-slate-100 dark:border-slate-800/80 flex gap-3 items-start transition-all duration-500 transform translate-y-[-150%] opacity-0 scale-95 z-[20000] cursor-pointer" onclick="clickRealPwaFloatingNotification()">
+      <!-- Mascot Container -->
+      <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100/30 shrink-0 flex items-center justify-center overflow-hidden shadow-inner relative">
+        <img id="real-pwa-floating-mascot-img" class="hidden w-full h-full object-contain scale-110" />
+        <div id="real-pwa-floating-mascot-svg" class="w-full h-full scale-110"></div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-slate-800 dark:text-slate-100 text-[13px] truncate" id="real-pwa-floating-title">Nuri Mascot</span>
+          <span class="text-[9px] text-slate-400 font-medium">bây giờ</span>
+        </div>
+        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed" id="real-pwa-floating-content">
+          Đến giờ rồi bạn ơi! 🌱
+        </p>
+      </div>
+      <div class="absolute bottom-1 right-3 text-[9px] text-slate-400 flex items-center gap-1 opacity-60">
+        <i class="fa-solid fa-bell text-[8px]"></i> PWA Notification
+      </div>
+    </div>
+
+    <!-- Real PWA Notification Prompt Banner for Customer Page -->
+    <div id="pwa-permission-prompt" class="fixed bottom-6 left-4 right-4 md:left-auto md:right-4 md:w-[400px] bg-white dark:bg-slate-900 rounded-2xl p-4.5 shadow-2xl border border-slate-200/80 dark:border-slate-800/80 z-[19999] flex flex-col gap-3 transition-all duration-500 transform translate-y-[200%] opacity-0 hidden">
+      <div class="flex gap-3 items-start">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100/30 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-bell text-emerald-600 dark:text-emerald-400 text-lg animate-bounce"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-slate-800 dark:text-slate-100 text-xs">Bật Nhắc Nhở từ Mascot Nuri</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            Nhận thông báo uống nước, lịch ăn uống lành mạnh từ trợ lý ảo Nuri ngay trên màn hình khóa điện thoại của bạn!
+          </p>
+        </div>
+        <button onclick="dismissPwaPermissionPrompt()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+      <div class="flex gap-2 justify-end mt-1">
+        <button onclick="dismissPwaPermissionPrompt()" class="px-3.5 py-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-xl text-xs font-semibold transition-all cursor-pointer">
+          Lúc khác
+        </button>
+        <button onclick="requestPwaNotificationPermission()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-emerald-500/10 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-circle-check"></i> Đồng ý bật
+        </button>
+      </div>
+    </div>
+
     <!-- Controller Scripts -->
     <script>
       // ==========================================
@@ -38067,10 +38160,105 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       let pwaNotificationEditingId = null;
       let currentPhoneGiantMascotId = "vui_ve";
       let currentPhoneNotiMascotId = "vui_ve";
+      let currentPhoneGiantCustomImage = null;
+      let currentPhoneNotiCustomImage = null;
+      let pwaNotiUploadedCustomImageBase64 = null;
+
+      function togglePwaNotiImageSource() {
+        const sourceSelect = document.getElementById("pwa-noti-img-source");
+        const mascotContainer = document.getElementById("pwa-noti-mascot-container");
+        const customImgContainer = document.getElementById("pwa-noti-custom-img-container");
+        
+        if (sourceSelect && mascotContainer && customImgContainer) {
+          if (sourceSelect.value === "custom") {
+            mascotContainer.classList.add("hidden");
+            customImgContainer.classList.remove("hidden");
+          } else {
+            mascotContainer.classList.remove("hidden");
+            customImgContainer.classList.add("hidden");
+          }
+        }
+      }
+
+      function handlePwaNotiCustomFileSelect(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) { // 2MB limit
+          showToast("Vui lòng chọn ảnh có dung lượng dưới 2MB!", "warning");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64String = e.target.result;
+          pwaNotiUploadedCustomImageBase64 = base64String;
+          
+          const previewBox = document.getElementById("pwa-noti-custom-preview-box");
+          const previewImg = document.getElementById("pwa-noti-custom-preview-img");
+          const fileNameLabel = document.getElementById("pwa-noti-custom-file-name");
+          
+          if (previewBox && previewImg) {
+            previewImg.src = base64String;
+            previewBox.classList.remove("hidden");
+          }
+          if (fileNameLabel) {
+            fileNameLabel.innerText = file.name;
+          }
+          showToast("Đã tải ảnh thông báo tùy chỉnh thành công!", "success");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function clearPwaNotiCustomImage() {
+        pwaNotiUploadedCustomImageBase64 = null;
+        
+        const fileInput = document.getElementById("pwa-noti-custom-file");
+        if (fileInput) fileInput.value = "";
+        
+        const previewBox = document.getElementById("pwa-noti-custom-preview-box");
+        const fileNameLabel = document.getElementById("pwa-noti-custom-file-name");
+        
+        if (previewBox) {
+          previewBox.classList.add("hidden");
+        }
+        if (fileNameLabel) {
+          fileNameLabel.innerText = "Chưa có ảnh nào được chọn. Hãy tải ảnh định dạng PNG/JPG/SVG.";
+        }
+        showToast("Đã gỡ bỏ ảnh tùy chỉnh.", "info");
+      }
+
+      window.togglePwaNotiImageSource = togglePwaNotiImageSource;
+      window.handlePwaNotiCustomFileSelect = handlePwaNotiCustomFileSelect;
+      window.clearPwaNotiCustomImage = clearPwaNotiCustomImage;
 
       // ==========================================
       // PWA CUSTOM ICON UPLOAD SYSTEM
       // ==========================================
+      function updatePageFavicons() {
+        const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
+        const favicon = document.querySelector('link[rel="icon"]');
+        if (pwaCustomIcon) {
+          if (appleTouchIcon) appleTouchIcon.href = pwaCustomIcon;
+          if (favicon) {
+            favicon.href = pwaCustomIcon;
+            if (pwaCustomIcon.startsWith("data:image/svg+xml")) {
+              favicon.type = "image/svg+xml";
+            } else if (pwaCustomIcon.startsWith("data:image/png")) {
+              favicon.type = "image/png";
+            } else {
+              favicon.type = "image/jpeg";
+            }
+          }
+        } else {
+          if (appleTouchIcon) appleTouchIcon.href = "/logo.svg";
+          if (favicon) {
+            favicon.href = "/logo.svg";
+            favicon.type = "image/svg+xml";
+          }
+        }
+      }
+
       function updatePwaIconUI() {
         const adminImg = document.getElementById("pwa-admin-icon-preview-img");
         const adminSvg = document.getElementById("pwa-admin-icon-preview-svg");
@@ -38109,6 +38297,8 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
           if (resetBtn) resetBtn.classList.add("hidden");
         }
+
+        updatePageFavicons();
       }
 
       function handlePwaIconUpload(event) {
@@ -38129,6 +38319,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             localStorage.setItem("nutriadmin_pwa_custom_icon", base64String);
             updatePwaIconUI();
             showToast("Đã cập nhật biểu tượng ứng dụng PWA thành công!", "success");
+            
+            if (typeof syncStateToServer === "function") {
+              syncStateToServer();
+            }
           } catch (err) {
             showToast("Không thể lưu ảnh do vượt quá dung lượng lưu trữ của trình duyệt.", "error");
           }
@@ -38142,6 +38336,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           localStorage.removeItem("nutriadmin_pwa_custom_icon");
           updatePwaIconUI();
           showToast("Đã khôi phục biểu tượng PWA mặc định.", "success");
+          
+          if (typeof syncStateToServer === "function") {
+            syncStateToServer();
+          }
         });
       }
 
@@ -38149,6 +38347,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       window.handlePwaIconUpload = handlePwaIconUpload;
       window.resetPwaIconToDefault = resetPwaIconToDefault;
       window.updatePwaIconUI = updatePwaIconUI;
+      window.updatePageFavicons = updatePageFavicons;
 
       function initPwaMascotSelect() {
         const select = document.getElementById("pwa-noti-mascot");
@@ -38192,6 +38391,15 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
       function previewSelectedFormMascot() {
         const selectEl = document.getElementById("pwa-noti-mascot");
+        const sourceSelect = document.getElementById("pwa-noti-img-source");
+        if (sourceSelect && sourceSelect.value === "custom") {
+          currentPhoneNotiCustomImage = pwaNotiUploadedCustomImageBase64;
+          currentPhoneGiantCustomImage = pwaNotiUploadedCustomImageBase64;
+        } else {
+          currentPhoneNotiCustomImage = null;
+          currentPhoneGiantCustomImage = null;
+        }
+
         if (selectEl) {
           const mascotId = selectEl.value;
           currentPhoneNotiMascotId = mascotId;
@@ -38207,17 +38415,23 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         const giantImg = document.getElementById("phone-giant-widget-mascot-img");
         const giantSvg = document.getElementById("phone-giant-widget-mascot-svg");
         if (giantImg && giantSvg) {
-          const mId = typeof currentPhoneGiantMascotId !== "undefined" ? currentPhoneGiantMascotId : "vui_ve";
-          const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
-          if (hasSeq) {
+          if (typeof currentPhoneGiantCustomImage !== "undefined" && currentPhoneGiantCustomImage) {
             giantSvg.classList.add("hidden");
             giantImg.classList.remove("hidden");
-            const frames = mascotLoadedSequences[mId];
-            giantImg.src = frames[frameIndex % frames.length];
+            giantImg.src = currentPhoneGiantCustomImage;
           } else {
-            giantImg.classList.add("hidden");
-            giantSvg.classList.remove("hidden");
-            giantSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+            const mId = typeof currentPhoneGiantMascotId !== "undefined" ? currentPhoneGiantMascotId : "vui_ve";
+            const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
+            if (hasSeq) {
+              giantSvg.classList.add("hidden");
+              giantImg.classList.remove("hidden");
+              const frames = mascotLoadedSequences[mId];
+              giantImg.src = frames[frameIndex % frames.length];
+            } else {
+              giantImg.classList.add("hidden");
+              giantSvg.classList.remove("hidden");
+              giantSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+            }
           }
         }
 
@@ -38225,17 +38439,23 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         const bannerImg = document.getElementById("phone-noti-mascot-preview-img");
         const bannerSvg = document.getElementById("phone-noti-mascot-preview-svg");
         if (bannerImg && bannerSvg) {
-          const mId = typeof currentPhoneNotiMascotId !== "undefined" ? currentPhoneNotiMascotId : "vui_ve";
-          const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
-          if (hasSeq) {
+          if (typeof currentPhoneNotiCustomImage !== "undefined" && currentPhoneNotiCustomImage) {
             bannerSvg.classList.add("hidden");
             bannerImg.classList.remove("hidden");
-            const frames = mascotLoadedSequences[mId];
-            bannerImg.src = frames[frameIndex % frames.length];
+            bannerImg.src = currentPhoneNotiCustomImage;
           } else {
-            bannerImg.classList.add("hidden");
-            bannerSvg.classList.remove("hidden");
-            bannerSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+            const mId = typeof currentPhoneNotiMascotId !== "undefined" ? currentPhoneNotiMascotId : "vui_ve";
+            const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
+            if (hasSeq) {
+              bannerSvg.classList.add("hidden");
+              bannerImg.classList.remove("hidden");
+              const frames = mascotLoadedSequences[mId];
+              bannerImg.src = frames[frameIndex % frames.length];
+            } else {
+              bannerImg.classList.add("hidden");
+              bannerSvg.classList.remove("hidden");
+              bannerSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+            }
           }
         }
 
@@ -38245,17 +38465,23 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             const listImg = document.getElementById(`pwa-noti-list-img-${noti.id}`);
             const listSvg = document.getElementById(`pwa-noti-list-svg-${noti.id}`);
             if (listImg && listSvg) {
-              const mId = noti.mascotId;
-              const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
-              if (hasSeq) {
+              if (noti.customImage) {
                 listSvg.classList.add("hidden");
                 listImg.classList.remove("hidden");
-                const frames = mascotLoadedSequences[mId];
-                listImg.src = frames[frameIndex % frames.length];
+                listImg.src = noti.customImage;
               } else {
-                listImg.classList.add("hidden");
-                listSvg.classList.remove("hidden");
-                listSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+                const mId = noti.mascotId;
+                const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mId] && mascotLoadedSequences[mId].length > 0;
+                if (hasSeq) {
+                  listSvg.classList.add("hidden");
+                  listImg.classList.remove("hidden");
+                  const frames = mascotLoadedSequences[mId];
+                  listImg.src = frames[frameIndex % frames.length];
+                } else {
+                  listImg.classList.add("hidden");
+                  listSvg.classList.remove("hidden");
+                  listSvg.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mId, frameIndex) : "";
+                }
               }
             }
           });
@@ -38279,20 +38505,26 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         let html = "";
         pwaNotifications.forEach((noti) => {
           const notiMascotId = noti.mascotId;
+          const hasCustomImg = !!noti.customImage;
           const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[notiMascotId] && mascotLoadedSequences[notiMascotId].length > 0;
           const miniSvg = typeof drawMascotSVG === "function" ? drawMascotSVG(notiMascotId, 0) : "";
           const activeClass = noti.isActive ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-700";
           const activeToggleChecked = noti.isActive ? "checked" : "";
           const typeLabel = noti.type === "water" ? "🥤 Nước uống" : noti.type === "meal" ? "🍱 Thực đơn" : "🌱 Custom";
           const typeColor = noti.type === "water" ? "bg-cyan-50 dark:bg-cyan-950/30 text-cyan-600 dark:text-cyan-400" : noti.type === "meal" ? "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400" : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400";
+          
+          const displayImgClass = (hasSeq || hasCustomImg) ? '' : 'hidden';
+          const displaySvgClass = (hasSeq || hasCustomImg) ? 'hidden' : '';
+          const imgUrl = hasCustomImg ? noti.customImage : '';
+          const mascotNameText = hasCustomImg ? "Ảnh tùy chỉnh" : getMascotDisplayName(notiMascotId);
 
           html += `
             <div class="flex items-center gap-4 p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800/60 transition-all hover:shadow-md">
               <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-150/50 dark:border-slate-800 shrink-0 flex items-center justify-center overflow-hidden relative">
-                <!-- PNG Sequence Image -->
-                <img id="pwa-noti-list-img-${noti.id}" class="${hasSeq ? '' : 'hidden'} w-full h-full object-contain scale-105" src="" />
+                <!-- PNG Sequence or Custom Image -->
+                <img id="pwa-noti-list-img-${noti.id}" class="${displayImgClass} w-full h-full object-contain scale-105" src="${imgUrl}" />
                 <!-- SVG Vector Backup -->
-                <div id="pwa-noti-list-svg-${noti.id}" class="${hasSeq ? 'hidden' : ''} w-full h-full scale-105 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&_svg]:max-w-full [&_svg]:max-h-full [&_svg]:drop-shadow-none">
+                <div id="pwa-noti-list-svg-${noti.id}" class="${displaySvgClass} w-full h-full scale-105 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&_svg]:max-w-full [&_svg]:max-h-full [&_svg]:drop-shadow-none">
                   ${miniSvg}
                 </div>
               </div>
@@ -38300,7 +38532,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
                 <div class="flex items-center gap-2">
                   <span class="text-xs font-black text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/30 px-2 py-0.5 rounded-md font-mono">${noti.time}</span>
                   <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${typeColor}">${typeLabel}</span>
-                  <span class="text-[10px] text-slate-400 font-medium truncate">${getMascotDisplayName(notiMascotId)}</span>
+                  <span class="text-[10px] text-slate-400 font-medium truncate">${mascotNameText}</span>
                 </div>
                 <h4 class="font-bold text-slate-700 dark:text-slate-200 text-xs mt-1 truncate">${noti.title}</h4>
                 <p class="text-[10px] text-slate-400 truncate leading-snug">${noti.content}</p>
@@ -38358,7 +38590,35 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         
         const select = document.getElementById("pwa-noti-mascot");
         if (select) {
-          select.value = noti.mascotId;
+          select.value = noti.mascotId || "vui_ve";
+        }
+
+        // Set image source select
+        const sourceSelect = document.getElementById("pwa-noti-img-source");
+        if (sourceSelect) {
+          sourceSelect.value = noti.customImage ? "custom" : "mascot";
+          togglePwaNotiImageSource();
+        }
+
+        // Show uploaded custom image if editing a custom image notification
+        pwaNotiUploadedCustomImageBase64 = noti.customImage || null;
+        const previewBox = document.getElementById("pwa-noti-custom-preview-box");
+        const previewImg = document.getElementById("pwa-noti-custom-preview-img");
+        const fileNameLabel = document.getElementById("pwa-noti-custom-file-name");
+
+        if (noti.customImage) {
+          if (previewImg && previewBox) {
+            previewImg.src = noti.customImage;
+            previewBox.classList.remove("hidden");
+          }
+          if (fileNameLabel) {
+            fileNameLabel.innerText = "Ảnh tùy chỉnh hiện tại";
+          }
+        } else {
+          if (previewBox) previewBox.classList.add("hidden");
+          if (fileNameLabel) {
+            fileNameLabel.innerText = "Chưa chọn ảnh nào.";
+          }
         }
 
         const formTitle = document.getElementById("pwa-noti-form-title");
@@ -38390,6 +38650,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
       function savePwaNotification() {
         const time = document.getElementById("pwa-noti-time").value;
+        const imgSource = document.getElementById("pwa-noti-img-source").value;
         const mascotId = document.getElementById("pwa-noti-mascot").value;
         const title = document.getElementById("pwa-noti-title").value.trim();
         const type = document.getElementById("pwa-noti-type").value;
@@ -38408,12 +38669,22 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           return;
         }
 
+        let customImage = null;
+        if (imgSource === "custom") {
+          if (!pwaNotiUploadedCustomImageBase64) {
+            showToast("Vui lòng tải ảnh tùy chỉnh lên hoặc chọn sử dụng Mascot mặc định!", "warning");
+            return;
+          }
+          customImage = pwaNotiUploadedCustomImageBase64;
+        }
+
         if (pwaNotificationEditingId) {
           // Update existing notification
           const notiIndex = pwaNotifications.findIndex(n => n.id === pwaNotificationEditingId);
           if (notiIndex !== -1) {
             pwaNotifications[notiIndex].time = time;
             pwaNotifications[notiIndex].mascotId = mascotId;
+            pwaNotifications[notiIndex].customImage = customImage;
             pwaNotifications[notiIndex].title = title;
             pwaNotifications[notiIndex].type = type;
             pwaNotifications[notiIndex].content = content;
@@ -38427,6 +38698,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             id: "noti-" + Date.now(),
             time,
             mascotId,
+            customImage,
             title,
             type,
             content,
@@ -38443,6 +38715,11 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         if (container) {
           container.classList.add("hidden");
         }
+
+        // Reset custom image selection state
+        pwaNotiUploadedCustomImageBase64 = null;
+        const fileInput = document.getElementById("pwa-noti-custom-file");
+        if (fileInput) fileInput.value = "";
         
         renderPwaNotificationsList();
       }
@@ -38515,7 +38792,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         showToast("Đã mở ứng dụng PWA. Đã xóa chấm đỏ thông báo thành công!", "success");
       }
 
-      function triggerPwaWebNotification(title, body, mascotId) {
+      function triggerPwaWebNotification(title, body, mascotId, customImage) {
         if (!("Notification" in window)) {
           console.log("Trình duyệt không hỗ trợ Web Notifications.");
           return;
@@ -38523,13 +38800,19 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
         const trigger = () => {
           let iconUrl = "/logo.svg";
-          try {
-            if (typeof drawMascotSVG === "function") {
-              const svgString = drawMascotSVG(mascotId, 0);
-              iconUrl = "data:image/svg+xml;utf8," + encodeURIComponent(svgString);
+          if (customImage) {
+            iconUrl = customImage;
+          } else if (typeof pwaCustomIcon !== "undefined" && pwaCustomIcon) {
+            iconUrl = pwaCustomIcon;
+          } else {
+            try {
+              if (typeof drawMascotSVG === "function") {
+                const svgString = drawMascotSVG(mascotId, 0);
+                iconUrl = "data:image/svg+xml;utf8," + encodeURIComponent(svgString);
+              }
+            } catch (e) {
+              console.error("Failed to generate mascot SVG icon for notification:", e);
             }
-          } catch (e) {
-            console.error("Failed to generate mascot SVG icon for notification:", e);
           }
 
           if (navigator.serviceWorker && navigator.serviceWorker.controller) {
@@ -38563,6 +38846,163 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         }
       }
 
+      // ==========================================
+      // REAL PWA FLOATING NOTIFICATIONS SYSTEM
+      // ==========================================
+      let realPwaFloatingTimeout = null;
+      function animateRealPwaFloatingNotification(title, body, mascotId, customImage) {
+        // Play notification sound!
+        if (typeof playNotificationSound === "function") {
+          playNotificationSound();
+        }
+
+        const banner = document.getElementById("real-pwa-floating-notification");
+        const titleEl = document.getElementById("real-pwa-floating-title");
+        const contentEl = document.getElementById("real-pwa-floating-content");
+        const imgEl = document.getElementById("real-pwa-floating-mascot-img");
+        const svgEl = document.getElementById("real-pwa-floating-mascot-svg");
+
+        if (titleEl) titleEl.innerText = title;
+        if (contentEl) contentEl.innerText = body;
+
+        // Draw mascot or custom image
+        if (imgEl && svgEl) {
+          if (customImage) {
+            svgEl.classList.add("hidden");
+            imgEl.classList.remove("hidden");
+            imgEl.src = customImage;
+          } else {
+            const hasSeq = typeof mascotLoadedSequences !== "undefined" && mascotLoadedSequences[mascotId] && mascotLoadedSequences[mascotId].length > 0;
+            if (hasSeq) {
+              svgEl.classList.add("hidden");
+              imgEl.classList.remove("hidden");
+              imgEl.src = mascotLoadedSequences[mascotId][0];
+            } else {
+              imgEl.classList.add("hidden");
+              svgEl.classList.remove("hidden");
+              svgEl.innerHTML = typeof drawMascotSVG === "function" ? drawMascotSVG(mascotId, 0) : "";
+            }
+          }
+        }
+
+        if (banner) {
+          banner.classList.remove("hidden");
+          // Force reflow
+          banner.offsetHeight;
+          banner.style.transform = "translateY(0) scale(1)";
+          banner.style.opacity = "1";
+
+          // Auto hide after 6 seconds
+          clearTimeout(realPwaFloatingTimeout);
+          realPwaFloatingTimeout = setTimeout(() => {
+            banner.style.transform = "translateY(-150%) scale(0.95)";
+            banner.style.opacity = "0";
+          }, 6000);
+        }
+      }
+
+      function clickRealPwaFloatingNotification() {
+        const banner = document.getElementById("real-pwa-floating-notification");
+        if (banner) {
+          banner.style.transform = "translateY(-150%) scale(0.95)";
+          banner.style.opacity = "0";
+        }
+        showToast("Đã xem thông báo từ Mascot Nuri! 🌱", "success");
+      }
+
+      function requestPwaNotificationPermission() {
+        if (!("Notification" in window)) {
+          showToast("Trình duyệt không hỗ trợ thông báo đẩy.", "error");
+          dismissPwaPermissionPrompt();
+          return;
+        }
+        
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            showToast("Tuyệt vời! Bạn sẽ nhận được thông báo nhắc nhở từ Mascot Nuri. 🌱", "success");
+            // Test send an immediate welcome notification with the mascot!
+            triggerPwaWebNotification("Nuri Đã Sẵn Sàng! 🌱", "Chúc mừng bạn đã kết nối thành công trợ lý ảo Nuri. Tôi sẽ đồng hành cùng sức khỏe của bạn mỗi ngày!", "vui_ve");
+            animateRealPwaFloatingNotification("Nuri Đã Sẵn Sàng! 🌱", "Chúc mừng bạn đã kết nối thành công trợ lý ảo Nuri. Tôi sẽ đồng hành cùng sức khỏe của bạn mỗi ngày!", "vui_ve");
+          } else if (permission === "denied") {
+            showToast("Bạn đã từ chối nhận thông báo. Hãy cho phép trong cài đặt trình duyệt để nhận được nhắc nhở.", "info");
+          }
+          dismissPwaPermissionPrompt();
+        });
+      }
+
+      function dismissPwaPermissionPrompt() {
+        const prompt = document.getElementById("pwa-permission-prompt");
+        if (prompt) {
+          prompt.style.transform = "translateY(200%)";
+          prompt.style.opacity = "0";
+          setTimeout(() => prompt.classList.add("hidden"), 500);
+        }
+        // Remember selection for 7 days
+        localStorage.setItem("pwa_permission_prompt_dismissed", Date.now().toString());
+      }
+
+      function checkAndShowPwaPermissionPrompt() {
+        if (!("Notification" in window) || Notification.permission === "granted" || Notification.permission === "denied") {
+          return;
+        }
+
+        // Check if recently dismissed
+        const dismissedTime = localStorage.getItem("pwa_permission_prompt_dismissed");
+        if (dismissedTime) {
+          const sevenDays = 7 * 24 * 60 * 60 * 1000;
+          if (Date.now() - parseInt(dismissedTime) < sevenDays) {
+            return;
+          }
+        }
+
+        // Only show for customers (when mode is landing)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("mode") !== "landing") {
+          return;
+        }
+
+        setTimeout(() => {
+          const prompt = document.getElementById("pwa-permission-prompt");
+          if (prompt) {
+            prompt.classList.remove("hidden");
+            // Force reflow
+            prompt.offsetHeight;
+            prompt.style.transform = "translateY(0)";
+            prompt.style.opacity = "1";
+          }
+        }, 3000); // Show after 3 seconds of load
+      }
+
+      function testPwaNotificationTrigger(id) {
+        if (typeof pwaNotifications === "undefined") return;
+        const noti = pwaNotifications.find(n => n.id === id);
+        if (!noti) {
+          showToast("Không tìm thấy thông báo mẫu!", "error");
+          return;
+        }
+        
+        // Trigger mockup animation on simulated phone
+        if (typeof animatePhoneNotification === "function") {
+          animatePhoneNotification(noti);
+        }
+        
+        // Trigger real web notification
+        triggerPwaWebNotification(noti.title, noti.content, noti.mascotId, noti.customImage);
+        
+        // Trigger real in-app floating banner for user
+        animateRealPwaFloatingNotification(noti.title, noti.content, noti.mascotId, noti.customImage);
+        
+        showToast("Đã gửi thông báo thử nghiệm! 🚀", "success");
+      }
+
+      // Export functions to global scope
+      window.animateRealPwaFloatingNotification = animateRealPwaFloatingNotification;
+      window.clickRealPwaFloatingNotification = clickRealPwaFloatingNotification;
+      window.requestPwaNotificationPermission = requestPwaNotificationPermission;
+      window.dismissPwaPermissionPrompt = dismissPwaPermissionPrompt;
+      window.checkAndShowPwaPermissionPrompt = checkAndShowPwaPermissionPrompt;
+      window.testPwaNotificationTrigger = testPwaNotificationTrigger;
+
       let phoneNotificationTimeout = null;
       function animatePhoneNotification(noti) {
         playNotificationSound();
@@ -38573,6 +39013,8 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         
         currentPhoneNotiMascotId = noti.mascotId;
         currentPhoneGiantMascotId = noti.mascotId;
+        currentPhoneNotiCustomImage = noti.customImage || null;
+        currentPhoneGiantCustomImage = noti.customImage || null;
 
         const giantWidgetBubble = document.getElementById("phone-widget-bubble");
         const giantWidgetLabel = document.getElementById("phone-widget-label");
@@ -38588,16 +39030,20 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           giantWidgetBubble.innerText = `"${noti.content}"`;
         }
         if (giantWidgetLabel) {
-          giantWidgetLabel.innerText = `Nuri Mascot (${getMascotDisplayName(noti.mascotId)})`;
+          if (noti.customImage) {
+            giantWidgetLabel.innerText = "Ảnh thông báo tùy chỉnh";
+          } else {
+            giantWidgetLabel.innerText = `Nuri Mascot (${getMascotDisplayName(noti.mascotId)})`;
+          }
         }
 
         if (banner) {
-          banner.classList.remove("translate-y-[-120%]", "opacity-0", "scale-95");
+          banner.classList.remove("translate-y-[-130%]", "opacity-0", "scale-95");
           banner.classList.add("translate-y-0", "opacity-100", "scale-100");
 
           clearTimeout(phoneNotificationTimeout);
           phoneNotificationTimeout = setTimeout(() => {
-            banner.classList.add("translate-y-[-120%]", "opacity-0", "scale-95");
+            banner.classList.add("translate-y-[-130%]", "opacity-0", "scale-95");
             banner.classList.remove("translate-y-0", "opacity-100", "scale-100");
           }, 6000);
         }
@@ -38667,15 +39113,24 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             if (!pwaLastSentNotifications[trackingKey]) {
               pwaLastSentNotifications[trackingKey] = true;
               
-              // Trigger the notification mockup & real Web Notifications!
-              animatePhoneNotification(noti);
-              triggerPwaWebNotification(noti.title, noti.content, noti.mascotId);
+              // Trigger the notification mockup, real Web Notifications & real floating in-app banner!
+              if (typeof animatePhoneNotification === "function") {
+                animatePhoneNotification(noti);
+              }
+              if (typeof triggerPwaWebNotification === "function") {
+                triggerPwaWebNotification(noti.title, noti.content, noti.mascotId);
+              }
+              if (typeof animateRealPwaFloatingNotification === "function") {
+                animateRealPwaFloatingNotification(noti.title, noti.content, noti.mascotId);
+              }
               
               if (noti.type === 'water' || noti.type === 'meal') {
                 pwaBadgeActive = true;
                 localStorage.setItem("nutriadmin_pwa_badge_active", "true");
                 updateAppBadgeUI();
-                renderPwaNotificationsList();
+                if (typeof renderPwaNotificationsList === "function") {
+                  renderPwaNotificationsList();
+                }
               }
             }
           }
