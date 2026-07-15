@@ -16453,8 +16453,58 @@
           }
           const pctFat = Math.round((todayFat / targetFat) * 100);
           animateCircularProgress('dash-fat-circle', 'dash-fat-pct', pctFat);
+
+          // Calorie Warning Check
+          if (todayTotal > targetCal) {
+            const todayStr = new Date().toISOString().split('T')[0];
+            const warnedKey = `calorie_warned_${currentUser.phone}_${todayStr}`;
+            if (!localStorage.getItem(warnedKey)) {
+              setTimeout(() => {
+                showCalorieWarningModal(todayTotal, targetCal);
+                localStorage.setItem(warnedKey, "true");
+              }, 1500); // Wait a bit after load to show popup
+            }
+          }
         }
       }
+
+      function showCalorieWarningModal(current, target) {
+        const modal = document.getElementById('calorie-warning-modal');
+        const content = document.getElementById('calorie-warning-modal-content');
+        const targetEl = document.getElementById('calorie-warning-target');
+        const img = document.getElementById('calorie-warning-mascot-img');
+        
+        if (!modal || !content) return;
+        
+        if (targetEl) targetEl.innerText = `${target} kcal`;
+        if (img) img.src = "/mascots/ngac_nhien.png";
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        // Force reflow
+        modal.offsetHeight;
+        
+        modal.classList.remove('opacity-0');
+        content.classList.remove('scale-95');
+      }
+
+      function closeCalorieWarningModal() {
+        const modal = document.getElementById('calorie-warning-modal');
+        const content = document.getElementById('calorie-warning-modal-content');
+        
+        if (!modal || !content) return;
+        
+        modal.classList.add('opacity-0');
+        content.classList.add('scale-95');
+        
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }, 300);
+      }
+      
+      window.closeCalorieWarningModal = closeCalorieWarningModal;
 
       function updateShareRewardBadge() {
         if (!currentUser) return;
@@ -36798,6 +36848,30 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       </div>
     </div>
 
+    <!-- Calorie Warning Modal -->
+    <div id="calorie-warning-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[120] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+      <div id="calorie-warning-modal-content" class="bg-white w-[90%] sm:w-[380px] rounded-[32px] p-6 transform scale-95 transition-all duration-300 shadow-2xl relative overflow-hidden text-center">
+        <!-- Glow background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-orange-500/10 pointer-events-none"></div>
+        
+        <!-- Mascot -->
+        <div class="relative w-28 h-28 mx-auto mb-4 bg-rose-50 rounded-full flex items-center justify-center p-3 border-4 border-white shadow-xl">
+          <img id="calorie-warning-mascot-img" src="/mascots/vui_ve.png" alt="Ngạc nhiên" class="w-full h-full object-contain mix-blend-multiply drop-shadow-md">
+        </div>
+        
+        <h3 class="text-xl font-black text-slate-800 mb-2 font-display relative z-10" id="calorie-warning-title">Ôi, hơi nhiều Calo rồi!</h3>
+        <p class="text-sm text-slate-600 mb-6 relative z-10 leading-relaxed" id="calorie-warning-desc">
+          Bạn vừa nạp vượt mức <span class="font-bold text-rose-500" id="calorie-warning-target">1500 kcal</span> mục tiêu hôm nay. Hãy chú ý vận động thêm để đốt cháy calo dư thừa nhé!
+        </p>
+        
+        <div class="relative z-10">
+          <button onclick="closeCalorieWarningModal()" class="w-full py-3.5 bg-slate-900 text-white font-bold rounded-2xl shadow-lg hover:bg-slate-800 hover:shadow-xl transition-all active:scale-[0.98]">
+            Đã hiểu, Nuri!
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Add Calorie Modal -->
     <div id="add-calorie-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] hidden items-end justify-center sm:items-center opacity-0 transition-opacity duration-300">
       <div id="add-calorie-modal-content" class="bg-white w-full sm:w-[400px] rounded-t-3xl sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300">
@@ -38269,18 +38343,6 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             }
           }
           if (manifestLink) {
-            if ('caches' in window) {
-              fetch(pwaCustomIcon)
-                .then(res => res.blob())
-                .then(blob => {
-                  caches.open('pwa-dynamic-assets').then(cache => {
-                    cache.put('/dynamic-pwa-icon.png', new Response(blob, {
-                      headers: { 'Content-Type': blob.type, 'Cache-Control': 'no-cache' }
-                    }));
-                  });
-                })
-                .catch(e => console.error("Error caching PWA icon:", e));
-            }
 
             const manifestObj = {
               "short_name": "Nuri",
@@ -38288,7 +38350,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
               "description": "Chuyên gia dinh dưỡng ảo & Thực đơn cá nhân hóa của bạn",
               "icons": [
                 {
-                  "src": "/dynamic-pwa-icon.png",
+                  "src": pwaCustomIcon,
                   "type": pwaCustomIcon.startsWith("data:image/svg") ? "image/svg+xml" : (pwaCustomIcon.startsWith("data:image/png") ? "image/png" : "image/jpeg"),
                   "sizes": "192x192 512x512",
                   "purpose": "any maskable"
