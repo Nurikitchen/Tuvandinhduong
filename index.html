@@ -38248,7 +38248,26 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             }
           }
           if (manifestLink) {
-            manifestLink.href = `/manifest.json?v=${pwaCustomIcon.length || Date.now()}`;
+            const manifestObj = {
+              "short_name": "Nuri",
+              "name": "Nuri - Tư Vấn Dinh Dưỡng",
+              "description": "Chuyên gia dinh dưỡng ảo & Thực đơn cá nhân hóa của bạn",
+              "icons": [
+                {
+                  "src": pwaCustomIcon,
+                  "type": pwaCustomIcon.startsWith("data:image/svg") ? "image/svg+xml" : (pwaCustomIcon.startsWith("data:image/png") ? "image/png" : "image/jpeg"),
+                  "sizes": "192x192 512x512",
+                  "purpose": "any maskable"
+                }
+              ],
+              "start_url": "/?mode=landing",
+              "background_color": "#f8fafc",
+              "theme_color": "#10b981",
+              "display": "standalone",
+              "orientation": "portrait"
+            };
+            const blob = new Blob([JSON.stringify(manifestObj)], {type: "application/json"});
+            manifestLink.href = URL.createObjectURL(blob);
           }
         } else {
           if (appleTouchIcon) appleTouchIcon.href = "/logo.svg";
