@@ -776,6 +776,9 @@
               if (data.geminiApiKey) {
                 window.NURI_GEMINI_API_KEY = data.geminiApiKey;
               }
+              if (data.appUrl) {
+                window.APP_URL = data.appUrl;
+              }
               window.NURI_CONFIG_SOURCE = "server";
               loaded = true;
               if (typeof initFirebaseSync === 'function') initFirebaseSync();
@@ -20783,6 +20786,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       // ==========================================
       function getBaseUrl() {
         let baseUrl = window.location.href.split("?")[0].split("#")[0];
+        if (window.APP_URL) return window.APP_URL;
         if (
           baseUrl.startsWith("blob:") ||
           baseUrl === "about:srcdoc" ||
@@ -35916,9 +35920,12 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
         const mode = urlParams.get("mode");
         const utmSourceParam = urlParams.get("utm_source") || urlParams.get("source");
-        if (utmSourceParam) {
-          logQrScanOnLoad(utmSourceParam);
-        }
+        // Fetch state instantly on load so initial actions like QR scans sync properly
+        pollStateFromServer().then(() => {
+          if (utmSourceParam) {
+            logQrScanOnLoad(utmSourceParam);
+          }
+        });
 
         if (mode === "landing") {
           const nav = document.querySelector("nav");
