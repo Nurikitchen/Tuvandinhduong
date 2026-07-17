@@ -20794,8 +20794,22 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       }
 
       function buildUrlWithCredentials(base) {
-        // Khi chạy trên máy chủ thực tế, không cần nhúng config vào URL
-        // để URL ngắn gọn, giúp mã QR đơn giản và dễ quét hơn.
+        const apiKey = localStorage.getItem("nutriadmin_custom_api_key") || window.NURI_GEMINI_API_KEY || "";
+        const firebaseConfig = localStorage.getItem("nutriadmin_custom_firebase_config") || window.NURI_FIREBASE_CONFIG || "";
+        
+        if (apiKey || firebaseConfig) {
+          try {
+            const fbParsed = typeof firebaseConfig === "string" && firebaseConfig.startsWith("{") ? JSON.parse(firebaseConfig) : firebaseConfig;
+            const cfg = { ak: apiKey, fb: fbParsed };
+            const cfgStr = encodeURIComponent(JSON.stringify(cfg));
+            const cfgHash = btoa(cfgStr);
+            const sep = base.includes("?") ? "&" : "?";
+            return base + sep + "cfg=" + cfgHash;
+          } catch(e) {
+            console.error(e);
+            return base;
+          }
+        }
         return base;
       }
 
