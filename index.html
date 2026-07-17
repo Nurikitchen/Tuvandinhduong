@@ -2627,9 +2627,8 @@
                         class="font-bold text-slate-700 mb-3 flex items-center gap-2"
                       >
                         <img
-                          src="https://test-payment.momo.vn/v2/gateway/resources/images/logos/momo_logo_pink.png"
-                          onerror="this.onerror=null; this.src='https://homepage.momocdn.net/img/momo-upload-api-220810142637-637957383979148092.png';"
-                          class="h-5"
+                          src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+                          class="h-5 rounded-md"
                           alt="MoMo"
                         />
                         Mã QR Ví MoMo
@@ -4038,6 +4037,265 @@
             </div>
           </div>
 
+          <!-- TRUST BANNER CONFIGURATION SECTION -->
+          <div
+            class="mt-8 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-100"
+          >
+            <div>
+              <h3 class="font-bold text-slate-800 text-lg">
+                Cấu Hình Trust Banner (Trang Tư Vấn & Trang Cá Nhân)
+              </h3>
+              <p class="text-sm text-slate-500 mt-1">
+                Chỉnh sửa trực tiếp nội dung bằng cách nhấn vào văn bản và nhập chữ mới để thay đổi. Thông tin sẽ lập tức đồng bộ sang trang tư vấn và trang cá nhân khách hàng. Nhấp vào 2 ảnh tròn để thay đổi ảnh.
+              </p>
+            </div>
+          </div>
+
+          <!-- TRUST BANNER WRAPPER -->
+          <div class="banner-scale-wrapper mt-4 mb-8 relative">
+            <div
+              class="banner-scale bg-[#043F2E] rounded-3xl overflow-hidden shadow-2xl flex flex-row items-center p-8 md:p-12 text-left relative"
+            >
+              <!-- Background pattern/glow -->
+              <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_var(--tw-gradient-stops))] from-emerald-600/20 via-transparent to-transparent opacity-80 pointer-events-none"
+              ></div>
+
+              <div class="relative z-10 w-[60%] lg:w-[55%] pr-2 md:pr-8 mb-0">
+                <!-- Badge -->
+                <div
+                  class="inline-flex items-center gap-3 px-6 md:px-8 py-2 md:py-3 rounded-full bg-emerald-900/50 border-[3px] border-emerald-700/50 text-emerald-300 text-[10px] md:text-sm font-bold mb-3 md:mb-6 uppercase tracking-wider backdrop-blur-sm shadow-lg"
+                >
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span
+                    id="admin-trust-brand-name"
+                    contenteditable="true"
+                    spellcheck="false"
+                    oninput="window.updateTrustField('brandName', this.innerText)"
+                    class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-emerald-300"
+                    >Nuri Kitchen</span
+                  >
+                  <div
+                    class="w-10 h-10 md:w-14 md:h-14 shrink-0 flex items-center justify-center relative ml-3"
+                  >
+                    <img
+                      id="trust-banner-mascot-admin-img"
+                      class="hidden w-full h-full object-contain drop-shadow-md"
+                      src=""
+                    />
+                    <div
+                      id="trust-banner-mascot-admin-svg"
+                      class="w-full h-full"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Heading -->
+                <h1
+                  class="text-[20px] sm:text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 leading-tight tracking-tight"
+                >
+                  <span
+                    id="admin-trust-title"
+                    contenteditable="true"
+                    spellcheck="false"
+                    oninput="window.updateTrustField('title', this.innerHTML)"
+                    class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-white block"
+                    >Khám phá dinh dưỡng<br class="hidden md:block" /> cá nhân hóa</span
+                  >
+                </h1>
+
+                <!-- Subheading -->
+                <p
+                  class="text-emerald-100/80 text-[11px] sm:text-[13px] md:text-lg mb-4 md:mb-8 max-w-lg leading-[1.4] md:leading-relaxed"
+                >
+                  <span
+                    id="admin-trust-subtitle"
+                    contenteditable="true"
+                    spellcheck="false"
+                    oninput="window.updateTrustField('subtitle', this.innerHTML)"
+                    class="focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-emerald-100/80 block"
+                    >Nuri phân tích chỉ số cơ thể và đề xuất thực đơn phù hợp với mục tiêu của bạn chỉ trong 4 bước đơn giản.</span
+                  >
+                </p>
+
+                <!-- Trust indicators -->
+                <div
+                  class="flex flex-col items-start gap-1 md:gap-2 mb-4 md:mb-8"
+                >
+                  <div class="flex -space-x-1.5 md:-space-x-3">
+                    <img
+                      class="w-6 h-6 md:w-11 md:h-11 rounded-full border-2 border-[#043F2E] object-cover"
+                      src="https://i.pravatar.cc/100?img=11"
+                      alt="Avatar"
+                    />
+                    <img
+                      class="w-6 h-6 md:w-11 md:h-11 rounded-full border-2 border-[#043F2E] object-cover"
+                      src="https://i.pravatar.cc/100?img=12"
+                      alt="Avatar"
+                    />
+                    <img
+                      class="hidden sm:block w-6 h-6 md:w-11 md:h-11 rounded-full border-2 border-[#043F2E] object-cover"
+                      src="https://i.pravatar.cc/100?img=33"
+                      alt="Avatar"
+                    />
+                    <img
+                      class="hidden md:block w-11 h-11 rounded-full border-2 border-[#043F2E] object-cover"
+                      src="https://i.pravatar.cc/100?img=14"
+                      alt="Avatar"
+                    />
+                  </div>
+                  <div
+                    class="text-emerald-200/90 text-[10px] md:text-sm font-medium leading-[1.1] md:leading-normal"
+                  >
+                    <span
+                      id="admin-trust-count"
+                      contenteditable="true"
+                      spellcheck="false"
+                      oninput="window.updateTrustField('trustCount', this.innerText)"
+                      class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-white font-bold text-xs md:text-base"
+                      >5.000+</span
+                    >
+                    <span
+                      id="admin-trust-text"
+                      contenteditable="true"
+                      spellcheck="false"
+                      oninput="window.updateTrustField('trustText', this.innerText)"
+                      class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors"
+                      >khách đã tin tưởng</span
+                    >
+                  </div>
+                </div>
+
+                <!-- CTA and notice -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-5"
+                >
+                  <button
+                    class="inline-flex items-center justify-center px-4 md:px-7 py-2.5 md:py-3.5 bg-[#059669] text-white rounded-xl font-bold text-[11px] sm:text-xs md:text-base transition-all duration-300 shadow-[0_8px_20px_rgba(5,150,105,0.3)] lg:hover:-translate-y-1 active:scale-[0.98] lg:hover:shadow-lg lg:hover:bg-[#047857] whitespace-nowrap animate-glow-pulse-emerald"
+                  >
+                    <span
+                      id="admin-trust-cta"
+                      contenteditable="true"
+                      spellcheck="false"
+                      oninput="window.updateTrustField('ctaText', this.innerText)"
+                      class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-white"
+                      >Bắt đầu phân tích</span
+                    >
+                    <i
+                      class="fa-solid fa-arrow-right ml-1.5 md:ml-2.5 text-[10px] md:text-sm text-white ml-2"
+                    ></i>
+                  </button>
+                  <div
+                    class="flex items-center gap-2 md:gap-3 text-emerald-200/70 text-[10px] md:text-sm"
+                  >
+                    <i
+                      class="fa-solid fa-chevron-right hidden md:block text-emerald-600"
+                    ></i>
+                    <div class="flex flex-col gap-0.5">
+                      <span
+                        id="admin-trust-free"
+                        contenteditable="true"
+                        spellcheck="false"
+                        oninput="window.updateTrustField('freeText', this.innerText)"
+                        class="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-emerald-800/85 rounded px-1 -mx-1 cursor-text transition-colors text-white font-semibold"
+                        >Miễn phí 100%</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Image Area -->
+              <div
+                class="relative z-10 w-[40%] lg:w-[45%] flex justify-center items-center h-[200px] md:h-auto min-h-[0] md:min-h-[300px]"
+              >
+                <div
+                  class="relative w-[130%] md:w-full max-w-[400px] aspect-square flex items-center justify-center translate-x-[10%] md:translate-x-0"
+                >
+                  <!-- Concentric circles -->
+                  <div
+                    class="absolute inset-0 rounded-full border border-dashed border-emerald-500/30 scale-[0.8] md:scale-[0.85] pointer-events-none animate-spin-slow"
+                  ></div>
+                  <div
+                    class="absolute inset-0 rounded-full border border-dotted border-emerald-500/20 scale-[1.05] md:scale-[1.1] pointer-events-none animate-[spin_25s_linear_infinite_reverse]"
+                  ></div>
+                  <div
+                    class="absolute inset-0 rounded-full border border-dashed border-emerald-500/10 scale-[1.3] md:scale-[1.35] pointer-events-none animate-spin-slow"
+                  ></div>
+
+                  <!-- Food Images with upload trigger -->
+                  <div
+                    id="admin-trust-top-container"
+                    onclick="document.getElementById('trust-img-top-upload').click()"
+                    class="absolute top-[5%] right-[5%] md:right-[0%] w-[70%] h-[70%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-2xl border-[3px] md:border-[6px] border-[#043F2E] overflow-hidden z-20 animate-float cursor-pointer group/trust-top"
+                    title="Nhấn để thay đổi ảnh trên"
+                  >
+                    <img id="user-banner-img-trust-top-3"
+                      src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1000&auto=format&fit=crop"
+                      alt="Healthy Food"
+                      class="w-full h-full object-cover transform hover:scale-110 transition-all duration-700 group-hover/trust-top:brightness-75"
+                    />
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/trust-top:opacity-100 transition-opacity bg-black/40 rounded-full">
+                      <span class="text-white font-bold text-xs flex items-center gap-1">
+                        <i class="fa-solid fa-camera"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    id="admin-trust-bottom-container"
+                    onclick="document.getElementById('trust-img-bottom-upload').click()"
+                    class="absolute bottom-[5%] left-[5%] md:left-[5%] w-[50%] h-[50%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-2xl border-[3px] md:border-[6px] border-[#043F2E] overflow-hidden z-30 animate-float-delayed cursor-pointer group/trust-bottom"
+                    title="Nhấn để thay đổi ảnh dưới"
+                  >
+                    <img id="user-banner-img-trust-bottom-3"
+                      src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1000&auto=format&fit=crop"
+                      alt="Salad"
+                      class="w-full h-full object-cover transform hover:scale-110 transition-all duration-700 group-hover/trust-bottom:brightness-75"
+                    />
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/trust-bottom:opacity-100 transition-opacity bg-black/40 rounded-full">
+                      <span class="text-white font-bold text-xs flex items-center gap-1">
+                        <i class="fa-solid fa-camera"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Central PNG Sequence Image with manual scale -->
+                  <div
+                    id="admin-trust-center-container"
+                    onclick="document.getElementById('trust-img-center-upload').click()"
+                    class="absolute w-[60%] h-[60%] flex items-center justify-center z-25 animate-float cursor-pointer"
+                    title="Nhấn để thay đổi ảnh giữa"
+                  >
+                    <div id="admin-trust-center-scale-wrapper" class="w-full h-full group/trust-center relative transition-transform duration-300" style="transform: scale(1.0);">
+                      <img id="user-banner-img-trust-center-3"
+                        src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1000&auto=format&fit=crop"
+                        alt="Center Image"
+                        class="w-full h-full object-contain transform hover:scale-110 transition-all duration-700 group-hover/trust-center:brightness-75"
+                      />
+                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/trust-center:opacity-100 transition-opacity bg-black/40 rounded-xl">
+                        <span class="text-white font-bold text-xs flex items-center gap-1">
+                          <i class="fa-solid fa-camera"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Icons/Badges -->
+                  <div
+                    class="absolute top-[20%] left-[10%] bg-[#064E3B] text-emerald-400 w-7 h-7 md:w-10 md:h-10 rounded-md md:rounded-xl flex items-center justify-center shadow-lg border border-emerald-700/50 z-40 transform -rotate-12 animate-float text-[10px] md:text-sm"
+                  >
+                    <i class="fa-solid fa-chart-line"></i>
+                  </div>
+                  <div
+                    class="absolute bottom-[35%] right-[0%] bg-[#064E3B] text-emerald-400 w-7 h-7 md:w-10 md:h-10 rounded-md md:rounded-xl flex items-center justify-center shadow-lg border border-emerald-700/50 z-40 transform rotate-12 animate-float-delayed text-[10px] md:text-sm"
+                  >
+                    <i class="fa-regular fa-heart"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           
           <div
             class="mt-8 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-100"
@@ -4061,26 +4319,58 @@
           </div>
 
           <div
-            class="mt-8 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-100"
+            class="mt-8 flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex-wrap gap-4"
           >
             <div>
               <h3 class="font-bold text-slate-800 text-lg">
                 Ảnh Trust Banner (Trang Tư Vấn - Hero Section)
               </h3>
               <p class="text-sm text-slate-500">
-                Tải lên ảnh hoặc PNG sequence (chọn nhiều file) cho 2 ảnh trong Trust Banner
+                Tải lên ảnh hoặc PNG sequence (chọn nhiều file) và Bật/Tắt, tùy chỉnh kích thước cho các ảnh trong Trust Banner
               </p>
             </div>
-            <div class="flex gap-4">
+            <div class="flex flex-wrap gap-4 items-center">
               <input type="file" id="trust-img-top-upload" class="hidden" accept="image/*" multiple onchange="handleBannerImageUpload(event, 'trust-top')" />
               <input type="file" id="trust-img-bottom-upload" class="hidden" accept="image/*" multiple onchange="handleBannerImageUpload(event, 'trust-bottom')" />
+              <input type="file" id="trust-img-center-upload" class="hidden" accept="image/*" multiple onchange="handleBannerImageUpload(event, 'trust-center')" />
               
-              <button onclick="document.getElementById('trust-img-top-upload').click()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-200 transition-colors">
-                <i class="fa-solid fa-camera mr-2"></i> Ảnh Trên
-              </button>
-              <button onclick="document.getElementById('trust-img-bottom-upload').click()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-200 transition-colors">
-                <i class="fa-solid fa-camera mr-2"></i> Ảnh Dưới
-              </button>
+              <div class="flex items-center gap-2 bg-emerald-50/50 p-1.5 rounded-lg border border-emerald-100">
+                <button onclick="document.getElementById('trust-img-top-upload').click()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-200 transition-colors">
+                  <i class="fa-solid fa-camera mr-2"></i> Ảnh Trên
+                </button>
+                <label class="relative inline-flex items-center cursor-pointer ml-1 select-none">
+                  <input type="checkbox" id="toggle-trust-top" class="sr-only peer" checked onchange="window.toggleTrustImage('top', this.checked)">
+                  <div class="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+                  <span class="ml-1.5 text-xs font-semibold text-slate-600">Hiện</span>
+                </label>
+              </div>
+
+              <div class="flex items-center gap-2 bg-emerald-50/50 p-1.5 rounded-lg border border-emerald-100">
+                <button onclick="document.getElementById('trust-img-bottom-upload').click()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-200 transition-colors">
+                  <i class="fa-solid fa-camera mr-2"></i> Ảnh Dưới
+                </button>
+                <label class="relative inline-flex items-center cursor-pointer ml-1 select-none">
+                  <input type="checkbox" id="toggle-trust-bottom" class="sr-only peer" checked onchange="window.toggleTrustImage('bottom', this.checked)">
+                  <div class="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+                  <span class="ml-1.5 text-xs font-semibold text-slate-600">Hiện</span>
+                </label>
+              </div>
+
+              <div class="flex items-center gap-2 bg-emerald-50/50 p-1.5 rounded-lg border border-emerald-100 flex-wrap">
+                <button onclick="document.getElementById('trust-img-center-upload').click()" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-200 transition-colors">
+                  <i class="fa-solid fa-camera mr-2"></i> Ảnh Giữa
+                </button>
+                <label class="relative inline-flex items-center cursor-pointer ml-1 select-none">
+                  <input type="checkbox" id="toggle-trust-center" class="sr-only peer" checked onchange="window.toggleTrustImage('center', this.checked)">
+                  <div class="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+                  <span class="ml-1.5 text-xs font-semibold text-slate-600">Hiện</span>
+                </label>
+                <div class="flex items-center gap-1.5 border-l border-emerald-200 pl-2 ml-1">
+                  <span class="text-xs text-slate-500 font-semibold whitespace-nowrap">Scale:</span>
+                  <input type="range" id="scale-trust-center" min="30" max="250" value="100" class="w-16 h-1 bg-emerald-200 rounded-lg appearance-none cursor-pointer accent-emerald-600" oninput="window.changeTrustCenterScale(this.value)" />
+                  <span id="scale-trust-center-val" class="text-xs font-bold text-emerald-700 min-w-[2.5rem] text-right">100%</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -5407,7 +5697,7 @@
                   class="inline-flex items-center gap-3 px-6 md:px-8 py-2 md:py-3 rounded-full bg-emerald-900/50 border-[3px] border-emerald-700/50 text-emerald-300 text-[10px] md:text-sm font-bold mb-3 md:mb-6 uppercase tracking-wider backdrop-blur-sm shadow-lg"
                 >
                   <i class="fa-solid fa-wand-magic-sparkles"></i>
-                  <span id="landing-brand-name">Nuri Kitchen</span>
+                  <span id="landing-brand-name"><span id="user-trust-brand-name-1">Nuri Kitchen</span></span>
                   <div
                     class="w-10 h-10 md:w-14 md:h-14 shrink-0 flex items-center justify-center relative ml-3"
                   >
@@ -5426,6 +5716,7 @@
                 <!-- Heading -->
                 <h1
                   class="text-[20px] sm:text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 leading-tight tracking-tight"
+                  id="user-trust-title-1"
                 >
                   Khám phá dinh dưỡng<br class="hidden md:block" />
                   cá nhân hóa
@@ -5434,6 +5725,7 @@
                 <!-- Subheading -->
                 <p
                   class="text-emerald-100/80 text-[11px] sm:text-[13px] md:text-lg mb-4 md:mb-8 max-w-lg leading-[1.4] md:leading-relaxed"
+                  id="user-trust-subtitle-1"
                 >
                   Nuri phân tích chỉ số cơ thể và đề xuất thực đơn phù hợp<span
                     class="hidden sm:inline"
@@ -5472,10 +5764,10 @@
                   <div
                     class="text-emerald-200/90 text-[10px] md:text-sm font-medium leading-[1.1] md:leading-normal"
                   >
-                    <span class="text-white font-bold text-xs md:text-base"
+                    <span class="text-white font-bold text-xs md:text-base" id="user-trust-count-1"
                       >5.000+</span
                     >
-                    khách đã tin tưởng
+                    <span id="user-trust-text-1">khách đã tin tưởng</span>
                   </div>
                 </div>
 
@@ -5491,9 +5783,9 @@
                     "
                     class="inline-flex items-center justify-center px-4 md:px-7 py-2.5 md:py-3.5 bg-[#059669] text-white rounded-xl font-bold text-[11px] sm:text-xs md:text-base transition-all duration-300 shadow-[0_8px_20px_rgba(5,150,105,0.3)] lg:hover:-translate-y-1 active:scale-[0.98] lg:hover:shadow-lg lg:hover:bg-[#047857] whitespace-nowrap animate-glow-pulse-emerald"
                   >
-                    Bắt đầu phân tích
+                    <span id="user-trust-cta-1">Bắt đầu phân tích</span>
                     <i
-                      class="fa-solid fa-arrow-right ml-1.5 md:ml-2.5 text-[10px] md:text-sm"
+                      class="fa-solid fa-arrow-right ml-1.5 md:ml-2.5 text-[10px] md:text-sm text-white ml-2"
                     ></i>
                   </button>
                   <div
@@ -5503,7 +5795,7 @@
                       class="fa-solid fa-chevron-right hidden md:block text-emerald-600"
                     ></i>
                     <div class="flex flex-col gap-0.5">
-                      <span class="text-white font-semibold"
+                      <span class="text-white font-semibold" id="user-trust-free-1"
                         >Miễn phí 100%</span
                       >
                     </div>
@@ -5531,6 +5823,7 @@
 
                   <!-- Food Images -->
                   <div
+                    id="user-trust-top-container-1"
                     class="absolute top-[5%] right-[5%] md:right-[0%] w-[70%] h-[70%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-2xl border-[3px] md:border-[6px] border-[#043F2E] overflow-hidden z-20 animate-float"
                   >
                     <img id="user-banner-img-trust-top"
@@ -5540,6 +5833,7 @@
                     />
                   </div>
                   <div
+                    id="user-trust-bottom-container-1"
                     class="absolute bottom-[5%] left-[5%] md:left-[5%] w-[50%] h-[50%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-2xl border-[3px] md:border-[6px] border-[#043F2E] overflow-hidden z-30 animate-float-delayed"
                   >
                     <img id="user-banner-img-trust-bottom"
@@ -5547,6 +5841,20 @@
                       alt="Salad"
                       class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
                     />
+                  </div>
+
+                  <!-- Central PNG Sequence Image with manual scale -->
+                  <div
+                    id="user-trust-center-container-1"
+                    class="absolute w-[60%] h-[60%] flex items-center justify-center z-25 animate-float"
+                  >
+                    <div id="user-trust-center-scale-wrapper-1" class="w-full h-full transition-transform duration-300" style="transform: scale(1.0);">
+                      <img id="user-banner-img-trust-center"
+                        src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1000&auto=format&fit=crop"
+                        alt="Center Image"
+                        class="w-full h-full object-contain transform hover:scale-110 transition-transform duration-700"
+                      />
+                    </div>
                   </div>
 
                   <!-- Floating Icons/Badges -->
@@ -7070,6 +7378,7 @@
                       >
                         Quét mã QR để thanh toán
                       </p>
+                      <div id="payment-logo-container" class="mb-3 flex justify-center"></div>
                       <img
                         id="payment-qr-image"
                         src="https://via.placeholder.com/200x200.png?text=QR+Code"
@@ -7239,7 +7548,7 @@
                 class="inline-flex items-center gap-3 px-6 md:px-8 py-2 md:py-3 rounded-full bg-emerald-900/50 border-[3px] border-emerald-700/50 text-emerald-300 text-[10px] md:text-sm font-bold mb-3 md:mb-5 uppercase tracking-wider backdrop-blur-sm shadow-lg"
               >
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <span>Nuri Kitchen</span>
+                <span id="user-trust-brand-name-2">Nuri Kitchen</span>
                 <div
                   class="w-10 h-10 shrink-0 flex items-center justify-center relative ml-3"
                 >
@@ -7258,6 +7567,7 @@
               <!-- Heading -->
               <h1
                 class="text-[18px] sm:text-xl md:text-3xl lg:text-4xl font-black text-white mb-2 md:mb-3 leading-tight tracking-tight"
+                id="user-trust-title-2"
               >
                 Khám phá dinh dưỡng<br class="hidden md:block" />
                 cá nhân hóa
@@ -7266,6 +7576,7 @@
               <!-- Subheading -->
               <p
                 class="text-emerald-100/80 text-[10px] sm:text-[11px] md:text-[13px] mb-3 md:mb-5 max-w-lg leading-[1.4] md:leading-relaxed"
+                id="user-trust-subtitle-2"
               >
                 Nuri phân tích chỉ số cơ thể và đề xuất thực đơn phù hợp<span
                   class="hidden sm:inline"
@@ -7289,7 +7600,7 @@
                     class="w-5 h-5 md:w-8 md:h-8 rounded-full border-2 border-[#043F2E] object-cover"
                     src="https://i.pravatar.cc/100?img=12"
                     alt="Avatar"
-                  />
+                    />
                   <img
                     class="hidden sm:block w-5 h-5 md:w-8 md:h-8 rounded-full border-2 border-[#043F2E] object-cover"
                     src="https://i.pravatar.cc/100?img=33"
@@ -7304,10 +7615,10 @@
                 <div
                   class="text-emerald-200/90 text-[9px] md:text-[11px] font-medium leading-[1.1] md:leading-normal"
                 >
-                  <span class="text-white font-bold text-[10px] md:text-[12px]"
+                  <span class="text-white font-bold text-[10px] md:text-[12px]" id="user-trust-count-2"
                     >5.000+</span
                   >
-                  khách đã tin tưởng
+                  <span id="user-trust-text-2">khách đã tin tưởng</span>
                 </div>
               </div>
 
@@ -7331,9 +7642,9 @@
                   "
                   class="inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 bg-[#059669] text-white rounded-lg font-bold text-[10px] sm:text-[11px] md:text-[13px] transition-all duration-300 shadow-[0_4px_10px_rgba(5,150,105,0.3)] lg:hover:-translate-y-0.5 active:scale-[0.98] lg:hover:shadow-md lg:hover:bg-[#047857] whitespace-nowrap animate-glow-pulse-emerald relative z-20"
                 >
-                  Bắt đầu phân tích
+                  <span id="user-trust-cta-2">Bắt đầu phân tích</span>
                   <i
-                    class="fa-solid fa-arrow-right ml-1.5 md:ml-2 text-[9px] md:text-[11px]"
+                    class="fa-solid fa-arrow-right ml-1.5 md:ml-2 text-[9px] md:text-[11px] text-white ml-1.5"
                   ></i>
                 </button>
                 <div
@@ -7343,7 +7654,7 @@
                     class="fa-solid fa-chevron-right hidden md:block text-emerald-600"
                   ></i>
                   <div class="flex flex-col gap-0.5">
-                    <span class="text-white font-semibold">Miễn phí 100%</span>
+                    <span class="text-white font-semibold" id="user-trust-free-2">Miễn phí 100%</span>
                   </div>
                 </div>
               </div>
@@ -7369,6 +7680,7 @@
 
                 <!-- Food Images -->
                 <div
+                  id="user-trust-top-container-2"
                   class="absolute top-[5%] right-[5%] md:right-[0%] w-[70%] h-[70%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-xl border-[2px] md:border-[4px] border-[#043F2E] overflow-hidden z-20 animate-float"
                 >
                   <img
@@ -7379,6 +7691,7 @@
                   />
                 </div>
                 <div
+                  id="user-trust-bottom-container-2"
                   class="absolute bottom-[5%] left-[5%] md:left-[5%] w-[50%] h-[50%] rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.3)] md:shadow-xl border-[2px] md:border-[4px] border-[#043F2E] overflow-hidden z-30 animate-float-delayed"
                 >
                   <img
@@ -7387,6 +7700,21 @@
                     alt="Salad"
                     class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
                   />
+                </div>
+
+                <!-- Central PNG Sequence Image with manual scale -->
+                <div
+                  id="user-trust-center-container-2"
+                  class="absolute w-[60%] h-[60%] flex items-center justify-center z-25 animate-float"
+                >
+                  <div id="user-trust-center-scale-wrapper-2" class="w-full h-full transition-transform duration-300" style="transform: scale(1.0);">
+                    <img
+                      id="user-banner-img-trust-center-2"
+                      src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1000&auto=format&fit=crop"
+                      alt="Center Image"
+                      class="w-full h-full object-contain transform hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -18358,6 +18686,278 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         }
       };
 
+      // Real-time synchronization of Trust Banner fields
+      window.updateTrustField = function (field, value) {
+        const savedSettings = localStorage.getItem("nutriadmin_settings");
+        let settings = savedSettings ? JSON.parse(savedSettings) : {};
+        if (!settings.trustBanner) {
+          settings.trustBanner = {};
+        }
+        settings.trustBanner[field] = value;
+        localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+        // Immediately sync to DOM elements across the 3 banners
+        if (field === 'brandName') {
+          ['landing-brand-name', 'user-trust-brand-name-2', 'admin-trust-brand-name'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) {
+              if (id === 'landing-brand-name') {
+                const subSpan = document.getElementById('user-trust-brand-name-1');
+                if (subSpan) subSpan.innerText = value;
+                else el.innerText = value;
+              } else {
+                el.innerText = value;
+              }
+            }
+          });
+        } else if (field === 'title') {
+          ['user-trust-title-1', 'user-trust-title-2', 'admin-trust-title'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerHTML = value;
+          });
+        } else if (field === 'subtitle') {
+          ['user-trust-subtitle-1', 'user-trust-subtitle-2', 'admin-trust-subtitle'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerHTML = value;
+          });
+        } else if (field === 'trustCount') {
+          ['user-trust-count-1', 'user-trust-count-2', 'admin-trust-count'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerText = value;
+          });
+        } else if (field === 'trustText') {
+          ['user-trust-text-1', 'user-trust-text-2', 'admin-trust-text'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerText = value;
+          });
+        } else if (field === 'ctaText') {
+          ['user-trust-cta-1', 'user-trust-cta-2', 'admin-trust-cta'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerText = value;
+          });
+        } else if (field === 'freeText') {
+          ['user-trust-free-1', 'user-trust-free-2', 'admin-trust-free'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el !== document.activeElement) el.innerText = value;
+          });
+        }
+
+        // Trigger network sync if needed
+        if (typeof syncStateToServer === "function") {
+          clearTimeout(syncTimeout);
+          syncTimeout = setTimeout(() => {
+            syncStateToServer();
+          }, 500);
+        }
+      };
+
+      // Appends defaults or actual settings to all 3 Trust Banners on load
+      window.applyTrustBannerSettings = function (settings) {
+        const tb = settings.trustBanner || {};
+        const defaultBrand = "Nuri Kitchen";
+        const defaultTitle = 'Khám phá dinh dưỡng<br class="hidden md:block" /> cá nhân hóa';
+        const defaultSubtitle = 'Nuri phân tích chỉ số cơ thể và đề xuất thực đơn phù hợp với mục tiêu của bạn chỉ trong 4 bước đơn giản.';
+        const defaultCount = "5.000+";
+        const defaultText = "khách đã tin tưởng";
+        const defaultCta = "Bắt đầu phân tích";
+        const defaultFree = "Miễn phí 100%";
+
+        const brandVal = tb.brandName !== undefined ? tb.brandName : defaultBrand;
+        const titleVal = tb.title !== undefined ? tb.title : defaultTitle;
+        const subtitleVal = tb.subtitle !== undefined ? tb.subtitle : defaultSubtitle;
+        const countVal = tb.trustCount !== undefined ? tb.trustCount : defaultCount;
+        const textVal = tb.trustText !== undefined ? tb.trustText : defaultText;
+        const ctaVal = tb.ctaText !== undefined ? tb.ctaText : defaultCta;
+        const freeVal = tb.freeText !== undefined ? tb.freeText : defaultFree;
+
+        // Sync brand name
+        const b1 = document.getElementById('user-trust-brand-name-1');
+        if (b1) b1.innerText = brandVal;
+        const b2 = document.getElementById('user-trust-brand-name-2');
+        if (b2) b2.innerText = brandVal;
+        const bAdmin = document.getElementById('admin-trust-brand-name');
+        if (bAdmin) bAdmin.innerText = brandVal;
+
+        // Sync title
+        const t1 = document.getElementById('user-trust-title-1');
+        if (t1) t1.innerHTML = titleVal;
+        const t2 = document.getElementById('user-trust-title-2');
+        if (t2) t2.innerHTML = titleVal;
+        const tAdmin = document.getElementById('admin-trust-title');
+        if (tAdmin) tAdmin.innerHTML = titleVal;
+
+        // Sync subtitle
+        const s1 = document.getElementById('user-trust-subtitle-1');
+        if (s1) s1.innerHTML = subtitleVal;
+        const s2 = document.getElementById('user-trust-subtitle-2');
+        if (s2) s2.innerHTML = subtitleVal;
+        const sAdmin = document.getElementById('admin-trust-subtitle');
+        if (sAdmin) sAdmin.innerHTML = subtitleVal;
+
+        // Sync count
+        const c1 = document.getElementById('user-trust-count-1');
+        if (c1) c1.innerText = countVal;
+        const c2 = document.getElementById('user-trust-count-2');
+        if (c2) c2.innerText = countVal;
+        const cAdmin = document.getElementById('admin-trust-count');
+        if (cAdmin) cAdmin.innerText = countVal;
+
+        // Sync text
+        const tx1 = document.getElementById('user-trust-text-1');
+        if (tx1) tx1.innerText = textVal;
+        const tx2 = document.getElementById('user-trust-text-2');
+        if (tx2) tx2.innerText = textVal;
+        const txAdmin = document.getElementById('admin-trust-text');
+        if (txAdmin) txAdmin.innerText = textVal;
+
+        // Sync CTA
+        const cta1 = document.getElementById('user-trust-cta-1');
+        if (cta1) cta1.innerText = ctaVal;
+        const cta2 = document.getElementById('user-trust-cta-2');
+        if (cta2) cta2.innerText = ctaVal;
+        const ctaAdmin = document.getElementById('admin-trust-cta');
+        if (ctaAdmin) ctaAdmin.innerText = ctaVal;
+
+        // Sync Free
+        const f1 = document.getElementById('user-trust-free-1');
+        if (f1) f1.innerText = freeVal;
+        const f2 = document.getElementById('user-trust-free-2');
+        if (f2) f2.innerText = freeVal;
+        const fAdmin = document.getElementById('admin-trust-free');
+        if (fAdmin) fAdmin.innerText = freeVal;
+
+        // Sync Image display (On/Off)
+        const showTop = tb.showTopImage !== undefined ? tb.showTopImage : true;
+        const showBottom = tb.showBottomImage !== undefined ? tb.showBottomImage : true;
+        const showCenter = tb.showCenterImage !== undefined ? tb.showCenterImage : true;
+        const centerScale = tb.centerImageScale !== undefined ? tb.centerImageScale : 100;
+
+        // Toggle Top Containers
+        ['admin-trust-top-container', 'user-trust-top-container-1', 'user-trust-top-container-2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (showTop) {
+              el.classList.remove('hidden');
+            } else {
+              el.classList.add('hidden');
+            }
+          }
+        });
+
+        // Toggle Bottom Containers
+        ['admin-trust-bottom-container', 'user-trust-bottom-container-1', 'user-trust-bottom-container-2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (showBottom) {
+              el.classList.remove('hidden');
+            } else {
+              el.classList.add('hidden');
+            }
+          }
+        });
+
+        // Toggle Center Containers
+        ['admin-trust-center-container', 'user-trust-center-container-1', 'user-trust-center-container-2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (showCenter) {
+              el.classList.remove('hidden');
+            } else {
+              el.classList.add('hidden');
+            }
+          }
+        });
+
+        // Apply Center Image Scale (to scale wrappers)
+        ['admin-trust-center-scale-wrapper', 'user-trust-center-scale-wrapper-1', 'user-trust-center-scale-wrapper-2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.style.transform = `scale(${centerScale / 100})`;
+          }
+        });
+
+        // Also update the checkboxes in the UI!
+        const toggleTopCheckbox = document.getElementById('toggle-trust-top');
+        if (toggleTopCheckbox) {
+          toggleTopCheckbox.checked = showTop;
+          const textSpan = toggleTopCheckbox.nextElementSibling?.nextElementSibling;
+          if (textSpan) textSpan.innerText = showTop ? "Hiện" : "Ẩn";
+        }
+        const toggleBottomCheckbox = document.getElementById('toggle-trust-bottom');
+        if (toggleBottomCheckbox) {
+          toggleBottomCheckbox.checked = showBottom;
+          const textSpan = toggleBottomCheckbox.nextElementSibling?.nextElementSibling;
+          if (textSpan) textSpan.innerText = showBottom ? "Hiện" : "Ẩn";
+        }
+        const toggleCenterCheckbox = document.getElementById('toggle-trust-center');
+        if (toggleCenterCheckbox) {
+          toggleCenterCheckbox.checked = showCenter;
+          const textSpan = toggleCenterCheckbox.nextElementSibling?.nextElementSibling;
+          if (textSpan) textSpan.innerText = showCenter ? "Hiện" : "Ẩn";
+        }
+
+        const scaleSlider = document.getElementById('scale-trust-center');
+        if (scaleSlider) {
+          scaleSlider.value = centerScale;
+        }
+        const scaleValSpan = document.getElementById('scale-trust-center-val');
+        if (scaleValSpan) {
+          scaleValSpan.innerText = `${centerScale}%`;
+        }
+      };
+
+      window.toggleTrustImage = function (position, isChecked) {
+        const savedSettings = localStorage.getItem("nutriadmin_settings");
+        let settings = savedSettings ? JSON.parse(savedSettings) : {};
+        if (!settings.trustBanner) {
+          settings.trustBanner = {};
+        }
+        if (position === 'top') {
+          settings.trustBanner.showTopImage = isChecked;
+        } else if (position === 'bottom') {
+          settings.trustBanner.showBottomImage = isChecked;
+        } else if (position === 'center') {
+          settings.trustBanner.showCenterImage = isChecked;
+        }
+        localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+        // Sync instantly to DOM
+        if (typeof applyTrustBannerSettings === "function") {
+          applyTrustBannerSettings(settings);
+        }
+
+        // Sync to server
+        if (typeof syncStateToServer === "function") {
+          clearTimeout(syncTimeout);
+          syncTimeout = setTimeout(() => {
+            syncStateToServer();
+          }, 500);
+        }
+      };
+
+      window.changeTrustCenterScale = function (value) {
+        const savedSettings = localStorage.getItem("nutriadmin_settings");
+        let settings = savedSettings ? JSON.parse(savedSettings) : {};
+        if (!settings.trustBanner) {
+          settings.trustBanner = {};
+        }
+        settings.trustBanner.centerImageScale = parseInt(value, 10);
+        localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+        // Sync instantly to DOM
+        if (typeof applyTrustBannerSettings === "function") {
+          applyTrustBannerSettings(settings);
+        }
+
+        // Sync to server
+        if (typeof syncStateToServer === "function") {
+          clearTimeout(syncTimeout);
+          syncTimeout = setTimeout(() => {
+            syncStateToServer();
+          }, 500);
+        }
+      };
+
       function loadSettings() {
         initSettingsLocation();
         const savedSettings = localStorage.getItem("nutriadmin_settings");
@@ -18525,6 +19125,11 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         if (typeof updateSecurityStatusUI === "function") {
           updateSecurityStatusUI();
         }
+
+        const savedSettingsObj = savedSettings ? JSON.parse(savedSettings) : {};
+        if (typeof applyTrustBannerSettings === "function") {
+          applyTrustBannerSettings(savedSettingsObj);
+        }
       }
 
       
@@ -18567,9 +19172,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
               
               if (position === 'banner-top' || position === 'banner-bottom') {
                 window.applySequence("user-banner-img-" + position, frames);
-              } else if (position === 'trust-top' || position === 'trust-bottom') {
+              } else if (position === 'trust-top' || position === 'trust-bottom' || position === 'trust-center') {
                 window.applySequence("user-banner-img-" + position, frames);
                 window.applySequence("user-banner-img-" + position + "-2", frames);
+                window.applySequence("user-banner-img-" + position + "-3", frames);
               }
             }
           }
@@ -18579,6 +19185,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         await loadImg('banner-bottom');
         await loadImg('trust-top');
         await loadImg('trust-bottom');
+        await loadImg('trust-center');
       };
       
       window.sequenceIntervals = window.sequenceIntervals || {};
@@ -18691,15 +19298,23 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           buttonSelector = 'button[onclick*="trust-img-top-upload"]';
         } else if (position === 'trust-bottom') {
           buttonSelector = 'button[onclick*="trust-img-bottom-upload"]';
+        } else if (position === 'trust-center') {
+          buttonSelector = 'button[onclick*="trust-img-center-upload"]';
         }
 
         setElementUploadLoading(previewId, buttonSelector, true, "Chuẩn bị...");
 
         const processFile = (file) => {
           return new Promise((resolve) => {
-            compressImage(file, 800, 600, 0.8, function (compressedDataUrl) {
-              resolve(compressedDataUrl);
-            });
+            if (position === 'trust-center') {
+              compressMascotImage(file, 800, 600, 0.8, function (compressedDataUrl) {
+                resolve(compressedDataUrl);
+              });
+            } else {
+              compressImage(file, 800, 600, 0.8, function (compressedDataUrl) {
+                resolve(compressedDataUrl);
+              });
+            }
           });
         };
 
@@ -18720,6 +19335,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         
         if (position.startsWith('trust')) {
             window.applySequence(`user-banner-img-${position}-2`, frames);
+            window.applySequence(`user-banner-img-${position}-3`, frames);
         }
 
         // Store in MascotDB for sequences
@@ -18768,6 +19384,15 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           const logoImg = document.getElementById(previewId);
           if (logoImg) logoImg.src = compressedDataUrl;
           
+          const savedSettings = localStorage.getItem("nutriadmin_settings");
+          let settings = savedSettings ? JSON.parse(savedSettings) : {};
+          settings.brandLogo = compressedDataUrl;
+          localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+          if (typeof syncStateToServer === "function") {
+            syncStateToServer();
+          }
+
           inputEl.disabled = false;
           inputEl.value = "";
           setElementUploadLoading(previewId, null, false);
@@ -18796,6 +19421,15 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           const favImg = document.getElementById(previewId);
           if (favImg) favImg.src = compressedDataUrl;
           
+          const savedSettings = localStorage.getItem("nutriadmin_settings");
+          let settings = savedSettings ? JSON.parse(savedSettings) : {};
+          settings.favicon = compressedDataUrl;
+          localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+          if (typeof syncStateToServer === "function") {
+            syncStateToServer();
+          }
+
           inputEl.disabled = false;
           inputEl.value = "";
           setElementUploadLoading(previewId, null, false);
@@ -18824,6 +19458,19 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           const img = document.getElementById(previewId);
           if (img) img.src = compressedDataUrl;
           
+          const savedSettings = localStorage.getItem("nutriadmin_settings");
+          let settings = savedSettings ? JSON.parse(savedSettings) : {};
+          if (type === "momo") {
+            settings.paymentMomoQr = compressedDataUrl;
+          } else if (type === "bank") {
+            settings.paymentBankQr = compressedDataUrl;
+          }
+          localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
+
+          if (typeof syncStateToServer === "function") {
+            syncStateToServer();
+          }
+
           inputEl.disabled = false;
           inputEl.value = "";
           setElementUploadLoading(previewId, null, false);
@@ -18833,49 +19480,32 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       function saveSettings(e) {
         e.preventDefault();
 
-        let logoBase64 = "";
-        const logoImg = document.getElementById("set-brand-logo-preview");
-        if (
-          logoImg &&
-          logoImg.src &&
-          !logoImg.src.endsWith("placeholder.com/150") &&
-          logoImg.src.startsWith("data:image")
-        ) {
-          logoBase64 = logoImg.src;
-        }
-
         // If there was an existing logo and input is not changed but preview is still valid
         const savedSettings = localStorage.getItem("nutriadmin_settings");
         let existing = {};
         if (savedSettings) {
           existing = JSON.parse(savedSettings);
-          if (
-            !logoBase64 &&
-            existing.brandLogo &&
-            logoImg &&
-            logoImg.src === existing.brandLogo
-          ) {
-            logoBase64 = existing.brandLogo;
-          }
         }
 
-        let faviconBase64 = "";
+        let logoBase64 = existing.brandLogo || "";
+        const logoImg = document.getElementById("set-brand-logo-preview");
+        if (
+          logoImg &&
+          logoImg.src &&
+          !logoImg.src.includes("placeholder.com/150")
+        ) {
+          logoBase64 = logoImg.src;
+        }
+
+        let faviconBase64 = existing.favicon || "";
         const favImg = document.getElementById("set-favicon-preview");
         if (
           favImg &&
           favImg.src &&
-          !favImg.src.endsWith("placeholder.com/150?text=Favicon") &&
-          favImg.src.startsWith("data:image")
+          !favImg.src.includes("placeholder.com/150") &&
+          !favImg.src.includes("Favicon")
         ) {
           faviconBase64 = favImg.src;
-        }
-        if (
-          !faviconBase64 &&
-          existing.favicon &&
-          favImg &&
-          favImg.src === existing.favicon
-        ) {
-          faviconBase64 = existing.favicon;
         }
 
         let momoQrBase64 = existing.paymentMomoQr || "";
@@ -18883,8 +19513,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         if (
           momoImg &&
           momoImg.src &&
-          !momoImg.src.endsWith("placeholder.com/200?text=QR+MoMo") &&
-          momoImg.src.startsWith("data:image")
+          !momoImg.src.includes("placeholder.com") &&
+          !momoImg.src.includes("QR+MoMo") &&
+          !momoImg.src.includes("QR MoMo") &&
+          !momoImg.src.includes("QR%20MoMo")
         ) {
           momoQrBase64 = momoImg.src;
         }
@@ -18894,8 +19526,10 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         if (
           bankImg &&
           bankImg.src &&
-          !bankImg.src.endsWith("placeholder.com/200?text=QR+Bank") &&
-          bankImg.src.startsWith("data:image")
+          !bankImg.src.includes("placeholder.com") &&
+          !bankImg.src.includes("QR+Bank") &&
+          !bankImg.src.includes("QR Bank") &&
+          !bankImg.src.includes("QR%20Bank")
         ) {
           bankQrBase64 = bankImg.src;
         }
@@ -20127,6 +20761,13 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       // QR Scan Tracking, Simulation and History List Functions
       function logQrScanOnLoad(source) {
         if (!source) return;
+
+        // Đợi dữ liệu trạng thái ban đầu tải xong để đảm bảo danh sách qrScans là mới nhất
+        if (!window.isInitialStateLoaded) {
+          setTimeout(() => logQrScanOnLoad(source), 100);
+          return;
+        }
+
         const sessionKey = "scanned_" + source + "_" + new Date().toISOString().split('T')[0];
         if (sessionStorage.getItem(sessionKey)) {
           console.log("Already logged this source scan in this session today:", source);
@@ -20136,23 +20777,37 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
         const deviceLabel = getDeviceLabel();
         const timestamp = new Date();
-        
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              const lat = pos.coords.latitude;
-              const lng = pos.coords.longitude;
-              const randomDistrict = getRandomDistrict();
-              const locationStr = `${randomDistrict}, HCM (GPS: ${lat.toFixed(4)}, ${lng.toFixed(4)})`;
-              saveQrScanEvent(source, locationStr, deviceLabel, timestamp);
-            },
-            (err) => {
+
+        // Kiểm tra quyền định vị ngầm để không hiển thị hộp thoại xác nhận cho khách hàng
+        if (navigator.permissions && navigator.permissions.query) {
+          navigator.permissions.query({ name: 'geolocation' })
+            .then((result) => {
+              if (result.state === 'granted') {
+                navigator.geolocation.getCurrentPosition(
+                  (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    const randomDistrict = getRandomDistrict();
+                    const locationStr = `${randomDistrict}, HCM (GPS: ${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+                    saveQrScanEvent(source, locationStr, deviceLabel, timestamp);
+                  },
+                  (err) => {
+                    const randomDistrict = getRandomDistrict();
+                    saveQrScanEvent(source, `${randomDistrict}, HCM`, deviceLabel, timestamp);
+                  }
+                );
+              } else {
+                // Trạng thái 'prompt' hoặc 'denied': KHÔNG hiển thị yêu cầu, dùng định vị ngẫu nhiên
+                const randomDistrict = getRandomDistrict();
+                saveQrScanEvent(source, `${randomDistrict}, HCM`, deviceLabel, timestamp);
+              }
+            })
+            .catch((err) => {
               const randomDistrict = getRandomDistrict();
               saveQrScanEvent(source, `${randomDistrict}, HCM`, deviceLabel, timestamp);
-            },
-            { timeout: 4000 }
-          );
+            });
         } else {
+          // Trình duyệt không hỗ trợ kiểm tra quyền, không mạo hiểm kích hoạt prompt
           const randomDistrict = getRandomDistrict();
           saveQrScanEvent(source, `${randomDistrict}, HCM`, deviceLabel, timestamp);
         }
@@ -24977,6 +25632,8 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           settings = JSON.parse(settingsStr);
         }
 
+        const logoContainer = document.getElementById("payment-logo-container");
+
         if (method === "momo") {
           qrContainer.classList.remove("hidden");
           instructionTag.innerText = settings.paymentMomoInfo
@@ -24985,6 +25642,11 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           qrImage.src =
             settings.paymentMomoQr ||
             "https://via.placeholder.com/200?text=QR+MoMo";
+          if (logoContainer) {
+            logoContainer.innerHTML = `
+              <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" class="h-10 w-10 object-contain rounded-xl shadow-sm" alt="MoMo" />
+            `;
+          }
         } else if (method === "bank") {
           qrContainer.classList.remove("hidden");
           instructionTag.innerText = settings.paymentBankInfo
@@ -24993,6 +25655,13 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           qrImage.src =
             settings.paymentBankQr ||
             "https://via.placeholder.com/200x200.png?text=QR+Bank";
+          if (logoContainer) {
+            logoContainer.innerHTML = `
+              <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm border border-blue-200">
+                <i class="fa-solid fa-building-columns text-lg"></i>
+              </div>
+            `;
+          }
         } else {
           qrContainer.classList.add("hidden");
         }
@@ -34436,6 +35105,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
         drawSingle("trust-banner-mascot-1");
         drawSingle("trust-banner-mascot-2");
+        drawSingle("trust-banner-mascot-admin");
 
         trustBannerMascotFrameIndex++;
         if (trustBannerMascotFrameIndex >= 1200)
@@ -39444,7 +40114,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         <div class="grid grid-cols-2 gap-4 mb-5 font-sans">
           <!-- Momo card -->
           <div onclick="window.selectRenewPaymentMethod('momo')" class="relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200" id="renew-method-card-momo">
-            <img src="https://test-payment.momo.vn/v2/gateway/resources/images/logos/momo_logo_pink.png" onerror="this.onerror=null; this.src='https://homepage.momocdn.net/img/momo-upload-api-220810142637-637957383979148092.png';" class="h-8 mb-2 object-contain" alt="MoMo" />
+            <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" class="h-8 w-8 mb-2 object-contain rounded-lg" alt="MoMo" />
             <span class="text-xs font-bold text-pink-700 dark:text-pink-400">Ví MoMo</span>
           </div>
           <!-- Bank card -->
