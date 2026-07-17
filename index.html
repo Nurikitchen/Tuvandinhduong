@@ -13087,6 +13087,12 @@
       // ==========================================
       const apiKey = ""; // Gemini API Key is provided by execution environment
 
+      let pwaCustomIcon = "";
+      try {
+        pwaCustomIcon = localStorage.getItem("nutriadmin_pwa_custom_icon") || "";
+      } catch (e) {}
+      window.pwaCustomIcon = pwaCustomIcon;
+
       let currentFilter = "complete";
       let currentSubFilter = "all";
       let currentCustomerFilter = "complete";
@@ -13363,11 +13369,12 @@
 
         if (serverState.settings) {
           const s = serverState.settings;
+          window.appSettings = s;
           if (s.bannerImagesCloud) {
             (async () => {
               if (window.MascotDB) {
                 await window.MascotDB.init();
-                for (const pos of ['banner-top', 'banner-bottom', 'trust-top', 'trust-bottom']) {
+                for (const pos of ['banner-top', 'banner-bottom', 'trust-top', 'trust-bottom', 'trust-center']) {
                   if (s.bannerImagesCloud[pos] && Array.isArray(s.bannerImagesCloud[pos])) {
                     await window.MascotDB.saveSequence(`seq_${pos}`, s.bannerImagesCloud[pos]);
                   }
@@ -13403,6 +13410,7 @@
         }
         if (typeof serverState.pwaCustomIcon !== "undefined") {
           pwaCustomIcon = serverState.pwaCustomIcon || "";
+          window.pwaCustomIcon = pwaCustomIcon;
           localStorage.setItem("nutriadmin_pwa_custom_icon", pwaCustomIcon);
           if (typeof updatePwaIconUI === "function") updatePwaIconUI();
         }
@@ -15087,12 +15095,7 @@
         pwaBadgeActive = false;
       }
 
-      let pwaCustomIcon = "";
-      try {
-        pwaCustomIcon = localStorage.getItem("nutriadmin_pwa_custom_icon") || "";
-      } catch (e) {
-        pwaCustomIcon = "";
-      }
+      // pwaCustomIcon is initialized early at the top of state configuration block to prevent TDZ errors
       
       let qrScans = [];
       window.notifiedScanIds = [];
@@ -19010,6 +19013,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         if (savedSettings) {
           try {
             const settings = JSON.parse(savedSettings);
+            window.appSettings = settings;
             wheelConfig = settings.wheelConfig || [...defaultWheelConfig];
             
             const setPhone = document.getElementById("set-phone");
@@ -20827,22 +20831,19 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           return;
         }
 
-        // Nhận diện thiết bị: Mỗi thiết bị chỉ ghi nhận và thông báo 1 lần duy nhất
-        const hasScannedBefore = localStorage.getItem("nutriadmin_qr_scanned_recorded") === "true" ||
-                                 (qrScans && qrScans.some(s => s.deviceId === customerDeviceId));
-        if (hasScannedBefore) {
-          console.log("Thiết bị này đã được ghi nhận quét QR trước đó. Bỏ qua lượt quét này.");
+        // Nhận diện thiết bị: Mỗi thiết bị chỉ ghi nhận và thông báo 1 lần duy nhất đối với mỗi mã nguồn (shopee food, hộp cơm,...)
+        const hasScannedThisSourceBefore = localStorage.getItem("nutriadmin_qr_scanned_recorded_" + source) === "true" ||
+                                           (qrScans && qrScans.some(s => s.deviceId === customerDeviceId && s.source === source));
+        if (hasScannedThisSourceBefore) {
+          console.log("Thiết bị này đã được ghi nhận quét QR nguồn '" + source + "' trước đó. Bỏ qua lượt quét này.");
           return;
         }
 
-        // Đánh dấu thiết bị đã được ghi nhận quét QR
-        localStorage.setItem("nutriadmin_qr_scanned_recorded", "true");
+        // Đánh dấu thiết bị đã được ghi nhận quét QR cho nguồn này
+        localStorage.setItem("nutriadmin_qr_scanned_recorded_" + source, "true");
 
+        // Ghi nhận ngay vào sessionStorage
         const sessionKey = "scanned_" + source + "_" + new Date().toISOString().split('T')[0];
-        if (sessionStorage.getItem(sessionKey)) {
-          console.log("Already logged this source scan in this session today:", source);
-          return;
-        }
         sessionStorage.setItem(sessionKey, "1");
 
         const deviceLabel = getDeviceLabel();
@@ -35787,7 +35788,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         updateMessagesNavBadge();
 
         const mode = urlParams.get("mode");
-        const utmSourceParam = urlParams.get("utm_source");
+        const utmSourceParam = urlParams.get("utm_source") || urlParams.get("source");
         if (utmSourceParam) {
           logQrScanOnLoad(utmSourceParam);
         }
@@ -38995,20 +38996,48 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         updatePageFavicons();
       }
 
+      function compressPwaIcon(file, callback) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (event) {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = function () {
+            const size = 512;
+            const canvas = document.createElement("canvas");
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext("2d");
+
+            let srcWidth = img.width;
+            let srcHeight = img.height;
+            let dstWidth = size;
+            let dstHeight = size;
+            let dstX = 0;
+            let dstY = 0;
+
+            if (srcWidth > srcHeight) {
+              dstHeight = (srcHeight * size) / srcWidth;
+              dstY = (size - dstHeight) / 2;
+            } else {
+              dstWidth = (srcWidth * size) / srcHeight;
+              dstX = (size - dstWidth) / 2;
+            }
+
+            ctx.drawImage(img, dstX, dstY, dstWidth, dstHeight);
+            const compressedDataUrl = canvas.toDataURL("image/png");
+            callback(compressedDataUrl);
+          };
+        };
+      }
+
       function handlePwaIconUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
 
-        // Limit size to 4MB for localStorage safety
-        if (file.size > 4 * 1024 * 1024) {
-          showToast("Kích thước tệp quá lớn! Vui lòng chọn ảnh nhỏ hơn 4MB.", "error");
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64String = e.target.result;
+        compressPwaIcon(file, function(base64String) {
           pwaCustomIcon = base64String;
+          window.pwaCustomIcon = base64String;
           try {
             localStorage.setItem("nutriadmin_pwa_custom_icon", base64String);
             updatePwaIconUI();
@@ -39020,13 +39049,13 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           } catch (err) {
             showToast("Không thể lưu ảnh do vượt quá dung lượng lưu trữ của trình duyệt.", "error");
           }
-        };
-        reader.readAsDataURL(file);
+        });
       }
 
       function resetPwaIconToDefault() {
         openConfirmModal("Bạn có muốn khôi phục biểu tượng ứng dụng PWA về mặc định không?", () => {
           pwaCustomIcon = "";
+          window.pwaCustomIcon = "";
           localStorage.removeItem("nutriadmin_pwa_custom_icon");
           updatePwaIconUI();
           showToast("Đã khôi phục biểu tượng PWA mặc định.", "success");
@@ -39988,15 +40017,17 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         const user = typeof currentUser !== "undefined" ? currentUser : (window.currentUser || null);
         if (!user) return;
         
-        // 1. Set package name and phone number
+        // 1. Set package name and phone number robustly from window.appSettings or localStorage
         const settingsStr = localStorage.getItem("nutriadmin_settings");
-        let pkgTexts = {};
-        if (settingsStr) {
+        let settings = window.appSettings;
+        if (!settings && settingsStr) {
           try {
-            const settings = JSON.parse(settingsStr);
-            pkgTexts = settings.packagesText || {};
+            settings = JSON.parse(settingsStr);
           } catch (e) {}
         }
+        if (!settings) settings = {};
+
+        let pkgTexts = settings.packagesText || {};
         
         let packageName = `Gói đăng ký`;
         const pkgValStr = String(user.package || "");
@@ -40022,12 +40053,6 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
         }
         
         // 3. Set QR images from settings
-        let settings = {};
-        if (settingsStr) {
-          try {
-            settings = JSON.parse(settingsStr);
-          } catch (e) {}
-        }
         const momoInfo = settings.paymentMomoInfo || "Ví MoMo";
         const bankInfo = settings.paymentBankInfo || "Chuyển khoản Ngân hàng";
         
