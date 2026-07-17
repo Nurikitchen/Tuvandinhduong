@@ -14543,6 +14543,21 @@
 
       window.isInitialStateLoaded = false;
       let lastStateStr = "";
+
+      async function pollStateFromServer() {
+        try {
+          let resState = await fetch("/api/state?t=" + Date.now(), {
+            cache: "no-store",
+          });
+          if (resState.ok) {
+            const serverState = await resState.json();
+            if (typeof updateLocalStateFromServer === "function") {
+              updateLocalStateFromServer(serverState);
+            }
+          }
+        } catch (e) {}
+      }
+
       async function syncStateToServer() {
         if (!window.isInitialStateLoaded) {
           console.log(
@@ -14610,59 +14625,91 @@
           // Try to sync via Firebase if configured
           if (typeof cloudDb !== "undefined" && cloudDb !== null) {
             try {
+              const mergeById = (
+                serverArr = [],
+                clientArr = [],
+                key = "id",
+              ) => {
+                const merged = [...serverArr];
+                clientArr.forEach((cItem) => {
+                  const idx = merged.findIndex(
+                    (sItem) => sItem[key] === cItem[key],
+                  );
+                  if (idx > -1) Object.assign(merged[idx], cItem);
+                  else merged.unshift(cItem);
+                });
+                return merged;
+              };
+
+              const docSnap = await cloudDb
+                .collection("nutriadmin_v1")
+                .doc("system_data")
+                .get();
+
               if (isSenderAdmin) {
-                const firebaseState = { ...currentState };
-                if (firebaseState.settings) {
-                  firebaseState.settings = { ...firebaseState.settings };
-                  delete firebaseState.settings.bannerImagesCloud;
-                  delete firebaseState.settings.bannerImages;
+                let finalState = { ...currentState };
+                if (docSnap.exists && docSnap.data().state) {
+                  const serverData = docSnap.data().state;
+                  // Admin merges user-authored collections to prevent overwriting new customer submissions
+                  finalState.orders = mergeById(
+                    serverData.orders || [],
+                    currentState.orders,
+                    "id",
+                  );
+                  finalState.potentialCustomers = mergeById(
+                    serverData.potentialCustomers || [],
+                    currentState.potentialCustomers,
+                    "id",
+                  );
+                  finalState.purchasedCustomers = mergeById(
+                    serverData.purchasedCustomers || [],
+                    currentState.purchasedCustomers,
+                    "id",
+                  );
+                  finalState.qrScans = mergeById(
+                    serverData.qrScans || [],
+                    currentState.qrScans,
+                    "id",
+                  );
+                  finalState.allChats = {
+                    ...(serverData.allChats || {}),
+                    ...(currentState.allChats || {}),
+                  };
+                  finalState.allReviews = {
+                    ...(serverData.allReviews || {}),
+                    ...(currentState.allReviews || {}),
+                  };
+                }
+                if (finalState.settings) {
+                  finalState.settings = { ...finalState.settings };
+                  delete finalState.settings.bannerImagesCloud;
+                  delete finalState.settings.bannerImages;
                 }
                 await cloudDb
                   .collection("nutriadmin_v1")
                   .doc("system_data")
-                  .set({ state: firebaseState }, { merge: true });
+                  .set({ state: finalState }, { merge: true });
               } else {
                 // If not admin, only merge data that customers generate to avoid overwriting admin settings
-                // Fetch latest to prevent overwriting arrays
-                const docSnap = await cloudDb
-                  .collection("nutriadmin_v1")
-                  .doc("system_data")
-                  .get();
                 if (docSnap.exists && docSnap.data().state) {
                   const serverData = docSnap.data().state;
-                  const mergeById = (
-                    serverArr = [],
-                    clientArr = [],
-                    key = "id",
-                  ) => {
-                    const merged = [...serverArr];
-                    clientArr.forEach((cItem) => {
-                      const idx = merged.findIndex(
-                        (sItem) => sItem[key] === cItem[key],
-                      );
-                      if (idx > -1) Object.assign(merged[idx], cItem);
-                      else merged.unshift(cItem);
-                    });
-                    return merged;
-                  };
-
                   const mergedOrders = mergeById(
-                    serverData.orders,
+                    serverData.orders || [],
                     currentState.orders,
                     "id",
                   );
                   const mergedPotential = mergeById(
-                    serverData.potentialCustomers,
+                    serverData.potentialCustomers || [],
                     currentState.potentialCustomers,
                     "id",
                   );
                   const mergedPurchased = mergeById(
-                    serverData.purchasedCustomers,
+                    serverData.purchasedCustomers || [],
                     currentState.purchasedCustomers,
                     "id",
                   );
                   const mergedScans = mergeById(
-                    serverData.qrScans,
+                    serverData.qrScans || [],
                     currentState.qrScans,
                     "id",
                   );
