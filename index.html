@@ -14714,144 +14714,160 @@
             console.error("Local storage sync error:", storageErr);
           }
 
-          // Try to sync via Firebase if configured
+          // Try to sync via Firebase if configured (non-blocking)
           if (typeof cloudDb !== "undefined" && cloudDb !== null) {
-            try {
-              const mergeById = (
-                serverArr = [],
-                clientArr = [],
-                key = "id",
-              ) => {
-                const merged = [...serverArr];
-                clientArr.forEach((cItem) => {
-                  const idx = merged.findIndex(
-                    (sItem) => sItem[key] === cItem[key],
-                  );
-                  if (idx > -1) Object.assign(merged[idx], cItem);
-                  else merged.unshift(cItem);
-                });
-                return merged;
-              };
+            (async () => {
+              try {
+                const mergeById = (
+                  serverArr = [],
+                  clientArr = [],
+                  key = "id",
+                ) => {
+                  const merged = [...serverArr];
+                  clientArr.forEach((cItem) => {
+                    const idx = merged.findIndex(
+                      (sItem) => sItem[key] === cItem[key],
+                    );
+                    if (idx > -1) Object.assign(merged[idx], cItem);
+                    else merged.unshift(cItem);
+                  });
+                  return merged;
+                };
 
-              const docSnap = await cloudDb
-                .collection("nutriadmin_v1")
-                .doc("system_data")
-                .get();
-
-              if (isSenderAdmin) {
-                let finalState = { ...currentState };
-                if (docSnap.exists && docSnap.data().state) {
-                  const serverData = docSnap.data().state;
-                  // Admin merges user-authored collections to prevent overwriting new customer submissions
-                  finalState.orders = mergeById(
-                    serverData.orders || [],
-                    currentState.orders,
-                    "id",
-                  );
-                  finalState.potentialCustomers = mergeById(
-                    serverData.potentialCustomers || [],
-                    currentState.potentialCustomers,
-                    "id",
-                  );
-                  finalState.purchasedCustomers = mergeById(
-                    serverData.purchasedCustomers || [],
-                    currentState.purchasedCustomers,
-                    "id",
-                  );
-                  finalState.qrScans = mergeById(
-                    serverData.qrScans || [],
-                    currentState.qrScans,
-                    "id",
-                  );
-                  finalState.allChats = {
-                    ...(serverData.allChats || {}),
-                    ...(currentState.allChats || {}),
-                  };
-                  finalState.allReviews = {
-                    ...(serverData.allReviews || {}),
-                    ...(currentState.allReviews || {}),
-                  };
-                }
-                if (finalState.settings) {
-                  finalState.settings = { ...finalState.settings };
-                  delete finalState.settings.bannerImagesCloud;
-                  delete finalState.settings.bannerImages;
-                }
-                await cloudDb
+                const docSnap = await cloudDb
                   .collection("nutriadmin_v1")
                   .doc("system_data")
-                  .set({ state: finalState }, { merge: true });
-              } else {
-                // If not admin, only merge data that customers generate to avoid overwriting admin settings
-                if (docSnap.exists && docSnap.data().state) {
-                  const serverData = docSnap.data().state;
-                  const mergedOrders = mergeById(
-                    serverData.orders || [],
-                    currentState.orders,
-                    "id",
-                  );
-                  const mergedPotential = mergeById(
-                    serverData.potentialCustomers || [],
-                    currentState.potentialCustomers,
-                    "id",
-                  );
-                  const mergedPurchased = mergeById(
-                    serverData.purchasedCustomers || [],
-                    currentState.purchasedCustomers,
-                    "id",
-                  );
-                  const mergedScans = mergeById(
-                    serverData.qrScans || [],
-                    currentState.qrScans,
-                    "id",
-                  );
-                  const mergedChats = {
-                    ...(serverData.allChats || {}),
-                    ...(currentState.allChats || {}),
-                  };
-                  const mergedReviews = {
-                    ...(serverData.allReviews || {}),
-                    ...(currentState.allReviews || {}),
-                  };
+                  .get();
 
+                if (isSenderAdmin) {
+                  let finalState = { ...currentState };
+                  if (docSnap.exists && docSnap.data().state) {
+                    const serverData = docSnap.data().state;
+                    // Admin merges user-authored collections to prevent overwriting new customer submissions
+                    finalState.orders = mergeById(
+                      serverData.orders || [],
+                      currentState.orders,
+                      "id",
+                    );
+                    finalState.potentialCustomers = mergeById(
+                      serverData.potentialCustomers || [],
+                      currentState.potentialCustomers,
+                      "id",
+                    );
+                    finalState.purchasedCustomers = mergeById(
+                      serverData.purchasedCustomers || [],
+                      currentState.purchasedCustomers,
+                      "id",
+                    );
+                    finalState.qrScans = mergeById(
+                      serverData.qrScans || [],
+                      currentState.qrScans,
+                      "id",
+                    );
+                    finalState.allChats = {
+                      ...(serverData.allChats || {}),
+                      ...(currentState.allChats || {}),
+                    };
+                    finalState.allReviews = {
+                      ...(serverData.allReviews || {}),
+                      ...(currentState.allReviews || {}),
+                    };
+                  }
+                  if (finalState.settings) {
+                    finalState.settings = { ...finalState.settings };
+                    delete finalState.settings.bannerImagesCloud;
+                    delete finalState.settings.bannerImages;
+                  }
                   await cloudDb
                     .collection("nutriadmin_v1")
                     .doc("system_data")
-                    .set(
-                      {
-                        state: {
-                          orders: mergedOrders,
-                          potentialCustomers: mergedPotential,
-                          purchasedCustomers: mergedPurchased,
-                          allChats: mergedChats,
-                          qrScans: mergedScans,
-                          allReviews: mergedReviews,
-                        },
-                      },
-                      { merge: true },
-                    );
+                    .set({ state: finalState }, { merge: true });
                 } else {
-                  await cloudDb
-                    .collection("nutriadmin_v1")
-                    .doc("system_data")
-                    .set(
-                      {
-                        state: {
-                          orders: currentState.orders,
-                          potentialCustomers: currentState.potentialCustomers,
-                          purchasedCustomers: currentState.purchasedCustomers,
-                          allChats: currentState.allChats,
-                          qrScans: currentState.qrScans,
-                          allReviews: currentState.allReviews,
-                        },
-                      },
-                      { merge: true },
+                  // If not admin, only merge data that customers generate to avoid overwriting admin settings
+                  if (docSnap.exists && docSnap.data().state) {
+                    const serverData = docSnap.data().state;
+                    const mergedOrders = mergeById(
+                      serverData.orders || [],
+                      currentState.orders,
+                      "id",
                     );
+                    const mergedPotential = mergeById(
+                      serverData.potentialCustomers || [],
+                      currentState.potentialCustomers,
+                      "id",
+                    );
+                    const mergedPurchased = mergeById(
+                      serverData.purchasedCustomers || [],
+                      currentState.purchasedCustomers,
+                      "id",
+                    );
+                    const mergedScans = mergeById(
+                      serverData.qrScans || [],
+                      currentState.qrScans,
+                      "id",
+                    );
+                    const mergedChats = {
+                      ...(serverData.allChats || {}),
+                      ...(currentState.allChats || {}),
+                    };
+                    const mergedReviews = {
+                      ...(serverData.allReviews || {}),
+                      ...(currentState.allReviews || {}),
+                    };
+
+                    // Use update with dotted paths to preserve admin fields like dishes, inventory, and settings
+                    await cloudDb
+                      .collection("nutriadmin_v1")
+                      .doc("system_data")
+                      .update({
+                        "state.orders": mergedOrders,
+                        "state.potentialCustomers": mergedPotential,
+                        "state.purchasedCustomers": mergedPurchased,
+                        "state.allChats": mergedChats,
+                        "state.qrScans": mergedScans,
+                        "state.allReviews": mergedReviews,
+                      }).catch(async (updateErr) => {
+                        // Fallback if update fails
+                        await cloudDb
+                          .collection("nutriadmin_v1")
+                          .doc("system_data")
+                          .set(
+                            {
+                              state: {
+                                orders: mergedOrders,
+                                potentialCustomers: mergedPotential,
+                                purchasedCustomers: mergedPurchased,
+                                allChats: mergedChats,
+                                qrScans: mergedScans,
+                                allReviews: mergedReviews,
+                              },
+                            },
+                            { merge: true },
+                          );
+                      });
+                  } else {
+                    await cloudDb
+                      .collection("nutriadmin_v1")
+                      .doc("system_data")
+                      .set(
+                        {
+                          state: {
+                            orders: currentState.orders,
+                            potentialCustomers: currentState.potentialCustomers,
+                            purchasedCustomers: currentState.purchasedCustomers,
+                            allChats: currentState.allChats,
+                            qrScans: currentState.qrScans,
+                            allReviews: currentState.allReviews,
+                          },
+                        },
+                        { merge: true },
+                      );
+                  }
                 }
+              } catch (err) {
+                console.error("Firebase sync error in syncStateToServer:", err);
               }
-            } catch (err) {
-              console.error("Firebase sync error in syncStateToServer:", err);
-            }
+            })();
           }
 
           const res = await fetch("/api/state", {
@@ -15052,10 +15068,23 @@
           try {
             prevCount = orders ? orders.length : 0;
           } catch (e) {}
-          orders = serverState.orders.map((o) => ({
+
+          const mergedOrders = [...orders];
+          serverState.orders.forEach((sOrder) => {
+            const idx = mergedOrders.findIndex((o) => o.id === sOrder.id);
+            if (idx > -1) {
+              mergedOrders[idx] = { ...mergedOrders[idx], ...sOrder };
+            } else {
+              mergedOrders.push(sOrder);
+            }
+          });
+
+          orders = mergedOrders.map((o) => ({
             ...o,
             timestamp: new Date(o.timestamp),
           }));
+          orders.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
           if (orders.length > prevCount) {
             const latestOrder = orders[0];
             const urlParams = new URLSearchParams(window.location.search);
@@ -15102,7 +15131,20 @@
           try {
             prevPotCount = potentialCustomers ? potentialCustomers.length : 0;
           } catch (e) {}
-          potentialCustomers = serverState.potentialCustomers;
+
+          const mergedPotential = [...potentialCustomers];
+          serverState.potentialCustomers.forEach((sPot) => {
+            const idx = mergedPotential.findIndex((p) => p.id === sPot.id || (p.phone && p.phone === sPot.phone));
+            if (idx > -1) {
+              mergedPotential[idx] = { ...mergedPotential[idx], ...sPot };
+            } else {
+              mergedPotential.push(sPot);
+            }
+          });
+
+          potentialCustomers = mergedPotential;
+          potentialCustomers.sort((a, b) => new Date(b.date || b.timestamp || 0).getTime() - new Date(a.date || a.timestamp || 0).getTime());
+
           if (potentialCustomers.length > prevPotCount) {
             const latestPot = potentialCustomers[0];
             const urlParams = new URLSearchParams(window.location.search);
@@ -15138,7 +15180,16 @@
           updatedUI = true;
         }
         if (serverState.purchasedCustomers) {
-          purchasedCustomers = serverState.purchasedCustomers;
+          const mergedPurchased = [...purchasedCustomers];
+          serverState.purchasedCustomers.forEach((sPur) => {
+            const idx = mergedPurchased.findIndex((p) => p.id === sPur.id || (p.phone && p.phone === sPur.phone));
+            if (idx > -1) {
+              mergedPurchased[idx] = { ...mergedPurchased[idx], ...sPur };
+            } else {
+              mergedPurchased.push(sPur);
+            }
+          });
+          purchasedCustomers = mergedPurchased;
           updatedUI = true;
         }
         if (serverState.shippers) {
@@ -39141,11 +39192,9 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           }
         });
 
-        // Start polling server state if Firebase is not active
+        // Start polling server state (always active as dual-channel fallback)
         setInterval(() => {
-          if (typeof cloudDb === "undefined" || cloudDb === null) {
-            pollStateFromServer();
-          }
+          pollStateFromServer();
         }, 5000);
 
         if (mode === "landing" || utmSourceParam) {
