@@ -2992,6 +2992,15 @@
                   </p>
 
                   <div class="space-y-5">
+                    <!-- Trang Web Nuri -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-4 bg-orange-50 p-4 rounded-xl border border-orange-200">
+                      <div class="flex items-center gap-3 w-48 shrink-0">
+                        <input type="checkbox" id="set-order-website-enable" onchange="window.silentSaveSettings(event)" class="w-4 h-4 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2" checked />
+                        <label for="set-order-website-enable" class="font-bold text-orange-700">Trang Web Nuri</label>
+                      </div>
+                      <p class="text-sm text-orange-600">Khách hàng đặt trực tiếp trên web, hệ thống tự động lưu đơn và tích điểm.</p>
+                    </div>
+
                     <!-- ShopeeFood -->
                     <div class="flex flex-col md:flex-row md:items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
                       <div class="flex items-center gap-3 w-48 shrink-0">
@@ -3370,58 +3379,7 @@
               </div>
             </div>
 
-            <!-- Cấu hình Địa chỉ Tên miền Ứng dụng (App Domain URL) -->
-            <div
-              class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-6 animate-fade-in"
-            >
-              <div class="p-6">
-                <h2
-                  class="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-3"
-                >
-                  <div
-                    class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg"
-                  >
-                    <i class="fa-solid fa-globe"></i>
-                  </div>
-                  <div>
-                    Địa chỉ Tên miền Ứng dụng (App URL)
-                    <p class="text-sm text-slate-500 font-normal mt-0.5">
-                      Cấu hình đường dẫn URL chính thức của bạn để tạo mã QR marketing chính xác nhất.
-                    </p>
-                  </div>
-                </h2>
 
-                <div class="mt-6 pl-0 sm:pl-12 space-y-4">
-                  <div class="relative">
-                    <input
-                      type="url"
-                      id="custom-app-url"
-                      placeholder="VD: https://my-nurikitchen.com/"
-                      class="w-full rounded-xl border-2 border-slate-200 py-3 px-4 text-sm focus:border-indigo-400 focus:ring-0 outline-none transition-colors font-mono font-normal"
-                    />
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-3">
-                    <button
-                      onclick="saveCustomAppUrl()"
-                      type="button"
-                      class="w-full sm:w-auto px-6 py-2.5 bg-indigo-500 text-white rounded-xl hover:bg-indigo-600 font-bold transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                    >
-                      <i class="fa-solid fa-floppy-disk"></i> Lưu địa chỉ URL
-                    </button>
-                    <button
-                      onclick="detectAppUrl()"
-                      type="button"
-                      class="w-full sm:w-auto px-6 py-2.5 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 font-bold transition-colors shadow-sm flex items-center justify-center gap-2 border border-slate-300 cursor-pointer"
-                    >
-                      <i class="fa-solid fa-wand-magic-sparkles"></i> Tự động nhận diện
-                    </button>
-                  </div>
-                  <p class="text-xs text-slate-400">
-                    <i class="fa-solid fa-circle-info mr-1"></i> Khi chạy thực tế, hãy cấu hình URL này (VD: tên miền Cloud Run hoặc Vercel của bạn) để các thiết bị di động quét mã QR có thể truy cập đúng vào trang tư vấn.
-                  </p>
-                </div>
-              </div>
-            </div>
 
             <!-- Cấu hình Cloud (Firebase) -->
             <div
@@ -14771,7 +14729,6 @@
                   if (finalState.settings) {
                     finalState.settings = { ...finalState.settings };
                     delete finalState.settings.bannerImagesCloud;
-                    delete finalState.settings.bannerImages;
                   }
                   await cloudDb
                     .collection("nutriadmin_v1")
@@ -14947,7 +14904,30 @@
             s.bannerImages = savedSettings.bannerImages;
           }
           window.appSettings = s;
+          
+          if (s.customGeminiApiKey) {
+            localStorage.setItem("nutriadmin_custom_api_key", s.customGeminiApiKey);
+          } else {
+            localStorage.removeItem("nutriadmin_custom_api_key");
+          }
+          
+          if (s.customFirebaseConfig) {
+            localStorage.setItem("nutriadmin_custom_firebase_config", s.customFirebaseConfig);
+          } else {
+            localStorage.removeItem("nutriadmin_custom_firebase_config");
+          }
+          
+          if (s.customAppUrl) {
+            localStorage.setItem("nutriadmin_custom_app_url", s.customAppUrl);
+          } else {
+            localStorage.removeItem("nutriadmin_custom_app_url");
+          }
+
           localStorage.setItem("nutriadmin_settings", JSON.stringify(s));
+          
+          if (typeof initFirebaseSync === "function") {
+            initFirebaseSync();
+          }
           if (s.bannerImagesCloud) {
             (async () => {
               if (window.MascotDB) {
@@ -21376,6 +21356,9 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             if (setWeekly)
               setWeekly.checked = settings.weeklySpecialFilterEnabled !== false;
 
+            const setWebsiteEnable = document.getElementById("set-order-website-enable");
+            if (setWebsiteEnable && setWebsiteEnable !== document.activeElement) setWebsiteEnable.checked = settings.orderWebsiteEnable !== false;
+
             const setShopeeFoodEnable = document.getElementById("set-order-shopeefood-enable");
             if (setShopeeFoodEnable && setShopeeFoodEnable !== document.activeElement) setShopeeFoodEnable.checked = settings.orderShopeeFoodEnable || false;
             const setShopeeFoodUrl = document.getElementById("set-order-shopeefood-url");
@@ -21491,13 +21474,6 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             if (el) el.value = customFirebase;
           }
 
-          const customAppUrl =
-            localStorage.getItem("nutriadmin_custom_app_url") ||
-            window.APP_URL;
-          if (customAppUrl) {
-            const el = document.getElementById("custom-app-url");
-            if (el) el.value = customAppUrl;
-          }
         } catch (err) {
           console.error("Error setting custom api/firebase elements:", err);
         }
@@ -21916,6 +21892,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           const savedSettings = localStorage.getItem("nutriadmin_settings");
           let existingSettings = savedSettings ? JSON.parse(savedSettings) : {};
           
+          existingSettings.orderWebsiteEnable = document.getElementById("set-order-website-enable")?.checked ?? true;
           existingSettings.orderShopeeFoodEnable = document.getElementById("set-order-shopeefood-enable")?.checked ?? false;
           existingSettings.orderShopeeFoodUrl = document.getElementById("set-order-shopeefood-url")?.value || "";
           existingSettings.orderGrabFoodEnable = document.getElementById("set-order-grabfood-enable")?.checked ?? false;
@@ -22092,6 +22069,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           weeklySpecialFilterEnabled: document.getElementById(
             "set-weekly-special-filter-enable",
           ).checked,
+          orderWebsiteEnable: document.getElementById("set-order-website-enable")?.checked ?? true,
           orderShopeeFoodEnable: document.getElementById("set-order-shopeefood-enable")?.checked ?? false,
           orderShopeeFoodUrl: document.getElementById("set-order-shopeefood-url")?.value || "",
           orderGrabFoodEnable: document.getElementById("set-order-grabfood-enable")?.checked ?? false,
@@ -22155,6 +22133,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             "info",
           );
         }
+        if (typeof syncStateToServer === "function") syncStateToServer();
       }
 
       async function testFirebaseConfig() {
@@ -22282,46 +22261,8 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             "info",
           );
         }
-      }
-
-      function saveCustomAppUrl() {
-        let url = document.getElementById("custom-app-url").value.trim();
-        if (url) {
-          if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = "https://" + url;
-          }
-          if (!url.endsWith("/")) {
-            url = url + "/";
-          }
-          window.APP_URL = url;
-          localStorage.setItem("nutriadmin_custom_app_url", url);
-          
-          const settingsRaw = localStorage.getItem("nutriadmin_settings");
-          const settings = settingsRaw ? JSON.parse(settingsRaw) : {};
-          settings.customAppUrl = url;
-          localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
-          
-          showToast("Đã lưu địa chỉ URL ứng dụng thành công.", "success");
-        } else {
-          window.APP_URL = null;
-          localStorage.removeItem("nutriadmin_custom_app_url");
-          
-          const settingsRaw = localStorage.getItem("nutriadmin_settings");
-          const settings = settingsRaw ? JSON.parse(settingsRaw) : {};
-          delete settings.customAppUrl;
-          localStorage.setItem("nutriadmin_settings", JSON.stringify(settings));
-          
-          showToast("Đã xóa cấu hình URL ứng dụng. Hệ thống sẽ tự động nhận diện.", "info");
-        }
-        if (typeof syncStateToServer === "function") {
-          syncStateToServer();
-        }
-      }
-
-      function detectAppUrl() {
-        const currentUrl = window.location.href.split("?")[0].split("#")[0];
-        document.getElementById("custom-app-url").value = currentUrl;
-        showToast("Đã nhận diện URL hiện tại: " + currentUrl, "info");
+        if (typeof initFirebaseSync === "function") initFirebaseSync();
+        if (typeof syncStateToServer === "function") syncStateToServer();
       }
 
       function saveGoogleClientId() {
@@ -23008,7 +22949,6 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       // ==========================================
       function getBaseUrl() {
         let baseUrl = window.location.href.split("?")[0].split("#")[0];
-        if (window.APP_URL) return window.APP_URL;
         if (
           baseUrl.startsWith("blob:") ||
           baseUrl === "about:srcdoc" ||
@@ -23133,16 +23073,9 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           badgeEl.classList.add("hidden");
         }
 
-        // Khôi phục việc nhúng payload Firebase/API key để QR có thể hoạt động đúng với DB cá nhân
-        landingUrl = buildUrlWithCredentials(landingUrl);
         document.getElementById("landing-url").value = landingUrl;
         document.getElementById("qr-code-img").src =
-          "https://via.placeholder.com/250x250.png?text=Loading...";
-
-        getShortUrl(landingUrl, function (shortUrl) {
-          document.getElementById("qr-code-img").src =
-            `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(shortUrl)}&margin=0`;
-        });
+          `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=L&data=${encodeURIComponent(landingUrl)}&margin=1`;
 
         closeTrackingModal();
         document.getElementById("qr-modal").classList.remove("hidden");
@@ -23171,28 +23104,29 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           return;
         }
 
-        // Nhận diện thiết bị: Mỗi thiết bị chỉ ghi nhận và thông báo 1 lần duy nhất đối với mỗi mã nguồn (shopee food, hộp cơm,...)
-        const hasScannedThisSourceBefore =
-          localStorage.getItem("nutriadmin_qr_scanned_recorded_" + source) ===
-            "true" ||
+        const todayStr = new Date().toISOString().split("T")[0];
+        const storageKey = "nutriadmin_qr_scanned_recorded_" + source + "_" + todayStr;
+
+        // Nhận diện thiết bị: Mỗi thiết bị chỉ ghi nhận và thông báo 1 lần duy nhất đối với mỗi mã nguồn (shopee food, hộp cơm,...) mỗi ngày
+        const hasScannedThisSourceToday =
+          localStorage.getItem(storageKey) === "true" ||
           (qrScans &&
-            qrScans.some(
-              (s) => s.deviceId === customerDeviceId && s.source === source,
-            ));
-        if (hasScannedThisSourceBefore) {
+            qrScans.some((s) => {
+              const scanDate = new Date(s.timestamp).toISOString().split("T")[0];
+              return s.deviceId === customerDeviceId && s.source === source && scanDate === todayStr;
+            }));
+
+        if (hasScannedThisSourceToday) {
           console.log(
             "Thiết bị này đã được ghi nhận quét QR nguồn '" +
               source +
-              "' trước đó. Bỏ qua lượt quét này.",
+              "' trong ngày hôm nay. Bỏ qua lượt quét này.",
           );
           return;
         }
 
-        // Đánh dấu thiết bị đã được ghi nhận quét QR cho nguồn này
-        localStorage.setItem(
-          "nutriadmin_qr_scanned_recorded_" + source,
-          "true",
-        );
+        // Đánh dấu thiết bị đã được ghi nhận quét QR cho nguồn này trong hôm nay
+        localStorage.setItem(storageKey, "true");
 
         // Ghi nhận ngay vào sessionStorage
         const sessionKey =
@@ -27444,6 +27378,12 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
 
                           <input type="hidden" id="pkg-lucky-prize" value="${localStorage.getItem("nutriadmin_wheel_prize") || ""}">
 
+                          <div class="flex justify-center my-10 relative z-20">
+                            <button type="button" onclick="openPreviewMenuModal()" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-4 px-10 rounded-full text-xl shadow-[0_0_20px_rgba(249,115,22,0.6)] animate-pulse hover:-translate-y-1 hover:scale-105 transition-all duration-300 flex items-center gap-3 active:scale-95">
+                              <i class="fa-solid fa-book-open text-2xl"></i> Xem Menu Đầy Đủ
+                            </button>
+                          </div>
+
                       <!-- Form Nhập thông tin -->
 
                           <div id="delivery-form-section" class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-[0_8px_30px_rgba(15,23,42,0.04)] border border-slate-200">
@@ -28155,6 +28095,121 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
           .join("");
         renderCart();
       }
+
+      window.currentPreviewMenuFilter = "complete";
+
+      window.setPreviewMenuFilter = function (id) {
+        window.currentPreviewMenuFilter = id;
+        renderPreviewMenu();
+      };
+
+      function renderPreviewMenu() {
+        const savedSettings = JSON.parse(
+          localStorage.getItem("nutriadmin_settings") || "{}",
+        );
+        const isWeeklySpecialEnabled = savedSettings.weeklySpecialFilterEnabled !== false;
+
+        if (!isWeeklySpecialEnabled && window.currentPreviewMenuFilter === "weekly_special") {
+          window.currentPreviewMenuFilter = "complete";
+        }
+
+        const filtersContainer = document.getElementById("preview-menu-filters");
+        if (filtersContainer) {
+          filtersContainer.innerHTML = categories
+            .filter(
+              (cat) =>
+                cat.id === "complete" ||
+                (isWeeklySpecialEnabled && cat.id === "weekly_special"),
+            )
+            .map(
+              (cat) => `
+                <button onclick="setPreviewMenuFilter('${cat.id}')"
+                        class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          window.currentPreviewMenuFilter === cat.id
+                            ? "bg-emerald-100 text-emerald-700 font-bold border border-emerald-200"
+                            : "bg-slate-100 text-slate-500 hover:bg-slate-200 border border-transparent"
+                        }">
+                    ${cat.id === "complete" ? "Món theo công thức" : cat.name}
+                </button>
+              `,
+            )
+            .join("");
+        }
+
+        const container = document.getElementById("preview-menu-list");
+        if (!container) return;
+
+        const hiddenKeywords = dishes
+          .filter((d) => d.isActive === false)
+          .map((d) => d.name)
+          .filter(Boolean)
+          .concat(
+            dishes
+              .flatMap((d) =>
+                (d.methods || []).filter((m) => m.isHidden).map((m) => m.name),
+              )
+              .filter(Boolean),
+          );
+          
+        let activeDishes = dishes.filter(
+          (d) =>
+            d.isActive !== false &&
+            !d.isCustom &&
+            d.sizes &&
+            (window.currentPreviewMenuFilter === "all" ||
+              d.category === window.currentPreviewMenuFilter) &&
+            !hiddenKeywords.some(
+              (kw) =>
+                d.name.includes(kw) ||
+                (d.ingredients && d.ingredients.includes(kw)),
+            ),
+        );
+
+        container.innerHTML = activeDishes
+          .map(
+            (dish) => `
+              <div class="flex items-start gap-4 p-4 bg-white border border-slate-100 rounded-xl hover:shadow-md transition-shadow">
+                  <img src="${dish.image}" class="w-24 h-24 rounded-lg object-cover bg-slate-100 shrink-0 shadow-sm">
+                  <div class="flex-1 min-w-0">
+                      <h4 class="font-bold text-slate-800 text-base mb-1 truncate">${dish.name}</h4>
+                      <p class="text-xs text-slate-500 mb-2 line-clamp-2">${dish.ingredients}</p>
+                      <div class="flex flex-wrap gap-2">
+                          <span class="text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full border border-emerald-100">Lean: ${dish.sizes?.lean?.kcal || 0} Kcal</span>
+                          <span class="text-[10px] font-medium bg-primary/10 text-primary px-2 py-1 rounded-full border border-primary/20">Balance: ${dish.sizes?.balance?.kcal || 0} Kcal</span>
+                          <span class="text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-1 rounded-full border border-amber-100">Power: ${dish.sizes?.power?.kcal || 0} Kcal</span>
+                      </div>
+                  </div>
+              </div>`,
+          )
+          .join("");
+      }
+
+      window.openPreviewMenuModal = function () {
+        const modal = document.getElementById("preview-menu-modal");
+        const content = document.getElementById("preview-menu-modal-content");
+        if (modal && content) {
+          window.currentPreviewMenuFilter = "complete";
+          renderPreviewMenu();
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          void modal.offsetWidth;
+          modal.classList.remove("opacity-0");
+          content.classList.remove("scale-95", "translate-y-4");
+        }
+      };
+
+      window.closePreviewMenuModal = function () {
+        const modal = document.getElementById("preview-menu-modal");
+        const content = document.getElementById("preview-menu-modal-content");
+        if (modal && content) {
+          modal.classList.add("opacity-0");
+          content.classList.add("scale-95", "translate-y-4");
+          setTimeout(() => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+          }, 300);
+        }
+      };
 
       function addToCart(dishId, sizeKey) {
         const dish = dishes.find((d) => d.id === dishId);
@@ -36116,6 +36171,7 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
       let firebaseSyncTask = null;
 
       function initFirebaseSync() {
+        if (firebaseSyncTask) clearInterval(firebaseSyncTask);
         let configStr =
           localStorage.getItem("nutriadmin_custom_firebase_config") ||
           window.NURI_FIREBASE_CONFIG;
@@ -36227,7 +36283,6 @@ Yêu cầu trả về đúng định dạng JSON thô (không bọc trong ký hi
             if (firebaseState.settings) {
               firebaseState.settings = { ...firebaseState.settings };
               delete firebaseState.settings.bannerImagesCloud;
-              delete firebaseState.settings.bannerImages;
             }
 
             const currentStr = JSON.stringify(firebaseState);
@@ -44863,6 +44918,40 @@ Tôi đã hoàn thành 7 ngày ăn uống lành mạnh cùng Nuri Kitchen! Hành
       </div>
     </div>
 
+    <!-- Preview Menu Modal -->
+    <div
+      id="preview-menu-modal"
+      class="fixed inset-0 z-[9999] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-all duration-300 opacity-0"
+      onclick="if(event.target === this) closePreviewMenuModal()"
+    >
+      <div id="preview-menu-modal-content" class="bg-white rounded-3xl w-full max-w-4xl shadow-2xl flex flex-col max-h-[90vh] transition-transform duration-300 scale-95 translate-y-4">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-emerald-50 rounded-t-3xl shrink-0">
+          <h3 class="text-xl font-bold text-emerald-800 flex items-center gap-2">
+            <i class="fa-solid fa-utensils"></i> Menu Nuri Kitchen
+          </h3>
+          <button onclick="closePreviewMenuModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-200 text-emerald-700 hover:bg-red-100 hover:text-red-500 transition-colors">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+        <div class="p-6 flex-1 overflow-y-auto custom-scrollbar">
+            <!-- Filter & Custom mix tool -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar" id="preview-menu-filters">
+                    <!-- Filters populated by JS -->
+                </div>
+                <button onclick="closePreviewMenuModal(); setTimeout(() => openCustomMixFromAdvice(), 300)" class="shrink-0 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_15px_rgba(249,115,22,0.6)] animate-pulse hover:scale-105 transition-transform flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Công cụ tự mix món
+                </button>
+            </div>
+            
+            <!-- Dishes list -->
+            <div id="preview-menu-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dishes populated by JS -->
+            </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Order Platform Modal -->
     <div id="order-platform-modal" class="fixed inset-0 z-[9999] hidden items-end justify-center sm:items-center bg-slate-900/60 backdrop-blur-sm p-4 transition-all duration-300 opacity-0">
       <div id="order-platform-modal-content" class="bg-white w-full max-w-sm rounded-[2rem] shadow-2xl overflow-hidden transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300">
@@ -45245,20 +45334,22 @@ Tôi đã hoàn thành 7 ngày ăn uống lành mạnh cùng Nuri Kitchen! Hành
         let html = '';
 
         // Website option
-        html += `
-          <button onclick="closeOrderPlatformModal(); switchView('order-form');" class="w-full flex items-center justify-between p-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-2xl transition-all group">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-store"></i>
+        if (settings.orderWebsiteEnable !== false) {
+          html += `
+            <button onclick="closeOrderPlatformModal(); switchView('order-form');" class="w-full flex items-center justify-between p-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-2xl transition-all group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-store"></i>
+                </div>
+                <div class="text-left">
+                  <p class="font-bold text-orange-800">Trang Web Nuri</p>
+                  <p class="text-[10px] text-orange-600 font-medium">Đặt trực tiếp, tích điểm</p>
+                </div>
               </div>
-              <div class="text-left">
-                <p class="font-bold text-orange-800">Trang Web Nuri</p>
-                <p class="text-[10px] text-orange-600 font-medium">Đặt trực tiếp, tích điểm</p>
-              </div>
-            </div>
-            <i class="fa-solid fa-chevron-right text-orange-400"></i>
-          </button>
-        `;
+              <i class="fa-solid fa-chevron-right text-orange-400"></i>
+            </button>
+          `;
+        }
 
         if (settings.orderShopeeFoodEnable && settings.orderShopeeFoodUrl) {
           html += `
